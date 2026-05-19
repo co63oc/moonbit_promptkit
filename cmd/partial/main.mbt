@@ -97,32 +97,8 @@ struct StreamResponse {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
-fn text_content(text : String) -> Content {
-  Content::{ type_: "text", text: Some(text), image_url: None }
-}
-
-///|
-fn image_content(url : String) -> Content {
-  Content::{
-    type_: "image_url",
-    text: None,
-    image_url: Some(ImageUrl::{ url, }),
-  }
-}
-
-///|
 fn user_message_with_text(text : String) -> Message {
   Message::{ role: "user", content: text.to_json(), partial: None }
-}
-
-///|
-fn user_message_with_contents(contents : Array[Content]) -> Message {
-  Message::{ role: "user", content: contents.to_json(), partial: None }
-}
-
-///|
-fn assistant_message(text : String) -> Message {
-  Message::{ role: "assistant", content: text.to_json(), partial: None }
 }
 
 ///|
@@ -165,23 +141,6 @@ fn extract_text_from_content(content : Json) -> String {
 }
 
 ///|
-fn parse_sse_data(line : String) -> String? {
-  if line.has_prefix("data: ") {
-    Some(line[6:].to_owned())
-  } else {
-    None
-  }
-}
-
-///|
-fn process_stream_response(
-  body_text : String,
-  on_delta : (String) -> Unit,
-) -> String {
-  body_text
-}
-
-///|
 async fn chat(model : String, messages : Array[Message]) -> Message {
   let request = Request::{ model, messages, stream: None, stream_options: None }
   let response = generate(request)
@@ -190,30 +149,6 @@ async fn chat(model : String, messages : Array[Message]) -> Message {
   } else {
     response.choices[0].message
   }
-}
-
-///|
-async fn chat_stream(
-  model : String,
-  messages : Array[Message],
-  on_delta : (String) -> Unit,
-) -> String {
-  let request = Request::{
-    model,
-    messages,
-    stream: Some(true),
-    stream_options: Some(StreamOptions::{ include_usage: true }),
-  }
-  let (response, body) = @http.post("\{base_url}", request.to_json(), headers={
-    "Authorization": "Bearer \{api_key}",
-    "Content-Type": "application/json",
-  })
-  guard response.code is (200..=299) else {
-    fail("HTTP request failed: \{response.code} \{response.reason}")
-  }
-  let body_text = body.text()
-  on_delta(body_text)
-  body_text
 }
 
 ///|
