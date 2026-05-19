@@ -7,22 +7,31 @@
 let env : Map[String, String] = @sys.get_env_vars()
 
 ///|
-fn get_env_var(name : String) -> String {
-  guard env.get(name) is Some(value) else {
-    println("Please set \{name} environment variable")
-    panic()
+fn get_env_var(name : String, default : String?) -> String {
+  match env.get(name) {
+    Some(value) => value
+    None =>
+      match default {
+        Some(value) => value
+        None => {
+          println("Please set \{name} environment variable")
+          panic()
+        }
+      }
   }
-  value
 }
 
 ///|
-let api_key : String = get_env_var("MOONBIT_API_KEY")
+let api_key : String = get_env_var("MOONBIT_API_KEY", None)
 
 ///|
-let base_url : String = get_env_var("MOONBIT_BASE_URL")
+let base_url : String = get_env_var(
+  "MOONBIT_BASE_URL",
+  Some("https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions"),
+)
 
 ///|
-let model : String = get_env_var("MOONBIT_MODEL")
+let model : String = get_env_var("MOONBIT_MODEL", Some("qwen3.6-plus"))
 
 ///|
 struct Function {
@@ -55,15 +64,10 @@ struct Response {
 
 ///|
 async fn generate(request : Request) -> Response {
-  let (response, body) = @http.post(
-    "\{base_url}",
-    request.to_json(),
-    headers={
-      "Authorization": "Bearer \{api_key}",
-      "Content-Type": "application/json",
-      //"Connection": "close",
-    },
-  )
+  let (response, body) = @http.post("\{base_url}", request.to_json(), headers={
+    "Authorization": "Bearer \{api_key}",
+    "Content-Type": "application/json",
+  })
   guard response.code is (200..=299) else {
     fail("HTTP request failed: \{response.code} \{response.reason}")
   }
