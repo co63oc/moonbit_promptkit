@@ -47,6 +47,8 @@ struct Message {
   role : String
   content : Json
   partial : Bool?
+  tool_calls : Array[ToolCall]?
+  tool_call_id : String?
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
@@ -72,6 +74,9 @@ struct Request {
   messages : Array[Message]
   stream : Bool?
   stream_options : StreamOptions?
+  tools : Json?
+  extra_body : Json?
+  enable_search : Bool?
 } derive(ToJson)
 
 ///|
@@ -86,49 +91,17 @@ struct Response {
 } derive(ToJson, @json.FromJson)
 
 ///|
-struct StreamChoice {
-  delta : Message
-} derive(Debug, ToJson, @json.FromJson)
-
-///|
-struct StreamResponse {
-  choices : Array[StreamChoice]
-  usage : Json?
-} derive(Debug, ToJson, @json.FromJson)
-
-///|
-fn text_content(text : String) -> Content {
-  Content::{ type_: "text", text: Some(text), image_url: None }
-}
-
-///|
-fn image_content(url : String) -> Content {
-  Content::{
-    type_: "image_url",
-    text: None,
-    image_url: Some(ImageUrl::{ url, }),
+fn user_message_with_text(text : String) -> Message {
+  Message::{
+    role: "user",
+    content: text.to_json(),
+    partial: None,
+    tool_calls: None,
+    tool_call_id: None,
   }
 }
 
-///|
-fn user_message_with_text(text : String) -> Message {
-  Message::{ role: "user", content: text.to_json(), partial: None }
-}
 
-///|
-fn user_message_with_contents(contents : Array[Content]) -> Message {
-  Message::{ role: "user", content: contents.to_json(), partial: None }
-}
-
-///|
-fn assistant_message(text : String) -> Message {
-  Message::{ role: "assistant", content: text.to_json(), partial: None }
-}
-
-///|
-fn assistant_message_partial(text : String) -> Message {
-  Message::{ role: "assistant", content: text.to_json(), partial: Some(true) }
-}
 
 ///|
 async fn generate(request : Request) -> Response {
@@ -164,32 +137,51 @@ fn extract_text_from_content(content : Json) -> String {
   }
 }
 
-///|
-fn parse_sse_data(line : String) -> String? {
-  if line.has_prefix("data: ") {
-    Some(line[6:].to_owned())
-  } else {
-    None
-  }
-}
-
-///|
-fn process_stream_response(
-  body_text : String,
-  on_delta : (String) -> Unit,
-) -> String {
-  body_text
-}
 
 ///|
 async fn chat(model : String, messages : Array[Message]) -> Message {
-  let request = Request::{ model, messages, stream: None, stream_options: None }
+  let request = Request::{
+    model,
+    messages,
+    stream: None,
+    stream_options: None,
+    tools: None,
+    extra_body: None,
+    enable_search: None,
+  }
   let response = generate(request)
   if response.choices.length() == 0 {
     fail("No response from model")
   } else {
     response.choices[0].message
   }
+}
+
+///|
+async fn chat_with_search(model : String, messages : Array[Message]) -> Message {
+  let request = Request::{
+    model,
+    messages,
+    stream: None,
+    stream_options: None,
+    tools: None,
+    extra_body: None,
+    enable_search: Some(true),
+  }
+  let response = generate(request)
+  if response.choices.length() == 0 {
+    fail("No response from model")
+  } else {
+    response.choices[0].message
+  }
+}
+
+///|
+fn get_current_weather(location : String) -> String {
+  let weather_conditions : Array[String] = ["晴天", "多云", "雨天"]
+  let index = location.length() % weather_conditions.length()
+  let random_weather = weather_conditions[index]
+  "\{location}今天是\{random_weather}。"
 }
 
 ///|
@@ -203,6 +195,9 @@ async fn chat_stream(
     messages,
     stream: Some(true),
     stream_options: Some(StreamOptions::{ include_usage: true }),
+    tools: None,
+    extra_body: None,
+    enable_search: None,
   }
   let (response, body) = @http.post("\{base_url}", request.to_json(), headers={
     "Authorization": "Bearer \{api_key}",
@@ -217,19 +212,26 @@ async fn chat_stream(
 }
 
 ///|
+fn system_message(text : String) -> Message {
+  Message::{
+    role: "system",
+    content: text.to_json(),
+    partial: None,
+    tool_calls: None,
+    tool_call_id: None,
+  }
+}
+
+///|
 async fn main {
-  println("=== 前缀续写（代码补全）===")
-  let partial_code = "def calculate_fibonacci(n):\\n    if n <= 1:\\n        return n\\n    else:\\n"
+  println("=== 联网搜索演示 ===")
+  let user_question = "杭州明天天气如何"
   let messages : Array[Message] = [
-    user_message_with_text(
-      "请补全这个斐波那契函数，勿添加其它内容",
-    ),
-    assistant_message_partial(partial_code),
+    system_message("You are a helpful assistant."),
+    user_message_with_text(user_question),
   ]
-  println("用户: 请补全这个斐波那契函数，勿添加其它内容")
-  println("前缀: ")
-  println(partial_code)
-  println("补全结果: ")
-  let response = chat("qwen3-coder-plus", messages)
-  println(extract_text_from_content(response.content))
+  println("用户: \{user_question}")
+  println("正在使用联网搜索...")
+  let response = chat_with_search("qwen-plus", messages)
+  println("助手: \{extract_text_from_content(response.content)}")
 }
