@@ -1,6 +1,6 @@
-# co63oc/moonbit_bailian
+# co63oc/moonbit_openai
 
-运行：
+以百炼接口为例运行：
 先导出环境变量，MOONBIT_API_KEY 为百炼API KEY，在页面 `https://bailian.console.aliyun.com/cn-beijing?tab=model#/api-key` 查看
 ```
 export MOONBIT_API_KEY=xxx
