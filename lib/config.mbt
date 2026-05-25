@@ -27,11 +27,7 @@ pub struct ClientConfig {
 }
 
 ///|
-pub fn create_client_config(
-  api_key_env : String,
-  base_url_env : String,
-  default_base_url : String,
-) -> ClientConfig {
+pub fn create_client_config(api_key_env : String, base_url_env : String, default_base_url : String) -> ClientConfig {
   ClientConfig::{
     api_key: get_env_var(api_key_env, None),
     base_url: get_env_var(base_url_env, Some(default_base_url)),

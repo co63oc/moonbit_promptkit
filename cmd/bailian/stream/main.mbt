@@ -4,7 +4,9 @@
 
 ///|
 let config : @lib.ClientConfig = @lib.create_client_config(
-  "MOONBIT_API_KEY", "MOONBIT_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",
+  "MOONBIT_API_KEY",
+  "MOONBIT_BASE_URL",
+  "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 
 ///|
@@ -19,9 +21,7 @@ async fn main {
   ]
   println("用户: 图中描绘的是什么景象？")
   println("助手: ")
-  let full_text1 = @lib.chat_stream(config, "qwen3-vl-plus", messages1, fn(
-    text,
-  ) {
+  let full_text1 = @lib.chat_stream(config, "qwen3-vl-plus", messages1, fn(text) {
     println(text)
   })
   println("完整回复: \{full_text1}")
@@ -34,9 +34,7 @@ async fn main {
   ]
   println("用户: 请用3句话介绍一下人工智能的发展历史")
   println("助手: ")
-  let full_text2 = @lib.chat_stream(config, "qwen3.6-plus", messages2, fn(
-    text,
-  ) {
+  let full_text2 = @lib.chat_stream(config, "qwen3.6-plus", messages2, fn(text) {
     println(text)
   })
   println("完整回复: \{full_text2}")

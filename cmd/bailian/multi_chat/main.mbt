@@ -4,7 +4,9 @@
 
 ///|
 let config : @lib.ClientConfig = @lib.create_client_config(
-  "MOONBIT_API_KEY", "MOONBIT_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",
+  "MOONBIT_API_KEY",
+  "MOONBIT_BASE_URL",
+  "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 
 ///|
@@ -25,11 +27,7 @@ async fn main {
   println("助手: \{@lib.extract_text_from_content(response1.content)}")
 
   let messages = messages +
-    [
-      @lib.user_message_with_contents([
-        @lib.text_content("它们属于什么风格?"),
-      ]),
-    ]
+    [@lib.user_message_with_contents([@lib.text_content("它们属于什么风格?")])]
 
   println("\n=== 第二轮对话===")
   println("用户: 它们属于什么风格?")
