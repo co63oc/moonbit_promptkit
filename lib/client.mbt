@@ -104,7 +104,7 @@ pub async fn chat_stream(
     extra_body: None,
     enable_search: None,
   }
-  let (response, body) = @http.post("\{config.base_url}", request.to_json(), headers={
+  let (response, body) = @http.post("\{config.base_url}/chat/completions", request.to_json(), headers={
     "Authorization": "Bearer \{config.api_key}",
     "Content-Type": "application/json",
   })
