@@ -1,0 +1,130 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "co63oc/moonbit_bailian/lib"
+
+import {
+  "moonbitlang/core/debug",
+  "moonbitlang/core/json",
+}
+
+// Values
+pub fn assistant_message(String) -> Message
+
+pub fn assistant_message_partial(String) -> Message
+
+pub async fn chat(ClientConfig, String, Array[Message]) -> Message
+
+pub async fn chat_stream(ClientConfig, String, Array[Message], (String) -> Unit) -> String
+
+pub async fn chat_with_search(ClientConfig, String, Array[Message]) -> Message
+
+pub async fn chat_with_tools(ClientConfig, String, Array[Message], Json) -> Message
+
+pub fn create_client_config(String, String, String) -> ClientConfig
+
+pub fn extract_text_from_content(Json) -> String
+
+pub async fn generate(ClientConfig, Request) -> Response
+
+pub fn get_env_var(String, String?) -> String
+
+pub fn image_content(String) -> Content
+
+pub fn system_message(String) -> Message
+
+pub fn text_content(String) -> Content
+
+pub fn tool_message(String, String) -> Message
+
+pub fn user_message_with_contents(Array[Content]) -> Message
+
+pub fn user_message_with_text(String) -> Message
+
+// Errors
+
+// Types and methods
+pub struct Choice {
+  message : Message
+} derive(ToJson, @json.FromJson)
+
+pub struct ClientConfig {
+  api_key : String
+  base_url : String
+}
+
+pub struct Content {
+  text : String?
+  image_url : ImageUrl?
+  type_ : String
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct Function {
+  name : String
+  arguments : String
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct FunctionDef {
+  name : String
+  description : String
+  parameters : Parameters
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct ImageUrl {
+  url : String
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct Message {
+  role : String
+  content : Json
+  partial : Bool?
+  tool_calls : Array[ToolCall]?
+  tool_call_id : String?
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct Parameters {
+  type_ : String
+  properties : Map[String, Json]
+  required : Array[String]
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct Request {
+  model : String
+  messages : Array[Message]
+  stream : Bool?
+  stream_options : StreamOptions?
+  tools : Json?
+  extra_body : Json?
+  enable_search : Bool?
+} derive(ToJson)
+
+pub struct Response {
+  choices : Array[Choice]
+  usage : Json?
+} derive(ToJson, @json.FromJson)
+
+pub struct StreamChoice {
+  delta : Message
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct StreamOptions {
+  include_usage : Bool
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct StreamResponse {
+  choices : Array[StreamChoice]
+  usage : Json?
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct Tool {
+  type_ : String
+  function : FunctionDef
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct ToolCall {
+  id : String
+  function : Function
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+// Type aliases
+
+// Traits
+

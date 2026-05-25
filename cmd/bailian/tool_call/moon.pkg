@@ -3,6 +3,7 @@ import {
   "moonbitlang/async/http" @http,
   "moonbitlang/async",
   "moonbitlang/x/sys",
+  "co63oc/moonbit_bailian/lib" @lib,
 }
 
 options(

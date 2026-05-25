@@ -1,10 +1,10 @@
 ///|
-/// Entry point for the CLI or runnable program
+/// Search enabled chat example
 ///
 
 ///|
 let config : @lib.ClientConfig = @lib.create_client_config(
-  "HUNYUAN_API_KEY", "HUNYUAN_BASE_URL", "https://tokenhub.tencentmaas.com/v1",
+  "MOONBIT_API_KEY", "MOONBIT_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions",
 )
 
 ///|
@@ -17,6 +17,6 @@ async fn main {
   ]
   println("用户: \{user_question}")
   println("正在使用联网搜索...")
-  let response = @lib.chat_with_search(config, "hy3-preview", messages)
+  let response = @lib.chat_with_search(config, "qwen-plus", messages)
   println("助手: \{@lib.extract_text_from_content(response.content)}")
 }
