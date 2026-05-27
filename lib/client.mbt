@@ -104,10 +104,14 @@ pub async fn chat_stream(
     extra_body: None,
     enable_search: None,
   }
-  let (response, body) = @http.post("\{config.base_url}/chat/completions", request.to_json(), headers={
-    "Authorization": "Bearer \{config.api_key}",
-    "Content-Type": "application/json",
-  })
+  let (response, body) = @http.post(
+    "\{config.base_url}/chat/completions",
+    request.to_json(),
+    headers={
+      "Authorization": "Bearer \{config.api_key}",
+      "Content-Type": "application/json",
+    },
+  )
   guard response.code is (200..=299) else {
     fail("HTTP request failed: \{response.code} \{response.reason}")
   }

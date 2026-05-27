@@ -4,9 +4,7 @@
 
 ///|
 let config : @lib.ClientConfig = @lib.create_client_config(
-  "MOONBIT_API_KEY",
-  "MOONBIT_BASE_URL",
-  "https://dashscope.aliyuncs.com/compatible-mode/v1",
+  "MOONBIT_API_KEY", "MOONBIT_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 
 ///|

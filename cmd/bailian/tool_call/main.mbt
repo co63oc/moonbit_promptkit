@@ -4,9 +4,7 @@
 
 ///|
 let config : @lib.ClientConfig = @lib.create_client_config(
-  "MOONBIT_API_KEY",
-  "MOONBIT_BASE_URL",
-  "https://dashscope.aliyuncs.com/compatible-mode/v1",
+  "MOONBIT_API_KEY", "MOONBIT_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 
 ///|
@@ -24,10 +22,14 @@ async fn main {
     "[{\"type\": \"function\", \"function\": {\"name\": \"get_current_weather\", \"description\": \"当你想查询指定城市的天气时非常有用。\", \"parameters\": {\"type\": \"object\", \"properties\": {\"location\": {\"type\": \"string\", \"description\": \"城市或县区，比如北京市、杭州市、余杭区等。\"}}, \"required\": [\"location\"]}}}]",
   )
 
-  let mut messages : Array[@lib.Message] = [@lib.user_message_with_text(user_question)]
+  let mut messages : Array[@lib.Message] = [
+    @lib.user_message_with_text(user_question),
+  ]
   println("用户: \{user_question}")
 
-  let mut response = @lib.chat_with_tools(config, "qwen3.6-plus", messages, tools)
+  let mut response = @lib.chat_with_tools(
+    config, "qwen3.6-plus", messages, tools,
+  )
   messages = messages + [response]
 
   match response.tool_calls {
@@ -52,8 +54,11 @@ async fn main {
               let location = "北京"
               let tool_result = get_current_weather(location)
               println("工具返回：\{tool_result}")
-              messages = messages + [@lib.tool_message(tool_call_id, tool_result)]
-              response = @lib.chat_with_tools(config, "qwen3.6-plus", messages, tools)
+              messages = messages +
+                [@lib.tool_message(tool_call_id, tool_result)]
+              response = @lib.chat_with_tools(
+                config, "qwen3.6-plus", messages, tools,
+              )
               messages = messages + [response]
             } else {
               continue_loop = false

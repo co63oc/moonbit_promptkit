@@ -4,9 +4,7 @@
 
 ///|
 let config : @lib.ClientConfig = @lib.create_client_config(
-  "HUNYUAN_API_KEY",
-  "HUNYUAN_BASE_URL",
-  "https://tokenhub.tencentmaas.com/v1",
+  "HUNYUAN_API_KEY", "HUNYUAN_BASE_URL", "https://tokenhub.tencentmaas.com/v1",
 )
 
 ///|
