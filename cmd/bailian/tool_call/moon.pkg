@@ -1,7 +1,7 @@
 import {
   "moonbitlang/async",
   "moonbitlang/core/json" @json,
-  "co63oc/moonbit_bailian/lib" @lib,
+  "moonbit_bailian/lib" @lib,
 }
 
 options(

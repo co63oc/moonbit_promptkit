@@ -1,5 +1,5 @@
 // Generated using `moon info`, DON'T EDIT IT
-package "co63oc/moonbit_bailian/cmd/bailian/tool_call"
+package "moonbit_bailian/cmd/bailian/tool_call"
 
 // Values
 
