@@ -21,11 +21,17 @@ pub async fn chat_with_tools(ClientConfig, String, Array[Message], Json) -> Mess
 
 pub fn create_client_config(String, String, String) -> ClientConfig
 
+pub async fn create_image_gen_task(ClientConfig, String, String, String?, String?, String?, Int?) -> ImageGenResponse
+
 pub fn extract_text_from_content(Json) -> String
 
 pub async fn generate(ClientConfig, Request) -> Response
 
+pub async fn generate_image(ClientConfig, String) -> Array[String]
+
 pub fn get_env_var(String, String?) -> String
+
+pub async fn get_image_gen_result(ClientConfig, String) -> ImageGenResponse
 
 pub fn image_content(String) -> Content
 
@@ -66,6 +72,59 @@ pub struct FunctionDef {
   name : String
   description : String
   parameters : Parameters
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct ImageGenInput {
+  prompt : String
+  negative_prompt : String?
+  ref_img : String?
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct ImageGenOutput {
+  task_id : String
+  task_status : String
+  results : Array[ImageGenResult]?
+  task_metrics : ImageGenTaskMetrics?
+  submit_time : String?
+  scheduled_time : String?
+  end_time : String?
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct ImageGenParameters {
+  style : String?
+  size : String?
+  n : Int?
+  seed : Int?
+  ref_strength : Float?
+  ref_mode : String?
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct ImageGenRequest {
+  model : String
+  input : ImageGenInput
+  parameters : ImageGenParameters?
+} derive(ToJson, @debug.Debug)
+
+pub struct ImageGenResponse {
+  output : ImageGenOutput
+  usage : ImageGenUsage?
+  request_id : String
+  code : String?
+  message : String?
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct ImageGenResult {
+  url : String
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct ImageGenTaskMetrics {
+  total : Int
+  succeeded : Int
+  failed : Int
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct ImageGenUsage {
+  image_count : Int
 } derive(ToJson, @debug.Debug, @json.FromJson)
 
 pub struct ImageUrl {

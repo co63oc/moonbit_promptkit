@@ -92,3 +92,82 @@ pub struct StreamResponse {
   choices : Array[StreamChoice]
   usage : Json?
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+/// Image generation - input parameters
+pub struct ImageGenInput {
+  prompt : String
+  negative_prompt : String?
+  ref_img : String?
+} derive(Debug, ToJson, @json.FromJson)
+
+///|
+/// Image generation - processing parameters
+pub struct ImageGenParameters {
+  style : String?
+  size : String?
+  n : Int?
+  seed : Int?
+  ref_strength : Float?
+  ref_mode : String?
+} derive(Debug, ToJson, @json.FromJson)
+
+///|
+/// Image generation - request body
+pub struct ImageGenRequest {
+  model : String
+  input : ImageGenInput
+  parameters : ImageGenParameters?
+} derive(Debug, ToJson)
+
+///|
+/// Image generation - single result
+pub struct ImageGenResult {
+  url : String
+} derive(Debug, ToJson, @json.FromJson)
+
+///|
+/// Image generation - task metrics
+pub struct ImageGenTaskMetrics {
+  total : Int
+  succeeded : Int
+  failed : Int
+} derive (
+  Debug,
+  ToJson(
+    fields(
+      total(rename="TOTAL"),
+      succeeded(rename="SUCCEEDED"),
+      failed(rename="FAILED"),
+    ),
+  ),
+  @json.FromJson,
+)
+
+///|
+/// Image generation - output info
+pub struct ImageGenOutput {
+  task_id : String
+  task_status : String
+  results : Array[ImageGenResult]?
+  task_metrics : ImageGenTaskMetrics?
+  submit_time : String?
+  scheduled_time : String?
+  end_time : String?
+} derive(Debug, ToJson, @json.FromJson)
+
+///|
+/// Image generation - usage info
+pub struct ImageGenUsage {
+  image_count : Int
+} derive(Debug, ToJson, @json.FromJson)
+
+///|
+/// Image generation - response
+pub struct ImageGenResponse {
+  output : ImageGenOutput
+  usage : ImageGenUsage?
+  request_id : String
+  code : String?
+  message : String?
+} derive(Debug, ToJson, @json.FromJson)
