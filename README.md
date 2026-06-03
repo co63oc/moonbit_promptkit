@@ -5,7 +5,7 @@
 ```
 export MOONBIT_API_KEY=xxx
 export MOONBIT_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
-export MOONBIT_MODEL=qwen3.6-plus
+export MOONBIT_MODEL=qwen3.7-plus
 ```
 然后运行 `moon run cmd/main`
 

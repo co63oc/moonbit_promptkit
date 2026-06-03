@@ -8,7 +8,7 @@ let config : @lib.ClientConfig = @lib.create_client_config(
 )
 
 ///|
-let model : String = @lib.get_env_var("MOONBIT_MODEL", Some("qwen3.6-plus"))
+let model : String = @lib.get_env_var("MOONBIT_MODEL", Some("qwen3.7-plus"))
 
 ///|
 async fn main {
