@@ -1,5 +1,5 @@
 ///|
-/// Configuration utilities for Moonbit Bailian SDK
+/// Configuration utilities for Moonbit Promptkit SDK
 ///
 
 ///|

@@ -1,5 +1,5 @@
 ///|
-/// Message builders for Moonbit Bailian SDK
+/// Message builders for Moonbit Promptkit SDK
 ///
 
 ///|
@@ -24,6 +24,7 @@ pub fn user_message_with_text(text : String) -> Message {
     partial: None,
     tool_calls: None,
     tool_call_id: None,
+    reasoning_content: None,
   }
 }
 
@@ -35,6 +36,7 @@ pub fn user_message_with_contents(contents : Array[Content]) -> Message {
     partial: None,
     tool_calls: None,
     tool_call_id: None,
+    reasoning_content: None,
   }
 }
 
@@ -46,6 +48,7 @@ pub fn assistant_message(text : String) -> Message {
     partial: None,
     tool_calls: None,
     tool_call_id: None,
+    reasoning_content: None,
   }
 }
 
@@ -57,6 +60,7 @@ pub fn assistant_message_partial(text : String) -> Message {
     partial: Some(true),
     tool_calls: None,
     tool_call_id: None,
+    reasoning_content: None,
   }
 }
 
@@ -68,6 +72,7 @@ pub fn tool_message(tool_call_id : String, content : String) -> Message {
     partial: None,
     tool_calls: None,
     tool_call_id: Some(tool_call_id),
+    reasoning_content: None,
   }
 }
 
@@ -79,6 +84,7 @@ pub fn system_message(text : String) -> Message {
     partial: None,
     tool_calls: None,
     tool_call_id: None,
+    reasoning_content: None,
   }
 }
 

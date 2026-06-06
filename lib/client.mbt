@@ -1,5 +1,5 @@
 ///|
-/// Core client functions for Moonbit Bailian SDK
+/// Core client functions for Moonbit Promptkit SDK
 ///
 
 ///|
@@ -32,6 +32,7 @@ pub async fn chat(
     tools: None,
     extra_body: None,
     enable_search: None,
+    enable_thinking: None,
   }
   let response = generate(config, request)
   if response.choices.length() == 0 {
@@ -55,6 +56,7 @@ pub async fn chat_with_search(
     tools: None,
     extra_body: None,
     enable_search: Some(true),
+    enable_thinking: None,
   }
   let response = generate(config, request)
   if response.choices.length() == 0 {
@@ -77,8 +79,9 @@ pub async fn chat_with_tools(
     stream: None,
     stream_options: None,
     tools: Some(tools),
-    extra_body: Some(@json.parse("{\"enable_thinking\": false}")),
+    extra_body: None,
     enable_search: None,
+    enable_thinking: Some(false),
   }
   let response = generate(config, request)
   if response.choices.length() == 0 {
@@ -103,6 +106,7 @@ pub async fn chat_stream(
     tools: None,
     extra_body: None,
     enable_search: None,
+    enable_thinking: None,
   }
   let (response, body) = @http.post(
     "\{config.base_url}/chat/completions",
@@ -118,6 +122,116 @@ pub async fn chat_stream(
   let body_text = body.text()
   on_delta(body_text)
   body_text
+}
+
+///|
+/// Deep thinking stream result: reasoning + answer
+pub struct ThinkingResult {
+  reasoning : String
+  answer : String
+}
+
+///|
+/// Parse SSE stream data, extract reasoning_content and content
+fn parse_thinking_sse(body_text : String) -> ThinkingResult {
+  let mut reasoning = ""
+  let mut answer = ""
+  let lines = body_text.split("\n")
+  for line in lines {
+    let trimmed = line.trim()
+    if trimmed.starts_with("data: ") && !trimmed.ends_with("[DONE]") {
+      // "data: " is 6 chars, extract JSON from index 6
+      let json_str = trimmed.substring(6)
+      try {
+        let chunk : StreamResponse = @json.from_json(@json.parse(json_str))
+        if chunk.choices.length() > 0 {
+          let delta = chunk.choices[0].delta
+          // Extract reasoning_content
+          match delta.reasoning_content {
+            Some(Json::String(s)) => reasoning = reasoning + s
+            _ => {}
+          }
+          // Extract content
+          match delta.content {
+            Json::String(s) => answer = answer + s
+            _ => {}
+          }
+        }
+      } catch {
+        _ => {}
+      }
+    }
+  }
+  ThinkingResult::{ reasoning, answer }
+}
+
+///|
+/// Chat with deep thinking enabled (streaming)
+/// Returns ThinkingResult with both reasoning process and final answer
+pub async fn chat_stream_thinking(
+  config : ClientConfig,
+  model : String,
+  messages : Array[Message],
+  on_reasoning_delta : (String) -> Unit,
+  on_answer_delta : (String) -> Unit,
+) -> ThinkingResult {
+  let request = Request::{
+    model,
+    messages,
+    stream: Some(true),
+    stream_options: Some(StreamOptions::{ include_usage: true }),
+    tools: None,
+    extra_body: None,
+    enable_search: None,
+    enable_thinking: Some(true),
+  }
+  let (response, body) = @http.post(
+    "\{config.base_url}/chat/completions",
+    request.to_json(),
+    headers={
+      "Authorization": "Bearer \{config.api_key}",
+      "Content-Type": "application/json",
+    },
+  )
+  guard response.code is (200..=299) else {
+    fail("HTTP request failed: \{response.code} \{response.reason}")
+  }
+  let body_text = body.text()
+  // Parse SSE stream and separate reasoning from answer
+  let result = parse_thinking_sse(body_text)
+  // Call callbacks with final content
+  if result.reasoning.length() > 0 {
+    on_reasoning_delta(result.reasoning)
+  }
+  if result.answer.length() > 0 {
+    on_answer_delta(result.answer)
+  }
+  result
+}
+
+///|
+/// Chat with deep thinking enabled (non-streaming)
+pub async fn chat_thinking(
+  config : ClientConfig,
+  model : String,
+  messages : Array[Message],
+) -> Message {
+  let request = Request::{
+    model,
+    messages,
+    stream: None,
+    stream_options: None,
+    tools: None,
+    extra_body: None,
+    enable_search: None,
+    enable_thinking: Some(true),
+  }
+  let response = generate(config, request)
+  if response.choices.length() == 0 {
+    fail("No response from model")
+  } else {
+    response.choices[0].message
+  }
 }
 
 ///|

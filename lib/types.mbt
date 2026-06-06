@@ -1,5 +1,5 @@
 ///|
-/// Common types for Moonbit Bailian SDK
+/// Common types for Moonbit Promptkit SDK
 ///
 
 ///|
@@ -21,6 +21,7 @@ pub struct Message {
   partial : Bool?
   tool_calls : Array[ToolCall]?
   tool_call_id : String?
+  reasoning_content : Json?
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
@@ -69,6 +70,7 @@ pub struct Request {
   tools : Json?
   extra_body : Json?
   enable_search : Bool?
+  enable_thinking : Bool?
 } derive(ToJson)
 
 ///|

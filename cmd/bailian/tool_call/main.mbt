@@ -4,7 +4,7 @@
 
 ///|
 let config : @lib.ClientConfig = @lib.create_client_config(
-  "MOONBIT_API_KEY", "MOONBIT_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
+  "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 
 ///|
@@ -28,7 +28,7 @@ async fn main {
   println("用户: \{user_question}")
 
   let mut response = @lib.chat_with_tools(
-    config, "qwen3.6-plus", messages, tools,
+    config, "qwen3.7-plus", messages, tools,
   )
   messages = messages + [response]
 
@@ -57,7 +57,7 @@ async fn main {
               messages = messages +
                 [@lib.tool_message(tool_call_id, tool_result)]
               response = @lib.chat_with_tools(
-                config, "qwen3.6-plus", messages, tools,
+                config, "qwen3.7-plus", messages, tools,
               )
               messages = messages + [response]
             } else {

@@ -4,11 +4,11 @@
 
 ///|
 let config : @lib.ClientConfig = @lib.create_client_config(
-  "MOONBIT_API_KEY", "MOONBIT_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
+  "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 
 ///|
-let model : String = @lib.get_env_var("MOONBIT_MODEL", Some("qwen3.7-plus"))
+let model : String = @lib.get_env_var("BAILIAN_MODEL", Some("qwen3.7-plus"))
 
 ///|
 async fn main {

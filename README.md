@@ -1,12 +1,30 @@
-# co63oc/moonbit_openai
+# co63oc/moonbit_promptkit
 
-以百炼接口为例运行：
-先导出环境变量，MOONBIT_API_KEY 为百炼API KEY，在页面 `https://bailian.console.aliyun.com/cn-beijing?tab=model#/api-key` 查看
-```
-export MOONBIT_API_KEY=xxx
-export MOONBIT_BASE_URL=https://dashscope.aliyuncs.com/compatible-mode/v1/chat/completions
-export MOONBIT_MODEL=qwen3.7-plus
-```
-然后运行 `moon run cmd/main`
+MoonBit 实现的 AI 大模型 SDK 示例，支持多个平台。
 
-如果有其他兼容openai的接口，可以修改这几个环境变量为对应接口值。
+## 支持的 API 平台
+
+| 平台 | 说明 | 文档 |
+|------|------|------|
+| **OpenRouter** | 统一接口访问数百种模型 | [cmd/openrouter/README.md](cmd/openrouter/README.md) |
+| **Moonshot AI (Kimi)** | OpenAI 兼容接口 | [cmd/moonshot/README.md](cmd/moonshot/README.md) |
+| **阿里云百炼 (Bailian)** | OpenAI 兼容接口 | [cmd/bailian/README.md](cmd/bailian/README.md) |
+| **腾讯混元 (Tokenhub)** | OpenAI 兼容接口 | [cmd/hunyuan/README.md](cmd/hunyuan/README.md) |
+| **百度千帆 (Qianfan)** | OpenAI 兼容接口 | [cmd/qianfan/README.md](cmd/qianfan/README.md) |
+
+## 项目结构
+
+```
+cmd/
+├── openrouter/  # OpenRouter 示例 
+├── moonshot/    # Moonshot AI (Kimi) 示例
+├── hunyuan/     # 腾讯混元示例
+├── qianfan/     # 百度千帆示例
+└── bailian/     # 阿里云百炼示例
+```
+
+## 通用说明
+
+所有平台均支持 OpenAI 兼容接口，配置对应的 API Key 和 Base URL 即可使用。
+
+如有其他兼容 OpenAI 的接口，可修改对应平台的环境变量为相应值。

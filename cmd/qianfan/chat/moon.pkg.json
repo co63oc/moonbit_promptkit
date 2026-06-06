@@ -1,0 +1,10 @@
+{
+  "is-main": true,
+  "import": [
+    {
+      "path": "moonbit_bailian/lib",
+      "alias": "lib"
+    },
+    "moonbitlang/async"
+  ]
+}

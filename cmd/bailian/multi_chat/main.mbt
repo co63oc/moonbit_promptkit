@@ -4,7 +4,7 @@
 
 ///|
 let config : @lib.ClientConfig = @lib.create_client_config(
-  "MOONBIT_API_KEY", "MOONBIT_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
+  "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 
 ///|
@@ -41,7 +41,7 @@ async fn main {
   let messages2 : Array[@lib.Message] = [
     @lib.user_message_with_text("你好，请简单介绍一下你自己"),
   ]
-  let response3 = @lib.chat(config, "qwen3.6-plus", messages2)
+  let response3 = @lib.chat(config, "qwen3.7-plus", messages2)
   println("用户: 你好，请简单介绍一下你自己")
   println("助手: \{@lib.extract_text_from_content(response3.content)}")
 
