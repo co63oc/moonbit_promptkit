@@ -4,9 +4,7 @@
 
 ///|
 let config : @lib.ClientConfig = @lib.create_client_config(
-  "OPENROUTER_API_KEY",
-  "OPENROUTER_BASE_URL",
-  "https://openrouter.ai/api/v1",
+  "OPENROUTER_API_KEY", "OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1",
 )
 
 ///|

@@ -1,1 +1,1 @@
-find cmd/ lib/ -name "*.mbt" | xargs cat | wc -l
+find cmd/ lib/ -name "*.mbt" -o -name "*.md" | xargs cat | wc -l

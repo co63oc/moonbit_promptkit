@@ -4,9 +4,7 @@
 
 ///|
 let config : @lib.ClientConfig = @lib.create_client_config(
-  "MOONSHOT_API_KEY",
-  "MOONSHOT_BASE_URL",
-  "https://api.moonshot.cn/v1",
+  "MOONSHOT_API_KEY", "MOONSHOT_BASE_URL", "https://api.moonshot.cn/v1",
 )
 
 ///|
@@ -19,9 +17,7 @@ async fn main {
   ]
   println("User: 请用3句话介绍一下人工智能的发展历史")
   println("Assistant: ")
-  let full_text1 = @lib.chat_stream(config, "kimi-latest", messages1, fn(
-    text,
-  ) {
+  let full_text1 = @lib.chat_stream(config, "kimi-latest", messages1, fn(text) {
     println(text)
   })
   println("\nFull reply: \{full_text1}")

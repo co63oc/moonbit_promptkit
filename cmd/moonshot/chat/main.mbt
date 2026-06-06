@@ -4,9 +4,7 @@
 
 ///|
 let config : @lib.ClientConfig = @lib.create_client_config(
-  "MOONSHOT_API_KEY",
-  "MOONSHOT_BASE_URL",
-  "https://api.moonshot.cn/v1",
+  "MOONSHOT_API_KEY", "MOONSHOT_BASE_URL", "https://api.moonshot.cn/v1",
 )
 
 ///|

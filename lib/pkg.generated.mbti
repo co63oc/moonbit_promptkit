@@ -7,47 +7,233 @@ import {
 }
 
 // Values
+pub async fn analyze_video(ClientConfig, String, String) -> String
+
+pub async fn analyze_video_with_model(ClientConfig, String, String, String) -> String
+
 pub fn assistant_message(String) -> Message
 
 pub fn assistant_message_partial(String) -> Message
 
+pub fn audio_content(String) -> Content
+
+pub async fn batch_chat(ClientConfig, String, Array[Message]) -> Message
+
+pub let batch_chat_base_url : String
+
+pub async fn batch_chat_full(ClientConfig, String, Array[Message]) -> Response
+
+pub async fn batch_chat_full_with_params(ClientConfig, String, Array[Message], Float?, Float?, Int?, Int?) -> Response
+
+pub async fn batch_chat_thinking(ClientConfig, String, Array[Message]) -> Message
+
+pub async fn batch_chat_with_params(ClientConfig, String, Array[Message], Float?, Float?, Int?, Int?) -> Message
+
+pub async fn batch_chat_with_search(ClientConfig, String, Array[Message]) -> Message
+
+pub async fn batch_chat_with_tools(ClientConfig, String, Array[Message], Json) -> Message
+
+pub fn build_batch_input_jsonl(Array[BatchInputItem]) -> String
+
+pub fn build_chat_batch_input(String, String, Array[Message]) -> BatchInputItem
+
+pub async fn cancel_batch(ClientConfig, String) -> Batch
+
 pub async fn chat(ClientConfig, String, Array[Message]) -> Message
 
+pub async fn chat_full(ClientConfig, String, Array[Message]) -> Response
+
+pub async fn chat_full_with_params(ClientConfig, String, Array[Message], Float?, Float?, Int?, Int?) -> Response
+
 pub async fn chat_stream(ClientConfig, String, Array[Message], (String) -> Unit) -> String
+
+pub async fn chat_stream_thinking(ClientConfig, String, Array[Message], (String) -> Unit, (String) -> Unit) -> ThinkingResult
+
+pub async fn chat_thinking(ClientConfig, String, Array[Message]) -> Message
+
+pub async fn chat_with_params(ClientConfig, String, Array[Message], Float?, Float?, Int?, Int?) -> Message
 
 pub async fn chat_with_search(ClientConfig, String, Array[Message]) -> Message
 
 pub async fn chat_with_tools(ClientConfig, String, Array[Message], Json) -> Message
 
+pub async fn compare_images(ClientConfig, String, String, String) -> String
+
+pub fn content_with_cache(Content) -> Content
+
+pub async fn create_batch(ClientConfig, String, String, String) -> Batch
+
+pub fn create_batch_client_config(String, String) -> ClientConfig
+
 pub fn create_client_config(String, String, String) -> ClientConfig
 
 pub async fn create_image_gen_task(ClientConfig, String, String, String?, String?, String?, Int?) -> ImageGenResponse
 
+pub async fn describe_image(ClientConfig, String, String) -> String
+
+pub async fn describe_image_with_model(ClientConfig, String, String, String) -> String
+
 pub fn extract_text_from_content(Json) -> String
+
+pub fn extract_usage(Response) -> Usage?
 
 pub async fn generate(ClientConfig, Request) -> Response
 
 pub async fn generate_image(ClientConfig, String) -> Array[String]
 
+pub async fn get_batch(ClientConfig, String) -> Batch
+
+pub fn get_cache_creation_tokens(Response) -> Int
+
+pub fn get_cache_read_tokens(Response) -> Int
+
+pub fn get_cached_tokens(Response) -> Int
+
+pub fn get_completion_tokens(Response) -> Int
+
 pub fn get_env_var(String, String?) -> String
+
+pub async fn get_file_content(ClientConfig, String) -> String
+
+pub async fn get_file_info(ClientConfig, String) -> BatchFile
 
 pub async fn get_image_gen_result(ClientConfig, String) -> ImageGenResponse
 
+pub async fn get_model(ClientConfig, String) -> Model
+
+pub fn get_model_names(ModelListResponse) -> Array[String]
+
+pub fn get_prompt_tokens(Response) -> Int
+
+pub fn get_total_tokens(Response) -> Int
+
 pub fn image_content(String) -> Content
+
+pub async fn list_batches(ClientConfig, Int?, String?) -> BatchListResponse
+
+pub async fn list_models(ClientConfig) -> ModelListResponse
+
+pub async fn multi_image_chat_full(ClientConfig, String, Array[String], String) -> Response
+
+pub async fn ocr_image(ClientConfig, String) -> String
+
+pub async fn ocr_image_with_model(ClientConfig, String, String) -> String
+
+pub fn parse_batch_output(String) -> Array[BatchOutputItem]
 
 pub fn system_message(String) -> Message
 
+pub fn system_message_with_cache(String) -> Message
+
 pub fn text_content(String) -> Content
 
+pub fn text_content_with_cache(String) -> Content
+
+pub fn to_batch_config(ClientConfig) -> ClientConfig
+
 pub fn tool_message(String, String) -> Message
+
+pub fn user_message_with_cache(String) -> Message
 
 pub fn user_message_with_contents(Array[Content]) -> Message
 
 pub fn user_message_with_text(String) -> Message
 
+pub fn video_content(String) -> Content
+
+pub async fn wait_for_batch(ClientConfig, String, Int, Int) -> Batch
+
 // Errors
 
 // Types and methods
+pub struct AudioUrl {
+  url : String
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct Batch {
+  id : String
+  object : String?
+  endpoint : String?
+  status : String
+  input_file_id : String?
+  output_file_id : String?
+  error_file_id : String?
+  completion_window : String?
+  request_counts : BatchRequestCounts?
+  errors : Array[BatchError]?
+  created_at : Int?
+  in_progress_at : Int?
+  completed_at : Int?
+  failed_at : Int?
+  expires_at : Int?
+  cancelling_at : Int?
+  cancelled_at : Int?
+  metadata : Map[String, String]?
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct BatchCreateRequest {
+  input_file_id : String
+  endpoint : String
+  completion_window : String
+  metadata : Map[String, String]?
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct BatchError {
+  code : String?
+  message : String?
+  param : String?
+  line : Int?
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct BatchFile {
+  id : String
+  object : String?
+  bytes : Int?
+  created_at : Int?
+  filename : String?
+  purpose : String?
+  status : String?
+  status_details : String?
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct BatchInputItem {
+  custom_id : String
+  method_ : String
+  url : String
+  body : Json
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct BatchListResponse {
+  object : String?
+  data : Array[Batch]
+  has_more : Bool?
+  first_id : String?
+  last_id : String?
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct BatchOutputItem {
+  id : String?
+  custom_id : String
+  response : BatchOutputResponse?
+  error : BatchError?
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct BatchOutputResponse {
+  status_code : Int?
+  request_id : String?
+  body : Json?
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct BatchRequestCounts {
+  total : Int?
+  completed : Int?
+  failed : Int?
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct CacheControl {
+  type_ : String
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
 pub struct Choice {
   message : Message
 } derive(ToJson, @json.FromJson)
@@ -60,7 +246,10 @@ pub struct ClientConfig {
 pub struct Content {
   text : String?
   image_url : ImageUrl?
+  video_url : VideoUrl?
+  audio_url : AudioUrl?
   type_ : String
+  cache_control : CacheControl?
 } derive(ToJson, @debug.Debug, @json.FromJson)
 
 pub struct Function {
@@ -137,12 +326,29 @@ pub struct Message {
   partial : Bool?
   tool_calls : Array[ToolCall]?
   tool_call_id : String?
+  reasoning_content : Json?
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct Model {
+  id : String
+  object : String?
+  created : Int?
+  owned_by : String?
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct ModelListResponse {
+  object : String?
+  data : Array[Model]
 } derive(ToJson, @debug.Debug, @json.FromJson)
 
 pub struct Parameters {
   type_ : String
   properties : Map[String, Json]
   required : Array[String]
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct PromptTokensDetails {
+  cached_tokens : Int?
 } derive(ToJson, @debug.Debug, @json.FromJson)
 
 pub struct Request {
@@ -153,6 +359,14 @@ pub struct Request {
   tools : Json?
   extra_body : Json?
   enable_search : Bool?
+  enable_thinking : Bool?
+  top_p : Float?
+  temperature : Float?
+  presence_penalty : Float?
+  n : Int?
+  max_tokens : Int?
+  seed : Int?
+  stop : Json?
 } derive(ToJson)
 
 pub struct Response {
@@ -173,6 +387,11 @@ pub struct StreamResponse {
   usage : Json?
 } derive(ToJson, @debug.Debug, @json.FromJson)
 
+pub struct ThinkingResult {
+  reasoning : String
+  answer : String
+}
+
 pub struct Tool {
   type_ : String
   function : FunctionDef
@@ -181,6 +400,19 @@ pub struct Tool {
 pub struct ToolCall {
   id : String
   function : Function
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct Usage {
+  prompt_tokens : Int?
+  completion_tokens : Int?
+  total_tokens : Int?
+  prompt_tokens_details : PromptTokensDetails?
+  cache_creation_input_tokens : Int?
+  cache_read_input_tokens : Int?
+} derive(ToJson, @debug.Debug, @json.FromJson)
+
+pub struct VideoUrl {
+  url : String
 } derive(ToJson, @debug.Debug, @json.FromJson)
 
 // Type aliases

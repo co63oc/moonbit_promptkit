@@ -1,6 +1,6 @@
 import {
   "moonbitlang/async",
-  "moonbit_bailian/lib" @lib,
+  "moonbit_bailian/lib",
 }
 
 options(

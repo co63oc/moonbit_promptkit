@@ -19,6 +19,7 @@ API Key 获取地址：https://bailian.console.aliyun.com/cn-beijing?tab=model#/
 | `chat` | 简单对话 | `moon run cmd/bailian/chat` |
 | `stream` | 流式输出 | `moon run cmd/bailian/stream` |
 | `thinking` | 深度思考 | `moon run cmd/bailian/thinking` |
+| `params` | 自定义参数 (temperature/top_p/max_tokens/seed等) | `moon run cmd/bailian/params` |
 | `multi_chat` | 多轮对话 | `moon run cmd/bailian/multi_chat` |
 | `partial` | 前缀续写 | `moon run cmd/bailian/partial` |
 | `search` | 联网搜索 | `moon run cmd/bailian/search` |
