@@ -29,6 +29,12 @@ pub async fn caption_audio_with_prompt(
   caption_audio_impl(config, audio_url, default_model, Some(prompt))
 }
 
+///| Clean text content struct (no null fields like image_url, video_url, etc.)
+struct CleanTextContent {
+  type_ : String
+  text : String
+} derive(ToJson(fields(type_(rename="type"))))
+
 ///| Message structure for audio requests
 struct AudioMessage {
   role : String
@@ -44,27 +50,35 @@ async fn caption_audio_impl(
 ) -> String {
   // Build audio content
   let audio_json = audio_content(audio_url).to_json()
-  
-  // Build content array - audio and optional text prompt
-  let content_items : Array[Json] = match prompt {
-    Some(p) => [audio_json, @lib.text_content(p).to_json()]
-    None => [audio_json]
-  }
-  
-  // Build message
-  let message = AudioMessage::{
+
+  // Audio always goes in a user message
+  let audio_message = AudioMessage::{
     role: "user",
-    content: content_items,
+    content: [audio_json],
   }
-  
+
+  // When there's a custom prompt, add it as a separate system message.
+  // The API rejects mixed audio+text in a single user message content array.
+  let messages : Array[Json] = match prompt {
+    Some(p) => {
+      let text_json = CleanTextContent::{ type_: "text", text: p }.to_json()
+      let system_message = AudioMessage::{
+        role: "system",
+        content: [text_json],
+      }
+      [system_message.to_json(), audio_message.to_json()]
+    }
+    None => [audio_message.to_json()]
+  }
+
   // Build request
   let request = AudioRequest::{
     model,
-    messages: [message.to_json()],
+    messages,
     stream: None,
     stream_options: None,
   }
-  
+
   let (response, body) = @http.post(
     "\{config.base_url}/chat/completions",
     request.to_json(),
