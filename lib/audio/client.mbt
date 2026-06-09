@@ -29,29 +29,42 @@ pub async fn caption_audio_with_prompt(
   caption_audio_impl(config, audio_url, default_model, Some(prompt))
 }
 
+///| Message structure for audio requests
+struct AudioMessage {
+  role : String
+  content : Array[Json]
+} derive(ToJson)
+
 ///| Internal: build request and call API
-fn caption_audio_impl(
+async fn caption_audio_impl(
   config : @lib.ClientConfig,
   audio_url : String,
   model : String,
   prompt : String?,
 ) -> String {
-  let content_items = match prompt {
-    Some(p) =>
-      [
-        audio_content(audio_url).to_json(),
-        @lib.text_content(p).to_json(),
-      ]
-    None =>
-      [audio_content(audio_url).to_json()]
+  // Build audio content
+  let audio_json = audio_content(audio_url).to_json()
+  
+  // Build content array - audio and optional text prompt
+  let content_items : Array[Json] = match prompt {
+    Some(p) => [audio_json, @lib.text_content(p).to_json()]
+    None => [audio_json]
   }
-  let message_json = { "role": "user", "content": content_items }
+  
+  // Build message
+  let message = AudioMessage::{
+    role: "user",
+    content: content_items,
+  }
+  
+  // Build request
   let request = AudioRequest::{
     model,
-    messages: [message_json],
+    messages: [message.to_json()],
     stream: None,
     stream_options: None,
   }
+  
   let (response, body) = @http.post(
     "\{config.base_url}/chat/completions",
     request.to_json(),
@@ -61,7 +74,8 @@ fn caption_audio_impl(
     },
   )
   guard response.code is (200..=299) else {
-    fail("Audio caption request failed: \{response.code} \{response.reason}")
+    let error_text = body.text()
+    fail("Audio caption request failed: \{response.code} \{response.reason}\n\{error_text}")
   }
   let resp : @lib.Response = body.json() |> @json.from_json()
   if resp.choices.length() == 0 {
