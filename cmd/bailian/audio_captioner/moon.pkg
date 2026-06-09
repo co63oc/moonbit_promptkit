@@ -1,7 +1,6 @@
 import {
   "moonbitlang/async",
-  "moonbit_bailian/lib",
-  "moonbit_bailian/lib/mt",
+  "moonbit_bailian/lib/audio",
 }
 
 options(

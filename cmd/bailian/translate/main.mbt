@@ -16,7 +16,7 @@ async fn main {
   // Demo 1: 基础翻译 (中译英)
   println("--- Demo 1: 基础翻译 (中译英) ---")
   let text1 = "我看到这个视频后没有笑"
-  let result1 = @lib.translate(config, text1, "Chinese", "English")
+  let result1 = @mt.translate(config, text1, "Chinese", "English")
   println("原文: " + text1)
   println("译文: " + result1)
   println("")
@@ -24,7 +24,7 @@ async fn main {
   // Demo 2: 自动检测源语种
   println("--- Demo 2: 自动检测源语种 (auto) ---")
   let text2 = "Hello, how are you today?"
-  let result2 = @lib.translate(config, text2, "auto", "Chinese")
+  let result2 = @mt.translate(config, text2, "auto", "Chinese")
   println("原文: " + text2)
   println("译文: " + result2)
   println("")
@@ -32,7 +32,7 @@ async fn main {
   // Demo 3: 使用指定模型 (qwen-mt-plus 翻译质量最高)
   println("--- Demo 3: 使用 qwen-mt-plus 高质量翻译 ---")
   let text3 = "量子计算是一种利用量子力学现象进行信息处理的计算方式。"
-  let result3 = @lib.translate_with_model(
+  let result3 = @mt.translate_with_model(
     config, text3, "Chinese", "English", "qwen-mt-plus",
   )
   println("原文: " + text3)
@@ -45,15 +45,15 @@ async fn main {
   println("原文: " + text4)
 
   println("\n[不使用术语表]")
-  let result4a = @lib.translate(config, text4, "Chinese", "English")
+  let result4a = @mt.translate(config, text4, "Chinese", "English")
   println("译文: " + result4a)
 
   println("\n[使用术语表]")
-  let terms : Array[@lib.TranslationTerm] = [
-    @lib.translation_term("生物传感器", "biological sensor"),
-    @lib.translation_term("身体健康状况", "health status of the body"),
+  let terms : Array[@mt.TranslationTerm] = [
+    @mt.translation_term("生物传感器", "biological sensor"),
+    @mt.translation_term("身体健康状况", "health status of the body"),
   ]
-  let result4b = @lib.translate_with_terms(
+  let result4b = @mt.translate_with_terms(
     config, text4, "Chinese", "English", terms,
   )
   println("译文: " + result4b)
@@ -62,7 +62,7 @@ async fn main {
   // Demo 5: 领域提示 (domain hint)
   println("--- Demo 5: 领域提示 (Domain Hint) ---")
   let text5 = "The defendant was found guilty of breach of contract and ordered to pay damages."
-  let result5 = @lib.translate_with_domain(
+  let result5 = @mt.translate_with_domain(
     config, text5, "English", "Chinese", "legal",
   )
   println("原文: " + text5)
@@ -74,7 +74,7 @@ async fn main {
   let text6 = "人工智能正在改变我们的生活方式,从医疗诊断到自动驾驶,AI技术的应用越来越广泛。"
   println("原文: " + text6)
   println("译文 (流式): ")
-  let _ = @lib.translate_stream(
+  let _ = @mt.translate_stream(
     config, text6, "Chinese", "English", fn(chunk) {
       println(chunk)
     },

@@ -30,6 +30,13 @@ API Key 获取地址：https://bailian.console.aliyun.com/cn-beijing?tab=model#/
 | `context_cache` | 上下文缓存 | `moon run cmd/bailian/context_cache` |
 | `vl` | 图像与视频理解 | `moon run cmd/bailian/vl` |
 | `translate` | Qwen-MT 机器翻译 | `moon run cmd/bailian/translate` |
+| `role_play` | 角色扮演（通义星尘） | `moon run cmd/bailian/role_play` |
+| `qwen_doc_turbo` | 文档数据挖掘 | `moon run cmd/bailian/qwen_doc_turbo` |
+| `qwen_math` | 数学推理（Qwen-Math） | `moon run cmd/bailian/qwen_math` |
+| `gui_automation` | UI交互自动化（GUI-Plus） | `moon run cmd/bailian/gui_automation` |
+| `dialogue_analysis` | 对话分析（通义晓蜜） | `moon run cmd/bailian/dialogue_analysis` |
+| `audio_captioner` | 音频理解（Qwen3-Omni-Captioner） | `moon run cmd/bailian/audio_captioner` |
+| `deep_research` | 深度研究（Qwen-Deep-Research） | `moon run cmd/bailian/deep_research` |
 
 ## 快速开始
 
