@@ -271,3 +271,8 @@ pub fn get_cached_tokens(response : Response) -> Int {
     None => 0
   }
 }
+
+///| Create a TranslationTerm for terminology intervention (术语干预)
+pub fn translation_term(source : String, target : String) -> TranslationTerm {
+  TranslationTerm::{ source, target }
+}

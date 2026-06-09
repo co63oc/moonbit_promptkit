@@ -25,6 +25,11 @@ API Key 获取地址：https://bailian.console.aliyun.com/cn-beijing?tab=model#/
 | `search` | 联网搜索 | `moon run cmd/bailian/search` |
 | `tool_call` | 工具调用 | `moon run cmd/bailian/tool_call` |
 | `image_gen` | 图像生成 | `moon run cmd/bailian/image_gen` |
+| `models` | 模型列表 | `moon run cmd/bailian/models` |
+| `batch` | 批量推理 | `moon run cmd/bailian/batch` |
+| `context_cache` | 上下文缓存 | `moon run cmd/bailian/context_cache` |
+| `vl` | 图像与视频理解 | `moon run cmd/bailian/vl` |
+| `translate` | Qwen-MT 机器翻译 | `moon run cmd/bailian/translate` |
 
 ## 快速开始
 

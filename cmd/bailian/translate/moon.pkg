@@ -1,0 +1,8 @@
+import {
+  "moonbitlang/async",
+  "moonbit_bailian/lib",
+}
+
+options(
+  "is-main": true,
+)
