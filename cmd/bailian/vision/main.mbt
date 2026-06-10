@@ -16,14 +16,14 @@ let math_image_url : String = "https://img.alicdn.com/imgextra/i1/O1CN01gDEY8M1W
 async fn main {
   // === Demo 1: QVQ 视觉推理（流式，分离思考过程和最终回答）===
   println("=== Demo 1: QVQ 视觉推理（流式）===")
-  println("模型: \{@vision.default_reasoning_model}")
+  println("模型: \{@lib_vs.default_reasoning_model}")
   println("图片: \{math_image_url}")
   println("问题: 这道题怎么解答？")
   println("")
 
-  let result1 = @vision.visual_reasoning_stream(
+  let result1 = @lib_vs.visual_reasoning_stream(
     config,
-    @vision.default_reasoning_model,
+    @lib_vs.default_reasoning_model,
     math_image_url,
     "这道题怎么解答？",
     fn(s) {
@@ -43,12 +43,12 @@ async fn main {
 
   // === Demo 2: Qwen3-VL 混合思考（开启思考）===
   println("=== Demo 2: Qwen3-VL 混合思考（开启思考）===")
-  println("模型: \{@vision.default_qwen3vl_model}")
+  println("模型: \{@lib_vs.default_qwen3vl_model}")
   println("enable_thinking: true")
   println("")
 
-  let result2 = @vision.qwen3vl_thinking(
-    config, @vision.default_qwen3vl_model, math_image_url, "请分析图片中的内容",
+  let result2 = @lib_vs.qwen3vl_thinking(
+    config, @lib_vs.default_qwen3vl_model, math_image_url, "请分析图片中的内容",
     true,
   )
   match result2.reasoning_content {
@@ -65,12 +65,12 @@ async fn main {
 
   // === Demo 3: Qwen3-VL 混合思考（关闭思考）===
   println("=== Demo 3: Qwen3-VL 混合思考（关闭思考）===")
-  println("模型: \{@vision.default_qwen3vl_model}")
+  println("模型: \{@lib_vs.default_qwen3vl_model}")
   println("enable_thinking: false")
   println("")
 
-  let result3 = @vision.qwen3vl_thinking(
-    config, @vision.default_qwen3vl_model, math_image_url, "请分析图片中的内容",
+  let result3 = @lib_vs.qwen3vl_thinking(
+    config, @lib_vs.default_qwen3vl_model, math_image_url, "请分析图片中的内容",
     false,
   )
   println("=== 直接回答 ===")
@@ -92,9 +92,9 @@ async fn main {
     @lib.user_message_with_text("请详细解答第一个图形的体积计算"),
   ]
 
-  let result4 = @vision.visual_reasoning_multi_turn_stream(
+  let result4 = @lib_vs.visual_reasoning_multi_turn_stream(
     config,
-    @vision.default_reasoning_model,
+    @lib_vs.default_reasoning_model,
     messages,
     fn(s) {
       ignore(s)
@@ -114,26 +114,26 @@ async fn main {
 
   // === Demo 5: 基础视觉理解（非推理模型）===
   println("=== Demo 5: 基础视觉理解 ===")
-  println("模型: \{@vision.default_vision_model}")
+  println("模型: \{@lib_vs.default_vision_model}")
   println("")
 
-  let desc = @vision.analyze_image(
-    config, @vision.default_vision_model, math_image_url, "描述这张图片中的内容",
+  let desc = @lib_vs.analyze_image(
+    config, @lib_vs.default_vision_model, math_image_url, "描述这张图片中的内容",
   )
   println("描述: \{desc}")
   println("")
 
   // === Demo 6: OCR ===
   println("=== Demo 6: OCR 文字识别 ===")
-  println("模型: \{@vision.default_ocr_model}")
+  println("模型: \{@lib_vs.default_ocr_model}")
   println("")
 
-  let text = @vision.ocr(config, @vision.default_ocr_model, math_image_url)
+  let text = @lib_vs.ocr(config, @lib_vs.default_ocr_model, math_image_url)
   println("识别结果: \{text}")
   println("")
 
   // === Demo 7: 图像定位 ===
   println("=== Demo 7: 图像定位 (Grounding) ===")
-  let bbox = @vision.grounding_easy(config, math_image_url, "数字")
+  let bbox = @lib_vs.grounding_easy(config, math_image_url, "数字")
   println("定位结果: \{bbox}")
 }

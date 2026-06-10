@@ -33,6 +33,7 @@ pub async fn chat(
     extra_body: None,
     enable_search: None,
     enable_thinking: None,
+    enable_code_interpreter: None,
     search_options: None,
     top_p: None,
     temperature: None,
@@ -65,6 +66,7 @@ pub async fn chat_with_search(
     extra_body: None,
     enable_search: Some(true),
     enable_thinking: None,
+    enable_code_interpreter: None,
     search_options: None,
     top_p: None,
     temperature: None,
@@ -98,6 +100,7 @@ pub async fn chat_with_tools(
     extra_body: None,
     enable_search: None,
     enable_thinking: Some(false),
+    enable_code_interpreter: None,
     search_options: None,
     top_p: None,
     temperature: None,
@@ -131,6 +134,7 @@ pub async fn chat_stream(
     extra_body: None,
     enable_search: None,
     enable_thinking: None,
+    enable_code_interpreter: None,
     search_options: None,
     top_p: None,
     temperature: None,
@@ -232,6 +236,7 @@ pub async fn chat_stream_thinking(
     extra_body: None,
     enable_search: None,
     enable_thinking: Some(true),
+    enable_code_interpreter: None,
     search_options: None,
     top_p: None,
     temperature: None,
@@ -281,6 +286,7 @@ pub async fn chat_thinking(
     extra_body: None,
     enable_search: None,
     enable_thinking: Some(true),
+    enable_code_interpreter: None,
     search_options: None,
     top_p: None,
     temperature: None,
@@ -318,6 +324,7 @@ pub async fn chat_with_params(
     extra_body: None,
     enable_search: None,
     enable_thinking: None,
+    enable_code_interpreter: None,
     search_options: None,
     top_p,
     temperature,
@@ -351,6 +358,7 @@ pub async fn chat_full(
     extra_body: None,
     enable_search: None,
     enable_thinking: None,
+    enable_code_interpreter: None,
     search_options: None,
     top_p: None,
     temperature: None,
@@ -383,6 +391,7 @@ pub async fn chat_full_with_params(
     extra_body: None,
     enable_search: None,
     enable_thinking: None,
+    enable_code_interpreter: None,
     search_options: None,
     top_p,
     temperature,
@@ -393,6 +402,198 @@ pub async fn chat_full_with_params(
     stop: None,
   }
   generate(config, request)
+}
+
+///|
+/// Chat with web extractor enabled (streaming)
+/// Uses search_strategy=agent_max to enable web page extraction
+/// Note: Web extractor requires streaming mode
+pub async fn chat_web_extractor_stream(
+  config : ClientConfig,
+  model : String,
+  messages : Array[Message],
+  on_delta : (String) -> Unit,
+) -> String {
+  let request = Request::{
+    model,
+    messages,
+    stream: Some(true),
+    stream_options: Some(StreamOptions::{ include_usage: true }),
+    tools: None,
+    extra_body: None,
+    enable_search: Some(true),
+    enable_thinking: Some(true),
+    search_options: Some(SearchOptions::{ search_strategy: Some("agent_max") }),
+    enable_code_interpreter: None,
+    top_p: None,
+    temperature: None,
+    presence_penalty: None,
+    n: None,
+    max_tokens: None,
+    seed: None,
+    stop: None,
+  }
+  let (response, body) = @http.post(
+    "\{config.base_url}/chat/completions",
+    request.to_json(),
+    headers={
+      "Authorization": "Bearer \{config.api_key}",
+      "Content-Type": "application/json",
+    },
+  )
+  guard response.code is (200..=299) else {
+    fail("HTTP request failed: \{response.code} \{response.reason}")
+  }
+  let body_text = body.text()
+  on_delta(body_text)
+  body_text
+}
+
+///|
+/// Chat with web extractor enabled (streaming, with thinking result)
+/// Returns ThinkingResult with both reasoning process and final answer
+pub async fn chat_web_extractor_stream_thinking(
+  config : ClientConfig,
+  model : String,
+  messages : Array[Message],
+  on_reasoning_delta : (String) -> Unit,
+  on_answer_delta : (String) -> Unit,
+) -> ThinkingResult {
+  let request = Request::{
+    model,
+    messages,
+    stream: Some(true),
+    stream_options: Some(StreamOptions::{ include_usage: true }),
+    tools: None,
+    extra_body: None,
+    enable_search: Some(true),
+    enable_thinking: Some(true),
+    search_options: Some(SearchOptions::{ search_strategy: Some("agent_max") }),
+    enable_code_interpreter: None,
+    top_p: None,
+    temperature: None,
+    presence_penalty: None,
+    n: None,
+    max_tokens: None,
+    seed: None,
+    stop: None,
+  }
+  let (response, body) = @http.post(
+    "\{config.base_url}/chat/completions",
+    request.to_json(),
+    headers={
+      "Authorization": "Bearer \{config.api_key}",
+      "Content-Type": "application/json",
+    },
+  )
+  guard response.code is (200..=299) else {
+    fail("HTTP request failed: \{response.code} \{response.reason}")
+  }
+  let body_text = body.text()
+  let result = parse_thinking_sse(body_text)
+  if result.reasoning.length() > 0 {
+    on_reasoning_delta(result.reasoning)
+  }
+  if result.answer.length() > 0 {
+    on_answer_delta(result.answer)
+  }
+  result
+}
+
+///|
+/// Chat with code interpreter enabled (streaming)
+/// Enables Python code execution in sandbox environment
+/// Note: Code interpreter requires streaming mode and thinking mode
+pub async fn chat_code_interpreter_stream(
+  config : ClientConfig,
+  model : String,
+  messages : Array[Message],
+  on_delta : (String) -> Unit,
+) -> String {
+  let request = Request::{
+    model,
+    messages,
+    stream: Some(true),
+    stream_options: Some(StreamOptions::{ include_usage: true }),
+    tools: None,
+    extra_body: None,
+    enable_search: None,
+    enable_thinking: Some(true),
+    enable_code_interpreter: Some(true),
+    search_options: None,
+    top_p: None,
+    temperature: None,
+    presence_penalty: None,
+    n: None,
+    max_tokens: None,
+    seed: None,
+    stop: None,
+  }
+  let (response, body) = @http.post(
+    "\{config.base_url}/chat/completions",
+    request.to_json(),
+    headers={
+      "Authorization": "Bearer \{config.api_key}",
+      "Content-Type": "application/json",
+    },
+  )
+  guard response.code is (200..=299) else {
+    fail("HTTP request failed: \{response.code} \{response.reason}")
+  }
+  let body_text = body.text()
+  on_delta(body_text)
+  body_text
+}
+
+///|
+/// Chat with code interpreter enabled (streaming, with thinking result)
+/// Returns ThinkingResult with both reasoning process and final answer
+pub async fn chat_code_interpreter_stream_thinking(
+  config : ClientConfig,
+  model : String,
+  messages : Array[Message],
+  on_reasoning_delta : (String) -> Unit,
+  on_answer_delta : (String) -> Unit,
+) -> ThinkingResult {
+  let request = Request::{
+    model,
+    messages,
+    stream: Some(true),
+    stream_options: Some(StreamOptions::{ include_usage: true }),
+    tools: None,
+    extra_body: None,
+    enable_search: None,
+    enable_thinking: Some(true),
+    enable_code_interpreter: Some(true),
+    search_options: None,
+    top_p: None,
+    temperature: None,
+    presence_penalty: None,
+    n: None,
+    max_tokens: None,
+    seed: None,
+    stop: None,
+  }
+  let (response, body) = @http.post(
+    "\{config.base_url}/chat/completions",
+    request.to_json(),
+    headers={
+      "Authorization": "Bearer \{config.api_key}",
+      "Content-Type": "application/json",
+    },
+  )
+  guard response.code is (200..=299) else {
+    fail("HTTP request failed: \{response.code} \{response.reason}")
+  }
+  let body_text = body.text()
+  let result = parse_thinking_sse(body_text)
+  if result.reasoning.length() > 0 {
+    on_reasoning_delta(result.reasoning)
+  }
+  if result.answer.length() > 0 {
+    on_answer_delta(result.answer)
+  }
+  result
 }
 
 ///|
@@ -787,6 +988,7 @@ pub fn build_chat_batch_input(
     extra_body: None,
     enable_search: None,
     enable_thinking: None,
+    enable_code_interpreter: None,
     search_options: None,
     top_p: None,
     temperature: None,
@@ -1373,6 +1575,62 @@ pub async fn get_3d_gen_result(
   let (response, body) = @http.get(
     "https://dashscope.aliyuncs.com/api/v1/tasks/\{task_id}",
     headers={ "Authorization": "Bearer \{config.api_key}" },
+  )
+  guard response.code is (200..=299) else {
+    fail("HTTP request failed: \{response.code} \{response.reason}")
+  }
+  body.json() |> @json.from_json()
+}
+
+///|
+/// Generate text embeddings (文本向量化)
+pub async fn create_embedding(
+  config : ClientConfig,
+  model : String,
+  input : Json,
+) -> EmbeddingResponse {
+  let request = EmbeddingRequest::{
+    model,
+    input,
+    encoding_format: None,
+    dimensions: None,
+  }
+  let (response, body) = @http.post(
+    "\{config.base_url}/embeddings",
+    request.to_json(),
+    headers={
+      "Authorization": "Bearer \{config.api_key}",
+      "Content-Type": "application/json",
+    },
+  )
+  guard response.code is (200..=299) else {
+    fail("HTTP request failed: \{response.code} \{response.reason}")
+  }
+  body.json() |> @json.from_json()
+}
+
+///|
+/// Generate text embeddings with options (文本向量化，可指定编码格式和维度)
+pub async fn create_embedding_with_options(
+  config : ClientConfig,
+  model : String,
+  input : Json,
+  encoding_format : String?,
+  dimensions : Int?,
+) -> EmbeddingResponse {
+  let request = EmbeddingRequest::{
+    model,
+    input,
+    encoding_format,
+    dimensions,
+  }
+  let (response, body) = @http.post(
+    "\{config.base_url}/embeddings",
+    request.to_json(),
+    headers={
+      "Authorization": "Bearer \{config.api_key}",
+      "Content-Type": "application/json",
+    },
   )
   guard response.code is (200..=299) else {
     fail("HTTP request failed: \{response.code} \{response.reason}")

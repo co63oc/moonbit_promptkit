@@ -94,6 +94,7 @@ pub struct Request {
   extra_body : Json?
   enable_search : Bool?
   enable_thinking : Bool?
+  enable_code_interpreter : Bool?
   search_options : SearchOptions?
   top_p : Float?
   temperature : Float?
@@ -411,6 +412,39 @@ pub struct BatchOutputResponse {
   status_code : Int?
   request_id : String?
   body : Json?
+} derive(Debug, ToJson, @json.FromJson)
+
+///|
+/// Embedding request body
+pub struct EmbeddingRequest {
+  model : String
+  input : Json
+  encoding_format : String?
+  dimensions : Int?
+} derive(ToJson)
+
+///|
+/// Embedding data item
+pub struct EmbeddingData {
+  object : String?
+  embedding : Array[Float]
+  index : Int?
+} derive(Debug, ToJson, @json.FromJson)
+
+///|
+/// Embedding usage
+pub struct EmbeddingUsage {
+  prompt_tokens : Int?
+  total_tokens : Int?
+} derive(Debug, ToJson, @json.FromJson)
+
+///|
+/// Embedding response
+pub struct EmbeddingResponse {
+  object : String?
+  data : Array[EmbeddingData]
+  model : String?
+  usage : EmbeddingUsage?
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|

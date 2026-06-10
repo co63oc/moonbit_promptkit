@@ -21,9 +21,9 @@ async fn main {
   println("扩展中...")
 
   try {
-    let urls = @image_expansion.expand_image(
+    let urls = @lib_ix.expand_image(
       config,
-      @image_expansion.default_model,
+      @lib_ix.default_model,
       image_url,
       x_scale=2.0,
       y_scale=2.0,
@@ -42,7 +42,7 @@ async fn main {
   // Demo 2: 便捷函数
   println("2. 便捷函数 expand_easy (1.5x)")
   try {
-    let urls = @image_expansion.expand_easy(
+    let urls = @lib_ix.expand_easy(
       config,
       image_url,
       x_scale=1.5,
@@ -60,9 +60,9 @@ async fn main {
   // Demo 3: 3倍扩展
   println("3. 3倍扩展")
   try {
-    let urls = @image_expansion.expand_image(
+    let urls = @lib_ix.expand_image(
       config,
-      @image_expansion.default_model,
+      @lib_ix.default_model,
       image_url,
       x_scale=3.0,
       y_scale=3.0,

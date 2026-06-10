@@ -22,9 +22,9 @@ async fn main {
   println("编辑中...")
 
   try {
-    let urls = @image_edit.edit_image(
+    let urls = @lib_ie.edit_image(
       config,
-      @image_edit.default_model,
+      @lib_ie.default_model,
       prompt,
       [image_url],
       n=1,
@@ -44,7 +44,7 @@ async fn main {
   let prompt2 = "给图片添加一个复古滤镜效果"
   println("指令: \{prompt2}")
   try {
-    let urls = @image_edit.edit_easy(config, prompt2, image_url)
+    let urls = @lib_ie.edit_easy(config, prompt2, image_url)
     println("编辑成功！共 \{urls.length()} 张图片")
     for url in urls {
       println("  URL: \{url}")
@@ -63,8 +63,8 @@ async fn main {
   println("编辑图: \{edit_url}")
   println("指令: \{prompt3}")
   try {
-    let urls = @image_edit.edit_with_refs(
-      config, @image_edit.default_model, prompt3, ref_url, edit_url,
+    let urls = @lib_ie.edit_with_refs(
+      config, @lib_ie.default_model, prompt3, ref_url, edit_url,
     )
     println("编辑成功！共 \{urls.length()} 张图片")
     for url in urls {

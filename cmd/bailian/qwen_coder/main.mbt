@@ -22,7 +22,7 @@ async fn main {
   // Demo 1: 代码生成
   println("--- Demo 1: 代码生成 ---")
   println("生成一个快速排序算法 (Python)")
-  let response1 = @qwen_coder.code_generate(
+  let response1 = @lib_qc.code_generate(
     config,
     "Write a quicksort algorithm with detailed comments",
     model,
@@ -36,7 +36,7 @@ async fn main {
   println("--- Demo 2: 代码解释 ---")
   println("代码:")
   println(fibonacci_code)
-  let response2 = @qwen_coder.code_explain(config, fibonacci_code, model)
+  let response2 = @lib_qc.code_explain(config, fibonacci_code, model)
   println("解释:")
   println(@lib.extract_text_from_content(response2.content))
   println("")
@@ -45,7 +45,7 @@ async fn main {
   println("--- Demo 3: 代码重构 ---")
   println("原始代码:")
   println(process_code)
-  let response3 = @qwen_coder.code_refactor(
+  let response3 = @lib_qc.code_refactor(
     config,
     process_code,
     Some("Use list comprehension and improve readability"),
@@ -58,7 +58,7 @@ async fn main {
   // Demo 4: 流式代码生成
   println("--- Demo 4: 流式代码生成 ---")
   println("生成一个 REST API 服务器 (Node.js)")
-  let _ = @qwen_coder.code_generate_stream(
+  let _ = @lib_qc.code_generate_stream(
     config,
     "Create a simple Express.js REST API with GET and POST endpoints for a todo list",
     fn(chunk) { println(chunk) },

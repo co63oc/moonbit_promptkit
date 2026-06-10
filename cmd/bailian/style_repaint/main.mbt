@@ -21,9 +21,9 @@ async fn main {
   println("重绘中...")
 
   try {
-    let urls = @style_repaint.style_repaint(
+    let urls = @lib_sr.style_repaint(
       config,
-      @style_repaint.default_model,
+      @lib_sr.default_model,
       image_url,
       7,
       poll_interval_ms=5000,
@@ -42,7 +42,7 @@ async fn main {
   println("2. 便捷函数 style_repaint_easy (style_index=1)")
   println("风格: 卡通")
   try {
-    let urls = @style_repaint.style_repaint_easy(config, image_url, 1)
+    let urls = @lib_sr.style_repaint_easy(config, image_url, 1)
     println("重绘成功！共 \{urls.length()} 张图片")
     for url in urls {
       println("  URL: \{url}")
@@ -54,7 +54,7 @@ async fn main {
 
   // Demo 3: 显示可用风格列表
   println("3. 可用风格列表")
-  let styles = @style_repaint.style_names
+  let styles = @lib_sr.style_names
   println("共 \{styles.length()} 种风格:")
   for i, style in styles.iter() {
     println("  \{i}: \{style}")

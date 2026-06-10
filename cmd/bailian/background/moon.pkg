@@ -1,7 +1,7 @@
 import {
   "moonbitlang/async",
   "moonbit_promptkit/lib",
-  "moonbit_promptkit/lib/background",
+  "moonbit_promptkit/lib/background" @lib_bg,
 }
 
 options(

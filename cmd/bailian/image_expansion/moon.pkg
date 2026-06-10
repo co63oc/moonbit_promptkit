@@ -1,7 +1,7 @@
 import {
   "moonbitlang/async",
   "moonbit_promptkit/lib",
-  "moonbit_promptkit/lib/image_expansion",
+  "moonbit_promptkit/lib/image_expansion" @lib_ix,
 }
 
 options(

@@ -119,8 +119,8 @@ API Key 获取地址：https://bailian.console.aliyun.com/cn-beijing?tab=model#/
 
 | 接口 | 说明 | 文档链接 |
 |------|------|----------|
-| 网页提取 | Web Extractor 网页内容提取 | [网页提取](https://help.aliyun.com/zh/model-studio/web-extractor) |
-| 代码解释器 | Qwen Code Interpreter 代码执行 | [代码解释器](https://help.aliyun.com/zh/model-studio/qwen-code-interpreter) |
+| 网页提取 | ✅ Web Extractor 网页内容提取 | [网页提取](https://help.aliyun.com/zh/model-studio/web-extractor) |
+| 代码解释器 | ✅ Qwen Code Interpreter 代码执行 | [代码解释器](https://help.aliyun.com/zh/model-studio/qwen-code-interpreter) |
 | 图片搜索 | Web Search Image 图文搜索 | [图片搜索](https://help.aliyun.com/zh/model-studio/web-search-image) |
 | 图像搜索 | Image Search 以图搜图 | [图像搜索](https://help.aliyun.com/zh/model-studio/image-search) |
 | 文件搜索 | File Search 文件检索 | [文件搜索](https://help.aliyun.com/zh/model-studio/file-search) |
@@ -161,7 +161,7 @@ API Key 获取地址：https://bailian.console.aliyun.com/cn-beijing?tab=model#/
 
 | 接口 | 说明 | 文档链接 |
 |------|------|----------|
-| Embedding 向量 | 文本向量表征模型 | [Embedding](https://help.aliyun.com/zh/model-studio/embedding) |
+| Embedding 向量 | ✅ 文本向量表征模型 | [Embedding](https://help.aliyun.com/zh/model-studio/embedding) |
 | Rerank 排序 | 文本排序模型 | [Rerank](https://help.aliyun.com/zh/model-studio/rerank) |
 
 ## 快速开始

@@ -7,7 +7,7 @@ let config : @lib.ClientConfig = @lib.create_client_config(
 )
 
 ///|
-let model : String = @qwen_long.default_model
+let model : String = @lib_ql.default_model
 
 ///|
 /// 创建示例文档
@@ -48,7 +48,7 @@ async fn main {
   let question1 = "MoonBit 语言的主要应用场景有哪些？"
   println("文档长度: \{doc_text.length()} 字符")
   println("问题: \{question1}")
-  let response1 = @qwen_long.chat_with_text(
+  let response1 = @lib_ql.chat_with_text(
     config,
     model,
     doc_text,
@@ -64,7 +64,7 @@ async fn main {
   let system_prompt = "你是一个专业的技术文档分析师。请基于提供的文档内容回答问题，确保回答准确且引用文档中的具体信息。"
   let question2 = "MoonBit 的类型系统有什么特点？"
   println("问题: \{question2}")
-  let response2 = @qwen_long.chat_with_text(
+  let response2 = @lib_ql.chat_with_text(
     config,
     model,
     doc_text,
@@ -80,7 +80,7 @@ async fn main {
   let question3 = "请详细解释 MoonBit 的异步编程特性"
   println("问题: \{question3}")
   println("回答 (流式):")
-  let _ = @qwen_long.chat_with_text_stream(
+  let _ = @lib_ql.chat_with_text_stream(
     config,
     model,
     doc_text,
@@ -93,7 +93,7 @@ async fn main {
   // Demo 4: 上传文件后通过 fileid:// 进行问答
   println("--- Demo 4: 上传文件并使用 fileid ---")
   println("上传示例文档...")
-  let upload_result = @qwen_long.upload_file(
+  let upload_result = @lib_ql.upload_file(
     config, "moonbit_doc.txt", doc_text,
   )
   println("文件上传成功!")
@@ -106,7 +106,7 @@ async fn main {
 
   let question4 = "请总结 MoonBit 的核心特性，用 3-5 个要点"
   println("问题: \{question4}")
-  let response4 = @qwen_long.chat_with_files(
+  let response4 = @lib_ql.chat_with_files(
     config,
     model,
     [upload_result.id],
@@ -120,13 +120,13 @@ async fn main {
   // Demo 5: 上传多个文件并使用 fileid 综合问答
   println("--- Demo 5: 多文件综合问答 ---")
   let doc2 = "## MoonBit 性能优化指南\n\n1. 使用尾递归优化函数调用\n2. 避免不必要的内存分配\n3. 利用模式匹配减少分支\n4. 使用编译器内联优化\n5. 合理使用异步任务调度"
-  let upload2 = @qwen_long.upload_file(config, "performance_guide.txt", doc2)
+  let upload2 = @lib_ql.upload_file(config, "performance_guide.txt", doc2)
   println("上传第二个文件: \{upload2.id}")
   println("")
 
   let question5 = "请综合两份文档，说明 MoonBit 如何实现高性能"
   println("问题: \{question5}")
-  let response5 = @qwen_long.chat_with_files(
+  let response5 = @lib_ql.chat_with_files(
     config,
     model,
     [upload_result.id, upload2.id],
@@ -142,7 +142,7 @@ async fn main {
   let question6 = "MoonBit 适合哪些开发场景？"
   println("问题: \{question6}")
   println("回答 (流式):")
-  let _ = @qwen_long.chat_with_files_stream(
+  let _ = @lib_ql.chat_with_files_stream(
     config,
     model,
     [upload_result.id],

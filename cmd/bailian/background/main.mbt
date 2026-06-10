@@ -20,9 +20,9 @@ async fn main {
   println("生成中...")
 
   try {
-    let urls = @background.generate_background(
+    let urls = @lib_bg.generate_background(
       config,
-      @background.default_model,
+      @lib_bg.default_model,
       base_url,
       size="1024*1024",
       poll_interval_ms=5000,
@@ -43,7 +43,7 @@ async fn main {
   println("前景图: \{base_url}")
   println("提示词: \{prompt}")
   try {
-    let urls = @background.background_easy(config, base_url, ref_prompt=prompt)
+    let urls = @lib_bg.background_easy(config, base_url, ref_prompt=prompt)
     println("生成成功！共 \{urls.length()} 张图片")
     for url in urls {
       println("  URL: \{url}")
@@ -59,9 +59,9 @@ async fn main {
   println("前景图: \{base_url}")
   println("参考图: \{ref_url}")
   try {
-    let urls = @background.generate_background(
+    let urls = @lib_bg.generate_background(
       config,
-      @background.default_model,
+      @lib_bg.default_model,
       base_url,
       ref_image_url=ref_url,
       size="1024*1024",

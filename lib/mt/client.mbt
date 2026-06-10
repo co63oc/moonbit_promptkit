@@ -38,7 +38,7 @@ pub async fn translate(
     "\{config.base_url}/chat/completions",
     request.to_json(),
     headers={
-      "Authorization": "Bearer…key}",
+      "Authorization": "Bearer \{config.api_key}",
       "Content-Type": "application/json",
     },
   )
@@ -80,7 +80,7 @@ pub async fn translate_with_model(
     "\{config.base_url}/chat/completions",
     request.to_json(),
     headers={
-      "Authorization": "Bearer…key}",
+      "Authorization": "Bearer \{config.api_key}",
       "Content-Type": "application/json",
     },
   )
@@ -124,7 +124,7 @@ pub async fn translate_with_terms(
     "\{config.base_url}/chat/completions",
     request.to_json(),
     headers={
-      "Authorization": "Bearer…key}",
+      "Authorization": "Bearer \{config.api_key}",
       "Content-Type": "application/json",
     },
   )
@@ -168,7 +168,7 @@ pub async fn translate_with_domain(
     "\{config.base_url}/chat/completions",
     request.to_json(),
     headers={
-      "Authorization": "Bearer…key}",
+      "Authorization": "Bearer \{config.api_key}",
       "Content-Type": "application/json",
     },
   )
@@ -212,7 +212,7 @@ pub async fn translate_stream(
     "\{config.base_url}/chat/completions",
     request.to_json(),
     headers={
-      "Authorization": "Bearer…key}",
+      "Authorization": "Bearer \{config.api_key}",
       "Content-Type": "application/json",
     },
   )
