@@ -24,8 +24,8 @@ async fn main {
   if response1.data.length() > 0 {
     let embedding = response1.data[0].embedding
     println("向量维度: \{embedding.length()}")
-    let first5 = embedding.iter().take(5).collect()
-    println("前5个维度: \{first5}")
+    let first5 = embedding.iter().take(5).map(fn(x) { x.to_string() }).to_array()
+    println("前5个维度: [\{first5.join(", ")}]")
   }
   
   match response1.usage {
@@ -46,7 +46,7 @@ async fn main {
   // 示例2: 批量文本向量化
   println("\n\n【示例2: 批量文本向量化】")
   let texts = ["你好世界", "机器学习很有趣", "深度学习是机器学习的子集"]
-  println("输入文本: \{texts}")
+  println("输入文本: \{texts.join(", ")}")
   
   let input2 : Json = Json::array(
     texts.map(fn(text) { Json::string(text) })
