@@ -43,9 +43,7 @@ async fn main {
   println("前景图: \{base_url}")
   println("提示词: \{prompt}")
   try {
-    let urls = @background.background_easy(
-      config, base_url, ref_prompt=prompt,
-    )
+    let urls = @background.background_easy(config, base_url, ref_prompt=prompt)
     println("生成成功！共 \{urls.length()} 张图片")
     for url in urls {
       println("  URL: \{url}")

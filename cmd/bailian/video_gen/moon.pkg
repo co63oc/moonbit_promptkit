@@ -1,0 +1,8 @@
+import {
+  "moonbitlang/async",
+  "moonbit_promptkit/lib",
+}
+
+options(
+  "is-main": true,
+)

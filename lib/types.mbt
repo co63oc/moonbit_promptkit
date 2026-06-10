@@ -215,6 +215,101 @@ pub struct ImageGenResponse {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+/// Video generation - media item for reference
+pub struct VideoMediaItem {
+  type_ : String
+  url : String
+  reference_voice : String?
+} derive(Debug, ToJson(fields(type_(rename="type"))), @json.FromJson)
+
+///|
+/// Video generation - input parameters
+pub struct VideoGenInput {
+  prompt : String?
+  img_url : String?
+  video_url : String?
+  audio_url : String?
+  function : String?
+  media : Array[VideoMediaItem]?
+  ref_images_url : Array[String]?
+  image : String?
+  images : Array[Json]?
+} derive(Debug, ToJson, @json.FromJson)
+
+///|
+/// Video generation - processing parameters
+pub struct VideoGenParameters {
+  resolution : String?
+  duration : Int?
+  shot_type : String?
+  prompt_extend : Bool?
+  watermark : Bool?
+  negative_prompt : String?
+  seed : Int?
+  ratio : String?
+  size : String?
+  obj_or_bg : Array[String]?
+  control_condition : String?
+  strength : Float?
+  texture_quality : String?
+  geometry_quality : String?
+} derive(Debug, ToJson, @json.FromJson)
+
+///|
+/// Video generation - request body
+pub struct VideoGenRequest {
+  model : String
+  input : VideoGenInput
+  parameters : VideoGenParameters?
+} derive(Debug, ToJson)
+
+///|
+/// Video generation - output info
+pub struct VideoGenOutput {
+  task_id : String
+  task_status : String
+  video_url : String?
+  results : Array[Json]?
+  submit_time : String?
+  scheduled_time : String?
+  end_time : String?
+} derive(Debug, ToJson, @json.FromJson)
+
+///|
+/// Video generation - response
+pub struct VideoGenResponse {
+  output : VideoGenOutput
+  request_id : String
+  code : String?
+  message : String?
+} derive(Debug, ToJson, @json.FromJson)
+
+///|
+/// 3D generation - single result
+pub struct Gen3DResult {
+  pbr_model_url : String?
+  base_model_url : String?
+  rendered_image_url : String?
+} derive(Debug, ToJson, @json.FromJson)
+
+///|
+/// 3D generation - output info
+pub struct Gen3DOutput {
+  task_id : String
+  task_status : String
+  results : Array[Gen3DResult]?
+} derive(Debug, ToJson, @json.FromJson)
+
+///|
+/// 3D generation - response
+pub struct Gen3DResponse {
+  output : Gen3DOutput
+  request_id : String
+  code : String?
+  message : String?
+} derive(Debug, ToJson, @json.FromJson)
+
+///|
 /// Batch File - uploaded file info
 pub struct BatchFile {
   id : String

@@ -1117,3 +1117,371 @@ pub async fn multi_image_chat_full(
   ]
   chat_full(config, model, messages)
 }
+
+///|
+/// Create a video generation task
+pub async fn create_video_gen_task(
+  config : ClientConfig,
+  model : String,
+  input : VideoGenInput,
+  parameters : VideoGenParameters?,
+) -> VideoGenResponse {
+  let request = VideoGenRequest::{ model, input, parameters }
+  let (response, body) = @http.post(
+    "https://dashscope.aliyuncs.com/api/v1/services/aigc/video-generation/video-synthesis",
+    request.to_json(),
+    headers={
+      "Authorization": "Bearer \{config.api_key}",
+      "Content-Type": "application/json",
+      "X-DashScope-Async": "enable",
+    },
+  )
+  guard response.code is (200..=299) else {
+    fail("HTTP request failed: \{response.code} \{response.reason}")
+  }
+  body.json() |> @json.from_json()
+}
+
+///|
+/// Get video generation task result
+pub async fn get_video_gen_result(
+  config : ClientConfig,
+  task_id : String,
+) -> VideoGenResponse {
+  let (response, body) = @http.get(
+    "https://dashscope.aliyuncs.com/api/v1/tasks/\{task_id}",
+    headers={ "Authorization": "Bearer \{config.api_key}" },
+  )
+  guard response.code is (200..=299) else {
+    fail("HTTP request failed: \{response.code} \{response.reason}")
+  }
+  body.json() |> @json.from_json()
+}
+
+///|
+/// Image-to-video generation (图生视频)
+pub async fn image_to_video(
+  config : ClientConfig,
+  model : String,
+  prompt : String,
+  img_url : String,
+) -> VideoGenResponse {
+  let input = VideoGenInput::{
+    prompt: Some(prompt),
+    img_url: Some(img_url),
+    video_url: None,
+    audio_url: None,
+    function: None,
+    media: None,
+    ref_images_url: None,
+    image: None,
+    images: None,
+  }
+  let parameters = VideoGenParameters::{
+    resolution: Some("720P"),
+    duration: Some(5),
+    shot_type: None,
+    prompt_extend: Some(true),
+    watermark: Some(true),
+    negative_prompt: None,
+    seed: None,
+    ratio: None,
+    size: None,
+    obj_or_bg: None,
+    control_condition: None,
+    strength: None,
+    texture_quality: None,
+    geometry_quality: None,
+  }
+  create_video_gen_task(config, model, input, Some(parameters))
+}
+
+///|
+/// Image-to-video generation with custom parameters
+pub async fn image_to_video_with_params(
+  config : ClientConfig,
+  model : String,
+  prompt : String,
+  img_url : String,
+  resolution : String?,
+  duration : Int?,
+  prompt_extend : Bool?,
+  watermark : Bool?,
+) -> VideoGenResponse {
+  let input = VideoGenInput::{
+    prompt: Some(prompt),
+    img_url: Some(img_url),
+    video_url: None,
+    audio_url: None,
+    function: None,
+    media: None,
+    ref_images_url: None,
+    image: None,
+    images: None,
+  }
+  let parameters = VideoGenParameters::{
+    resolution,
+    duration,
+    shot_type: None,
+    prompt_extend,
+    watermark,
+    negative_prompt: None,
+    seed: None,
+    ratio: None,
+    size: None,
+    obj_or_bg: None,
+    control_condition: None,
+    strength: None,
+    texture_quality: None,
+    geometry_quality: None,
+  }
+  create_video_gen_task(config, model, input, Some(parameters))
+}
+
+///|
+/// Reference-to-video generation (参考生视频)
+pub async fn reference_to_video(
+  config : ClientConfig,
+  model : String,
+  prompt : String,
+  media : Array[VideoMediaItem],
+) -> VideoGenResponse {
+  let input = VideoGenInput::{
+    prompt: Some(prompt),
+    img_url: None,
+    video_url: None,
+    audio_url: None,
+    function: None,
+    media: Some(media),
+    ref_images_url: None,
+    image: None,
+    images: None,
+  }
+  let parameters = VideoGenParameters::{
+    resolution: Some("720P"),
+    duration: Some(5),
+    shot_type: None,
+    prompt_extend: Some(false),
+    watermark: Some(true),
+    negative_prompt: None,
+    seed: None,
+    ratio: Some("16:9"),
+    size: None,
+    obj_or_bg: None,
+    control_condition: None,
+    strength: None,
+    texture_quality: None,
+    geometry_quality: None,
+  }
+  create_video_gen_task(config, model, input, Some(parameters))
+}
+
+///|
+/// Video editing (视频编辑)
+pub async fn edit_video(
+  config : ClientConfig,
+  model : String,
+  prompt : String,
+  video_url : String,
+  reference_image_url : String?,
+) -> VideoGenResponse {
+  let media : Array[VideoMediaItem] = []
+  media.push(VideoMediaItem::{
+    type_: "video",
+    url: video_url,
+    reference_voice: None,
+  })
+  match reference_image_url {
+    Some(img_url) =>
+      media.push(VideoMediaItem::{
+        type_: "reference_image",
+        url: img_url,
+        reference_voice: None,
+      })
+    None => ignore(())
+  }
+  let input = VideoGenInput::{
+    prompt: Some(prompt),
+    img_url: None,
+    video_url: None,
+    audio_url: None,
+    function: None,
+    media: Some(media),
+    ref_images_url: None,
+    image: None,
+    images: None,
+  }
+  let parameters = VideoGenParameters::{
+    resolution: Some("720P"),
+    duration: None,
+    shot_type: None,
+    prompt_extend: Some(true),
+    watermark: Some(true),
+    negative_prompt: None,
+    seed: None,
+    ratio: None,
+    size: None,
+    obj_or_bg: None,
+    control_condition: None,
+    strength: None,
+    texture_quality: None,
+    geometry_quality: None,
+  }
+  create_video_gen_task(config, model, input, Some(parameters))
+}
+
+///|
+/// Create a 3D generation task
+pub async fn create_3d_gen_task(
+  config : ClientConfig,
+  model : String,
+  input : VideoGenInput,
+  parameters : VideoGenParameters?,
+) -> Gen3DResponse {
+  let request = VideoGenRequest::{ model, input, parameters }
+  let (response, body) = @http.post(
+    "https://dashscope.aliyuncs.com/api/v1/services/aigc/video-generation/3d-generation",
+    request.to_json(),
+    headers={
+      "Authorization": "Bearer \{config.api_key}",
+      "Content-Type": "application/json",
+      "X-DashScope-Async": "enable",
+    },
+  )
+  guard response.code is (200..=299) else {
+    fail("HTTP request failed: \{response.code} \{response.reason}")
+  }
+  body.json() |> @json.from_json()
+}
+
+///|
+/// Get 3D generation task result
+pub async fn get_3d_gen_result(
+  config : ClientConfig,
+  task_id : String,
+) -> Gen3DResponse {
+  let (response, body) = @http.get(
+    "https://dashscope.aliyuncs.com/api/v1/tasks/\{task_id}",
+    headers={ "Authorization": "Bearer \{config.api_key}" },
+  )
+  guard response.code is (200..=299) else {
+    fail("HTTP request failed: \{response.code} \{response.reason}")
+  }
+  body.json() |> @json.from_json()
+}
+
+///|
+/// Text-to-3D generation (文生3D模型)
+pub async fn text_to_3d(
+  config : ClientConfig,
+  prompt : String,
+) -> Gen3DResponse {
+  let input = VideoGenInput::{
+    prompt: Some(prompt),
+    img_url: None,
+    video_url: None,
+    audio_url: None,
+    function: None,
+    media: None,
+    ref_images_url: None,
+    image: None,
+    images: None,
+  }
+  let parameters = VideoGenParameters::{
+    resolution: None,
+    duration: None,
+    shot_type: None,
+    prompt_extend: None,
+    watermark: None,
+    negative_prompt: None,
+    seed: None,
+    ratio: None,
+    size: None,
+    obj_or_bg: None,
+    control_condition: None,
+    strength: None,
+    texture_quality: Some("standard"),
+    geometry_quality: None,
+  }
+  create_3d_gen_task(config, "Tripo/Tripo-P1.0", input, Some(parameters))
+}
+
+///|
+/// Image-to-3D generation (单图生3D模型)
+pub async fn image_to_3d(
+  config : ClientConfig,
+  image_url : String,
+) -> Gen3DResponse {
+  let input = VideoGenInput::{
+    prompt: None,
+    img_url: None,
+    video_url: None,
+    audio_url: None,
+    function: None,
+    media: None,
+    ref_images_url: None,
+    image: Some(image_url),
+    images: None,
+  }
+  let parameters = VideoGenParameters::{
+    resolution: None,
+    duration: None,
+    shot_type: None,
+    prompt_extend: None,
+    watermark: None,
+    negative_prompt: None,
+    seed: None,
+    ratio: None,
+    size: None,
+    obj_or_bg: None,
+    control_condition: None,
+    strength: None,
+    texture_quality: Some("standard"),
+    geometry_quality: None,
+  }
+  create_3d_gen_task(config, "Tripo/Tripo-P1.0", input, Some(parameters))
+}
+
+///|
+/// Wait for a video generation task to complete (polling)
+pub async fn wait_for_video_gen(
+  config : ClientConfig,
+  task_id : String,
+  max_attempts : Int,
+  interval_ms : Int,
+) -> VideoGenResponse {
+  let mut attempt = 1
+  let mut response = get_video_gen_result(config, task_id)
+  while attempt <= max_attempts {
+    let status = response.output.task_status
+    if status == "SUCCEEDED" || status == "FAILED" || status == "CANCELLED" {
+      break
+    }
+    @async.sleep(interval_ms)
+    response = get_video_gen_result(config, task_id)
+    attempt = attempt + 1
+  }
+  response
+}
+
+///|
+/// Wait for a 3D generation task to complete (polling)
+pub async fn wait_for_3d_gen(
+  config : ClientConfig,
+  task_id : String,
+  max_attempts : Int,
+  interval_ms : Int,
+) -> Gen3DResponse {
+  let mut attempt = 1
+  let mut response = get_3d_gen_result(config, task_id)
+  while attempt <= max_attempts {
+    let status = response.output.task_status
+    if status == "SUCCEEDED" || status == "FAILED" || status == "CANCELLED" {
+      break
+    }
+    @async.sleep(interval_ms)
+    response = get_3d_gen_result(config, task_id)
+    attempt = attempt + 1
+  }
+  response
+}

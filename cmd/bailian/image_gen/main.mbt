@@ -21,7 +21,11 @@ async fn main {
 
   try {
     let urls = @image_gen.generate_sync(
-      config, @image_gen.default_model, prompt, n=1, size="1024*1024",
+      config,
+      @image_gen.default_model,
+      prompt,
+      n=1,
+      size="1024*1024",
     )
     println("生成成功！共 \{urls.length()} 张图片")
     for url in urls {
@@ -37,9 +41,7 @@ async fn main {
   let prompt2 = "赛博朋克风格的城市夜景，霓虹灯，未来感"
   println("提示词: \{prompt2}")
   try {
-    let urls = @image_gen.text_to_image(
-      config, prompt2, size="1024*1024",
-    )
+    let urls = @image_gen.text_to_image(config, prompt2, size="1024*1024")
     println("生成成功！共 \{urls.length()} 张图片")
     for url in urls {
       println("  URL: \{url}")

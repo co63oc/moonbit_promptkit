@@ -23,7 +23,12 @@ async fn main {
 
   try {
     let urls = @image_edit.edit_image(
-      config, @image_edit.default_model, prompt, [image_url], n=1, size="1024*1024",
+      config,
+      @image_edit.default_model,
+      prompt,
+      [image_url],
+      n=1,
+      size="1024*1024",
     )
     println("编辑成功！共 \{urls.length()} 张图片")
     for url in urls {
