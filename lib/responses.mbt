@@ -204,21 +204,19 @@ pub async fn image_search(
 pub fn extract_web_search_images(response : ResponsesResponse) -> Array[Json] {
   let results : Array[Json] = []
   for item in response.output {
-    if item.type_ == Some("web_search_image_call") && item.output is Some(_) {
-      match item.output {
-        Some(output_str) => {
-          try {
-            let parsed = @json.parse(output_str)
-            match parsed {
-              Json::Array(arr) => for x in arr { results.push(x) }
-              _ => ignore(())
-            }
-          } catch {
+    match item.output {
+      Some(output_str) => {
+        try {
+          let parsed = @json.parse(output_str)
+          match parsed {
+            Json::Array(arr) => for x in arr { results.push(x) }
             _ => ignore(())
           }
+        } catch {
+          _ => ignore(())
         }
-        None => ignore(())
       }
+      None => ignore(())
     }
   }
   results
@@ -229,21 +227,19 @@ pub fn extract_web_search_images(response : ResponsesResponse) -> Array[Json] {
 pub fn extract_image_search_results(response : ResponsesResponse) -> Array[Json] {
   let results : Array[Json] = []
   for item in response.output {
-    if item.type_ == Some("image_search_call") && item.output is Some(_) {
-      match item.output {
-        Some(output_str) => {
-          try {
-            let parsed = @json.parse(output_str)
-            match parsed {
-              Json::Array(arr) => for x in arr { results.push(x) }
-              _ => ignore(())
-            }
-          } catch {
+    match item.output {
+      Some(output_str) => {
+        try {
+          let parsed = @json.parse(output_str)
+          match parsed {
+            Json::Array(arr) => for x in arr { results.push(x) }
             _ => ignore(())
           }
+        } catch {
+          _ => ignore(())
         }
-        None => ignore(())
       }
+      None => ignore(())
     }
   }
   results
