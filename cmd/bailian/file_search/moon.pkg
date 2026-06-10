@@ -1,0 +1,9 @@
+import {
+  "moonbitlang/async",
+  "moonbit_promptkit/lib",
+  "moonbit_promptkit/lib/file_search" @lib_file_search,
+}
+
+options(
+  "is-main": true,
+)

@@ -1,0 +1,9 @@
+import {
+  "moonbitlang/async",
+  "moonbit_promptkit/lib",
+  "moonbit_promptkit/lib/hot_words" @lib_hot_words,
+}
+
+options(
+  "is-main": true,
+)

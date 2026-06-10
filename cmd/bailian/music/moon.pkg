@@ -1,0 +1,9 @@
+import {
+  "moonbitlang/async",
+  "moonbit_promptkit/lib",
+  "moonbit_promptkit/lib/music" @lib_music,
+}
+
+options(
+  "is-main": true,
+)

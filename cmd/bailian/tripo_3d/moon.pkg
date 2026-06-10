@@ -1,0 +1,9 @@
+import {
+  "moonbitlang/async",
+  "moonbit_promptkit/lib",
+  "moonbit_promptkit/lib/tripo_3d" @lib_tripo_3d,
+}
+
+options(
+  "is-main": true,
+)

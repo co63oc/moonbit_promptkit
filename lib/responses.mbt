@@ -24,16 +24,34 @@ pub struct InputImage {
 } derive(ToJson(fields(type_(rename="type"))))
 
 ///|
+/// Response API - Input audio content
+pub struct InputAudio {
+  type_ : String
+  audio_url : String
+} derive(ToJson(fields(type_(rename="type"))))
+
+///|
+/// Response API - Input video content
+pub struct InputVideo {
+  type_ : String
+  video_url : String
+} derive(ToJson(fields(type_(rename="type"))))
+
+///|
 /// Response API - Input content item (union type simulation)
 pub enum InputContent {
   Text(InputText)
   Image(InputImage)
+  Audio(InputAudio)
+  Video(InputVideo)
 }
 
 impl ToJson for InputContent with fn to_json(self : InputContent) -> Json {
   match self {
     Text(t) => t.to_json()
     Image(i) => i.to_json()
+    Audio(a) => a.to_json()
+    Video(v) => v.to_json()
   }
 }
 
@@ -106,6 +124,18 @@ pub fn image_search_tool() -> ResponseTool {
 }
 
 ///|
+/// Create a file_search tool
+pub fn file_search_tool() -> ResponseTool {
+  ResponseTool::{ type_: "file_search" }
+}
+
+///|
+/// Create a response input message
+pub fn response_message(role : String, content : Array[InputContent]) -> ResponseInputMessage {
+  ResponseInputMessage::{ role, content }
+}
+
+///|
 /// Create input text content
 pub fn input_text(text : String) -> InputContent {
   InputContent::Text(InputText::{ type_: "input_text", text })
@@ -115,6 +145,18 @@ pub fn input_text(text : String) -> InputContent {
 /// Create input image content
 pub fn input_image(image_url : String) -> InputContent {
   InputContent::Image(InputImage::{ type_: "input_image", image_url })
+}
+
+///|
+/// Create input audio content
+pub fn input_audio(audio_url : String) -> InputContent {
+  InputContent::Audio(InputAudio::{ type_: "input_audio", audio_url })
+}
+
+///|
+/// Create input video content
+pub fn input_video(video_url : String) -> InputContent {
+  InputContent::Video(InputVideo::{ type_: "input_video", video_url })
 }
 
 ///|

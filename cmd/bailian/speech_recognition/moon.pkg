@@ -1,0 +1,9 @@
+import {
+  "moonbitlang/async",
+  "moonbit_promptkit/lib",
+  "moonbit_promptkit/lib/speech_recognition" @lib_speech_recognition,
+}
+
+options(
+  "is-main": true,
+)
