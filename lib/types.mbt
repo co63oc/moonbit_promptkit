@@ -80,6 +80,11 @@ pub struct Tool {
 } derive(Debug, ToJson(fields(type_(rename="type"))), @json.FromJson)
 
 ///|
+pub struct SearchOptions {
+  search_strategy : String?
+} derive(ToJson)
+
+///|
 pub struct Request {
   model : String
   messages : Array[Message]
@@ -89,6 +94,7 @@ pub struct Request {
   extra_body : Json?
   enable_search : Bool?
   enable_thinking : Bool?
+  search_options : SearchOptions?
   top_p : Float?
   temperature : Float?
   presence_penalty : Float?
