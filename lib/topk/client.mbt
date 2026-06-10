@@ -3,7 +3,9 @@
 ///
 
 ///| Chat with top_k parameter for deterministic output
-///| Recommended: temperature=0.0, top_k=1 for dialogue analysis
+
+///|
+/// Recommended: temperature=0.0, top_k=1 for dialogue analysis
 pub async fn chat_topk(
   config : @lib.ClientConfig,
   model : String,
@@ -38,7 +40,8 @@ pub async fn chat_topk(
   }
 }
 
-///| Chat with top_k and streaming output
+///|
+/// Chat with top_k and streaming output
 pub async fn chat_topk_stream(
   config : @lib.ClientConfig,
   model : String,

@@ -1,7 +1,7 @@
 import {
   "moonbitlang/async",
-  "moonbit_bailian/lib",
-  "moonbit_bailian/lib/deep_research",
+  "moonbit_promptkit/lib",
+  "moonbit_promptkit/lib/deep_research",
 }
 
 options(

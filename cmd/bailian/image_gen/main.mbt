@@ -1,5 +1,6 @@
 ///|
-/// Image generation example - using WanXiang model
+/// Text-to-Image generation example
+/// 演示同步文生图（Wan2.7 / Qwen-Image）
 ///
 
 ///|
@@ -9,18 +10,41 @@ let config : @lib.ClientConfig = @lib.create_client_config(
 
 ///|
 async fn main {
-  println("=== Bailian Text-to-Image Test ===")
+  println("=== 文生图 Demo ===")
+  println("")
 
-  let prompt = "A cute orange cat sitting on a windowsill, sunshine streaming in from outside, warm atmosphere, photography style"
-  println("\nPrompt: " + prompt)
-  println("\nGenerating image, please wait...")
+  // Demo 1: 同步文生图（Wan2.7）
+  println("1. 同步文生图 (wan2.7-image-pro)")
+  let prompt = "一只可爱的橘猫坐在窗台上，阳光从窗外照进来，温馨氛围，摄影风格"
+  println("提示词: \{prompt}")
+  println("生成中...")
 
   try {
-    let result = @lib.generate_image(config, prompt)
-    println("\nImage generation complete!")
-    println("Task ID: " + result[0])
-    println("Status: " + result[1])
+    let urls = @image_gen.generate_sync(
+      config, @image_gen.default_model, prompt, n=1, size="1024*1024",
+    )
+    println("生成成功！共 \{urls.length()} 张图片")
+    for url in urls {
+      println("  URL: \{url}")
+    }
   } catch {
-    _ => println("Image generation failed: Error")
+    e => println("生成失败: \{e.to_string()}")
+  }
+  println("")
+
+  // Demo 2: 便捷函数
+  println("2. 便捷函数 text_to_image")
+  let prompt2 = "赛博朋克风格的城市夜景，霓虹灯，未来感"
+  println("提示词: \{prompt2}")
+  try {
+    let urls = @image_gen.text_to_image(
+      config, prompt2, size="1024*1024",
+    )
+    println("生成成功！共 \{urls.length()} 张图片")
+    for url in urls {
+      println("  URL: \{url}")
+    }
+  } catch {
+    e => println("生成失败: \{e.to_string()}")
   }
 }

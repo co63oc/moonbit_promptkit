@@ -3,7 +3,9 @@
 ///
 
 ///| Chat request with top_k parameter
-///| Used for dialogue analysis models that require deterministic output
+
+///|
+/// Used for dialogue analysis models that require deterministic output
 pub struct TopKRequest {
   model : String
   messages : Array[@lib.Message]

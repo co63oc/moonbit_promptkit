@@ -1,5 +1,5 @@
 import {
   "moonbitlang/async/http",
   "moonbitlang/core/json",
-  "moonbit_bailian/lib",
+  "moonbit_promptkit/lib",
 }

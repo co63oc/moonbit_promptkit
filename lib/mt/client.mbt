@@ -2,13 +2,18 @@
 /// Qwen-MT Translation API client functions
 ///
 
-///| Qwen-MT default model: best balance of quality, speed and cost
+///|
+/// Qwen-MT default model: best balance of quality, speed and cost
 pub let translate_default_model : String = "qwen-mt-flash"
 
 ///| Translate text using Qwen-MT model
+
 ///| - source_lang: "Chinese", "English", "Japanese", "Korean", "French", "German", etc. or "auto"
+
 ///| - target_lang: same language names as source_lang
-///| - model: "qwen-mt-flash" (default), "qwen-mt-plus", "qwen-mt-turbo", "qwen-mt-lite"
+
+///|
+/// - model: "qwen-mt-flash" (default), "qwen-mt-plus", "qwen-mt-turbo", "qwen-mt-lite"
 pub async fn translate(
   config : @lib.ClientConfig,
   text : String,
@@ -48,7 +53,8 @@ pub async fn translate(
   }
 }
 
-///| Translate with specific model
+///|
+/// Translate with specific model
 pub async fn translate_with_model(
   config : @lib.ClientConfig,
   text : String,
@@ -90,7 +96,9 @@ pub async fn translate_with_model(
 }
 
 ///| Translate with terminology intervention (术语干预)
-///| terms: array of TranslationTerm { source, target } for consistent translation
+
+///|
+/// terms: array of TranslationTerm { source, target } for consistent translation
 pub async fn translate_with_terms(
   config : @lib.ClientConfig,
   text : String,
@@ -132,7 +140,9 @@ pub async fn translate_with_terms(
 }
 
 ///| Translate with domain hint for better specialized translation
-///| domain: e.g. "legal", "medical", "technical", "social"
+
+///|
+/// domain: e.g. "legal", "medical", "technical", "social"
 pub async fn translate_with_domain(
   config : @lib.ClientConfig,
   text : String,
@@ -174,7 +184,9 @@ pub async fn translate_with_domain(
 }
 
 ///| Translate with streaming output (incremental)
-///| Only qwen-mt-flash and qwen-mt-lite support streaming
+
+///|
+/// Only qwen-mt-flash and qwen-mt-lite support streaming
 pub async fn translate_stream(
   config : @lib.ClientConfig,
   text : String,

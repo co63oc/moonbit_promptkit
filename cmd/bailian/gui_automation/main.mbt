@@ -2,15 +2,16 @@
 /// GUI-Plus 多模态 UI 交互自动化模型示例
 /// 基于屏幕截图和自然语言指令解析用户意图，转换为标准化 GUI 操作
 ///
-
 let config : @lib.ClientConfig = @lib.create_client_config(
   "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 
-///| Sample desktop screenshot URL
+///|
+/// Sample desktop screenshot URL
 let sample_screenshot_url : String = "https://img.alicdn.com/imgextra/i2/O1CN016iJ8ob1C3xP1s2M6z_!!6000000000026-2-tps-3008-1758.png"
 
-///| Simplified system prompt for GUI automation
+///|
+/// Simplified system prompt for GUI automation
 let gui_system_prompt : String = "You are a computer use agent. You can interact with a desktop GUI using mouse and keyboard. The screen resolution is 1000x1000. Output your action as a JSON tool_call with action type and parameters."
 
 ///|
@@ -42,10 +43,10 @@ async fn main {
     @lib.system_message(gui_system_prompt),
     @lib.user_message_with_contents(contents2),
   ]
-  @lib.chat_stream(
-    config, "gui-plus-2026-02-26", messages2,
-    fn(delta) { println(delta) },
-  ) |> ignore
+  @lib.chat_stream(config, "gui-plus-2026-02-26", messages2, fn(delta) {
+    println(delta)
+  })
+  |> ignore
   println("")
   println("")
 
@@ -66,7 +67,9 @@ async fn main {
 
   println("=== 可用模型 ===")
   println("  gui-plus              - 非思考模式，快速响应")
-  println("  gui-plus-2026-02-26   - 支持思考与非思考模式（推荐）")
+  println(
+    "  gui-plus-2026-02-26   - 支持思考与非思考模式（推荐）",
+  )
   println("")
   println("=== 支持的操作 ===")
   println("  key, type, mouse_move, left_click, right_click,")

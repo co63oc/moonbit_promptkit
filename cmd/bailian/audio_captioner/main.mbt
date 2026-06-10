@@ -4,14 +4,15 @@
 ///
 /// 注意：使用 OpenAI 兼容格式的 `input_audio`，不是 DashScope 原生的 `audio_url`
 ///
-
 let config : @lib.ClientConfig = @lib.create_client_config(
   "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 
-///| Sample audio URL
+///|
+/// Sample audio URL
 let sample_audio_url : String = "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20240916/xvappi/装修噪音.wav"
 
+///|
 async fn main {
   println("=== Qwen3-Omni-Captioner 音频理解示例 ===\n")
 

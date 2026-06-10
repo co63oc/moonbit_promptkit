@@ -3,15 +3,20 @@
 ///
 
 ///| Translation term for terminology intervention (术语干预)
-///| Maps a source term to its pre-translated target
+
+///|
+/// Maps a source term to its pre-translated target
 pub struct TranslationTerm {
   source : String
   target : String
 } derive(Debug, ToJson, @json.FromJson)
 
 ///| Translation options for Qwen-MT models
+
 ///| source_lang/target_lang: use English language names (e.g. "Chinese", "English", "Japanese")
-///| Set source_lang to "auto" for automatic detection
+
+///|
+/// Set source_lang to "auto" for automatic detection
 pub struct TranslationOptions {
   source_lang : String
   target_lang : String
@@ -20,8 +25,11 @@ pub struct TranslationOptions {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///| Translate request for Qwen-MT models
+
 ///| translation_options is a top-level field in the API request body
-///| This struct is separate from lib.Request to avoid polluting non-translation APIs
+
+///|
+/// This struct is separate from lib.Request to avoid polluting non-translation APIs
 pub struct TranslateRequest {
   model : String
   messages : Array[@lib.Message]
@@ -30,7 +38,8 @@ pub struct TranslateRequest {
   translation_options : TranslationOptions
 } derive(ToJson)
 
-///| Create a TranslationTerm for terminology intervention (术语干预)
+///|
+/// Create a TranslationTerm for terminology intervention (术语干预)
 pub fn translation_term(source : String, target : String) -> TranslationTerm {
   TranslationTerm::{ source, target }
 }

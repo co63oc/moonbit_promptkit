@@ -1,0 +1,9 @@
+import {
+  "moonbitlang/async",
+  "moonbit_promptkit/lib",
+  "moonbit_promptkit/lib/style_repaint",
+}
+
+options(
+  "is-main": true,
+)

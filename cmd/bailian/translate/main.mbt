@@ -74,11 +74,9 @@ async fn main {
   let text6 = "人工智能正在改变我们的生活方式,从医疗诊断到自动驾驶,AI技术的应用越来越广泛。"
   println("原文: " + text6)
   println("译文 (流式): ")
-  let _ = @mt.translate_stream(
-    config, text6, "Chinese", "English", fn(chunk) {
-      println(chunk)
-    },
-  )
+  let _ = @mt.translate_stream(config, text6, "Chinese", "English", fn(chunk) {
+    println(chunk)
+  })
 
   // API 总览
   println("=== Qwen-MT API 总览 ===")
@@ -91,7 +89,9 @@ async fn main {
   println("  translate_stream() - 流式输出翻译")
   println("")
   println("【可用模型】")
-  println("  qwen-mt-flash  - 通用首选,质量/速度/成本平衡 (支持流式)")
+  println(
+    "  qwen-mt-flash  - 通用首选,质量/速度/成本平衡 (支持流式)",
+  )
   println("  qwen-mt-plus   - 最高质量,适合专业文献/正式文书")
   println("  qwen-mt-turbo  - 快速 (已停更,建议用 flash)")
   println("  qwen-mt-lite   - 最低延迟,适合实时聊天 (支持流式)")

@@ -1,4 +1,4 @@
-name = "moonbit_bailian"
+name = "moonbit_promptkit"
 
 version = "0.1.0"
 

@@ -1,6 +1,6 @@
 import {
   "moonbitlang/async",
-  "moonbit_bailian/lib",
+  "moonbit_promptkit/lib",
 }
 
 options(

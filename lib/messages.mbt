@@ -272,8 +272,8 @@ pub fn get_cached_tokens(response : Response) -> Int {
   }
 }
 
-
-///| Create StreamOptions for streaming requests
+///|
+/// Create StreamOptions for streaming requests
 pub fn stream_options(include_usage : Bool) -> StreamOptions {
-  StreamOptions::{ include_usage }
+  StreamOptions::{ include_usage, }
 }

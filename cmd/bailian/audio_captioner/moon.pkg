@@ -1,7 +1,7 @@
 import {
   "moonbitlang/async",
-  "moonbit_bailian/lib",
-  "moonbit_bailian/lib/audio",
+  "moonbit_promptkit/lib",
+  "moonbit_promptkit/lib/audio",
 }
 
 options(

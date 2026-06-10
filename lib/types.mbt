@@ -327,6 +327,3 @@ pub struct ModelListResponse {
   object : String?
   data : Array[Model]
 } derive(Debug, ToJson, @json.FromJson)
-
-
-

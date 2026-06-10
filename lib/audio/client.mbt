@@ -3,7 +3,8 @@
 /// Uses OpenAI-compatible `input_audio` format
 ///
 
-///| Caption audio using Qwen3-Omni-Captioner
+///|
+/// Caption audio using Qwen3-Omni-Captioner
 pub async fn caption_audio(
   config : @lib.ClientConfig,
   audio_url : String,
@@ -11,7 +12,8 @@ pub async fn caption_audio(
   caption_audio_impl(config, audio_url, default_model, None)
 }
 
-///| Caption audio with specific model
+///|
+/// Caption audio with specific model
 pub async fn caption_audio_with_model(
   config : @lib.ClientConfig,
   audio_url : String,
@@ -20,7 +22,8 @@ pub async fn caption_audio_with_model(
   caption_audio_impl(config, audio_url, model, None)
 }
 
-///| Caption audio with custom prompt
+///|
+/// Caption audio with custom prompt
 pub async fn caption_audio_with_prompt(
   config : @lib.ClientConfig,
   audio_url : String,
@@ -29,19 +32,22 @@ pub async fn caption_audio_with_prompt(
   caption_audio_impl(config, audio_url, default_model, Some(prompt))
 }
 
-///| Clean text content struct (no null fields like image_url, video_url, etc.)
+///|
+/// Clean text content struct (no null fields like image_url, video_url, etc.)
 struct CleanTextContent {
   type_ : String
   text : String
 } derive(ToJson(fields(type_(rename="type"))))
 
-///| Message structure for audio requests
+///|
+/// Message structure for audio requests
 struct AudioMessage {
   role : String
   content : Array[Json]
 } derive(ToJson)
 
-///| Internal: build request and call API
+///|
+/// Internal: build request and call API
 async fn caption_audio_impl(
   config : @lib.ClientConfig,
   audio_url : String,
@@ -52,10 +58,7 @@ async fn caption_audio_impl(
   let audio_json = audio_content(audio_url).to_json()
 
   // Audio always goes in a user message
-  let audio_message = AudioMessage::{
-    role: "user",
-    content: [audio_json],
-  }
+  let audio_message = AudioMessage::{ role: "user", content: [audio_json] }
 
   // When there's a custom prompt, add it as a separate system message.
   // The API rejects mixed audio+text in a single user message content array.
@@ -89,7 +92,9 @@ async fn caption_audio_impl(
   )
   guard response.code is (200..=299) else {
     let error_text = body.text()
-    fail("Audio caption request failed: \{response.code} \{response.reason}\n\{error_text}")
+    fail(
+      "Audio caption request failed: \{response.code} \{response.reason}\n\{error_text}",
+    )
   }
   let resp : @lib.Response = body.json() |> @json.from_json()
   if resp.choices.length() == 0 {
