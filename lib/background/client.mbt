@@ -10,27 +10,6 @@ pub let default_model : String = "wanx-background-generation-v2"
 ///|
 let dashscope_base : String = "https://dashscope.aliyuncs.com/api/v1"
 
-///|
-/// 背景生成请求体
-struct BackgroundInput {
-  base_image_url : String
-  ref_prompt : String?
-  ref_image_url : String?
-} derive(ToJson)
-
-///|
-struct BackgroundParams {
-  n : Int?
-  size : String?
-} derive(ToJson)
-
-///|
-struct BackgroundRequest {
-  model : String
-  input : BackgroundInput
-  parameters : BackgroundParams?
-} derive(ToJson)
-
 ///| 提交背景生成异步任务
 
 ///|
@@ -44,14 +23,48 @@ pub async fn submit_background(
   n? : Int,
   size? : String,
 ) -> String {
-  let request = BackgroundRequest::{
-    model,
-    input: BackgroundInput::{ base_image_url, ref_prompt, ref_image_url },
-    parameters: Some(BackgroundParams::{ n, size }),
+  // 手动构建 input JSON，避免 None 字段被序列化为 null
+  let input_fields : Array[(String, Json)] = [("base_image_url", base_image_url.to_json())]
+  match ref_prompt {
+    Some(v) => input_fields.push(("ref_prompt", v.to_json()))
+    None => ()
   }
+  match ref_image_url {
+    Some(v) => input_fields.push(("ref_image_url", v.to_json()))
+    None => ()
+  }
+  let input_json = Json::object(Map::Map(input_fields.view()))
+
+  // 手动构建 parameters JSON
+  let param_fields : Array[(String, Json)] = [("model_version", "v3".to_json())]
+  match n {
+    Some(v) => param_fields.push(("n", v.to_json()))
+    None => ()
+  }
+  match size {
+    Some(v) => param_fields.push(("size", v.to_json()))
+    None => ()
+  }
+  let parameters_json = if param_fields.length() > 0 {
+    Some(Json::object(Map::Map(param_fields.view())))
+  } else {
+    None
+  }
+
+  // 构建请求 JSON
+  let request_fields : Array[(String, Json)] = [
+    ("model", model.to_json()),
+    ("input", input_json),
+  ]
+  match parameters_json {
+    Some(v) => request_fields.push(("parameters", v))
+    None => ()
+  }
+  let request = Json::object(Map::Map(request_fields.view()))
+
   let (response, resp_body) = @http.post(
-    "\{dashscope_base}/services/aigc/image-generation/generation",
-    request.to_json(),
+    "\{dashscope_base}/services/aigc/background-generation/generation",
+    request,
     headers={
       "Authorization": "Bearer \{config.api_key}",
       "Content-Type": "application/json",
@@ -59,7 +72,8 @@ pub async fn submit_background(
     },
   )
   guard response.code is (200..=299) else {
-    fail("Background gen submit failed: \{response.code} \{response.reason}")
+    let error_body = resp_body.text()
+    fail("Background gen submit failed: \{response.code} \{response.reason}\n\{error_body}")
   }
   let resp : Json = @json.from_json(resp_body.json())
   extract_task_id(resp)

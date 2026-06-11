@@ -1,9 +1,0 @@
-import {
-  "moonbitlang/async",
-  "moonbit_promptkit/lib",
-  "moonbit_promptkit/lib/poster" @lib_poster,
-}
-
-options(
-  "is-main": true,
-)

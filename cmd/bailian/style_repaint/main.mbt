@@ -15,7 +15,7 @@ async fn main {
 
   // Demo 1: 风格重绘（油画风格）
   println("1. 油画风格重绘 (style_index=7)")
-  let image_url = "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250717/zfifqo/dog_and_girl.jpeg"
+  let image_url = "https://dashscope.oss-cn-beijing.aliyuncs.com/images/dog_and_girl.jpeg"
   println("原图: \{image_url}")
   println("风格: 油画")
   println("重绘中...")

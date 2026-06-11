@@ -1,9 +1,0 @@
-import {
-  "moonbitlang/async",
-  "moonbit_promptkit/lib",
-  "moonbit_promptkit/lib/virtual_model" @lib_virtual_model,
-}
-
-options(
-  "is-main": true,
-)

@@ -10,23 +10,30 @@ let config : @lib.ClientConfig = @lib.create_client_config(
 async fn main {
   println("=== Qwen-Deep-Research 深度研究模型示例 ===\n")
 
-  // Demo 1: 基础研究
-  println("--- Demo 1: 基础研究 ---")
-  let question1 = "研究一下人工智能在教育中的应用"
-  println("研究问题: " + question1)
+  // Demo 1: 两步式深度研究（模型反问确认）
+  println("--- Demo 1: 两步式深度研究 ---")
+  let initial_question = "研究一下人工智能在教育中的应用"
+  println("初始问题: " + initial_question)
+  println("\n第一步：模型反问确认")
+  
+  // 第一步：发送初始问题，获取模型的反问
   println("开始研究...")
-  @lib_dr.research(config, question1, fn(progress) { println(progress) })
+  @lib_dr.research(config, initial_question, fn(progress) {
+    println(progress)
+  })
   |> ignore
-  println("\n研究完成!")
-  println("")
-
-  // Demo 2: 使用指定模型
-  println("--- Demo 2: 指定模型 (qwen-deep-research) ---")
-  let question2 = "分析2024年中国新能源汽车市场发展趋势"
-  println("研究问题: " + question2)
-  @lib_dr.research_with_model(config, question2, "qwen-deep-research", fn(
-    progress,
-  ) {
+  
+  // 第二步：带上完整对话历史继续研究
+  println("\n第二步：深入研究")
+  let user_answer = "我主要关注个性化学习方面"
+  println("用户回答: " + user_answer)
+  
+  let messages : Array[@lib.Message] = [
+    @lib.user_message_with_text(initial_question),
+    @lib.assistant_message("请告诉我您希望重点研究人工智能在教育中的哪些具体应用场景？"),
+    @lib.user_message_with_text(user_answer),
+  ]
+  @lib_dr.research_with_messages(config, messages, fn(progress) {
     println(progress)
   })
   |> ignore

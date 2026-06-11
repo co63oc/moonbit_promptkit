@@ -15,9 +15,11 @@ pub async fn search_files(
   let messages = [
     @lib.response_message("user", [@lib.input_text(query)])
   ]
-  let tools = [
-    @lib.file_search_tool(),
-  ]
+  let tools = if file_ids.length() > 0 {
+    [@lib.file_search_tool_with_ids(file_ids)]
+  } else {
+    [@lib.file_search_tool()]
+  }
   @lib.responses_create(config, model, messages, Some(tools))
 }
 
@@ -28,7 +30,6 @@ pub async fn search_files_with_options(
   model : String,
   query : String,
   file_ids : Array[String],
-  max_num_results? : Int,
 ) -> @lib.ResponsesResponse {
   search_files(config, model, query, file_ids)
 }

@@ -9,9 +9,6 @@ let config : @lib.ClientConfig = @lib.create_client_config(
 )
 
 ///|
-let sample_audio_url : String = "https://your-audio-url.wav"
-
-///|
 async fn main {
   println("=== 百炼语音合成 (TTS) 示例 ===\n")
 

@@ -13,7 +13,7 @@ async fn main {
   println("=== 图像扩展 Demo ===")
   println("")
 
-  let image_url = "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250717/zfifqo/dog_and_girl.jpeg"
+  let image_url = "https://dashscope.oss-cn-beijing.aliyuncs.com/images/dog_and_girl.jpeg"
 
   // Demo 1: 基础图像扩展
   println("1. 基础图像扩展 (2x)")

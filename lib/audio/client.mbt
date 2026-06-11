@@ -9,7 +9,7 @@ pub async fn caption_audio(
   config : @lib.ClientConfig,
   audio_url : String,
 ) -> String {
-  caption_audio_impl(config, audio_url, default_model, None)
+  caption_audio_impl(config, audio_url, default_model)
 }
 
 ///|
@@ -19,25 +19,8 @@ pub async fn caption_audio_with_model(
   audio_url : String,
   model : String,
 ) -> String {
-  caption_audio_impl(config, audio_url, model, None)
+  caption_audio_impl(config, audio_url, model)
 }
-
-///|
-/// Caption audio with custom prompt
-pub async fn caption_audio_with_prompt(
-  config : @lib.ClientConfig,
-  audio_url : String,
-  prompt : String,
-) -> String {
-  caption_audio_impl(config, audio_url, default_model, Some(prompt))
-}
-
-///|
-/// Clean text content struct (no null fields like image_url, video_url, etc.)
-struct CleanTextContent {
-  type_ : String
-  text : String
-} derive(ToJson(fields(type_(rename="type"))))
 
 ///|
 /// Message structure for audio requests
@@ -52,27 +35,13 @@ async fn caption_audio_impl(
   config : @lib.ClientConfig,
   audio_url : String,
   model : String,
-  prompt : String?,
 ) -> String {
   // Build audio content
   let audio_json = audio_content(audio_url).to_json()
 
-  // Audio always goes in a user message
+  // Audio goes in a user message
   let audio_message = AudioMessage::{ role: "user", content: [audio_json] }
-
-  // When there's a custom prompt, add it as a separate system message.
-  // The API rejects mixed audio+text in a single user message content array.
-  let messages : Array[Json] = match prompt {
-    Some(p) => {
-      let text_json = CleanTextContent::{ type_: "text", text: p }.to_json()
-      let system_message = AudioMessage::{
-        role: "system",
-        content: [text_json],
-      }
-      [system_message.to_json(), audio_message.to_json()]
-    }
-    None => [audio_message.to_json()]
-  }
+  let messages : Array[Json] = [audio_message.to_json()]
 
   // Build request
   let request = AudioRequest::{

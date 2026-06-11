@@ -3,9 +3,15 @@
 ///
 
 ///|
-/// Deep research request structure
+/// Deep research request structure (DashScope native format)
 pub struct DeepResearchRequest {
   model : String
+  input : DeepResearchInput
+  parameters : String?
+} derive(ToJson)
+
+///|
+/// Input structure
+pub struct DeepResearchInput {
   messages : Array[@lib.Message]
-  stream : Bool
 } derive(ToJson)

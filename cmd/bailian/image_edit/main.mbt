@@ -15,7 +15,7 @@ async fn main {
 
   // Demo 1: 单图编辑
   println("1. 单图编辑")
-  let image_url = "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250717/zfifqo/dog_and_girl.jpeg"
+  let image_url = "https://dashscope.oss-cn-beijing.aliyuncs.com/images/dog_and_girl.jpeg"
   let prompt = "把图中的狗狗变成一只猫咪"
   println("原图: \{image_url}")
   println("指令: \{prompt}")
@@ -56,8 +56,8 @@ async fn main {
 
   // Demo 3: 多参考图编辑
   println("3. 多参考图编辑")
-  let ref_url = "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250717/zfifqo/dog_and_girl.jpeg"
-  let edit_url = "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250717/zfifqo/dog_and_girl.jpeg"
+  let ref_url = "https://dashscope.oss-cn-beijing.aliyuncs.com/images/dog_and_girl.jpeg"
+  let edit_url = "https://dashscope.oss-cn-beijing.aliyuncs.com/images/dog_and_girl.jpeg"
   let prompt3 = "将第一张图的风格应用到第二张图上"
   println("参考图: \{ref_url}")
   println("编辑图: \{edit_url}")

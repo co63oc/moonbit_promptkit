@@ -1,9 +1,0 @@
-import {
-  "moonbitlang/async",
-  "moonbit_promptkit/lib",
-  "moonbit_promptkit/lib/s2s" @lib_s2s,
-}
-
-options(
-  "is-main": true,
-)

@@ -1,9 +1,0 @@
-import {
-  "moonbitlang/async",
-  "moonbit_promptkit/lib",
-  "moonbit_promptkit/lib/qwen_omni" @lib_qwen_omni,
-}
-
-options(
-  "is-main": true,
-)

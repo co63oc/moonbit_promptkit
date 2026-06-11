@@ -7,6 +7,7 @@
 /// Response API - Tool definition
 pub struct ResponseTool {
   type_ : String
+  vector_store_ids : Array[String]?
 } derive(ToJson(fields(type_(rename="type"))))
 
 ///|
@@ -114,19 +115,25 @@ pub struct ResponsesResponse {
 ///|
 /// Create a web_search_image tool
 pub fn web_search_image_tool() -> ResponseTool {
-  ResponseTool::{ type_: "web_search_image" }
+  ResponseTool::{ type_: "web_search_image", vector_store_ids: None }
 }
 
 ///|
 /// Create an image_search tool
 pub fn image_search_tool() -> ResponseTool {
-  ResponseTool::{ type_: "image_search" }
+  ResponseTool::{ type_: "image_search", vector_store_ids: None }
 }
 
 ///|
 /// Create a file_search tool
 pub fn file_search_tool() -> ResponseTool {
-  ResponseTool::{ type_: "file_search" }
+  ResponseTool::{ type_: "file_search", vector_store_ids: None }
+}
+
+///|
+/// Create a file_search tool with vector store IDs (knowledge base IDs)
+pub fn file_search_tool_with_ids(vector_store_ids : Array[String]) -> ResponseTool {
+  ResponseTool::{ type_: "file_search", vector_store_ids: Some(vector_store_ids) }
 }
 
 ///|

@@ -12,7 +12,7 @@ let config : @lib.ClientConfig = @lib.create_client_config(
 let sample_image_url : String = "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250925/wpimhv/rap.png"
 
 ///|
-let sample_video_url : String = "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20260129/qigswt/wan-r2v-role2.mp4"
+///let sample_video_url : String = "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20260129/qigswt/wan-r2v-role2.mp4"
 
 ///|
 async fn main {
@@ -56,8 +56,8 @@ async fn main {
   println("  Tripo/Tripo-H3.1 - 高精度，200万面")
   println("")
 
-  // Demo 1: 图生视频 - 创建任务
-  println("--- Demo 1: 图生视频（创建任务） ---")
+  // Demo 1: 图生视频 - 创建任务并轮询获取结果
+  println("--- Demo 1: 图生视频（创建任务 + 轮询获取视频） ---")
   try {
     let task_resp = @lib.image_to_video(
       config, "wan2.6-i2v-flash", "一个可爱的猫咪在草地上奔跑，阳光明媚的午后",
@@ -67,26 +67,72 @@ async fn main {
     println("任务创建成功! 任务ID: " + task_id)
     println("任务状态: " + task_resp.output.task_status)
     println("")
-    println(
-      "提示: 视频生成需要较长时间，可使用 wait_for_video_gen() 轮询等待完成",
-    )
-    println("      或调用 get_video_gen_result(task_id) 主动查询结果")
+
+    // 轮询等待视频生成完成
+    println("开始轮询等待视频生成完成...")
+    let result = @lib.wait_for_video_gen(config, task_id, 60, 5000)
+    let final_status = result.output.task_status
+    println("最终状态: " + final_status)
+
+    match final_status {
+      "SUCCEEDED" => {
+        match result.output.video_url {
+          Some(url) => println("视频生成成功! 视频URL: " + url)
+          None => println("视频生成成功，但未获取到视频URL")
+        }
+      }
+      "FAILED" => println("视频生成失败!")
+      "CANCELLED" => println("视频生成已取消")
+      _ => println("轮询超时，任务仍在进行中，请稍后手动查询: get_video_gen_result(\"" + task_id + "\")")
+    }
   } catch {
     _ => println("创建任务失败: 请检查 API Key 和模型权限")
   }
   println("")
 
-  // Demo 2: 文生3D
-  println("--- Demo 2: 文生3D模型（创建任务） ---")
+  // Demo 2: 文生3D - 创建任务并轮询获取结果
+  println("--- Demo 2: 文生3D模型（创建任务 + 轮询获取结果） ---")
   try {
     let task_3d = @lib.text_to_3d(config, "一只可爱的猫咪")
-    println("3D任务创建成功! 任务ID: " + task_3d.output.task_id)
+    let task_id_3d = task_3d.output.task_id
+    println("3D任务创建成功! 任务ID: " + task_id_3d)
     println("任务状态: " + task_3d.output.task_status)
     println("")
-    println("提示: 3D生成通常需要数分钟，建议轮询间隔 15 秒")
-    println(
-      "      调用 wait_for_3d_gen(task_id, max_attempts, interval_ms) 等待完成",
-    )
+
+    // 轮询等待3D生成完成（文档建议间隔 15 秒，最多轮询20次约5分钟）
+    println("开始轮询等待3D模型生成完成（间隔15秒）...")
+    let result_3d = @lib.wait_for_3d_gen(config, task_id_3d, 20, 15000)
+    let final_status_3d = result_3d.output.task_status
+    println("最终状态: " + final_status_3d)
+
+    match final_status_3d {
+      "SUCCEEDED" => {
+        match result_3d.output.results {
+          Some(results) => {
+            if results.length() > 0 {
+              // 3D生成成功，提取模型URL
+              match results[0].pbr_model_url {
+                Some(url) => println("PBR模型URL: " + url)
+                None => ignore(())
+              }
+              match results[0].base_model_url {
+                Some(url) => println("基础模型URL: " + url)
+                None => ignore(())
+              }
+              match results[0].rendered_image_url {
+                Some(url) => println("渲染预览URL: " + url)
+                None => ignore(())
+              }
+            }
+          }
+          None => println("3D生成成功，但未获取到结果列表")
+        }
+      }
+      "FAILED" => println("3D生成失败!")
+      "CANCELED" => println("3D生成已取消")
+      "UNKNOWN" => println("任务不存在或已过期（task_id有效期24小时）")
+      _ => println("轮询超时，任务仍在进行中，请稍后手动查询")
+    }
   } catch {
     _ => println("创建3D任务失败: 请检查 API Key 和模型权限")
   }

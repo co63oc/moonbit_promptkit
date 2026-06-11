@@ -1,9 +1,0 @@
-import {
-  "moonbitlang/async",
-  "moonbit_promptkit/lib",
-  "moonbit_promptkit/lib/video_edit" @lib_video_edit,
-}
-
-options(
-  "is-main": true,
-)

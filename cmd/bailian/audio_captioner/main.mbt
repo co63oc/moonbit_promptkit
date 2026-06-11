@@ -32,15 +32,6 @@ async fn main {
   println(result2)
   println("")
 
-  // Demo 3: 自定义提示词
-  println("--- Demo 3: 自定义提示词 ---")
-  let result3 = @audio.caption_audio_with_prompt(
-    config, sample_audio_url, "请用中文详细描述这段音频的内容",
-  )
-  println("音频描述:")
-  println(result3)
-  println("")
-
   println("=== 可用模型 ===")
   println("  qwen3-omni-30b-a3b-captioner - 音频理解专用模型")
   println("")

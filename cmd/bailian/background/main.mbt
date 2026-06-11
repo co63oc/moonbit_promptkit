@@ -13,32 +13,10 @@ async fn main {
   println("=== 背景生成 Demo ===")
   println("")
 
-  // Demo 1: 基础背景生成
-  println("1. 基础背景生成")
-  let base_url = "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250717/zfifqo/dog_and_girl.jpeg"
-  println("前景图: \{base_url}")
-  println("生成中...")
+  let base_url = "https://help-static-aliyun-doc.aliyuncs.com/assets/img/zh-CN/9461437371/p904092.png"
 
-  try {
-    let urls = @lib_bg.generate_background(
-      config,
-      @lib_bg.default_model,
-      base_url,
-      size="1024*1024",
-      poll_interval_ms=5000,
-      max_attempts=20,
-    )
-    println("生成成功！共 \{urls.length()} 张图片")
-    for url in urls {
-      println("  URL: \{url}")
-    }
-  } catch {
-    e => println("生成失败: \{e.to_string()}")
-  }
-  println("")
-
-  // Demo 2: 带提示词的背景生成
-  println("2. 带提示词的背景生成")
+  // Demo 1: 带提示词的背景生成
+  println("1. 带提示词的背景生成")
   let prompt = "海边日落，金色阳光洒在海面上"
   println("前景图: \{base_url}")
   println("提示词: \{prompt}")
@@ -53,9 +31,9 @@ async fn main {
   }
   println("")
 
-  // Demo 3: 使用参考图生成背景
-  println("3. 使用参考图生成背景")
-  let ref_url = "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250717/zfifqo/dog_and_girl.jpeg"
+  // Demo 2: 使用参考图生成背景
+  println("2. 使用参考图生成背景")
+  let ref_url = "https://dashscope.oss-cn-beijing.aliyuncs.com/images/dog_and_girl.jpeg"
   println("前景图: \{base_url}")
   println("参考图: \{ref_url}")
   try {

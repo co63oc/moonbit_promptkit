@@ -42,20 +42,10 @@ API Key 获取地址：https://bailian.console.aliyun.com/cn-beijing?tab=model#/
 | `image_search` | 图搜图（Responses API） | `moon run cmd/bailian/image_search` |
 | `web_extractor` | 网页内容提取 | `moon run cmd/bailian/web_extractor` |
 | `code_interpreter` | 代码解释器 | `moon run cmd/bailian/code_interpreter` |
-| `image_process` | 图像处理（分割/擦除/重绘/涂鸦） | `moon run cmd/bailian/image_process` |
-| `poster` | 创意海报生成 | `moon run cmd/bailian/poster` |
-| `virtual_model` | 虚拟模特生成 | `moon run cmd/bailian/virtual_model` |
-| `video_edit` | 视频编辑（风格迁移/增强） | `moon run cmd/bailian/video_edit` |
-| `tripo_3d` | Tripo 3D 模型生成 | `moon run cmd/bailian/tripo_3d` |
-| `music` | FunMusic 音乐生成 | `moon run cmd/bailian/music` |
 | `speech_recognition` | 语音识别（文件转写） | `moon run cmd/bailian/speech_recognition` |
-| `s2s` | 端到端语音对话（S2S） | `moon run cmd/bailian/s2s` |
-| `live_translate` | 实时翻译 | `moon run cmd/bailian/live_translate` |
 | `mcp` | MCP 工具集成 | `moon run cmd/bailian/mcp` |
 | `rerank` | 文本排序（Rerank） | `moon run cmd/bailian/rerank` |
 | `file_search` | 文件搜索 | `moon run cmd/bailian/file_search` |
-| `hot_words` | 自定义热词（语音识别词汇表） | `moon run cmd/bailian/hot_words` |
-| `qwen_omni` | Qwen-Omni 多模态大模型 | `moon run cmd/bailian/qwen_omni` |
 | `vace` | Wan VACE 视频编辑（多图参考/重绘） | `moon run cmd/bailian/vace` |
 
 ## 已实现接口文档参考
@@ -130,19 +120,6 @@ API Key 获取地址：https://bailian.console.aliyun.com/cn-beijing?tab=model#/
 | SSML 与 LaTeX | 语音合成标记语言，数学公式朗读 | [SSML与LaTeX](https://help.aliyun.com/zh/model-studio/ssml-latex-user-guide) |
 | CosyVoice 音色列表 | CosyVoice 可用音色参考 | [CosyVoice音色列表](https://help.aliyun.com/zh/model-studio/cosyvoice-voice-list) |
 
-## 待开发接口（规划中）
-
-以下接口参考文档，待后续开发：
-
-### WebSocket 协议（待开发）
-
-以下接口需要 WebSocket 支持，待后续实现：
-
-| 接口 | 说明 | 文档链接 |
-|------|------|----------|
-| 实时语音 | 实时语音对话（WebSocket） | [实时语音](https://help.aliyun.com/zh/model-studio/realtime) |
-| 实时语音识别 | WebSocket 流式语音识别 | [实时语音识别](https://help.aliyun.com/zh/model-studio/real-time-speech-recognition-user-guide) |
-
 ### 参考文档（已实现）
 
 | 接口 | 说明 | 文档链接 |
@@ -154,16 +131,9 @@ API Key 获取地址：https://bailian.console.aliyun.com/cn-beijing?tab=model#/
 | 文件搜索 | ✅ File Search 文件检索 | [文件搜索](https://help.aliyun.com/zh/model-studio/file-search) |
 | MCP | ✅ Model Context Protocol 集成 | [MCP](https://help.aliyun.com/zh/model-studio/mcp) |
 | 图像实例分割 | ✅ 实例分割与抠图 | [图像实例分割](https://help.aliyun.com/zh/model-studio/image-instance-segmentation) |
-| 视频编辑 | ✅ 视频风格迁移、增强 | [视频编辑](https://help.aliyun.com/zh/model-studio/wan-video-editing-guide) |
-| Tripo 3D 生成 | ✅ 3D 模型生成 | [Tripo 3D生成](https://help.aliyun.com/zh/model-studio/tripo-3d-generation-guide) |
-| FunMusic 音乐生成 | ✅ 百聆音乐生成大模型 | [音乐生成](https://help.aliyun.com/zh/model-studio/fun-music) |
 | 非实时语音识别 | ✅ 异步音视频文件转写 | [非实时语音识别](https://help.aliyun.com/zh/model-studio/non-realtime-speech-recognition-user-guide) |
-| 端到端语音 | ✅ S2S 语音大模型 | [S2S模型](https://help.aliyun.com/zh/model-studio/s2s-model) |
-| 实时翻译 | ✅ 流式实时翻译 | [实时翻译](https://help.aliyun.com/zh/model-studio/qwen3-5-livetranslate-flash-realtime) |
 | Embedding 向量 | ✅ 文本向量表征模型 | [Embedding](https://help.aliyun.com/zh/model-studio/embedding) |
 | Rerank 排序 | ✅ 文本排序模型 | [Rerank](https://help.aliyun.com/zh/model-studio/rerank) |
-| 自定义热词 | ✅ 语音识别热词词汇表管理 | [自定义热词](https://help.aliyun.com/zh/model-studio/custom-hot-words-user-guide) |
-| Qwen-Omni | ✅ 多模态大模型（文本/音频/视频理解与生成） | [Qwen-Omni](https://help.aliyun.com/zh/model-studio/qwen-omni) |
 | Wan VACE 视频编辑 | ✅ VACE 视频编辑（多图参考/重绘/局部编辑/延展） | [Wan VACE](https://help.aliyun.com/zh/model-studio/wan-vace-guide) |
 
 ## 快速开始

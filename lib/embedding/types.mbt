@@ -75,4 +75,4 @@ pub struct RerankResponse {
 
 ///|
 /// Default rerank model
-pub let default_rerank_model : String = "gte-rerank"
+pub let default_rerank_model : String = "qwen3-rerank"

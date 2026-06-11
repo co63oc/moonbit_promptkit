@@ -35,11 +35,11 @@ async fn main {
     for index_, score in results {
       rank = rank + 1
       let truncated = if documents[index_].length() > 50 {
-        documents[index_][0:50].to_string() + "..."
+        documents[index_][0:50].to_owned() + "..."
       } else {
         documents[index_]
       }
-      println("  [\{rank}] 文档\{index_} (score: \{score.to_string()})")
+      println("  [\{rank}] 文档\{index_} (score: \{@debug.to_string(score)})")
       println("      \{truncated}")
     }
   } catch {
@@ -61,11 +61,11 @@ async fn main {
     let mut rank = 0
     for index_, score in scores {
       rank = rank + 1
-      println("  [\{rank}] 文档\{index_} (score: \{score.to_string()})")
+      println("  [\{rank}] 文档\{index_} (score: \{@debug.to_string(score)})")
       match docs[rank - 1] {
         Some(doc) => {
           let truncated = if doc.length() > 60 {
-            doc[0:60].to_string() + "..."
+            doc[0:60].to_owned() + "..."
           } else {
             doc
           }
