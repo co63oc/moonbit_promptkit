@@ -1543,30 +1543,6 @@ pub async fn edit_video(
 }
 
 ///|
-/// Create a 3D generation task
-pub async fn create_3d_gen_task(
-  config : ClientConfig,
-  model : String,
-  input : VideoGenInput,
-  parameters : VideoGenParameters?,
-) -> Gen3DResponse {
-  let request = VideoGenRequest::{ model, input, parameters }
-  let (response, body) = @http.post(
-    "https://dashscope.aliyuncs.com/api/v1/services/aigc/video-generation/3d-generation",
-    request.to_json(),
-    headers={
-      "Authorization": "Bearer \{config.api_key}",
-      "Content-Type": "application/json",
-      "X-DashScope-Async": "enable",
-    },
-  )
-  guard response.code is (200..=299) else {
-    fail("HTTP request failed: \{response.code} \{response.reason}")
-  }
-  body.json() |> @json.from_json()
-}
-
-///|
 /// Get 3D generation task result
 pub async fn get_3d_gen_result(
   config : ClientConfig,
@@ -1636,78 +1612,6 @@ pub async fn create_embedding_with_options(
     fail("HTTP request failed: \{response.code} \{response.reason}")
   }
   body.json() |> @json.from_json()
-}
-
-///|
-/// Text-to-3D generation (文生3D模型)
-pub async fn text_to_3d(
-  config : ClientConfig,
-  prompt : String,
-) -> Gen3DResponse {
-  let input = VideoGenInput::{
-    prompt: Some(prompt),
-    img_url: None,
-    video_url: None,
-    audio_url: None,
-    function: None,
-    media: None,
-    ref_images_url: None,
-    image: None,
-    images: None,
-  }
-  let parameters = VideoGenParameters::{
-    resolution: None,
-    duration: None,
-    shot_type: None,
-    prompt_extend: None,
-    watermark: None,
-    negative_prompt: None,
-    seed: None,
-    ratio: None,
-    size: None,
-    obj_or_bg: None,
-    control_condition: None,
-    strength: None,
-    texture_quality: Some("standard"),
-    geometry_quality: None,
-  }
-  create_3d_gen_task(config, "Tripo/Tripo-P1.0", input, Some(parameters))
-}
-
-///|
-/// Image-to-3D generation (单图生3D模型)
-pub async fn image_to_3d(
-  config : ClientConfig,
-  image_url : String,
-) -> Gen3DResponse {
-  let input = VideoGenInput::{
-    prompt: None,
-    img_url: None,
-    video_url: None,
-    audio_url: None,
-    function: None,
-    media: None,
-    ref_images_url: None,
-    image: Some(image_url),
-    images: None,
-  }
-  let parameters = VideoGenParameters::{
-    resolution: None,
-    duration: None,
-    shot_type: None,
-    prompt_extend: None,
-    watermark: None,
-    negative_prompt: None,
-    seed: None,
-    ratio: None,
-    size: None,
-    obj_or_bg: None,
-    control_condition: None,
-    strength: None,
-    texture_quality: Some("standard"),
-    geometry_quality: None,
-  }
-  create_3d_gen_task(config, "Tripo/Tripo-P1.0", input, Some(parameters))
 }
 
 ///|
