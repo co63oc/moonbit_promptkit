@@ -15,6 +15,6 @@ license = "Apache-2.0"
 
 keywords = [ ]
 
-description = ""
+description = "MoonBit 实现的 AI 大模型 SDK 示例，支持多个平台。"
 
 preferred_target = "native"
