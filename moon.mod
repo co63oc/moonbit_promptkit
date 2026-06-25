@@ -1,4 +1,4 @@
-name = "moonbit_promptkit"
+name = "co63oc/moonbit_promptkit"
 
 version = "0.1.0"
 
@@ -9,7 +9,7 @@ import {
 
 readme = "README.mbt.md"
 
-repository = ""
+repository = "https://gitlink.org.cn/co63oc/moonbit_promptkit"
 
 license = "Apache-2.0"
 

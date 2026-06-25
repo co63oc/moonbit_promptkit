@@ -1,5 +1,5 @@
 import {
-  "moonbit_promptkit/lib",
+  "co63oc/moonbit_promptkit/lib",
   "moonbitlang/async",
 }
 
