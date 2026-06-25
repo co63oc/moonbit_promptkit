@@ -1594,12 +1594,7 @@ pub async fn create_embedding_with_options(
   encoding_format : String?,
   dimensions : Int?,
 ) -> EmbeddingResponse {
-  let request = EmbeddingRequest::{
-    model,
-    input,
-    encoding_format,
-    dimensions,
-  }
+  let request = EmbeddingRequest::{ model, input, encoding_format, dimensions }
   let (response, body) = @http.post(
     "\{config.base_url}/embeddings",
     request.to_json(),

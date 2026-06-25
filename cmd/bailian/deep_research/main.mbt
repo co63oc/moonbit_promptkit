@@ -1,8 +1,13 @@
 ///|
-/// Qwen-Deep-Research 深度研究模型示例
-/// 自动完成复杂研究课题，生成结构化研究报告
+/// 深度研究示例（阿里云百炼）
 ///
-let config : @lib.ClientConfig = @lib.create_client_config(
+/// 运行命令: moon run cmd/bailian/deep_research
+///
+/// 环境变量要求:
+/// - BAILIAN_API_KEY: 阿里云百炼 API Key
+/// - BAILIAN_BASE_URL: API Base URL（默认: https://dashscope.aliyuncs.com/compatible-mode/v1）
+///
+pub let config : @lib.ClientConfig = @lib.create_client_config(
   "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 
@@ -15,22 +20,22 @@ async fn main {
   let initial_question = "研究一下人工智能在教育中的应用"
   println("初始问题: " + initial_question)
   println("\n第一步：模型反问确认")
-  
+
   // 第一步：发送初始问题，获取模型的反问
   println("开始研究...")
-  @lib_dr.research(config, initial_question, fn(progress) {
-    println(progress)
-  })
+  @lib_dr.research(config, initial_question, fn(progress) { println(progress) })
   |> ignore
-  
+
   // 第二步：带上完整对话历史继续研究
   println("\n第二步：深入研究")
   let user_answer = "我主要关注个性化学习方面"
   println("用户回答: " + user_answer)
-  
+
   let messages : Array[@lib.Message] = [
     @lib.user_message_with_text(initial_question),
-    @lib.assistant_message("请告诉我您希望重点研究人工智能在教育中的哪些具体应用场景？"),
+    @lib.assistant_message(
+      "请告诉我您希望重点研究人工智能在教育中的哪些具体应用场景？",
+    ),
     @lib.user_message_with_text(user_answer),
   ]
   @lib_dr.research_with_messages(config, messages, fn(progress) {

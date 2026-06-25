@@ -1,21 +1,26 @@
 ///|
-/// Wan VACE Video Editing example (万相视频编辑示例)
-/// Demonstrates image reference and video repainting
+/// 视频编辑示例（阿里云百炼）
+///
+/// 运行命令: moon run cmd/bailian/vace
+///
+/// 环境变量要求:
+/// - BAILIAN_API_KEY: 阿里云百炼 API Key
+/// - BAILIAN_BASE_URL: API Base URL（默认: https://dashscope.aliyuncs.com/compatible-mode/v1）
 ///
 
 ///|
-let config : @lib.ClientConfig = @lib.create_client_config(
+pub let config : @lib.ClientConfig = @lib.create_client_config(
   "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 
 ///|
-let sample_image_1 : String = "http://wanx.alicdn.com/material/20250318/image_reference_2_5_16.png"
+pub let sample_image_1 : String = "http://wanx.alicdn.com/material/20250318/image_reference_2_5_16.png"
 
 ///|
-let sample_image_2 : String = "http://wanx.alicdn.com/material/20250318/image_reference_1_5_16.png"
+pub let sample_image_2 : String = "http://wanx.alicdn.com/material/20250318/image_reference_1_5_16.png"
 
 ///|
-let sample_video : String = "http://wanx.alicdn.com/material/20250318/video_repainting_1.mp4"
+pub let sample_video : String = "http://wanx.alicdn.com/material/20250318/video_repainting_1.mp4"
 
 ///|
 async fn main {
@@ -43,10 +48,8 @@ async fn main {
   println("--- Demo 2: 视频重绘 (Video Repainting) ---")
   try {
     let video_url = @lib_vace.video_repainting(
-      config,
-      "视频展示了一辆黑色的蒸汽朋克风格汽车，绅士驾驶着，车辆装饰着齿轮和铜管。",
-      sample_video,
-      @lib_vace.depth_condition,
+      config, "视频展示了一辆黑色的蒸汽朋克风格汽车，绅士驾驶着，车辆装饰着齿轮和铜管。",
+      sample_video, @lib_vace.depth_condition,
     )
     println("视频重绘完成！")
     println("视频URL: \{video_url}")

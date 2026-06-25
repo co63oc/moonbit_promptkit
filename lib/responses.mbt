@@ -47,6 +47,7 @@ pub enum InputContent {
   Video(InputVideo)
 }
 
+///|
 impl ToJson for InputContent with fn to_json(self : InputContent) -> Json {
   match self {
     Text(t) => t.to_json()
@@ -63,7 +64,10 @@ pub struct ResponseInputMessage {
   content : Array[InputContent]
 }
 
-impl ToJson for ResponseInputMessage with fn to_json(self : ResponseInputMessage) -> Json {
+///|
+impl ToJson for ResponseInputMessage with fn to_json(
+  self : ResponseInputMessage,
+) -> Json {
   let content_json = self.content.map(fn(c) { c.to_json() })
   Json::object({
     "role": Json::string(self.role),
@@ -132,13 +136,21 @@ pub fn file_search_tool() -> ResponseTool {
 
 ///|
 /// Create a file_search tool with vector store IDs (knowledge base IDs)
-pub fn file_search_tool_with_ids(vector_store_ids : Array[String]) -> ResponseTool {
-  ResponseTool::{ type_: "file_search", vector_store_ids: Some(vector_store_ids) }
+pub fn file_search_tool_with_ids(
+  vector_store_ids : Array[String],
+) -> ResponseTool {
+  ResponseTool::{
+    type_: "file_search",
+    vector_store_ids: Some(vector_store_ids),
+  }
 }
 
 ///|
 /// Create a response input message
-pub fn response_message(role : String, content : Array[InputContent]) -> ResponseInputMessage {
+pub fn response_message(
+  role : String,
+  content : Array[InputContent],
+) -> ResponseInputMessage {
   ResponseInputMessage::{ role, content }
 }
 
@@ -188,12 +200,7 @@ pub async fn responses_create(
   input : Array[ResponseInputMessage],
   tools : Array[ResponseTool]?,
 ) -> ResponsesResponse {
-  let request = ResponsesRequest::{
-    model,
-    input,
-    tools,
-    stream: Some(false),
-  }
+  let request = ResponsesRequest::{ model, input, tools, stream: Some(false) }
   let (response, body) = @http.post(
     "\{config.base_url}/responses",
     request.to_json(),
@@ -216,10 +223,7 @@ pub async fn web_search_image(
   query : String,
 ) -> ResponsesResponse {
   let messages = [
-    ResponseInputMessage::{
-      role: "user",
-      content: [input_text(query)],
-    }
+    ResponseInputMessage::{ role: "user", content: [input_text(query)] },
   ]
   responses_create(config, model, messages, Some([web_search_image_tool()]))
 }
@@ -238,13 +242,8 @@ pub async fn image_search(
     None => ignore(())
   }
   contents.push(input_image(image_url))
-  
-  let messages = [
-    ResponseInputMessage::{
-      role: "user",
-      content: contents,
-    }
-  ]
+
+  let messages = [ResponseInputMessage::{ role: "user", content: contents }]
   responses_create(config, model, messages, Some([image_search_tool()]))
 }
 
@@ -254,17 +253,19 @@ pub fn extract_web_search_images(response : ResponsesResponse) -> Array[Json] {
   let results : Array[Json] = []
   for item in response.output {
     match item.output {
-      Some(output_str) => {
+      Some(output_str) =>
         try {
           let parsed = @json.parse(output_str)
           match parsed {
-            Json::Array(arr) => for x in arr { results.push(x) }
+            Json::Array(arr) =>
+              for x in arr {
+                results.push(x)
+              }
             _ => ignore(())
           }
         } catch {
           _ => ignore(())
         }
-      }
       None => ignore(())
     }
   }
@@ -273,21 +274,25 @@ pub fn extract_web_search_images(response : ResponsesResponse) -> Array[Json] {
 
 ///|
 /// Extract image search results from response
-pub fn extract_image_search_results(response : ResponsesResponse) -> Array[Json] {
+pub fn extract_image_search_results(
+  response : ResponsesResponse,
+) -> Array[Json] {
   let results : Array[Json] = []
   for item in response.output {
     match item.output {
-      Some(output_str) => {
+      Some(output_str) =>
         try {
           let parsed = @json.parse(output_str)
           match parsed {
-            Json::Array(arr) => for x in arr { results.push(x) }
+            Json::Array(arr) =>
+              for x in arr {
+                results.push(x)
+              }
             _ => ignore(())
           }
         } catch {
           _ => ignore(())
         }
-      }
       None => ignore(())
     }
   }

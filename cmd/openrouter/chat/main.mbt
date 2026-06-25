@@ -1,9 +1,15 @@
 ///|
-/// OpenRouter chat example
+/// 简单对话示例（OpenRouter）
+///
+/// 运行命令: moon run cmd/openrouter/chat
+///
+/// 环境变量要求:
+/// - OPENROUTER_API_KEY: OpenRouter API Key
+/// - OPENROUTER_BASE_URL: API Base URL（默认: https://openrouter.ai/api/v1）
 ///
 
 ///|
-let config : @lib.ClientConfig = @lib.create_client_config(
+pub let config : @lib.ClientConfig = @lib.create_client_config(
   "OPENROUTER_API_KEY", "OPENROUTER_BASE_URL", "https://openrouter.ai/api/v1",
 )
 

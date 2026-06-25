@@ -1,9 +1,15 @@
 ///|
-/// Multi-turn chat example
+/// 多轮对话示例（阿里云百炼）
+///
+/// 运行命令: moon run cmd/bailian/multi_chat
+///
+/// 环境变量要求:
+/// - BAILIAN_API_KEY: 阿里云百炼 API Key
+/// - BAILIAN_BASE_URL: API Base URL（默认: https://dashscope.aliyuncs.com/compatible-mode/v1）
 ///
 
 ///|
-let config : @lib.ClientConfig = @lib.create_client_config(
+pub let config : @lib.ClientConfig = @lib.create_client_config(
   "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 

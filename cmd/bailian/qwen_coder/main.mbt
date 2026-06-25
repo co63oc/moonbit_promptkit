@@ -1,19 +1,24 @@
 ///|
-/// Qwen-Coder 代码生成模型示例
-/// 支持 qwen3-coder-next / qwen-coder-plus 等模型
+/// 代码生成示例（阿里云百炼）
 ///
-let config : @lib.ClientConfig = @lib.create_client_config(
+/// 运行命令: moon run cmd/bailian/qwen_coder
+///
+/// 环境变量要求:
+/// - BAILIAN_API_KEY: 阿里云百炼 API Key
+/// - BAILIAN_BASE_URL: API Base URL（默认: https://dashscope.aliyuncs.com/compatible-mode/v1）
+///
+pub let config : @lib.ClientConfig = @lib.create_client_config(
   "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 
 ///|
-let model : String = "qwen-coder-plus"
+pub let model : String = "qwen-coder-plus"
 
 ///|
-let fibonacci_code : String = "def fibonacci(n, memo={}):\n    if n in memo:\n        return memo[n]\n    if n <= 1:\n        return n\n    memo[n] = fibonacci(n-1, memo) + fibonacci(n-2, memo)\n    return memo[n]"
+pub let fibonacci_code : String = "def fibonacci(n, memo={}):\n    if n in memo:\n        return memo[n]\n    if n <= 1:\n        return n\n    memo[n] = fibonacci(n-1, memo) + fibonacci(n-2, memo)\n    return memo[n]"
 
 ///|
-let process_code : String = "def process(data):\n    result = []\n    for i in range(len(data)):\n        if data[i] > 0:\n            result.append(data[i] * 2)\n        elif data[i] == 0:\n            result.append(0)\n        else:\n            result.append(data[i] * -1)\n    return result"
+pub let process_code : String = "def process(data):\n    result = []\n    for i in range(len(data)):\n        if data[i] > 0:\n            result.append(data[i] * 2)\n        elif data[i] == 0:\n            result.append(0)\n        else:\n            result.append(data[i] * -1)\n    return result"
 
 ///|
 async fn main {

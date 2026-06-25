@@ -4,12 +4,12 @@
 ///
 
 ///|
-let config : @lib.ClientConfig = @lib.create_client_config(
+pub let config : @lib.ClientConfig = @lib.create_client_config(
   "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 
 ///|
-let sample_image_url : String = "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250925/wpimhv/rap.png"
+pub let sample_image_url : String = "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250925/wpimhv/rap.png"
 
 ///|
 ///let sample_video_url : String = "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20260129/qigswt/wan-r2v-role2.mp4"
@@ -62,15 +62,19 @@ async fn main {
     println("最终状态: " + final_status)
 
     match final_status {
-      "SUCCEEDED" => {
+      "SUCCEEDED" =>
         match result.output.video_url {
           Some(url) => println("视频生成成功! 视频URL: " + url)
           None => println("视频生成成功，但未获取到视频URL")
         }
-      }
       "FAILED" => println("视频生成失败!")
       "CANCELLED" => println("视频生成已取消")
-      _ => println("轮询超时，任务仍在进行中，请稍后手动查询: get_video_gen_result(\"" + task_id + "\")")
+      _ =>
+        println(
+          "轮询超时，任务仍在进行中，请稍后手动查询: get_video_gen_result(\"" +
+          task_id +
+          "\")",
+        )
     }
   } catch {
     _ => println("创建任务失败: 请检查 API Key 和模型权限")

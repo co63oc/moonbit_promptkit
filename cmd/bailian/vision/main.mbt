@@ -1,16 +1,21 @@
 ///|
-/// Visual Reasoning (视觉推理) example using Bailian
-/// 演示 QVQ 模型的思考过程 + Qwen3-VL 混合思考控制
+/// 视觉推理示例（阿里云百炼）
+///
+/// 运行命令: moon run cmd/bailian/vision
+///
+/// 环境变量要求:
+/// - BAILIAN_API_KEY: 阿里云百炼 API Key
+/// - BAILIAN_BASE_URL: API Base URL（默认: https://dashscope.aliyuncs.com/compatible-mode/v1）
 ///
 
 ///|
-let config : @lib.ClientConfig = @lib.create_client_config(
+pub let config : @lib.ClientConfig = @lib.create_client_config(
   "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 
 ///|
 /// 示例图片：包含数学题的图片
-let math_image_url : String = "https://img.alicdn.com/imgextra/i1/O1CN01gDEY8M1W114Hi3XcN_!!6000000002727-0-tps-1024-406.jpg"
+pub let math_image_url : String = "https://img.alicdn.com/imgextra/i1/O1CN01gDEY8M1W114Hi3XcN_!!6000000002727-0-tps-1024-406.jpg"
 
 ///|
 async fn main {

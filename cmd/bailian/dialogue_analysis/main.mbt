@@ -1,14 +1,19 @@
 ///|
-/// 通义晓蜜对话分析模型示例
-/// 专门针对中文对话分析,支持信息抽取、场景分类、满意度挖掘、质检等
+/// 对话分析示例（阿里云百炼）
 ///
-let config : @lib.ClientConfig = @lib.create_client_config(
+/// 运行命令: moon run cmd/bailian/dialogue_analysis
+///
+/// 环境变量要求:
+/// - BAILIAN_API_KEY: 阿里云百炼 API Key
+/// - BAILIAN_BASE_URL: API Base URL（默认: https://dashscope.aliyuncs.com/compatible-mode/v1）
+///
+pub let config : @lib.ClientConfig = @lib.create_client_config(
   "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 
 ///|
 /// Sample dialogue text
-let sample_dialogue : String = "[1] 客服:您好,欢迎致电AB电商平台,请问有什么可以帮您?" +
+pub let sample_dialogue : String = "[1] 客服:您好,欢迎致电AB电商平台,请问有什么可以帮您?" +
   "\n" +
   "[2] 客户:你好,我上周在你们店买了一台料理机,现在运行时有点异响。" +
   "\n" +

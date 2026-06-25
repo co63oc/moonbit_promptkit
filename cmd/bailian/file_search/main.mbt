@@ -1,13 +1,16 @@
 ///|
-/// File Search example (文件搜索示例)
-/// Demonstrates searching knowledge base using Responses API
+/// 文件搜索示例（阿里云百炼）
 ///
-/// 使用前需先在百炼控制台创建知识库并获取知识库 ID，
-/// 然后设置 BAILIAN_VECTOR_STORE_ID 环境变量。
+/// 运行命令: moon run cmd/bailian/file_search
+///
+/// 环境变量要求:
+/// - BAILIAN_API_KEY: 阿里云百炼 API Key
+/// - BAILIAN_BASE_URL: API Base URL（默认: https://dashscope.aliyuncs.com/compatible-mode/v1）
+/// - BAILIAN_VECTOR_STORE_ID: 知识库 ID（需在百炼控制台创建）
 ///
 
 ///|
-let config : @lib.ClientConfig = @lib.create_client_config(
+pub let config : @lib.ClientConfig = @lib.create_client_config(
   "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 
@@ -25,7 +28,7 @@ async fn main {
   println("【示例1: 单轮搜索】")
   let query1 = "请总结知识库中的主要内容"
   println("搜索查询: \{query1}")
-  
+
   let response1 = @lib_file_search.search_files(
     config,
     "qwen3.7-plus",
@@ -69,7 +72,9 @@ async fn main {
 
   // 示例2: 多轮追问搜索
   println("\n\n【示例2: 多轮追问搜索】")
-  let queries = ["知识库中提到了哪些关键技术？", "这些技术的优势是什么？"]
+  let queries = [
+    "知识库中提到了哪些关键技术？", "这些技术的优势是什么？",
+  ]
   let mut idx = 0
   while idx < queries.length() {
     let query = queries[idx]
@@ -94,6 +99,10 @@ async fn main {
   println("✓ 多文档综合分析")
   println("✓ 合同、报告等专业文档处理")
   println("")
-  println("注意: 文件搜索使用 Responses API，需要 qwen3.7-plus 或更高版本模型")
-  println("使用前请设置 BAILIAN_API_KEY 和 BAILIAN_VECTOR_STORE_ID 环境变量")
+  println(
+    "注意: 文件搜索使用 Responses API，需要 qwen3.7-plus 或更高版本模型",
+  )
+  println(
+    "使用前请设置 BAILIAN_API_KEY 和 BAILIAN_VECTOR_STORE_ID 环境变量",
+  )
 }

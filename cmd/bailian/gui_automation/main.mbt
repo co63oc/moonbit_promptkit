@@ -1,18 +1,23 @@
 ///|
-/// GUI-Plus 多模态 UI 交互自动化模型示例
-/// 基于屏幕截图和自然语言指令解析用户意图，转换为标准化 GUI 操作
+/// UI 交互自动化示例（阿里云百炼）
 ///
-let config : @lib.ClientConfig = @lib.create_client_config(
+/// 运行命令: moon run cmd/bailian/gui_automation
+///
+/// 环境变量要求:
+/// - BAILIAN_API_KEY: 阿里云百炼 API Key
+/// - BAILIAN_BASE_URL: API Base URL（默认: https://dashscope.aliyuncs.com/compatible-mode/v1）
+///
+pub let config : @lib.ClientConfig = @lib.create_client_config(
   "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 
 ///|
 /// Sample desktop screenshot URL
-let sample_screenshot_url : String = "https://img.alicdn.com/imgextra/i2/O1CN016iJ8ob1C3xP1s2M6z_!!6000000000026-2-tps-3008-1758.png"
+pub let sample_screenshot_url : String = "https://img.alicdn.com/imgextra/i2/O1CN016iJ8ob1C3xP1s2M6z_!!6000000000026-2-tps-3008-1758.png"
 
 ///|
 /// Simplified system prompt for GUI automation
-let gui_system_prompt : String = "You are a computer use agent. You can interact with a desktop GUI using mouse and keyboard. The screen resolution is 1000x1000. Output your action as a JSON tool_call with action type and parameters."
+pub let gui_system_prompt : String = "You are a computer use agent. You can interact with a desktop GUI using mouse and keyboard. The screen resolution is 1000x1000. Output your action as a JSON tool_call with action type and parameters."
 
 ///|
 async fn main {

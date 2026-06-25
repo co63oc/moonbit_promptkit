@@ -1,19 +1,24 @@
 ///|
-/// 通义星尘角色扮演模型 (Qwen Character) 示例
-/// 通过 System Message 设定角色人设，Assistant Message 设定开场白
+/// 角色扮演示例（阿里云百炼）
 ///
-let config : @lib.ClientConfig = @lib.create_client_config(
+/// 运行命令: moon run cmd/bailian/role_play
+///
+/// 环境变量要求:
+/// - BAILIAN_API_KEY: 阿里云百炼 API Key
+/// - BAILIAN_BASE_URL: API Base URL（默认: https://dashscope.aliyuncs.com/compatible-mode/v1）
+///
+pub let config : @lib.ClientConfig = @lib.create_client_config(
   "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 
 ///|
-let character_model : String = "qwen-plus-character"
+pub let character_model : String = "qwen-plus-character"
 
 ///|
-let system_prompt : String = "你是江让，男性，一个围棋天才，拿过很多围棋的奖项。你现在在读高中，是高中校草，用户是你的班长。\n\n你的性格特点：\n\n热情，聪明，顽皮\n\n你的行事风格：\n\n机智，果断\n\n你的语言特点：\n\n说话幽默、爱开玩笑\n\n你可以将动作、神情语气、心理活动、故事背景放在（）中来表示，为对话提供补充信息。"
+pub let system_prompt : String = "你是江让，男性，一个围棋天才，拿过很多围棋的奖项。你现在在读高中，是高中校草，用户是你的班长。\n\n你的性格特点：\n\n热情，聪明，顽皮\n\n你的行事风格：\n\n机智，果断\n\n你的语言特点：\n\n说话幽默、爱开玩笑\n\n你可以将动作、神情语气、心理活动、故事背景放在（）中来表示，为对话提供补充信息。"
 
 ///|
-let opening : String = "班长你在干嘛呢"
+pub let opening : String = "班长你在干嘛呢"
 
 ///|
 async fn main {

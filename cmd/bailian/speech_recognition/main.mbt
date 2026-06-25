@@ -1,15 +1,20 @@
 ///|
-/// Speech Recognition example (语音识别示例)
-/// Demonstrates non-realtime audio transcription (file-based)
+/// 语音识别示例（阿里云百炼）
+///
+/// 运行命令: moon run cmd/bailian/speech_recognition
+///
+/// 环境变量要求:
+/// - BAILIAN_API_KEY: 阿里云百炼 API Key
+/// - BAILIAN_BASE_URL: API Base URL（默认: https://dashscope.aliyuncs.com/compatible-mode/v1）
 ///
 
 ///|
-let config : @lib.ClientConfig = @lib.create_client_config(
+pub let config : @lib.ClientConfig = @lib.create_client_config(
   "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 
 ///|
-let sample_audio_url : String = "https://dashscope.oss-cn-beijing.aliyuncs.com/audios/welcome.mp3"
+pub let sample_audio_url : String = "https://dashscope.oss-cn-beijing.aliyuncs.com/audios/welcome.mp3"
 
 ///|
 async fn main {
@@ -18,10 +23,9 @@ async fn main {
   // Demo 1: 基础语音转写
   println("--- Demo 1: 基础语音转写 ---")
   try {
-    let result_url = @lib_speech_recognition.transcribe(
-      config,
-      [sample_audio_url],
-    )
+    let result_url = @lib_speech_recognition.transcribe(config, [
+      sample_audio_url,
+    ])
     println("转写完成！")
     println("结果URL: \{result_url}")
   } catch {
@@ -53,6 +57,8 @@ async fn main {
   println("  - 说话人分离 (diarization_enabled)")
   println("  - 多文件批量转写")
   println("")
-  println("注意: 实时语音识别使用 WebSocket 协议，需要额外实现")
+  println(
+    "注意: 实时语音识别使用 WebSocket 协议，需要额外实现",
+  )
   println("使用前请设置 BAILIAN_API_KEY 环境变量")
 }

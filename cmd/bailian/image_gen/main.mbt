@@ -1,10 +1,15 @@
 ///|
-/// Text-to-Image generation example
-/// 演示同步文生图（Wan2.7 / Qwen-Image）
+/// 图像生成示例（阿里云百炼）
+///
+/// 运行命令: moon run cmd/bailian/image_gen
+///
+/// 环境变量要求:
+/// - BAILIAN_API_KEY: 阿里云百炼 API Key
+/// - BAILIAN_BASE_URL: API Base URL（默认: https://dashscope.aliyuncs.com/compatible-mode/v1）
 ///
 
 ///|
-let config : @lib.ClientConfig = @lib.create_client_config(
+pub let config : @lib.ClientConfig = @lib.create_client_config(
   "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 

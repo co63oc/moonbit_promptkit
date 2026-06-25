@@ -1,11 +1,15 @@
 ///|
-/// Qwen-MT Translation example (通义千问翻译模型)
-/// 展示如何使用 Qwen-MT 模型进行机器翻译
-/// 支持 92 种语言互译,提供术语干预、领域提示等能力
+/// 机器翻译示例（阿里云百炼）
+///
+/// 运行命令: moon run cmd/bailian/translate
+///
+/// 环境变量要求:
+/// - BAILIAN_API_KEY: 阿里云百炼 API Key
+/// - BAILIAN_BASE_URL: API Base URL（默认: https://dashscope.aliyuncs.com/compatible-mode/v1）
 ///
 
 ///|
-let config : @lib.ClientConfig = @lib.create_client_config(
+pub let config : @lib.ClientConfig = @lib.create_client_config(
   "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 

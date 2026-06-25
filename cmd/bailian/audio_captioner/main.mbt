@@ -1,16 +1,19 @@
 ///|
-/// Qwen3-Omni-Captioner 音频理解示例
-/// 自动生成精准、全面的音频描述，支持语音、环境声、音乐、影视声效
+/// 音频理解示例（阿里云百炼）
 ///
-/// 注意：使用 OpenAI 兼容格式的 `input_audio`，不是 DashScope 原生的 `audio_url`
+/// 运行命令: moon run cmd/bailian/audio_captioner
 ///
-let config : @lib.ClientConfig = @lib.create_client_config(
+/// 环境变量要求:
+/// - BAILIAN_API_KEY: 阿里云百炼 API Key
+/// - BAILIAN_BASE_URL: API Base URL（默认: https://dashscope.aliyuncs.com/compatible-mode/v1）
+///
+pub let config : @lib.ClientConfig = @lib.create_client_config(
   "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 
 ///|
 /// Sample audio URL
-let sample_audio_url : String = "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20240916/xvappi/装修噪音.wav"
+pub let sample_audio_url : String = "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20240916/xvappi/装修噪音.wav"
 
 ///|
 async fn main {

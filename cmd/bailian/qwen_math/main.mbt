@@ -1,9 +1,13 @@
 ///|
-/// Qwen-Math 数学模型示例
-/// 专精于英文数学问题，支持 LaTeX 符号和公式
-/// 默认 temperature=0，结果输出在 \boxed{} 中
+/// 数学推理示例（阿里云百炼）
 ///
-let config : @lib.ClientConfig = @lib.create_client_config(
+/// 运行命令: moon run cmd/bailian/qwen_math
+///
+/// 环境变量要求:
+/// - BAILIAN_API_KEY: 阿里云百炼 API Key
+/// - BAILIAN_BASE_URL: API Base URL（默认: https://dashscope.aliyuncs.com/compatible-mode/v1）
+///
+pub let config : @lib.ClientConfig = @lib.create_client_config(
   "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 

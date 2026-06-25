@@ -1,21 +1,20 @@
 ///|
-/// Qianfan (千帆) text generation example - OpenAI compatible mode
-/// 百度千帆大模型平台文本生成示例（OpenAI 兼容模式）
+/// 文本生成示例（百度千帆）
 ///
-/// 环境变量设置:
-/// export QIANFAN_API_KEY=***
-/// export QIANFAN_MODEL=ernie-4.0-turbo-8k  (可选，默认 ernie-4.0-turbo-8k)
+/// 运行命令: moon run cmd/qianfan/chat
 ///
-/// API文档: https://cloud.baidu.com/doc/qianfan-api/s/3m7of64lb
+/// 环境变量要求:
+/// - QIANFAN_API_KEY: 百度千帆 API Key
+/// - QIANFAN_MODEL: 使用的模型（默认: ernie-4.0-turbo-8k）
 ///
 
 ///|
-let config : @lib.ClientConfig = @lib.create_client_config(
+pub let config : @lib.ClientConfig = @lib.create_client_config(
   "QIANFAN_API_KEY", "QIANFAN_BASE_URL", "https://qianfan.baidubce.com/v2",
 )
 
 ///|
-let model : String = @lib.get_env_var(
+pub let model : String = @lib.get_env_var(
   "QIANFAN_MODEL",
   Some("ernie-4.0-turbo-8k"),
 )

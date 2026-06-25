@@ -21,7 +21,11 @@ pub struct McpFunction {
 
 ///|
 /// Create an MCP tool
-pub fn mcp_tool(name : String, description : String, parameters : Json) -> McpTool {
+pub fn mcp_tool(
+  name : String,
+  description : String,
+  parameters : Json,
+) -> McpTool {
   let function = McpFunction::{ name, description, parameters }
   McpTool::{ type_: "function", function }
 }
@@ -43,14 +47,10 @@ pub async fn chat_with_mcp(
   }
 
   let url = "\{config.base_url}/chat/completions"
-  let (response, body) = @http.post(
-    url,
-    request.to_json(),
-    headers={
-      "Authorization": "Bearer \{config.api_key}",
-      "Content-Type": "application/json",
-    },
-  )
+  let (response, body) = @http.post(url, request.to_json(), headers={
+    "Authorization": "Bearer \{config.api_key}",
+    "Content-Type": "application/json",
+  })
   guard response.code is (200..=299) else {
     let error_text = body.text()
     fail(

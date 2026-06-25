@@ -28,3 +28,7 @@ cmd/
 所有平台均支持 OpenAI 兼容接口，配置对应的 API Key 和 Base URL 即可使用。
 
 如有其他兼容 OpenAI 的接口，可修改对应平台的环境变量为相应值。
+
+## 文档生成
+
+本项目使用 `moon doc` 生成文档，由于当前版本的 `moon doc` 仍需要 `moon.mod.json` 才能运行，因此仓库中同时保留了新格式的 `moon.mod` 和旧格式的 `moon.mod.json`（二者内容保持一致）。

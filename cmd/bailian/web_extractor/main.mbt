@@ -1,10 +1,15 @@
 ///|
-/// Web Extractor example (网页提取示例)
-/// Demonstrates web page content extraction using search_strategy=agent_max
+/// 网页提取示例（阿里云百炼）
+///
+/// 运行命令: moon run cmd/bailian/web_extractor
+///
+/// 环境变量要求:
+/// - BAILIAN_API_KEY: 阿里云百炼 API Key
+/// - BAILIAN_BASE_URL: API Base URL（默认: https://dashscope.aliyuncs.com/compatible-mode/v1）
 ///
 
 ///|
-let config : @lib.ClientConfig = @lib.create_client_config(
+pub let config : @lib.ClientConfig = @lib.create_client_config(
   "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 
@@ -15,9 +20,7 @@ async fn main {
   // 示例1: 提取并总结网页内容
   println("【示例1: 提取并总结网页内容】")
   let question1 = "请访问阿里云百炼代码解释器部分的官方文档，并总结主要内容"
-  let messages1 : Array[@lib.Message] = [
-    @lib.user_message_with_text(question1),
-  ]
+  let messages1 : Array[@lib.Message] = [@lib.user_message_with_text(question1)]
   println("用户: \{question1}")
   println("\n助手: ")
 
@@ -42,9 +45,7 @@ async fn main {
   // 示例2: 提取特定网页信息
   println("\n\n【示例2: 提取特定网页信息】")
   let question2 = "请访问 https://help.aliyun.com/zh/model-studio/ 获取百炼平台的最新功能介绍"
-  let messages2 : Array[@lib.Message] = [
-    @lib.user_message_with_text(question2),
-  ]
+  let messages2 : Array[@lib.Message] = [@lib.user_message_with_text(question2)]
   println("用户: \{question2}")
   println("\n助手: ")
 
@@ -52,9 +53,7 @@ async fn main {
     config,
     "qwen3.7-max",
     messages2,
-    fn(text) {
-      println(text)
-    },
+    fn(text) { println(text) },
   )
 
   println("\n\n=== 完整回复 ===")

@@ -1,9 +1,15 @@
 ///|
-/// Kimi (Moonshot AI) chat example
+/// 简单对话示例（Moonshot）
+///
+/// 运行命令: moon run cmd/moonshot/chat
+///
+/// 环境变量要求:
+/// - MOONSHOT_API_KEY: Moonshot AI API Key
+/// - MOONSHOT_BASE_URL: API Base URL（默认: https://api.moonshot.cn/v1）
 ///
 
 ///|
-let config : @lib.ClientConfig = @lib.create_client_config(
+pub let config : @lib.ClientConfig = @lib.create_client_config(
   "MOONSHOT_API_KEY", "MOONSHOT_BASE_URL", "https://api.moonshot.cn/v1",
 )
 

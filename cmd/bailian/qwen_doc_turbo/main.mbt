@@ -1,16 +1,21 @@
 ///|
-/// Qwen-Doc-Turbo 数据挖掘模型示例
-/// 专门针对信息抽取、内容审核、分类打标和摘要生成任务
+/// 数据挖掘示例（阿里云百炼）
 ///
-let config : @lib.ClientConfig = @lib.create_client_config(
+/// 运行命令: moon run cmd/bailian/qwen_doc_turbo
+///
+/// 环境变量要求:
+/// - BAILIAN_API_KEY: 阿里云百炼 API Key
+/// - BAILIAN_BASE_URL: API Base URL（默认: https://dashscope.aliyuncs.com/compatible-mode/v1）
+///
+pub let config : @lib.ClientConfig = @lib.create_client_config(
   "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 
 ///|
-let doc_model : String = "qwen-doc-turbo"
+pub let doc_model : String = "qwen-doc-turbo"
 
 ///|
-let sample_doc : String = "智能办公产品手册 版本：V2.0 发布日期：2024年1月\n\n1.1 产品概述\nPRO-100 智能打印机，价格 8999 元\nPRO-200 智能扫描仪，价格 12999 元\nSEC-400 智能访客系统，价格 9999 元\nSEC-500 智能停车管理，价格 22999 元"
+pub let sample_doc : String = "智能办公产品手册 版本：V2.0 发布日期：2024年1月\n\n1.1 产品概述\nPRO-100 智能打印机，价格 8999 元\nPRO-200 智能扫描仪，价格 12999 元\nSEC-400 智能访客系统，价格 9999 元\nSEC-500 智能停车管理，价格 22999 元"
 
 ///|
 async fn main {

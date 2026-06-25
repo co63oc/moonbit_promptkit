@@ -24,7 +24,9 @@ pub async fn submit_background(
   size? : String,
 ) -> String {
   // 手动构建 input JSON，避免 None 字段被序列化为 null
-  let input_fields : Array[(String, Json)] = [("base_image_url", base_image_url.to_json())]
+  let input_fields : Array[(String, Json)] = [
+    ("base_image_url", base_image_url.to_json()),
+  ]
   match ref_prompt {
     Some(v) => input_fields.push(("ref_prompt", v.to_json()))
     None => ()
@@ -73,7 +75,9 @@ pub async fn submit_background(
   )
   guard response.code is (200..=299) else {
     let error_body = resp_body.text()
-    fail("Background gen submit failed: \{response.code} \{response.reason}\n\{error_body}")
+    fail(
+      "Background gen submit failed: \{response.code} \{response.reason}\n\{error_body}",
+    )
   }
   let resp : Json = @json.from_json(resp_body.json())
   extract_task_id(resp)

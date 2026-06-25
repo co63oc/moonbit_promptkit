@@ -1,10 +1,15 @@
 ///|
-/// Image Search example (图搜图示例)
-/// Demonstrates searching similar images by image URL using Responses API
+/// 图搜图示例（阿里云百炼）
+///
+/// 运行命令: moon run cmd/bailian/image_search
+///
+/// 环境变量要求:
+/// - BAILIAN_API_KEY: 阿里云百炼 API Key
+/// - BAILIAN_BASE_URL: API Base URL（默认: https://dashscope.aliyuncs.com/compatible-mode/v1）
 ///
 
 ///|
-let config : @lib.ClientConfig = @lib.create_client_config(
+pub let config : @lib.ClientConfig = @lib.create_client_config(
   "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 
@@ -15,11 +20,16 @@ async fn main {
   // 示例图片 URL
   let image_url = "https://img.alicdn.com/imgextra/i4/O1CN01YbrnSS1qtmsAkw0Ud_!!6000000005554-2-tps-788-450.png"
   let query = "找与这张图相似风格的风景图"
-  
+
   println("输入图片: \{image_url}")
   println("搜索描述: \{query}\n")
 
-  let response = @lib.image_search(config, "qwen3.7-plus", image_url, Some(query))
+  let response = @lib.image_search(
+    config,
+    "qwen3.7-plus",
+    image_url,
+    Some(query),
+  )
 
   // 输出搜索结果
   println("=== 搜索结果 ===")

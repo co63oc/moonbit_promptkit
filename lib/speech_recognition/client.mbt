@@ -53,15 +53,11 @@ pub async fn submit_transcription(
   }
 
   let url = "https://dashscope.aliyuncs.com/api/v1/services/audio/asr/transcription"
-  let (response, body) = @http.post(
-    url,
-    request.to_json(),
-    headers={
-      "Authorization": "Bearer \{config.api_key}",
-      "Content-Type": "application/json",
-      "X-DashScope-Async": "enable",
-    },
-  )
+  let (response, body) = @http.post(url, request.to_json(), headers={
+    "Authorization": "Bearer \{config.api_key}",
+    "Content-Type": "application/json",
+    "X-DashScope-Async": "enable",
+  })
   guard response.code is (200..=299) else {
     let error_text = body.text()
     fail(
@@ -131,6 +127,8 @@ pub async fn query_transcription_task(
 }
 
 // Internal helpers
+
+///|
 fn extract_task_id(resp : Json) -> String {
   match resp {
     Json::Object(obj) =>
@@ -146,6 +144,7 @@ fn extract_task_id(resp : Json) -> String {
   }
 }
 
+///|
 fn extract_status(resp : Json) -> String {
   match resp {
     Json::Object(obj) =>
@@ -161,6 +160,7 @@ fn extract_status(resp : Json) -> String {
   }
 }
 
+///|
 fn extract_result_url(resp : Json) -> String {
   match resp {
     Json::Object(obj) =>

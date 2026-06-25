@@ -1,10 +1,15 @@
 ///|
-/// 语音合成 (TTS) 示例
-/// 展示 CosyVoice、Qwen-TTS、MiniMax 语音合成，以及声音复刻、声音设计、SSML 等功能
+/// 语音合成示例（阿里云百炼）
+///
+/// 运行命令: moon run cmd/bailian/tts
+///
+/// 环境变量要求:
+/// - DASHSCOPE_API_KEY: 阿里云百炼 API Key
+/// - DASHSCOPE_BASE_URL: API Base URL（默认: https://dashscope.aliyuncs.com/api/v1）
 ///
 
 ///|
-let config : @lib.ClientConfig = @lib.create_client_config(
+pub let config : @lib.ClientConfig = @lib.create_client_config(
   "DASHSCOPE_API_KEY", "DASHSCOPE_BASE_URL", "https://dashscope.aliyuncs.com/api/v1",
 )
 

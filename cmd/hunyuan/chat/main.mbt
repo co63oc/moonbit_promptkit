@@ -1,9 +1,15 @@
 ///|
-/// Entry point for tokenhub chat example
+/// 简单对话示例（腾讯混元）
+///
+/// 运行命令: moon run cmd/hunyuan/chat
+///
+/// 环境变量要求:
+/// - HUNYUAN_API_KEY: 腾讯混元 API Key
+/// - HUNYUAN_BASE_URL: API Base URL（默认: https://tokenhub.tencentmaas.com/v1）
 ///
 
 ///|
-let config : @lib.ClientConfig = @lib.create_client_config(
+pub let config : @lib.ClientConfig = @lib.create_client_config(
   "HUNYUAN_API_KEY", "HUNYUAN_BASE_URL", "https://tokenhub.tencentmaas.com/v1",
 )
 

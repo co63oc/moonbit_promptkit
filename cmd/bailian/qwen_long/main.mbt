@@ -1,13 +1,18 @@
 ///|
-/// Qwen-Long 超长文档推理示例
-/// 支持上传文件（fileid://）或直接传入文档文本
+/// 长文档推理示例（阿里云百炼）
 ///
-let config : @lib.ClientConfig = @lib.create_client_config(
+/// 运行命令: moon run cmd/bailian/qwen_long
+///
+/// 环境变量要求:
+/// - BAILIAN_API_KEY: 阿里云百炼 API Key
+/// - BAILIAN_BASE_URL: API Base URL（默认: https://dashscope.aliyuncs.com/compatible-mode/v1）
+///
+pub let config : @lib.ClientConfig = @lib.create_client_config(
   "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 
 ///|
-let model : String = @lib_ql.default_model
+pub let model : String = @lib_ql.default_model
 
 ///|
 /// 创建示例文档
@@ -93,9 +98,7 @@ async fn main {
   // Demo 4: 上传文件后通过 fileid:// 进行问答
   println("--- Demo 4: 上传文件并使用 fileid ---")
   println("上传示例文档...")
-  let upload_result = @lib_ql.upload_file(
-    config, "moonbit_doc.txt", doc_text,
-  )
+  let upload_result = @lib_ql.upload_file(config, "moonbit_doc.txt", doc_text)
   println("文件上传成功!")
   println("File ID: \{upload_result.id}")
   match upload_result.filename {

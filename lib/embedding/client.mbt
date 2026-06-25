@@ -171,7 +171,10 @@ async fn rerank_impl(
   }
 
   // Rerank uses compatible-api/v1, not compatible-mode/v1
-  let base_url = config.base_url.replace(old="compatible-mode", new="compatible-api")
+  let base_url = config.base_url.replace(
+    old="compatible-mode",
+    new="compatible-api",
+  )
   let url = "\{base_url}/reranks"
   let (response, body) = @http.post(url, request.to_json(), headers={
     "Authorization": "Bearer \{config.api_key}",

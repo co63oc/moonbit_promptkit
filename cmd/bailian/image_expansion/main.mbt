@@ -4,7 +4,7 @@
 ///
 
 ///|
-let config : @lib.ClientConfig = @lib.create_client_config(
+pub let config : @lib.ClientConfig = @lib.create_client_config(
   "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
 )
 
@@ -42,12 +42,7 @@ async fn main {
   // Demo 2: 便捷函数
   println("2. 便捷函数 expand_easy (1.5x)")
   try {
-    let urls = @lib_ix.expand_easy(
-      config,
-      image_url,
-      x_scale=1.5,
-      y_scale=1.5,
-    )
+    let urls = @lib_ix.expand_easy(config, image_url, x_scale=1.5, y_scale=1.5)
     println("扩展成功！共 \{urls.length()} 张图片")
     for url in urls {
       println("  URL: \{url}")

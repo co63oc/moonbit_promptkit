@@ -11,15 +11,27 @@ pub let default_model : String = "wanx2.1-vace-plus"
 ///|
 /// Video editing function names
 pub let image_reference_fn : String = "image_reference"
+
+///|
 pub let video_repainting_fn : String = "video_repainting"
+
+///|
 pub let local_editing_fn : String = "local_editing"
+
+///|
 pub let video_extension_fn : String = "video_extension"
 
 ///|
 /// Control condition names
 pub let pose_body_face : String = "posebodyface"
+
+///|
 pub let pose_body : String = "posebody"
+
+///|
 pub let depth_condition : String = "depth"
+
+///|
 pub let scribble_condition : String = "scribble"
 
 ///|
@@ -78,15 +90,11 @@ pub async fn submit_image_reference(
   }
 
   let url = "https://dashscope.aliyuncs.com/api/v1/services/aigc/video-generation/video-synthesis"
-  let (response, body) = @http.post(
-    url,
-    request.to_json(),
-    headers={
-      "Authorization": "Bearer \{config.api_key}",
-      "Content-Type": "application/json",
-      "X-DashScope-Async": "enable",
-    },
-  )
+  let (response, body) = @http.post(url, request.to_json(), headers={
+    "Authorization": "Bearer \{config.api_key}",
+    "Content-Type": "application/json",
+    "X-DashScope-Async": "enable",
+  })
   guard response.code is (200..=299) else {
     let error_text = body.text()
     fail(
@@ -131,15 +139,11 @@ pub async fn submit_video_repainting(
   }
 
   let url = "https://dashscope.aliyuncs.com/api/v1/services/aigc/video-generation/video-synthesis"
-  let (response, body) = @http.post(
-    url,
-    request.to_json(),
-    headers={
-      "Authorization": "Bearer \{config.api_key}",
-      "Content-Type": "application/json",
-      "X-DashScope-Async": "enable",
-    },
-  )
+  let (response, body) = @http.post(url, request.to_json(), headers={
+    "Authorization": "Bearer \{config.api_key}",
+    "Content-Type": "application/json",
+    "X-DashScope-Async": "enable",
+  })
   guard response.code is (200..=299) else {
     let error_text = body.text()
     fail(
@@ -161,7 +165,13 @@ pub async fn image_reference(
   poll_interval_ms? : Int,
   max_attempts? : Int,
 ) -> String {
-  let task_id = submit_image_reference(config, prompt, ref_images, obj_or_bg, size?)
+  let task_id = submit_image_reference(
+    config,
+    prompt,
+    ref_images,
+    obj_or_bg,
+    size?,
+  )
   let interval = poll_interval_ms.unwrap_or(15000)
   let max = max_attempts.unwrap_or(40)
   let mut attempt = 0
@@ -240,6 +250,8 @@ pub async fn query_vace_task(
 }
 
 // Internal helpers
+
+///|
 fn extract_task_id(resp : Json) -> String {
   match resp {
     Json::Object(obj) =>
@@ -255,6 +267,7 @@ fn extract_task_id(resp : Json) -> String {
   }
 }
 
+///|
 fn extract_status(resp : Json) -> String {
   match resp {
     Json::Object(obj) =>
@@ -270,6 +283,7 @@ fn extract_status(resp : Json) -> String {
   }
 }
 
+///|
 fn extract_video_url(resp : Json) -> String {
   match resp {
     Json::Object(obj) =>
