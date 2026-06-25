@@ -1,6 +1,6 @@
 name = "co63oc/moonbit_promptkit"
 
-version = "0.1.1"
+version = "0.1.2"
 
 import {
   "moonbitlang/async@0.19.1",
@@ -15,6 +15,6 @@ license = "Apache-2.0"
 
 keywords = [ ]
 
-description = "MoonBit 实现的 AI 大模型 SDK 示例，支持多个平台。"
+description = "The MoonBit-implemented AI model SDK supports OpenAI compatible interfaces and is compatible with multiple platforms."
 
 preferred_target = "native"
