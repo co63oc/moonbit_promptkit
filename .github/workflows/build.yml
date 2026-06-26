@@ -14,4 +14,4 @@ jobs:
       uses: ./.github/actions/install-moonbit
 
     - name: Run moon build
-      run: moon build
+      run: moon update && moon build
