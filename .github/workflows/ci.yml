@@ -8,18 +8,8 @@ on:
 
 jobs:
   check:
-    runs-on: ubuntu-latest
+    uses: ./.github/workflows/check.yml
 
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Install MoonBit
-      run: |
-        curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
-        echo "$HOME/.moon/bin" >> $GITHUB_PATH
-
-    - name: Run moon update
-      run: moon update
-
-    - name: Run moon check
-      run: moon check
+  build:
+    needs: check
+    uses: ./.github/workflows/build.yml

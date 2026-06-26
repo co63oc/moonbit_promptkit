@@ -1,0 +1,11 @@
+name: 'Install MoonBit'
+description: 'Install MoonBit CLI'
+
+runs:
+  using: 'composite'
+  steps:
+    - name: Install MoonBit
+      run: |
+        curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+        echo "$HOME/.moon/bin" >> $GITHUB_PATH
+      shell: bash
