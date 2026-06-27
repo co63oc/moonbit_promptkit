@@ -1,0 +1,3 @@
+import {
+  "co63oc/moonbit_promptkit/lib" @promptkit,
+} for "test"

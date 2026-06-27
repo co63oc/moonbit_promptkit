@@ -1,0 +1,17 @@
+name: CI-test
+
+on:
+  workflow_call:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v4
+
+    - name: Install MoonBit
+      uses: ./.github/actions/install-moonbit
+
+    - name: Run moon test
+      run: moon update && moon test

@@ -13,3 +13,7 @@ jobs:
   build:
     needs: check
     uses: ./.github/workflows/build.yml
+
+  test:
+    needs: check
+    uses: ./.github/workflows/test.yml
