@@ -1,6 +1,6 @@
 # co63oc/moonbit_promptkit
 
-MoonBit 实现的 AI 大模型 SDK 示例，支持多个平台。
+MoonBit 实现的 AI 大模型 SDK，附带多平台调用示例。
 
 ## 支持的 API 平台
 
