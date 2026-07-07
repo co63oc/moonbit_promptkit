@@ -1,0 +1,20 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  check:
+    uses: ./.github/workflows/check.yml
+
+  build:
+    needs: check
+    uses: ./.github/workflows/build.yml
+
+  test:
+    needs: check
+    uses: ./.github/workflows/test.yml
+~                                         
