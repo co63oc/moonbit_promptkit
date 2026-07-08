@@ -2,25 +2,30 @@
 /// 文本生成示例（百度千帆）
 ///
 /// 运行命令: moon run cmd/qianfan/chat
+/// 接口文档: https://cloud.baidu.com/doc/qianfan-api/s/3m7of64lb
 ///
 /// 环境变量要求:
 /// - QIANFAN_API_KEY: 百度千帆 API Key
-/// - QIANFAN_MODEL: 使用的模型（默认: ernie-4.0-turbo-8k）
+/// - QIANFAN_MODEL: 使用的模型（默认: ernie-4.5-turbo-32k）
 ///
 
 ///|
-pub let config : @lib.ClientConfig = @lib.create_client_config(
-  "QIANFAN_API_KEY", "QIANFAN_BASE_URL", "https://qianfan.baidubce.com/v2",
-)
-
-///|
-pub let model : String = @lib.get_env_var(
-  "QIANFAN_MODEL",
-  Some("ernie-4.0-turbo-8k"),
-)
+let mock_body = "{\"id\": \"as-cd5j7pxiw9\", \"object\": \"chat.completion\", \"created\": 1783502150, \"model\": \"ernie-4.5-turbo-32k\", \"choices\": [{\"index\": 0, \"message\": {\"role\": \"assistant\", \"content\": \"你好！我是文心一言，英文名是ERNIE Bot，是百度研发的知识增强大语言模型。我能够与人对话互动，回答问题，协助创作，高效便捷地帮助人们获取信息、知识和灵感。如果你有任何问题，都可以随时告诉我。\"}, \"finish_reason\": \"stop\", \"flag\": 0}], \"usage\": {\"prompt_tokens\": 6, \"completion_tokens\": 50, \"total_tokens\": 56, \"prompt_tokens_details\": {\"cached_tokens\": 4}}}"
 
 ///|
 async fn main {
+  let api_key = @lib.get_env_var("QIANFAN_API_KEY", Some(""))
+  let base_url = @lib.get_env_var(
+    "QIANFAN_BASE_URL",
+    Some("https://qianfan.baidubce.com/v2"),
+  )
+  let config = @lib.make_client_config(
+    api_key,
+    base_url,
+    mock_body=Some(mock_body),
+  )
+  let model = @lib.get_env_var("QIANFAN_MODEL", Some("ernie-4.5-turbo-32k"))
+
   println("=== 百度千帆文本生成示例 (OpenAI 兼容模式) ===\n")
 
   // 示例1: 简单对话

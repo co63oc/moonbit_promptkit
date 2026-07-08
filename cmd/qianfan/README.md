@@ -6,7 +6,7 @@
 
 ```bash
 export QIANFAN_API_KEY=***
-export QIANFAN_MODEL=ernie-4.0-turbo-8k  # 可选，默认 ernie-4.0-turbo-8k
+export QIANFAN_MODEL=ernie-4.5-turbo-32k  # 可选，默认 ernie-4.5-turbo-32k
 ```
 
 API Key 获取地址：https://console.bce.baidu.com/qianfan/ais/console/applicationList/application
@@ -19,11 +19,9 @@ API Key 获取地址：https://console.bce.baidu.com/qianfan/ais/console/applica
 
 ## 支持的模型
 
-常用模型：
-- `ernie-4.0-turbo-8k`
-- `ernie-4.0-8k`
-- `ernie-3.5-8k`
-- `ernie-speed-8k`
+常用模型（具体可用模型请通过 API 查询）：
+- `ernie-4.5-turbo-32k`（推荐）
+- `ernie-4.5-turbo-128k`
 
 ## API 文档参考
 
@@ -38,7 +36,7 @@ API Key 获取地址：https://console.bce.baidu.com/qianfan/ais/console/applica
 ```bash
 # 配置环境变量
 export QIANFAN_API_KEY=***
-export QIANFAN_MODEL=ernie-4.0-turbo-8k
+export QIANFAN_MODEL=ernie-4.5-turbo-32k
 
 # 运行示例
 moon run cmd/qianfan/chat

@@ -25,8 +25,10 @@ cmd/
 
 ## 环境变量
 
-SDK 在运行时会从环境变量读取 API Key（通过 `get_env_var` 读取，缺失则报错退出），
-不同模块使用各自独立的环境变量。**运行对应示例前必须先设置所属模块的 API Key 环境变量**。
+SDK 在运行时会从环境变量读取 API Key。不同模块使用各自独立的环境变量。
+
+- **设置了 API Key**：正常调用真实 API 接口。
+- **API Key 为空**：使用内置的 mock 数据返回，无需联网即可运行示例、查看效果。适合快速体验、测试和 CI 环境。
 
 | 模块 / 平台 | 所需 API Key 环境变量 | 说明 |
 |-------------|----------------------|------|
@@ -66,8 +68,8 @@ QIANFAN_API_KEY="..." moon run cmd/qianfan/chat
 ```
 
 > 提示：`lib` 核心库本身不直接硬编码任何 API Key 变量名，所有变量名由各 `cmd/*`
-> 示例在调用 `create_client_config(api_key_env, base_url_env, default_base_url)`
-> 时传入。如需新增兼容 OpenAI 的平台，只需在对应示例中修改这两个环境变量名即可。
+> 示例在调用 `make_client_config` 时传入。如需新增兼容 OpenAI 的平台，只需在对应示例中修改环境变量名即可。
+> 各示例已内置 mock 数据，无需 API Key 即可直接运行查看效果。
 
 ## 通用说明
 
