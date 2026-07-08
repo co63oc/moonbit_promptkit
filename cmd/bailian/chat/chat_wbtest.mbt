@@ -71,8 +71,7 @@ async test "bailian chat mock multi-turn" {
   let cfg = @lib.make_client_config(
     "dummy-key", "https://dashscope.aliyuncs.com/compatible-mode/v1",
   )
-  let body =
-    "{\"choices\":[{\"message\":{\"role\":\"assistant\",\"content\":\"再次问好!\"}}],\"usage\":null}"
+  let body = "{\"choices\":[{\"message\":{\"role\":\"assistant\",\"content\":\"再次问好!\"}}],\"usage\":null}"
   @lib.test_install_mock(200, "OK", body)
   try {
     let msg = @lib.chat(cfg, "qwen3.7-plus", [
