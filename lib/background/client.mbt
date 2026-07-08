@@ -23,6 +23,13 @@ pub async fn submit_background(
   n? : Int,
   size? : String,
 ) -> String {
+  match @lib.try_mock(config) {
+    Some(body) => {
+      let resp : Json = @json.from_json(@json.parse(body))
+      return extract_task_id(resp)
+    }
+    None => ignore(())
+  }
   // 手动构建 input JSON，避免 None 字段被序列化为 null
   let input_fields : Array[(String, Json)] = [
     ("base_image_url", base_image_url.to_json()),

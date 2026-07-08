@@ -20,6 +20,17 @@ pub async fn translate(
   source_lang : String,
   target_lang : String,
 ) -> String {
+  match @lib.try_mock(config) {
+    Some(body) => {
+      let resp : @lib.Response = @json.from_json(@json.parse(body))
+      if resp.choices.length() == 0 {
+        fail("No translation result")
+      } else {
+        return @lib.extract_text_from_content(resp.choices[0].message.content)
+      }
+    }
+    None => ignore(())
+  }
   let messages : Array[@lib.Message] = [@lib.user_message_with_text(text)]
   let translation_options = TranslationOptions::{
     source_lang,
@@ -62,6 +73,17 @@ pub async fn translate_with_model(
   target_lang : String,
   model : String,
 ) -> String {
+  match @lib.try_mock(config) {
+    Some(body) => {
+      let resp : @lib.Response = @json.from_json(@json.parse(body))
+      if resp.choices.length() == 0 {
+        fail("No translation result")
+      } else {
+        return @lib.extract_text_from_content(resp.choices[0].message.content)
+      }
+    }
+    None => ignore(())
+  }
   let messages : Array[@lib.Message] = [@lib.user_message_with_text(text)]
   let translation_options = TranslationOptions::{
     source_lang,
@@ -106,6 +128,17 @@ pub async fn translate_with_terms(
   target_lang : String,
   terms : Array[TranslationTerm],
 ) -> String {
+  match @lib.try_mock(config) {
+    Some(body) => {
+      let resp : @lib.Response = @json.from_json(@json.parse(body))
+      if resp.choices.length() == 0 {
+        fail("No translation result")
+      } else {
+        return @lib.extract_text_from_content(resp.choices[0].message.content)
+      }
+    }
+    None => ignore(())
+  }
   let messages : Array[@lib.Message] = [@lib.user_message_with_text(text)]
   let translation_options = TranslationOptions::{
     source_lang,
@@ -150,6 +183,17 @@ pub async fn translate_with_domain(
   target_lang : String,
   domain : String,
 ) -> String {
+  match @lib.try_mock(config) {
+    Some(body) => {
+      let resp : @lib.Response = @json.from_json(@json.parse(body))
+      if resp.choices.length() == 0 {
+        fail("No translation result")
+      } else {
+        return @lib.extract_text_from_content(resp.choices[0].message.content)
+      }
+    }
+    None => ignore(())
+  }
   let messages : Array[@lib.Message] = [@lib.user_message_with_text(text)]
   let translation_options = TranslationOptions::{
     source_lang,
@@ -194,6 +238,13 @@ pub async fn translate_stream(
   target_lang : String,
   on_delta : (String) -> Unit,
 ) -> String {
+  match @lib.try_mock(config) {
+    Some(body) => {
+      on_delta(body)
+      return body
+    }
+    None => ignore(())
+  }
   let messages : Array[@lib.Message] = [@lib.user_message_with_text(text)]
   let translation_options = TranslationOptions::{
     source_lang,

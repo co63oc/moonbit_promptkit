@@ -2,6 +2,7 @@
 /// 语音识别示例（阿里云百炼）
 ///
 /// 运行命令: moon run cmd/bailian/speech_recognition
+/// 接口文档: https://help.aliyun.com/zh/model-studio/non-realtime-speech-recognition-user-guide
 ///
 /// 环境变量要求:
 /// - BAILIAN_API_KEY: 阿里云百炼 API Key
@@ -9,8 +10,22 @@
 ///
 
 ///|
-pub let config : @lib.ClientConfig = @lib.create_client_config(
-  "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
+let api_key : String = @lib.get_env_var("BAILIAN_API_KEY", Some(""))
+
+///|
+let base_url : String = @lib.get_env_var(
+  "BAILIAN_BASE_URL",
+  Some("https://dashscope.aliyuncs.com/compatible-mode/v1"),
+)
+
+///|
+let mock_body = "{\"request_id\":\"135a7732-4a41-9aaf-a76f-b338e1a7bbe4\",\"output\":{\"task_id\":\"0f993915-2590-4143-ac62-2eacb01f6815\",\"task_status\":\"PENDING\"}}"
+
+///|
+let config : @lib.ClientConfig = @lib.make_client_config(
+  api_key,
+  base_url,
+  mock_body=Some(mock_body),
 )
 
 ///|
@@ -26,7 +41,6 @@ async fn main {
     let result_url = @lib_speech_recognition.transcribe(config, [
       sample_audio_url,
     ])
-    println("转写完成！")
     println("结果URL: \{result_url}")
   } catch {
     e => println("转写失败: \{e}")
@@ -42,7 +56,6 @@ async fn main {
       diarization_enabled=true,
       speaker_count=2,
     )
-    println("转写完成！")
     println("结果URL: \{result_url}")
   } catch {
     e => println("转写失败: \{e}")

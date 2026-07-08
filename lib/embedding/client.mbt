@@ -79,6 +79,10 @@ async fn create_embeddings_impl(
   model : String,
   dimensions : Int?,
 ) -> TextEmbeddingResponse {
+  match @lib.try_mock(config) {
+    Some(body) => return @json.parse(body) |> @json.from_json()
+    None => ignore(())
+  }
   let input = if texts.length() == 1 {
     TextEmbeddingInput::Single(texts[0])
   } else {
@@ -162,6 +166,10 @@ async fn rerank_impl(
   top_n : Int?,
   return_documents : Bool?,
 ) -> RerankResponse {
+  match @lib.try_mock(config) {
+    Some(body) => return @json.parse(body) |> @json.from_json()
+    None => ignore(())
+  }
   let request = RerankRequest::{
     model,
     query,

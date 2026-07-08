@@ -1,11 +1,26 @@
 ///|
 /// Video generation and 3D generation example (视频生成与3D生成示例)
+/// 接口文档: https://help.aliyun.com/zh/model-studio/text-to-video-guide
 /// 展示图生视频、参考生视频、视频编辑、3D生成等功能
 ///
 
 ///|
-pub let config : @lib.ClientConfig = @lib.create_client_config(
-  "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
+let api_key : String = @lib.get_env_var("BAILIAN_API_KEY", Some(""))
+
+///|
+let base_url : String = @lib.get_env_var(
+  "BAILIAN_BASE_URL",
+  Some("https://dashscope.aliyuncs.com/compatible-mode/v1"),
+)
+
+///|
+let mock_body = "{\"request_id\":\"b5d80347-8716-9aad-883f-f0773944d79d\",\"output\":{\"task_id\":\"b9c0b7ff-6aa2-4789-944d-922d5e6a3266\",\"task_status\":\"PENDING\"}}"
+
+///|
+let config : @lib.ClientConfig = @lib.make_client_config(
+  api_key,
+  base_url,
+  mock_body=Some(mock_body),
 )
 
 ///|

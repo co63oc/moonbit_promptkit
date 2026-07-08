@@ -40,6 +40,13 @@ pub async fn submit_expansion(
   x_scale? : Double,
   y_scale? : Double,
 ) -> String {
+  match @lib.try_mock(config) {
+    Some(body) => {
+      let resp : Json = @json.from_json(@json.parse(body))
+      return extract_task_id(resp)
+    }
+    None => ignore(())
+  }
   let request = ExpansionRequest::{
     model,
     input: ExpansionInput::{ image_url, },

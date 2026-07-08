@@ -27,6 +27,13 @@ pub async fn edit_image(
   size? : String,
   prompt_extend? : Bool,
 ) -> Array[String] {
+  match @lib.try_mock(config) {
+    Some(body) => {
+      let resp : EditResponse = @json.from_json(@json.parse(body))
+      return extract_edit_urls(resp)
+    }
+    None => ignore(())
+  }
   let content : Array[Json] = []
   // Add text prompt
   let text_item = TextItem::{ text: prompt }

@@ -40,6 +40,13 @@ pub async fn submit_transcription(
   diarization_enabled? : Bool,
   speaker_count? : Int,
 ) -> String {
+  match @lib.try_mock(config) {
+    Some(body) => {
+      let resp : Json = @json.from_json(@json.parse(body))
+      return extract_task_id(resp)
+    }
+    None => ignore(())
+  }
   let input = TranscriptionInput::{ file_urls, language_hints }
   let parameters = TranscriptionParams::{
     diarization_enabled,

@@ -1,11 +1,26 @@
 ///|
 /// Image editing example
+/// 接口文档: https://help.aliyun.com/zh/model-studio/qwen-image-edit-guide
 /// 演示图像编辑（Qwen-Image-Edit）
 ///
 
 ///|
-pub let config : @lib.ClientConfig = @lib.create_client_config(
-  "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
+let api_key : String = @lib.get_env_var("BAILIAN_API_KEY", Some(""))
+
+///|
+let base_url : String = @lib.get_env_var(
+  "BAILIAN_BASE_URL",
+  Some("https://dashscope.aliyuncs.com/compatible-mode/v1"),
+)
+
+///|
+let mock_body = "{\"output\":{\"choices\":[{\"finish_reason\":\"stop\",\"message\":{\"content\":[{\"image\":\"https://dashscope-7c2c.oss-accelerate.aliyuncs.com/1d/f4/20260708/d689c36f/df9d74d7-14b4-4abd-99d1-edad10a42346_0.png?Expires=1783586372&OSSAccessKeyId=LTAI5tPxpiCM2hjmWrFXrym1&Signature=Lo715X0KQWKgzCjdz53xv0dTacM%3D\",\"type\":\"image\"}],\"role\":\"assistant\"}}],\"finished\":true},\"usage\":{\"image_count\":1,\"input_tokens\":25,\"output_tokens\":2,\"size\":\"1024*1024\",\"total_tokens\":27},\"request_id\":\"0422e57c-b7aa-9988-9cde-bb4dc58fdf4f\"}"
+
+///|
+let config : @lib.ClientConfig = @lib.make_client_config(
+  api_key,
+  base_url,
+  mock_body=Some(mock_body),
 )
 
 ///|
@@ -30,7 +45,6 @@ async fn main {
       n=1,
       size="1024*1024",
     )
-    println("编辑成功！共 \{urls.length()} 张图片")
     for url in urls {
       println("  URL: \{url}")
     }
@@ -45,7 +59,6 @@ async fn main {
   println("指令: \{prompt2}")
   try {
     let urls = @lib_ie.edit_easy(config, prompt2, image_url)
-    println("编辑成功！共 \{urls.length()} 张图片")
     for url in urls {
       println("  URL: \{url}")
     }
@@ -66,7 +79,6 @@ async fn main {
     let urls = @lib_ie.edit_with_refs(
       config, @lib_ie.default_model, prompt3, ref_url, edit_url,
     )
-    println("编辑成功！共 \{urls.length()} 张图片")
     for url in urls {
       println("  URL: \{url}")
     }

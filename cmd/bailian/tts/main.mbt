@@ -2,6 +2,7 @@
 /// 语音合成示例（阿里云百炼）
 ///
 /// 运行命令: moon run cmd/bailian/tts
+/// 接口文档: https://help.aliyun.com/zh/model-studio/non-realtime-tts-user-guide
 ///
 /// 环境变量要求:
 /// - DASHSCOPE_API_KEY: 阿里云百炼 API Key
@@ -9,8 +10,22 @@
 ///
 
 ///|
-pub let config : @lib.ClientConfig = @lib.create_client_config(
-  "DASHSCOPE_API_KEY", "DASHSCOPE_BASE_URL", "https://dashscope.aliyuncs.com/api/v1",
+let api_key : String = @lib.get_env_var("DASHSCOPE_API_KEY", Some(""))
+
+///|
+let base_url : String = @lib.get_env_var(
+  "DASHSCOPE_BASE_URL",
+  Some("https://dashscope.aliyuncs.com/api/v1"),
+)
+
+///|
+let mock_body = "{\"output\":{\"audio\":{\"data\":\"\",\"expires_at\":1783586360,\"id\":\"audio_050c1a91-c480-9b60-a90c-266eed160ab3\",\"url\":\"http://dashscope-result-bj.oss-cn-beijing.aliyuncs.com/prod/cosyvoice-v3-flash/20260708/1659608586699480/050c1a91-c480-9b60-a90c-266eed160ab3.wav?Expires=1783586360&OSSAccessKeyId=LTAI5tGzqbGcEmE58b221XQy&Signature=3eU5kj3HjWpgBMZD042ulQWbb9A%3D\"},\"finish_reason\":\"stop\"},\"usage\":{\"characters\":26},\"request_id\":\"050c1a91-c480-9b60-a90c-266eed160ab3\"}"
+
+///|
+let config : @lib.ClientConfig = @lib.make_client_config(
+  api_key,
+  base_url,
+  mock_body=Some(mock_body),
 )
 
 ///|

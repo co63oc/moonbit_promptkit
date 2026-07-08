@@ -26,6 +26,13 @@ pub async fn generate_sync(
   watermark? : Bool,
   prompt_extend? : Bool,
 ) -> Array[String] {
+  match @lib.try_mock(config) {
+    Some(body) => {
+      let resp : ImageGenResponse = @json.from_json(@json.parse(body))
+      return extract_image_urls(resp)
+    }
+    None => ignore(())
+  }
   let text_item = TextContent::{ text: prompt }
   let message = ImageGenMessage::{
     role: "user",
@@ -76,6 +83,13 @@ pub async fn submit_async_task(
   style? : String,
   negative_prompt? : String,
 ) -> String {
+  match @lib.try_mock(config) {
+    Some(body) => {
+      let resp : AsyncTaskResponse = @json.from_json(@json.parse(body))
+      return extract_task_id(resp.output)
+    }
+    None => ignore(())
+  }
   let request = AsyncImageGenRequest::{
     model,
     input: AsyncImageGenInput::{ prompt, negative_prompt, style },
@@ -105,6 +119,18 @@ pub async fn query_async_task(
   config : @lib.ClientConfig,
   task_id : String,
 ) -> (String, Array[String]) {
+  match @lib.try_mock(config) {
+    Some(body) => {
+      let resp : AsyncTaskResult = @json.from_json(@json.parse(body))
+      let status = extract_task_status(resp.output)
+      if status == "SUCCEEDED" {
+        return (status, extract_result_urls(resp.output))
+      } else {
+        return (status, [])
+      }
+    }
+    None => ignore(())
+  }
   let (response, resp_body) = @http.get("\{dashscope_base}/tasks/\{task_id}", headers={
     "Authorization": "Bearer \{config.api_key}",
   })

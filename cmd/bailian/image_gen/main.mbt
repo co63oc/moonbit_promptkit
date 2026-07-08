@@ -2,6 +2,7 @@
 /// 图像生成示例（阿里云百炼）
 ///
 /// 运行命令: moon run cmd/bailian/image_gen
+/// 接口文档: https://help.aliyun.com/zh/model-studio/text-to-image
 ///
 /// 环境变量要求:
 /// - BAILIAN_API_KEY: 阿里云百炼 API Key
@@ -9,8 +10,22 @@
 ///
 
 ///|
-pub let config : @lib.ClientConfig = @lib.create_client_config(
-  "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
+let api_key : String = @lib.get_env_var("BAILIAN_API_KEY", Some(""))
+
+///|
+let base_url : String = @lib.get_env_var(
+  "BAILIAN_BASE_URL",
+  Some("https://dashscope.aliyuncs.com/compatible-mode/v1"),
+)
+
+///|
+let mock_body = "{\"output\":{\"choices\":[{\"finish_reason\":\"stop\",\"message\":{\"content\":[{\"image\":\"https://dashscope-7c2c.oss-accelerate.aliyuncs.com/1d/62/20260708/d689c36f/b90f8f4c-3a0e-4fe0-8ccf-ad904083a3a9_0.png?Expires=1783586358&OSSAccessKeyId=LTAI5tPxpiCM2hjmWrFXrym1&Signature=4ad0zsVAewR1ugHbXrkNkjZ6xW4%3D\",\"type\":\"image\"}],\"role\":\"assistant\"}}],\"finished\":true},\"usage\":{\"image_count\":1,\"input_tokens\":23,\"output_tokens\":2,\"size\":\"1024*1024\",\"total_tokens\":25},\"request_id\":\"250a907d-9b03-9541-bc7f-8e33f25bc657\"}"
+
+///|
+let config : @lib.ClientConfig = @lib.make_client_config(
+  api_key,
+  base_url,
+  mock_body=Some(mock_body),
 )
 
 ///|
@@ -32,7 +47,6 @@ async fn main {
       n=1,
       size="1024*1024",
     )
-    println("生成成功！共 \{urls.length()} 张图片")
     for url in urls {
       println("  URL: \{url}")
     }
@@ -47,7 +61,6 @@ async fn main {
   println("提示词: \{prompt2}")
   try {
     let urls = @lib_ig.text_to_image(config, prompt2, size="1024*1024")
-    println("生成成功！共 \{urls.length()} 张图片")
     for url in urls {
       println("  URL: \{url}")
     }

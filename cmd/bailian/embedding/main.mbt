@@ -1,11 +1,26 @@
 ///|
 /// Embedding example (文本向量化示例)
+/// 接口文档: https://help.aliyun.com/zh/model-studio/embedding
 /// Demonstrates text embedding generation
 ///
 
 ///|
-pub let config : @lib.ClientConfig = @lib.create_client_config(
-  "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
+let api_key : String = @lib.get_env_var("BAILIAN_API_KEY", Some(""))
+
+///|
+let base_url : String = @lib.get_env_var(
+  "BAILIAN_BASE_URL",
+  Some("https://dashscope.aliyuncs.com/compatible-mode/v1"),
+)
+
+///|
+let mock_body = "{\"data\":[{\"embedding\":[0.007704960182309151,-0.06173783168196678,0.07302535325288773],\"index\":0,\"object\":\"embedding\"},{\"embedding\":[-0.025690985843539238,-0.02086496725678444,0.07186467945575714],\"index\":1,\"object\":\"embedding\"}],\"object\":\"list\",\"model\":\"text-embedding-v4\",\"usage\":{\"prompt_tokens\":4,\"total_tokens\":4},\"id\":\"54db8f84-91fc-92a6-a83f-79091eb87b32\"}"
+
+///|
+let config : @lib.ClientConfig = @lib.make_client_config(
+  api_key,
+  base_url,
+  mock_body=Some(mock_body),
 )
 
 ///|

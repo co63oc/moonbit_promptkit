@@ -36,6 +36,17 @@ async fn caption_audio_impl(
   audio_url : String,
   model : String,
 ) -> String {
+  match @lib.try_mock(config) {
+    Some(body) => {
+      let resp : @lib.Response = @json.from_json(@json.parse(body))
+      if resp.choices.length() == 0 {
+        fail("No audio caption generated")
+      } else {
+        return @lib.extract_text_from_content(resp.choices[0].message.content)
+      }
+    }
+    None => ignore(())
+  }
   // Build audio content
   let audio_json = audio_content(audio_url).to_json()
 
@@ -142,6 +153,20 @@ async fn cosyvoice_tts_impl(
   sample_rate : Int?,
   instruction : String?,
 ) -> String {
+  match @lib.try_mock(config) {
+    Some(body) => {
+      let resp : TtsResponse = @json.from_json(@json.parse(body))
+      match resp.output.audio {
+        Some(audio) =>
+          match audio.url {
+            Some(u) => return u
+            None => fail("No audio URL in response")
+          }
+        None => fail("No audio output in response")
+      }
+    }
+    None => ignore(())
+  }
   let input = TtsInput::{
     text,
     voice: Some(voice),
@@ -224,6 +249,20 @@ async fn qwen_tts_impl(
   voice : String,
   instructions : String?,
 ) -> String {
+  match @lib.try_mock(config) {
+    Some(body) => {
+      let resp : TtsResponse = @json.from_json(@json.parse(body))
+      match resp.output.audio {
+        Some(audio) =>
+          match audio.url {
+            Some(u) => return u
+            None => fail("No audio URL in response")
+          }
+        None => fail("No audio output in response")
+      }
+    }
+    None => ignore(())
+  }
   let input = QwenTtsInput::{
     text,
     voice: Some(voice),
@@ -297,6 +336,20 @@ async fn minimax_tts_impl(
   speed : Float?,
   emotion : String?,
 ) -> String {
+  match @lib.try_mock(config) {
+    Some(body) => {
+      let resp : TtsResponse = @json.from_json(@json.parse(body))
+      match resp.output.audio {
+        Some(audio) =>
+          match audio.url {
+            Some(u) => return u
+            None => fail("No audio URL in response")
+          }
+        None => fail("No audio output in response")
+      }
+    }
+    None => ignore(())
+  }
   let voice_setting = VoiceSetting::{
     voice_id: Some(voice_id),
     speed,

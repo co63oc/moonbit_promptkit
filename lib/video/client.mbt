@@ -40,6 +40,13 @@ pub async fn submit_text_to_video(
   watermark? : Bool,
   shot_type? : String,
 ) -> String {
+  match @lib.try_mock(config) {
+    Some(body) => {
+      let resp : Json = @json.from_json(@json.parse(body))
+      return extract_task_id(resp)
+    }
+    None => ignore(())
+  }
   let input_json = Json::object(Map::Map([("prompt", prompt.to_json())].view()))
   let params_fields : Array[(String, Json)] = []
   match resolution {
@@ -167,6 +174,13 @@ pub async fn submit_image_to_video(
   prompt_extend? : Bool,
   watermark? : Bool,
 ) -> String {
+  match @lib.try_mock(config) {
+    Some(body) => {
+      let resp : Json = @json.from_json(@json.parse(body))
+      return extract_task_id(resp)
+    }
+    None => ignore(())
+  }
   let media_arr : Array[Json] = []
   for type_, url in media.iter() {
     media_arr.push(
@@ -324,6 +338,13 @@ pub async fn submit_kf2v(
   prompt_extend? : Bool,
   watermark? : Bool,
 ) -> String {
+  match @lib.try_mock(config) {
+    Some(body) => {
+      let resp : Json = @json.from_json(@json.parse(body))
+      return extract_task_id(resp)
+    }
+    None => ignore(())
+  }
   let input_fields : Array[(String, Json)] = [
     ("first_frame_url", first_frame_url.to_json()),
   ]

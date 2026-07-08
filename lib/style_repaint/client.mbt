@@ -47,6 +47,13 @@ pub async fn submit_style_repaint(
   image_url : String,
   style_index : Int,
 ) -> String {
+  match @lib.try_mock(config) {
+    Some(body) => {
+      let resp : Json = @json.from_json(@json.parse(body))
+      return extract_task_id(resp)
+    }
+    None => ignore(())
+  }
   let request = StyleRepaintRequest::{
     model,
     input: StyleRepaintInput::{ image_url, style_index },

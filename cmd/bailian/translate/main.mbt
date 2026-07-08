@@ -2,6 +2,7 @@
 /// 机器翻译示例（阿里云百炼）
 ///
 /// 运行命令: moon run cmd/bailian/translate
+/// 接口文档: https://help.aliyun.com/zh/model-studio/machine-translation
 ///
 /// 环境变量要求:
 /// - BAILIAN_API_KEY: 阿里云百炼 API Key
@@ -9,8 +10,22 @@
 ///
 
 ///|
-pub let config : @lib.ClientConfig = @lib.create_client_config(
-  "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
+let api_key : String = @lib.get_env_var("BAILIAN_API_KEY", Some(""))
+
+///|
+let base_url : String = @lib.get_env_var(
+  "BAILIAN_BASE_URL",
+  Some("https://dashscope.aliyuncs.com/compatible-mode/v1"),
+)
+
+///|
+let mock_body = "{\"choices\":[{\"message\":{\"content\":\"Hello world\",\"role\":\"assistant\"},\"finish_reason\":\"stop\",\"index\":0,\"logprobs\":null}],\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":32,\"completion_tokens\":2,\"total_tokens\":34},\"created\":1783499963,\"system_fingerprint\":null,\"model\":\"qwen-mt-flash\",\"id\":\"chatcmpl-8aff1694-7cd0-906f-a6bf-e9232826f164\"}"
+
+///|
+let config : @lib.ClientConfig = @lib.make_client_config(
+  api_key,
+  base_url,
+  mock_body=Some(mock_body),
 )
 
 ///|

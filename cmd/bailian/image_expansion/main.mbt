@@ -1,11 +1,26 @@
 ///|
 /// Image expansion (out-painting) example
+/// 接口文档: https://help.aliyun.com/zh/model-studio/image-expansion
 /// 演示图像扩展（image-out-painting）
 ///
 
 ///|
-pub let config : @lib.ClientConfig = @lib.create_client_config(
-  "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
+let api_key : String = @lib.get_env_var("BAILIAN_API_KEY", Some(""))
+
+///|
+let base_url : String = @lib.get_env_var(
+  "BAILIAN_BASE_URL",
+  Some("https://dashscope.aliyuncs.com/compatible-mode/v1"),
+)
+
+///|
+let mock_body = "{\"request_id\":\"0465c8ec-7024-96ff-8a39-1cbe1aa25c2c\",\"output\":{\"task_id\":\"2b0ef10f-ebf5-425a-9c4d-81e81d217312\",\"task_status\":\"PENDING\"}}"
+
+///|
+let config : @lib.ClientConfig = @lib.make_client_config(
+  api_key,
+  base_url,
+  mock_body=Some(mock_body),
 )
 
 ///|
@@ -30,7 +45,6 @@ async fn main {
       poll_interval_ms=5000,
       max_attempts=20,
     )
-    println("扩展成功！共 \{urls.length()} 张图片")
     for url in urls {
       println("  URL: \{url}")
     }
@@ -43,7 +57,6 @@ async fn main {
   println("2. 便捷函数 expand_easy (1.5x)")
   try {
     let urls = @lib_ix.expand_easy(config, image_url, x_scale=1.5, y_scale=1.5)
-    println("扩展成功！共 \{urls.length()} 张图片")
     for url in urls {
       println("  URL: \{url}")
     }
@@ -64,7 +77,6 @@ async fn main {
       poll_interval_ms=5000,
       max_attempts=20,
     )
-    println("扩展成功！共 \{urls.length()} 张图片")
     for url in urls {
       println("  URL: \{url}")
     }

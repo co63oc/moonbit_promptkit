@@ -2,6 +2,7 @@
 /// 模型列表示例（阿里云百炼）
 ///
 /// 运行命令: moon run cmd/bailian/models
+/// 接口文档: https://help.aliyun.com/zh/model-studio/models
 ///
 /// 环境变量要求:
 /// - BAILIAN_API_KEY: 阿里云百炼 API Key
@@ -9,8 +10,22 @@
 ///
 
 ///|
-pub let config : @lib.ClientConfig = @lib.create_client_config(
-  "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
+let api_key : String = @lib.get_env_var("BAILIAN_API_KEY", Some(""))
+
+///|
+let base_url : String = @lib.get_env_var(
+  "BAILIAN_BASE_URL",
+  Some("https://dashscope.aliyuncs.com/compatible-mode/v1"),
+)
+
+///|
+let mock_body = "{\"object\":\"list\",\"data\":[{\"id\":\"qwen-image-2.0-pro-2026-06-22\",\"object\":\"model\",\"created\":1782972278,\"owned_by\":\"system\"},{\"id\":\"test-sre-gpu-auto-handle\",\"object\":\"model\",\"created\":1782141996,\"owned_by\":\"system\"},{\"id\":\"fun-asr-flash-2026-06-15\",\"object\":\"model\",\"created\":1781685634,\"owned_by\":\"system\"}],\"first_id\":\"model-id-0\",\"last_id\":\"model-id-219\",\"has_more\":false}"
+
+///|
+let config : @lib.ClientConfig = @lib.make_client_config(
+  api_key,
+  base_url,
+  mock_body=Some(mock_body),
 )
 
 ///|

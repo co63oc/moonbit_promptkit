@@ -70,6 +70,13 @@ pub async fn submit_image_reference(
   obj_or_bg : Array[String],
   size? : String,
 ) -> String {
+  match @lib.try_mock(config) {
+    Some(body) => {
+      let resp : Json = @json.from_json(@json.parse(body))
+      return extract_task_id(resp)
+    }
+    None => ignore(())
+  }
   let input = VaceInput::{
     function: image_reference_fn,
     prompt,
@@ -116,6 +123,13 @@ pub async fn submit_video_repainting(
   ref_image_url? : String,
   size? : String,
 ) -> String {
+  match @lib.try_mock(config) {
+    Some(body) => {
+      let resp : Json = @json.from_json(@json.parse(body))
+      return extract_task_id(resp)
+    }
+    None => ignore(())
+  }
   let input = VaceInput::{
     function: video_repainting_fn,
     prompt,

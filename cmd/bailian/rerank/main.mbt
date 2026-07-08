@@ -2,6 +2,7 @@
 /// 文本排序示例（阿里云百炼）
 ///
 /// 运行命令: moon run cmd/bailian/rerank
+/// 接口文档: https://help.aliyun.com/zh/model-studio/rerank
 ///
 /// 环境变量要求:
 /// - BAILIAN_API_KEY: 阿里云百炼 API Key
@@ -9,8 +10,22 @@
 ///
 
 ///|
-pub let config : @lib.ClientConfig = @lib.create_client_config(
-  "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
+let api_key : String = @lib.get_env_var("BAILIAN_API_KEY", Some(""))
+
+///|
+let base_url : String = @lib.get_env_var(
+  "BAILIAN_BASE_URL",
+  Some("https://dashscope.aliyuncs.com/compatible-mode/v1"),
+)
+
+///|
+let mock_body = "{\"object\":\"list\",\"results\":[{\"index\":0,\"relevance_score\":0.6215930029468875},{\"index\":2,\"relevance_score\":0.36498076611019586},{\"index\":1,\"relevance_score\":0.3204092732077675}],\"model\":\"qwen3-rerank\",\"id\":\"cc10e5f3-2f37-9a18-87c3-f4f959ebeeeb\",\"usage\":{\"total_tokens\":77}}"
+
+///|
+let config : @lib.ClientConfig = @lib.make_client_config(
+  api_key,
+  base_url,
+  mock_body=Some(mock_body),
 )
 
 ///|

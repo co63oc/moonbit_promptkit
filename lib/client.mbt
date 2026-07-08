@@ -33,27 +33,41 @@ let mock_state : MockState = MockState::{
 
 ///|
 /// Perform an HTTP POST.
-/// In mock mode returns the canned response and records the request; otherwise
-/// delegates to @http.post.
+/// In mock mode (either global install_mock or config.mock_body) returns
+/// the canned response and records the request; otherwise delegates to @http.post.
 async fn do_post(
   url : String,
   body : Json,
   headers~ : Map[String, String],
+  mock_body? : String? = None,
 ) -> (Int, String, String) {
-  if mock_state.use_mock {
-    mock_state.url = url
-    mock_state.req_body = body
-    mock_state.req_headers = headers
-    // Read back to keep fields used (read) and mutability (write) visible.
-    let _ = (mock_state.url, mock_state.req_body, mock_state.req_headers)
-    mock_state.use_mock = mock_state.use_mock
-    mock_state.code = mock_state.code
-    mock_state.reason = mock_state.reason
-    mock_state.body = mock_state.body
-    (mock_state.code, mock_state.reason, mock_state.body)
+  match mock_body {
+    Some(mb) => (200, "OK", mb)
+    None =>
+      if mock_state.use_mock {
+        mock_state.url = url
+        mock_state.req_body = body
+        mock_state.req_headers = headers
+        let _ = (mock_state.url, mock_state.req_body, mock_state.req_headers)
+        mock_state.use_mock = mock_state.use_mock
+        mock_state.code = mock_state.code
+        mock_state.reason = mock_state.reason
+        mock_state.body = mock_state.body
+        (mock_state.code, mock_state.reason, mock_state.body)
+      } else {
+        let (response, resp_body) = @http.post(url, body, headers~)
+        (response.code, response.reason, resp_body.text())
+      }
+  }
+}
+
+///|
+/// If api_key is empty and mock_body is configured, return it; otherwise None.
+pub fn try_mock(config : ClientConfig) -> String? {
+  if config.api_key == "" {
+    config.mock_body
   } else {
-    let (response, resp_body) = @http.post(url, body, headers~)
-    (response.code, response.reason, resp_body.text())
+    None
   }
 }
 
@@ -246,6 +260,7 @@ pub async fn chat_stream(
       "Authorization": "Bearer \{config.api_key}",
       "Content-Type": "application/json",
     },
+    mock_body=try_mock(config),
   )
   guard code is (200..=299) else {
     fail("HTTP request failed: \{code} \{reason}")
@@ -347,6 +362,7 @@ pub async fn chat_stream_thinking(
       "Authorization": "Bearer \{config.api_key}",
       "Content-Type": "application/json",
     },
+    mock_body=try_mock(config),
   )
   guard code is (200..=299) else {
     fail("HTTP request failed: \{code} \{reason}")
@@ -526,18 +542,18 @@ pub async fn chat_web_extractor_stream(
     seed: None,
     stop: None,
   }
-  let (response, body) = @http.post(
+  let (code, reason, body_text) = do_post(
     "\{config.base_url}/chat/completions",
     request.to_json(),
     headers={
       "Authorization": "Bearer \{config.api_key}",
       "Content-Type": "application/json",
     },
+    mock_body=try_mock(config),
   )
-  guard response.code is (200..=299) else {
-    fail("HTTP request failed: \{response.code} \{response.reason}")
+  guard code is (200..=299) else {
+    fail("HTTP request failed: \{code} \{reason}")
   }
-  let body_text = body.text()
   on_delta(body_text)
   body_text
 }
@@ -571,18 +587,18 @@ pub async fn chat_web_extractor_stream_thinking(
     seed: None,
     stop: None,
   }
-  let (response, body) = @http.post(
+  let (code, reason, body_text) = do_post(
     "\{config.base_url}/chat/completions",
     request.to_json(),
     headers={
       "Authorization": "Bearer \{config.api_key}",
       "Content-Type": "application/json",
     },
+    mock_body=try_mock(config),
   )
-  guard response.code is (200..=299) else {
-    fail("HTTP request failed: \{response.code} \{response.reason}")
+  guard code is (200..=299) else {
+    fail("HTTP request failed: \{code} \{reason}")
   }
-  let body_text = body.text()
   let result = parse_thinking_sse(body_text)
   if result.reasoning.length() > 0 {
     on_reasoning_delta(result.reasoning)
@@ -622,18 +638,18 @@ pub async fn chat_code_interpreter_stream(
     seed: None,
     stop: None,
   }
-  let (response, body) = @http.post(
+  let (code, reason, body_text) = do_post(
     "\{config.base_url}/chat/completions",
     request.to_json(),
     headers={
       "Authorization": "Bearer \{config.api_key}",
       "Content-Type": "application/json",
     },
+    mock_body=try_mock(config),
   )
-  guard response.code is (200..=299) else {
-    fail("HTTP request failed: \{response.code} \{response.reason}")
+  guard code is (200..=299) else {
+    fail("HTTP request failed: \{code} \{reason}")
   }
-  let body_text = body.text()
   on_delta(body_text)
   body_text
 }
@@ -667,18 +683,18 @@ pub async fn chat_code_interpreter_stream_thinking(
     seed: None,
     stop: None,
   }
-  let (response, body) = @http.post(
+  let (code, reason, body_text) = do_post(
     "\{config.base_url}/chat/completions",
     request.to_json(),
     headers={
       "Authorization": "Bearer \{config.api_key}",
       "Content-Type": "application/json",
     },
+    mock_body=try_mock(config),
   )
-  guard response.code is (200..=299) else {
-    fail("HTTP request failed: \{response.code} \{response.reason}")
+  guard code is (200..=299) else {
+    fail("HTTP request failed: \{code} \{reason}")
   }
-  let body_text = body.text()
   let result = parse_thinking_sse(body_text)
   if result.reasoning.length() > 0 {
     on_reasoning_delta(result.reasoning)
@@ -710,7 +726,7 @@ pub async fn create_image_gen_task(
     ref_mode: None,
   }
   let request = ImageGenRequest::{ model, input, parameters: Some(parameters) }
-  let (response, body) = @http.post(
+  let (code, reason, body_text) = do_post(
     "https://dashscope.aliyuncs.com/api/v1/services/aigc/text2image/image-synthesis",
     request.to_json(),
     headers={
@@ -718,11 +734,12 @@ pub async fn create_image_gen_task(
       "Content-Type": "application/json",
       "X-DashScope-Async": "enable",
     },
+    mock_body=try_mock(config),
   )
-  guard response.code is (200..=299) else {
-    fail("HTTP request failed: \{response.code} \{response.reason}")
+  guard code is (200..=299) else {
+    fail("HTTP request failed: \{code} \{reason}")
   }
-  body.json() |> @json.from_json()
+  @json.parse(body_text) |> @json.from_json()
 }
 
 ///|
@@ -731,6 +748,10 @@ pub async fn get_image_gen_result(
   config : ClientConfig,
   task_id : String,
 ) -> ImageGenResponse {
+  match try_mock(config) {
+    Some(body) => return @json.parse(body) |> @json.from_json()
+    None => ignore(())
+  }
   let (response, body) = @http.get(
     "https://dashscope.aliyuncs.com/api/v1/tasks/\{task_id}",
     headers={ "Authorization": "Bearer \{config.api_key}" },
@@ -1112,6 +1133,10 @@ pub fn build_batch_input_jsonl(items : Array[BatchInputItem]) -> String {
 ///|
 /// List all available models
 pub async fn list_models(config : ClientConfig) -> ModelListResponse {
+  match try_mock(config) {
+    Some(body) => return @json.parse(body) |> @json.from_json()
+    None => ignore(())
+  }
   let (response, body) = @http.get("\{config.base_url}/models", headers={
     "Authorization": "Bearer \{config.api_key}",
     "Content-Type": "application/json",
@@ -1125,6 +1150,10 @@ pub async fn list_models(config : ClientConfig) -> ModelListResponse {
 ///|
 /// Get a specific model by ID
 pub async fn get_model(config : ClientConfig, model_id : String) -> Model {
+  match try_mock(config) {
+    Some(body) => return @json.parse(body) |> @json.from_json()
+    None => ignore(())
+  }
   let (response, body) = @http.get("\{config.base_url}/models/\{model_id}", headers={
     "Authorization": "Bearer \{config.api_key}",
     "Content-Type": "application/json",
@@ -1432,7 +1461,7 @@ pub async fn create_video_gen_task(
   parameters : VideoGenParameters?,
 ) -> VideoGenResponse {
   let request = VideoGenRequest::{ model, input, parameters }
-  let (response, body) = @http.post(
+  let (code, reason, body_text) = do_post(
     "https://dashscope.aliyuncs.com/api/v1/services/aigc/video-generation/video-synthesis",
     request.to_json(),
     headers={
@@ -1440,11 +1469,12 @@ pub async fn create_video_gen_task(
       "Content-Type": "application/json",
       "X-DashScope-Async": "enable",
     },
+    mock_body=try_mock(config),
   )
-  guard response.code is (200..=299) else {
-    fail("HTTP request failed: \{response.code} \{response.reason}")
+  guard code is (200..=299) else {
+    fail("HTTP request failed: \{code} \{reason}")
   }
-  body.json() |> @json.from_json()
+  @json.parse(body_text) |> @json.from_json()
 }
 
 ///|
@@ -1453,6 +1483,10 @@ pub async fn get_video_gen_result(
   config : ClientConfig,
   task_id : String,
 ) -> VideoGenResponse {
+  match try_mock(config) {
+    Some(body) => return @json.parse(body) |> @json.from_json()
+    None => ignore(())
+  }
   let (response, body) = @http.get(
     "https://dashscope.aliyuncs.com/api/v1/tasks/\{task_id}",
     headers={ "Authorization": "Bearer \{config.api_key}" },
@@ -1664,18 +1698,19 @@ pub async fn create_embedding(
     encoding_format: None,
     dimensions: None,
   }
-  let (response, body) = @http.post(
+  let (code, reason, body_text) = do_post(
     "\{config.base_url}/embeddings",
     request.to_json(),
     headers={
       "Authorization": "Bearer \{config.api_key}",
       "Content-Type": "application/json",
     },
+    mock_body=try_mock(config),
   )
-  guard response.code is (200..=299) else {
-    fail("HTTP request failed: \{response.code} \{response.reason}")
+  guard code is (200..=299) else {
+    fail("HTTP request failed: \{code} \{reason}")
   }
-  body.json() |> @json.from_json()
+  @json.parse(body_text) |> @json.from_json()
 }
 
 ///|
@@ -1688,18 +1723,19 @@ pub async fn create_embedding_with_options(
   dimensions : Int?,
 ) -> EmbeddingResponse {
   let request = EmbeddingRequest::{ model, input, encoding_format, dimensions }
-  let (response, body) = @http.post(
+  let (code, reason, body_text) = do_post(
     "\{config.base_url}/embeddings",
     request.to_json(),
     headers={
       "Authorization": "Bearer \{config.api_key}",
       "Content-Type": "application/json",
     },
+    mock_body=try_mock(config),
   )
-  guard response.code is (200..=299) else {
-    fail("HTTP request failed: \{response.code} \{response.reason}")
+  guard code is (200..=299) else {
+    fail("HTTP request failed: \{code} \{reason}")
   }
-  body.json() |> @json.from_json()
+  @json.parse(body_text) |> @json.from_json()
 }
 
 ///|

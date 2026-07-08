@@ -2,6 +2,7 @@
 /// 背景生成示例（阿里云百炼）
 ///
 /// 运行命令: moon run cmd/bailian/background
+/// 接口文档: https://help.aliyun.com/zh/model-studio/image-background-generation
 ///
 /// 环境变量要求:
 /// - BAILIAN_API_KEY: 阿里云百炼 API Key
@@ -9,8 +10,22 @@
 ///
 
 ///|
-pub let config : @lib.ClientConfig = @lib.create_client_config(
-  "BAILIAN_API_KEY", "BAILIAN_BASE_URL", "https://dashscope.aliyuncs.com/compatible-mode/v1",
+let api_key : String = @lib.get_env_var("BAILIAN_API_KEY", Some(""))
+
+///|
+let base_url : String = @lib.get_env_var(
+  "BAILIAN_BASE_URL",
+  Some("https://dashscope.aliyuncs.com/compatible-mode/v1"),
+)
+
+///|
+let mock_body = "{\"request_id\":\"8a31d092-2eb4-9b06-acbf-50c83a4dea46\",\"output\":{\"task_id\":\"dc77909b-0f34-4c13-b5a8-2e639f8f71bf\",\"task_status\":\"PENDING\"}}"
+
+///|
+let config : @lib.ClientConfig = @lib.make_client_config(
+  api_key,
+  base_url,
+  mock_body=Some(mock_body),
 )
 
 ///|
@@ -27,7 +42,6 @@ async fn main {
   println("提示词: \{prompt}")
   try {
     let urls = @lib_bg.background_easy(config, base_url, ref_prompt=prompt)
-    println("生成成功！共 \{urls.length()} 张图片")
     for url in urls {
       println("  URL: \{url}")
     }
@@ -51,7 +65,6 @@ async fn main {
       poll_interval_ms=5000,
       max_attempts=20,
     )
-    println("生成成功！共 \{urls.length()} 张图片")
     for url in urls {
       println("  URL: \{url}")
     }
