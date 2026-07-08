@@ -23,12 +23,54 @@ cmd/
 └── bailian/     # 阿里云百炼示例
 ```
 
+## 环境变量
+
+SDK 在运行时会从环境变量读取 API Key（通过 `get_env_var` 读取，缺失则报错退出），
+不同模块使用各自独立的环境变量。**运行对应示例前必须先设置所属模块的 API Key 环境变量**。
+
+| 模块 / 平台 | 所需 API Key 环境变量 | 说明 |
+|-------------|----------------------|------|
+| **OpenRouter** | `OPENROUTER_API_KEY` | `cmd/openrouter/*` 示例 |
+| **Moonshot AI (Kimi)** | `MOONSHOT_API_KEY` | `cmd/moonshot/*` 示例 |
+| **腾讯混元 (Tokenhub)** | `HUNYUAN_API_KEY` | `cmd/hunyuan/*` 示例 |
+| **百度千帆 (Qianfan)** | `QIANFAN_API_KEY` | `cmd/qianfan/*` 示例 |
+| **阿里云百炼 (Bailian)** | `BAILIAN_API_KEY` | `cmd/bailian/*` 全部示例（chat、stream、image、video、audio、embedding、batch 等）|
+
+各模块除 API Key 外，Base URL 也通过环境变量读取（缺失时使用内置默认值）：
+
+- OpenRouter：`OPENROUTER_BASE_URL`（默认 `https://openrouter.ai/api/v1`）
+- Moonshot：`MOONSHOT_BASE_URL`（默认 `https://api.moonshot.cn/v1`）
+- 腾讯混元：`HUNYUAN_BASE_URL`（默认 `https://tokenhub.tencentmaas.com/v1`）
+- 百度千帆：`QIANFAN_BASE_URL`（默认 `https://qianfan.baidubce.com/v2`）
+- 阿里云百炼：`BAILIAN_BASE_URL`（默认 `https://dashscope.aliyuncs.com/compatible-mode/v1`）
+
+### 额外环境变量
+
+部分阿里云百炼示例还需要以下变量：
+
+| 环境变量 | 用途 | 是否必填 |
+|----------|------|----------|
+| `BAILIAN_MODEL` | 指定模型名（如 `qwen-plus`、`qwen3.7-plus`），未设置时使用代码内默认值 | 可选 |
+| `BAILIAN_VECTOR_STORE_ID` | 知识库（向量库）ID，`cmd/bailian/file_search` 示例必需 | 条件必填 |
+
+### 设置示例
+
+```bash
+# Bash / Zsh
+export OPENROUTER_API_KEY="sk-or-..."
+export BAILIAN_API_KEY="sk-..."
+export BAILIAN_VECTOR_STORE_ID="vs_xxx"   # 仅 file_search 示例需要
+
+# 或临时在命令前指定
+QIANFAN_API_KEY="..." moon run cmd/qianfan/chat
+```
+
+> 提示：`lib` 核心库本身不直接硬编码任何 API Key 变量名，所有变量名由各 `cmd/*`
+> 示例在调用 `create_client_config(api_key_env, base_url_env, default_base_url)`
+> 时传入。如需新增兼容 OpenAI 的平台，只需在对应示例中修改这两个环境变量名即可。
+
 ## 通用说明
 
 所有平台均支持 OpenAI 兼容接口，配置对应的 API Key 和 Base URL 即可使用。
 
 如有其他兼容 OpenAI 的接口，可修改对应平台的环境变量为相应值。
-
-## 文档生成
-
-本项目使用 `moon doc` 生成文档，由于当前版本的 `moon doc` 仍需要 `moon.mod.json` 才能运行，因此仓库中同时保留了新格式的 `moon.mod` 和旧格式的 `moon.mod.json`（二者内容保持一致）。

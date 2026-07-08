@@ -1,3 +1,4 @@
 import {
   "co63oc/moonbit_promptkit/lib" @promptkit,
+  "moonbitlang/core/json",
 } for "test"

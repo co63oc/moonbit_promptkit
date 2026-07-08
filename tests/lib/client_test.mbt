@@ -186,3 +186,33 @@ test "file_search_tool_with_ids" {
   assert_true(tool.type_ == "file_search")
   assert_true(tool.vector_store_ids is Some(_))
 }
+
+///|
+test "response usage extraction" {
+  let json = @json.parse(
+    "{\"choices\":[{\"message\":{\"role\":\"assistant\",\"content\":\"x\"}}],\"usage\":{\"prompt_tokens\":3,\"completion_tokens\":2,\"total_tokens\":5}}",
+  )
+  let resp : @promptkit.Response = @json.from_json(json)
+  assert_eq(@promptkit.get_total_tokens(resp), 5)
+  assert_eq(@promptkit.get_prompt_tokens(resp), 3)
+  assert_eq(@promptkit.get_completion_tokens(resp), 2)
+}
+
+///|
+test "response usage missing defaults to zero" {
+  let json = @json.parse("{\"choices\":[]}")
+  let resp : @promptkit.Response = @json.from_json(json)
+  assert_eq(@promptkit.get_total_tokens(resp), 0)
+  assert_eq(@promptkit.get_prompt_tokens(resp), 0)
+  assert_eq(@promptkit.get_completion_tokens(resp), 0)
+}
+
+///|
+test "extract_text_from_content handles string and array" {
+  assert_eq(
+    @promptkit.extract_text_from_content(Json::string("plain")),
+    "plain",
+  )
+  let arr = Json::array([Json::object({ "text": Json::string("arr") })])
+  assert_eq(@promptkit.extract_text_from_content(arr), "arr")
+}

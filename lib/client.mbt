@@ -3,8 +3,93 @@
 ///
 
 ///|
+
+///|
+
+///|
+/// Test-only mock HTTP state. When `use_mock` is true, `do_post` returns the
+/// canned response (code/reason/body) instead of performing a real request, and
+/// records the last request (url/req_body/req_headers) so tests can assert on it.
+priv struct MockState {
+  mut use_mock : Bool
+  mut code : Int
+  mut reason : String
+  mut body : String
+  mut url : String
+  mut req_body : Json
+  mut req_headers : Map[String, String]
+}
+
+///|
+let mock_state : MockState = MockState::{
+  use_mock: false,
+  code: 200,
+  reason: "OK",
+  body: "",
+  url: "",
+  req_body: Json::object({}),
+  req_headers: {},
+}
+
+///|
+/// Perform an HTTP POST.
+/// In mock mode returns the canned response and records the request; otherwise
+/// delegates to @http.post.
+async fn do_post(
+  url : String,
+  body : Json,
+  headers~ : Map[String, String],
+) -> (Int, String, String) {
+  if mock_state.use_mock {
+    mock_state.url = url
+    mock_state.req_body = body
+    mock_state.req_headers = headers
+    // Read back to keep fields used (read) and mutability (write) visible.
+    let _ = (mock_state.url, mock_state.req_body, mock_state.req_headers)
+    mock_state.use_mock = mock_state.use_mock
+    mock_state.code = mock_state.code
+    mock_state.reason = mock_state.reason
+    mock_state.body = mock_state.body
+    (mock_state.code, mock_state.reason, mock_state.body)
+  } else {
+    let (response, resp_body) = @http.post(url, body, headers~)
+    (response.code, response.reason, resp_body.text())
+  }
+}
+
+///|
+/// Test-only helper (used by `cmd/*` mock tests). Enable the mock HTTP transport
+/// with a canned response. While enabled, no real network call is made.
+pub fn test_install_mock(
+  code : Int,
+  reason : String,
+  body_text : String,
+) -> Unit {
+  mock_state.use_mock = true
+  mock_state.code = code
+  mock_state.reason = reason
+  mock_state.body = body_text
+  mock_state.url = ""
+  mock_state.req_body = Json::object({})
+  mock_state.req_headers = {}
+}
+
+///|
+/// Test-only helper. Disable the mock HTTP transport.
+pub fn test_restore_mock() -> Unit {
+  mock_state.use_mock = false
+}
+
+///|
+/// Test-only helper. Return the last captured request (url, body, headers)
+/// recorded by `do_post` while the mock transport was enabled.
+pub fn test_last_request() -> (String, Json, Map[String, String]) {
+  (mock_state.url, mock_state.req_body, mock_state.req_headers)
+}
+
+///|
 pub async fn generate(config : ClientConfig, request : Request) -> Response {
-  let (response, body) = @http.post(
+  let (code, reason, body_text) = do_post(
     "\{config.base_url}/chat/completions",
     request.to_json(),
     headers={
@@ -12,10 +97,10 @@ pub async fn generate(config : ClientConfig, request : Request) -> Response {
       "Content-Type": "application/json",
     },
   )
-  guard response.code is (200..=299) else {
-    fail("HTTP request failed: \{response.code} \{response.reason}")
+  guard code is (200..=299) else {
+    fail("HTTP request failed: \{code} \{reason}")
   }
-  body.json() |> @json.from_json()
+  @json.parse(body_text) |> @json.from_json()
 }
 
 ///|
@@ -144,7 +229,7 @@ pub async fn chat_stream(
     seed: None,
     stop: None,
   }
-  let (response, body) = @http.post(
+  let (code, reason, body_text) = do_post(
     "\{config.base_url}/chat/completions",
     request.to_json(),
     headers={
@@ -152,10 +237,9 @@ pub async fn chat_stream(
       "Content-Type": "application/json",
     },
   )
-  guard response.code is (200..=299) else {
-    fail("HTTP request failed: \{response.code} \{response.reason}")
+  guard code is (200..=299) else {
+    fail("HTTP request failed: \{code} \{reason}")
   }
-  let body_text = body.text()
   on_delta(body_text)
   body_text
 }
@@ -246,7 +330,7 @@ pub async fn chat_stream_thinking(
     seed: None,
     stop: None,
   }
-  let (response, body) = @http.post(
+  let (code, reason, body_text) = do_post(
     "\{config.base_url}/chat/completions",
     request.to_json(),
     headers={
@@ -254,10 +338,9 @@ pub async fn chat_stream_thinking(
       "Content-Type": "application/json",
     },
   )
-  guard response.code is (200..=299) else {
-    fail("HTTP request failed: \{response.code} \{response.reason}")
+  guard code is (200..=299) else {
+    fail("HTTP request failed: \{code} \{reason}")
   }
-  let body_text = body.text()
   // Parse SSE stream and separate reasoning from answer
   let result = parse_thinking_sse(body_text)
   // Call callbacks with final content

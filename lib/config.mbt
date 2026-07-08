@@ -27,6 +27,14 @@ pub struct ClientConfig {
 }
 
 ///|
+/// Build a ClientConfig directly from an api_key and base_url.
+/// Mainly useful for tests or when configuration is provided by other means
+/// than environment variables.
+pub fn make_client_config(api_key : String, base_url : String) -> ClientConfig {
+  ClientConfig::{ api_key, base_url }
+}
+
+///|
 pub fn create_client_config(
   api_key_env : String,
   base_url_env : String,
