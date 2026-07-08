@@ -25,7 +25,13 @@ API Key 获取地址：https://console.bce.baidu.com/qianfan/ais/console/applica
 - `ernie-3.5-8k`
 - `ernie-speed-8k`
 
-API 文档：https://cloud.baidu.com/doc/qianfan-api/s/3m7of64lb
+## API 文档参考
+
+| 接口 | 说明 | 文档链接 |
+|------|------|----------|
+| Chat Completions | OpenAI 兼容的对话补全接口 | [Chat Completions](https://cloud.baidu.com/doc/qianfan-api/s/3m7of64lb) |
+| 鉴权说明 | API Key 获取与鉴权方式 | [鉴权说明](https://cloud.baidu.com/doc/WENXINWORKSHOP/s/4lilb9vpf) |
+| API 概览 | 千帆 ModelBuilder API 总览 | [API 概览](https://cloud.baidu.com/doc/WENXINWORKSHOP/s/Fm2vrveyu) |
 
 ## 快速开始
 

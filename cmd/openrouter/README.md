@@ -35,6 +35,14 @@ OpenRouter 支持数百种模型，包括免费和付费模型：
 
 完整模型列表：https://openrouter.ai/models
 
+## API 文档参考
+
+| 接口 | 说明 | 文档链接 |
+|------|------|----------|
+| Chat Completions | OpenAI 兼容的对话补全接口 | [Chat Completions](https://openrouter.ai/docs/api-reference/chat-completion) |
+| 模型列表 | 查询可用模型及定价 | [Models](https://openrouter.ai/models) |
+| API 概览 | OpenRouter API 总览 | [API 概览](https://openrouter.ai/docs/quick-start) |
+
 ## 快速开始
 
 ```bash

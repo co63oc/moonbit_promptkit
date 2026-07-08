@@ -58,13 +58,11 @@ async fn do_post(
 }
 
 ///|
-/// Test-only helper (used by `cmd/*` mock tests). Enable the mock HTTP transport
-/// with a canned response. While enabled, no real network call is made.
-pub fn test_install_mock(
-  code : Int,
-  reason : String,
-  body_text : String,
-) -> Unit {
+/// Enable the mock HTTP transport with a canned response.
+/// While mock mode is active, all HTTP requests return the canned response
+/// and no real network calls are made.
+/// Useful for runtime fallback (e.g. when API_KEY is empty) and testing.
+pub fn install_mock(code : Int, reason : String, body_text : String) -> Unit {
   mock_state.use_mock = true
   mock_state.code = code
   mock_state.reason = reason
@@ -75,20 +73,32 @@ pub fn test_install_mock(
 }
 
 ///|
-/// Test-only helper. Disable the mock HTTP transport.
-pub fn test_restore_mock() -> Unit {
+/// Disable the mock HTTP transport and restore normal network calls.
+pub fn restore_mock() -> Unit {
   mock_state.use_mock = false
 }
 
 ///|
-/// Test-only helper. Return the last captured request (url, body, headers)
-/// recorded by `do_post` while the mock transport was enabled.
-pub fn test_last_request() -> (String, Json, Map[String, String]) {
+/// Return the last captured request (url, body, headers) recorded
+/// while the mock transport was enabled.
+pub fn last_request() -> (String, Json, Map[String, String]) {
   (mock_state.url, mock_state.req_body, mock_state.req_headers)
 }
 
 ///|
 pub async fn generate(config : ClientConfig, request : Request) -> Response {
+  if config.api_key == "" {
+    match config.mock_body {
+      Some(body) => {
+        let json = @json.parse(body)
+        return @json.from_json(json)
+      }
+      None =>
+        // No mock_body configured; fall through to do_post which may
+        // be intercepted by the global install_mock (used in tests).
+        ignore(())
+    }
+  }
   let (code, reason, body_text) = do_post(
     "\{config.base_url}/chat/completions",
     request.to_json(),

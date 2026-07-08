@@ -26,7 +26,13 @@ API Key 获取地址：https://platform.moonshot.cn/console/api-keys
 - `moonshot-v1-32k` - 32k 上下文
 - `moonshot-v1-128k` - 128k 上下文
 
-API 文档：https://platform.moonshot.cn/docs
+## API 文档参考
+
+| 接口 | 说明 | 文档链接 |
+|------|------|----------|
+| Chat Completions | OpenAI 兼容的对话补全接口 | [Chat](https://platform.moonshot.cn/docs/api/chat) |
+| 文件管理 | 文件上传与列表查询 | [Files](https://platform.moonshot.cn/docs/api/files) |
+| API 概览 | Moonshot API 总览 | [API 概览](https://platform.moonshot.cn/docs) |
 
 ## 快速开始
 

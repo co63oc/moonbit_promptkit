@@ -2,28 +2,15 @@
 /// Whitebox tests for the HTTP transport layer.
 /// These exercise error handling, streaming, auth, and request parameter mapping
 /// without making real network calls, by enabling the package's mock HTTP state.
-
-///|
-/// Enable the mock transport with a canned response and reset the captured request.
-fn install_mock(code : Int, reason : String, body_text : String) -> Unit {
-  mock_state.use_mock = true
-  mock_state.code = code
-  mock_state.reason = reason
-  mock_state.body = body_text
-  mock_state.url = ""
-  mock_state.req_body = Json::object({})
-  mock_state.req_headers = {}
-}
-
-///|
-/// Disable the mock transport.
-fn restore_mock() -> Unit {
-  mock_state.use_mock = false
-}
+/// The `install_mock` / `restore_mock` helpers are provided by `client.mbt`.
 
 ///|
 fn test_config() -> ClientConfig {
-  ClientConfig::{ api_key: "test-key", base_url: "https://api.example.com/v1" }
+  ClientConfig::{
+    api_key: "test-key",
+    base_url: "https://api.example.com/v1",
+    mock_body: None,
+  }
 }
 
 ///|
@@ -164,6 +151,7 @@ async test "missing auth sends empty bearer token" {
   let cfg = ClientConfig::{
     api_key: "",
     base_url: "https://api.example.com/v1",
+    mock_body: None,
   }
   install_mock(200, "OK", "{\"choices\":[]}")
   try {
