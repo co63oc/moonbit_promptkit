@@ -1,0 +1,1 @@
+{"choices":[{"finish_reason":"stop","index":0,"message":{"content":"我是一个大型语言模型，能够回答问题、创作文字、编程、逻辑推理等。","role":"assistant"}}],"created":1783559892,"id":"chatcmpl-5d2db952-fed2-941b-abce-7b0605f287e0","model":"qwen-turbo","object":"chat.completion","usage":{"completion_tokens":19,"prompt_tokens":17,"prompt_tokens_details":{"cached_tokens":0},"total_tokens":36}}
