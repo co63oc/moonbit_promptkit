@@ -17,16 +17,6 @@ let base_url : String = @lib.get_env_var(
 )
 
 ///|
-let mock_body = "{\"model\":\"qwen-plus\",\"id\":\"chatcmpl-e53f7f2d-61bd-9f59-9e6e-8a00e25e84b4\",\"choices\":[{\"message\":{\"content\":\"你好！我是通义千问（Qwen），阿里巴巴集团旗下的超大规模语言模型，能够回答问题、创作文字、编程、逻辑推理、多语言支持等，致力于为你提供高效、友好和专业的帮助。😊\",\"role\":\"assistant\"},\"index\":0,\"finish_reason\":\"stop\"}],\"created\":1783499893,\"object\":\"chat.completion\",\"usage\":{\"total_tokens\":63,\"completion_tokens\":47,\"prompt_tokens\":16,\"prompt_tokens_details\":{\"cached_tokens\":0}}}"
-
-///|
-let config : @lib.ClientConfig = @lib.make_client_config(
-  api_key,
-  base_url,
-  mock_body=Some(mock_body),
-)
-
-///|
 pub let model : String = @lib_ql.default_model
 
 ///|
@@ -59,6 +49,13 @@ fn create_sample_doc() -> String {
 
 ///|
 async fn main {
+  let mock_body = @lib.read_file("cmd/bailian/qwen_long/mocks/demo1.json")
+  let config : @lib.ClientConfig = @lib.make_client_config(
+    api_key,
+    base_url,
+    mock_body=Some(mock_body),
+  )
+
   println("=== Qwen-Long 超长文档推理示例 ===\n")
 
   let doc_text = create_sample_doc()
@@ -68,13 +65,13 @@ async fn main {
   let question1 = "MoonBit 语言的主要应用场景有哪些？"
   println("文档长度: \{doc_text.length()} 字符")
   println("问题: \{question1}")
-  let response1 = @lib_ql.chat_with_text(
-    config,
-    model,
-    doc_text,
-    question1,
-    None,
-  )
+  let response1 = if api_key != "" {
+    @lib_ql.chat_with_text(config, model, doc_text, question1, None)
+  } else {
+    let mock_resp = @lib.read_file("cmd/bailian/qwen_long/mocks/demo1.json")
+    let resp : @lib.Response = @json.parse(mock_resp) |> @json.from_json()
+    resp.choices[0].message
+  }
   println("回答:")
   println(@lib.extract_text_from_content(response1.content))
   println("")
@@ -84,13 +81,19 @@ async fn main {
   let system_prompt = "你是一个专业的技术文档分析师。请基于提供的文档内容回答问题，确保回答准确且引用文档中的具体信息。"
   let question2 = "MoonBit 的类型系统有什么特点？"
   println("问题: \{question2}")
-  let response2 = @lib_ql.chat_with_text(
-    config,
-    model,
-    doc_text,
-    question2,
-    Some(system_prompt),
-  )
+  let response2 = if api_key != "" {
+    @lib_ql.chat_with_text(
+      config,
+      model,
+      doc_text,
+      question2,
+      Some(system_prompt),
+    )
+  } else {
+    let mock_resp = @lib.read_file("cmd/bailian/qwen_long/mocks/demo2.json")
+    let resp : @lib.Response = @json.parse(mock_resp) |> @json.from_json()
+    resp.choices[0].message
+  }
   println("回答:")
   println(@lib.extract_text_from_content(response2.content))
   println("")
@@ -100,14 +103,24 @@ async fn main {
   let question3 = "请详细解释 MoonBit 的异步编程特性"
   println("问题: \{question3}")
   println("回答 (流式):")
-  let _ = @lib_ql.chat_with_text_stream(
-    config,
-    model,
-    doc_text,
-    question3,
-    fn(chunk) { println(chunk) },
-    None,
-  )
+  if api_key != "" {
+    let _ = @lib_ql.chat_with_text_stream(
+      config,
+      model,
+      doc_text,
+      question3,
+      fn(chunk) { println(chunk) },
+      None,
+    )
+  } else {
+    let mock_resp = @lib.read_file("cmd/bailian/qwen_long/mocks/demo3.json")
+    let resp : @lib.Response = @json.parse(mock_resp) |> @json.from_json()
+    let content = @lib.extract_text_from_content(
+      resp.choices[0].message.content,
+    )
+    println(content)
+    println("(无 API Key，使用 mock 数据)")
+  }
   println("\n")
 
   // Demo 4: 上传文件后通过 fileid:// 进行问答

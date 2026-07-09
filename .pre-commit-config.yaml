@@ -15,3 +15,10 @@ repos:
         language: system
         pass_filenames: false
         always_run: true
+      - id: moon-fmt
+        name: moon fmt
+        description: Format MoonBit source files
+        entry: moon fmt
+        language: system
+        pass_filenames: false
+        always_run: true

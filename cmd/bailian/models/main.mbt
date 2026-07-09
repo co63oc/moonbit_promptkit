@@ -64,8 +64,11 @@ async fn main {
       }
     } else {
       // 无 API Key 时从 mock 文件读取
-      let mock_detail = @lib.read_file("cmd/bailian/models/mocks/model_detail.json")
-      let model_info : @lib.Model = @json.parse(mock_detail) |> @json.from_json()
+      let mock_detail = @lib.read_file(
+        "cmd/bailian/models/mocks/model_detail.json",
+      )
+      let model_info : @lib.Model = @json.parse(mock_detail)
+        |> @json.from_json()
       println("模型 ID: " + model_info.id)
       match model_info.object {
         Some(obj) => println("对象类型: " + obj)
@@ -119,9 +122,12 @@ async fn main {
         _ => "cmd/bailian/models/mocks/chat_turbo.json"
       }
       let mock_response = @lib.read_file(mock_file)
-      let response : @lib.Response = @json.parse(mock_response) |> @json.from_json()
+      let response : @lib.Response = @json.parse(mock_response)
+        |> @json.from_json()
       if response.choices.length() > 0 {
-        let answer = @lib.extract_text_from_content(response.choices[0].message.content)
+        let answer = @lib.extract_text_from_content(
+          response.choices[0].message.content,
+        )
         println("回答: " + answer)
         println("(无 API Key，使用 mock 数据)")
       }
