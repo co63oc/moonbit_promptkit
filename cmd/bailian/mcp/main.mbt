@@ -19,12 +19,19 @@ let base_url : String = @lib.get_env_var(
 )
 
 ///|
+/// 模拟天气查询工具
+fn get_weather(city : String) -> String {
+  "{\"city\": \"\{city}\", \"temperature\": \"25°C\", \"condition\": \"晴朗\", \"humidity\": \"45%\", \"wind\": \"东北风3级\"}"
+}
+
+///|
 async fn main {
-  let mock_body = @lib.read_file("cmd/bailian/mcp/mocks/demo1.json")
+  let mock_body1 = @lib.read_file("cmd/bailian/mcp/mocks/demo1.json")
+  let mock_body2 = @lib.read_file("cmd/bailian/mcp/mocks/demo2.json")
   let config : @lib.ClientConfig = @lib.make_client_config(
     api_key,
     base_url,
-    mock_body=Some(mock_body),
+    mock_body=Some(mock_body1),
   )
 
   println("=== MCP (Model Context Protocol) 示例 ===\n")
@@ -65,17 +72,69 @@ async fn main {
 
   // Demo 1: 使用 MCP 工具进行对话
   println("--- Demo 1: 使用 MCP 工具 ---")
-  let messages : Array[@lib.Message] = [
-    @lib.user_message_with_text("北京今天天气怎么样？"),
+  let user_question = "北京今天天气怎么样？"
+  println("用户: \{user_question}")
+
+  let mut messages : Array[@lib.Message] = [
+    @lib.user_message_with_text(user_question),
   ]
 
-  try {
-    let result = @lib_mcp.chat_with_mcp(config, "qwen3.7-plus", messages, [
-      weather_tool,
-    ])
-    println("模型回复: \{result}")
-  } catch {
-    e => println("MCP 对话失败: \{e}")
+  // 第一次调用：模型决定调用工具
+  let mut response = @lib_mcp.chat_with_mcp(config, "qwen3.7-plus", messages, [
+    weather_tool,
+  ])
+  messages = messages + [response]
+
+  match response.tool_calls {
+    None =>
+      println(
+        "无需调用工具，直接回复：\{@lib.extract_text_from_content(response.content)}",
+      )
+    Some(_) => {
+      let mut continue_loop = true
+      while continue_loop {
+        match response.tool_calls {
+          None => continue_loop = false
+          Some(tool_calls) =>
+            if tool_calls.length() > 0 {
+              let tool_call = tool_calls[0]
+              let tool_call_id = tool_call.id
+              let func_name = tool_call.function.name
+              let arguments = tool_call.function.arguments
+              println(
+                "正在调用工具 [\{func_name}]，参数：\{arguments}",
+              )
+
+              // 解析参数并调用工具
+              let city = "北京"
+              let tool_result = get_weather(city)
+              println("工具返回：\{tool_result}")
+
+              messages = messages +
+                [@lib.tool_message(tool_call_id, tool_result)]
+
+              // 第二次调用使用 demo2.json（最终回复，无 tool_calls）
+              let config2 : @lib.ClientConfig = @lib.make_client_config(
+                api_key,
+                base_url,
+                mock_body=Some(mock_body2),
+              )
+              response = @lib_mcp.chat_with_mcp(
+                config2,
+                "qwen3.7-plus",
+                messages,
+                [weather_tool],
+              )
+              messages = messages + [response]
+            } else {
+              continue_loop = false
+            }
+        }
+      }
+      println(
+        "模型最终回复：\{@lib.extract_text_from_content(response.content)}",
+      )
+    }
   }
   println("")
 

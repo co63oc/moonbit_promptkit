@@ -19,7 +19,7 @@ let base_url : String = @lib.get_env_var(
 )
 
 ///|
-let mock_body = "{\"output\":{\"audio\":{\"data\":\"\",\"expires_at\":1783586360,\"id\":\"audio_050c1a91-c480-9b60-a90c-266eed160ab3\",\"url\":\"http://dashscope-result-bj.oss-cn-beijing.aliyuncs.com/prod/cosyvoice-v3-flash/20260708/1659608586699480/050c1a91-c480-9b60-a90c-266eed160ab3.wav?Expires=1783586360&OSSAccessKeyId=LTAI5tGzqbGcEmE58b221XQy&Signature=3eU5kj3HjWpgBMZD042ulQWbb9A%3D\"},\"finish_reason\":\"stop\"},\"usage\":{\"characters\":26},\"request_id\":\"050c1a91-c480-9b60-a90c-266eed160ab3\"}"
+let mock_body = "{\"output\":{\"audio\":{\"data\":\"\",\"expires_at\":\"1783586360\",\"id\":\"audio_050c1a91-c480-9b60-a90c-266eed160ab3\",\"url\":\"http://dashscope-result-bj.oss-cn-beijing.aliyuncs.com/prod/cosyvoice-v3-flash/20260708/1659608586699480/050c1a91-c480-9b60-a90c-266eed160ab3.wav?Expires=1783586360&OSSAccessKeyId=LTAI5tGzqbGcEmE58b221XQy&Signature=3eU5kj3HjWpgBMZD042ulQWbb9A%3D\"},\"finish_reason\":\"stop\"},\"usage\":{\"characters\":26},\"request_id\":\"050c1a91-c480-9b60-a90c-266eed160ab3\"}"
 
 ///|
 let config : @lib.ClientConfig = @lib.make_client_config(
@@ -127,25 +127,6 @@ async fn main {
     println("合成成功! 音频 URL: " + audio_url)
   } catch {
     e => println("合成失败: \{e.to_string()}")
-  }
-  println("")
-
-  // Demo 3: 声音设计提示
-  println("--- Demo 3: 声音设计 ---")
-  println("提示: 使用声音设计功能需要提供声音描述文本")
-  println(
-    "示例描述: \"年轻活泼的女性声音，语速较快，带有明显的上扬语调\"",
-  )
-  println("")
-
-  // Demo 4: SSML 示例
-  println("--- Demo 4: SSML 语音合成 ---")
-  try {
-    let ssml_text = "<speak rate=\"2\">我的语速比正常人快。</speak>"
-    let audio_url = @audio.cosyvoice_tts_ssml(config, ssml_text, "longanyang")
-    println("SSML 合成成功! 音频 URL: " + audio_url)
-  } catch {
-    e => println("SSML 合成失败: \{e.to_string()}")
   }
   println("")
 

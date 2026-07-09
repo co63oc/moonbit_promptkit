@@ -25,14 +25,22 @@ API Key 获取地址：https://bailian.console.aliyun.com/cn-beijing?tab=model#/
 | `search` | 联网搜索 | `moon run cmd/bailian/search` |
 | `tool_call` | 工具调用 | `moon run cmd/bailian/tool_call` |
 | `image_gen` | 图像生成 | `moon run cmd/bailian/image_gen` |
+| `image_edit` | 图像编辑（Qwen-Image-Edit） | `moon run cmd/bailian/image_edit` |
+| `image_expansion` | 图像扩图（Outpainting） | `moon run cmd/bailian/image_expansion` |
+| `style_repaint` | 风格重绘 | `moon run cmd/bailian/style_repaint` |
+| `background` | 背景生成 | `moon run cmd/bailian/background` |
+| `video_gen` | 视频生成与3D生成 | `moon run cmd/bailian/video_gen` |
 | `models` | 模型列表 | `moon run cmd/bailian/models` |
 | `batch` | 批量推理 | `moon run cmd/bailian/batch` |
 | `context_cache` | 上下文缓存 | `moon run cmd/bailian/context_cache` |
 | `vl` | 图像与视频理解 | `moon run cmd/bailian/vl` |
+| `vision` | 视觉推理 | `moon run cmd/bailian/vision` |
 | `translate` | Qwen-MT 机器翻译 | `moon run cmd/bailian/translate` |
 | `role_play` | 角色扮演（通义星尘） | `moon run cmd/bailian/role_play` |
 | `qwen_doc_turbo` | 文档数据挖掘 | `moon run cmd/bailian/qwen_doc_turbo` |
 | `qwen_math` | 数学推理（Qwen-Math） | `moon run cmd/bailian/qwen_math` |
+| `qwen_coder` | 代码生成（Qwen-Coder） | `moon run cmd/bailian/qwen_coder` |
+| `qwen_long` | 长文档推理（Qwen-Long） | `moon run cmd/bailian/qwen_long` |
 | `gui_automation` | UI交互自动化（GUI-Plus） | `moon run cmd/bailian/gui_automation` |
 | `dialogue_analysis` | 对话分析（通义晓蜜） | `moon run cmd/bailian/dialogue_analysis` |
 | `audio_captioner` | 音频理解（Qwen3-Omni-Captioner） | `moon run cmd/bailian/audio_captioner` |
@@ -45,6 +53,7 @@ API Key 获取地址：https://bailian.console.aliyun.com/cn-beijing?tab=model#/
 | `speech_recognition` | 语音识别（文件转写） | `moon run cmd/bailian/speech_recognition` |
 | `mcp` | MCP 工具集成 | `moon run cmd/bailian/mcp` |
 | `rerank` | 文本排序（Rerank） | `moon run cmd/bailian/rerank` |
+| `embedding` | 文本向量化（Embedding） | `moon run cmd/bailian/embedding` |
 | `file_search` | 文件搜索 | `moon run cmd/bailian/file_search` |
 | `vace` | Wan VACE 视频编辑（多图参考/重绘） | `moon run cmd/bailian/vace` |
 

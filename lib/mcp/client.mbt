@@ -32,12 +32,13 @@ pub fn mcp_tool(
 
 ///|
 /// Chat with MCP tools
+/// Returns the model's response message (which may contain tool_calls)
 pub async fn chat_with_mcp(
   config : @lib.ClientConfig,
   model : String,
   messages : Array[@lib.Message],
   tools : Array[McpTool],
-) -> String {
+) -> @lib.Message {
   let request = McpRequest::{
     model,
     messages,
@@ -47,21 +48,31 @@ pub async fn chat_with_mcp(
   }
 
   let url = "\{config.base_url}/chat/completions"
-  let (response, body) = @http.post(url, request.to_json(), headers={
-    "Authorization": "Bearer \{config.api_key}",
-    "Content-Type": "application/json",
-  })
-  guard response.code is (200..=299) else {
-    let error_text = body.text()
-    fail(
-      "MCP chat request failed: \{response.code} \{response.reason}\n\{error_text}",
-    )
+
+  // Mock mode: when api_key is empty and mock_body is configured,
+  // return the canned response without making a real HTTP call.
+  let body_text = match @lib.try_mock(config) {
+    Some(mock) => mock
+    None => {
+      let (response, body) = @http.post(url, request.to_json(), headers={
+        "Authorization": "Bearer \{config.api_key}",
+        "Content-Type": "application/json",
+      })
+      guard response.code is (200..=299) else {
+        let error_text = body.text()
+        fail(
+          "MCP chat request failed: \{response.code} \{response.reason}\n\{error_text}",
+        )
+      }
+      body.text()
+    }
   }
-  let resp : @lib.Response = body.json() |> @json.from_json()
+
+  let resp : @lib.Response = @json.parse(body_text) |> @json.from_json()
   if resp.choices.length() == 0 {
     fail("No response from model")
   } else {
-    @lib.extract_text_from_content(resp.choices[0].message.content)
+    resp.choices[0].message
   }
 }
 
