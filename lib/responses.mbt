@@ -201,13 +201,14 @@ pub async fn responses_create(
   tools : Array[ResponseTool]?,
 ) -> ResponsesResponse {
   let request = ResponsesRequest::{ model, input, tools, stream: Some(false) }
-  let (code, reason, text) = timed_post(
+  let (code, reason, text) = do_post(
     "\{config.base_url}/responses",
     request.to_json(),
     headers={
       "Authorization": "Bearer \{config.api_key}",
       "Content-Type": "application/json",
     },
+    mock_body=try_mock(config),
   )
   guard code is (200..=299) else {
     fail("HTTP request failed: \{code} \{reason}")

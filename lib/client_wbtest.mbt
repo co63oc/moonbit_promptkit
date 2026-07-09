@@ -107,8 +107,9 @@ async test "chat_stream delivers sse body to callback" {
     ) {
       chunks.push(s)
     })
-    assert_eq(chunks.join(""), sse)
-    assert_eq(result, sse)
+    // chat_stream now parses SSE and extracts content
+    assert_eq(chunks.join(""), "Hello")
+    assert_eq(result, "Hello")
     restore_mock()
   } catch {
     e => {

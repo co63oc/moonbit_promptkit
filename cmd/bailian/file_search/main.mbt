@@ -20,7 +20,7 @@ let base_url : String = @lib.get_env_var(
 )
 
 ///|
-let mock_body = "{\"model\":\"qwen-plus\",\"id\":\"chatcmpl-e53f7f2d-61bd-9f59-9e6e-8a00e25e84b4\",\"choices\":[{\"message\":{\"content\":\"你好！我是通义千问（Qwen），阿里巴巴集团旗下的超大规模语言模型，能够回答问题、创作文字、编程、逻辑推理、多语言支持等，致力于为你提供高效、友好和专业的帮助。😊\",\"role\":\"assistant\"},\"index\":0,\"finish_reason\":\"stop\"}],\"created\":1783499893,\"object\":\"chat.completion\",\"usage\":{\"total_tokens\":63,\"completion_tokens\":47,\"prompt_tokens\":16,\"prompt_tokens_details\":{\"cached_tokens\":0}}}"
+let mock_body = "{\"output\":[{\"type\":\"message\",\"status\":\"completed\",\"output\":\"[{\\\"type\\\":\\\"file_search_call\\\",\\\"queries\\\":[\\\"知识库主要内容\\\"],\\\"results\\\":[{\\\"file_id\\\":\\\"file-mock-001\\\",\\\"text\\\":\\\"这是知识库中的示例内容。\\\"}]}]\"}],\"output_text\":\"你好！我是通义千问（Qwen），阿里巴巴集团旗下的超大规模语言模型，能够回答问题、创作文字、编程、逻辑推理、多语言支持等，致力于为你提供高效、友好和专业的帮助。😊\",\"usage\":{\"total_tokens\":63,\"input_tokens\":16,\"output_tokens\":47}}"
 
 ///|
 let config : @lib.ClientConfig = @lib.make_client_config(
@@ -34,7 +34,10 @@ async fn main {
   println("=== 百炼文件搜索示例 (File Search) ===\n")
 
   // 获取知识库 ID（从环境变量或控制台）
-  let vector_store_id = @lib.get_env_var("BAILIAN_VECTOR_STORE_ID", None)
+  let vector_store_id = @lib.get_env_var(
+    "BAILIAN_VECTOR_STORE_ID",
+    Some("vs-mock-test-id"),
+  )
 
   println("知识库 ID: \{vector_store_id}")
   println("")

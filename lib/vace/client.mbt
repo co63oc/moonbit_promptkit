@@ -190,13 +190,14 @@ pub async fn image_reference(
   let max = max_attempts.unwrap_or(40)
   let mut attempt = 0
   while attempt < max {
-    @async.sleep(interval)
+    // 先检查状态再 sleep，避免 mock 模式下的不必要等待
     let (status, video_url) = query_vace_task(config, task_id)
     if status == "SUCCEEDED" {
       return video_url
     } else if status == "FAILED" {
       fail("VACE task failed: \{task_id}")
     }
+    @async.sleep(@lib.mock_interval(config, interval))
     attempt = attempt + 1
   }
   fail("VACE task timeout: \{task_id}")
@@ -228,13 +229,14 @@ pub async fn video_repainting(
   let max = max_attempts.unwrap_or(40)
   let mut attempt = 0
   while attempt < max {
-    @async.sleep(interval)
+    // 先检查状态再 sleep，避免 mock 模式下的不必要等待
     let (status, video_url) = query_vace_task(config, task_id)
     if status == "SUCCEEDED" {
       return video_url
     } else if status == "FAILED" {
       fail("VACE task failed: \{task_id}")
     }
+    @async.sleep(@lib.mock_interval(config, interval))
     attempt = attempt + 1
   }
   fail("VACE task timeout: \{task_id}")

@@ -30,11 +30,10 @@ async fn main {
   ]
   println("User: \{user_question}")
   println("Assistant: ")
-  let full_text = @lib.chat_stream(
-    config,
-    "tencent/hy3:free",
-    messages,
-    fn(text) { println(text) },
-  )
+  let full_text = @lib.chat_stream(config, "tencent/hy3:free", messages, fn(
+    text,
+  ) {
+    println(text)
+  })
   println("\n\nFull reply length: \{full_text.length()} chars")
 }

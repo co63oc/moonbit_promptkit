@@ -83,6 +83,24 @@ pub fn create_batch_client_config(
 }
 
 ///|
+/// Check if the config is in mock mode (api_key is empty).
+pub fn is_mock(config : ClientConfig) -> Bool {
+  config.api_key == ""
+}
+
+///|
+/// Return a mock-aware poll interval: 1000ms if in mock mode,
+/// otherwise the original interval. Use this to avoid long waits
+/// during testing with mock data.
+pub fn mock_interval(config : ClientConfig, interval : Int) -> Int {
+  if is_mock(config) {
+    1000
+  } else {
+    interval
+  }
+}
+
+///|
 /// Read file content as string
 pub fn read_file(path : String) -> String raise @fs.IOError {
   @fs.read_file_to_string(path)

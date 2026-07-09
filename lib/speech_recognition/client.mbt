@@ -98,13 +98,14 @@ pub async fn transcribe(
   let max = max_attempts.unwrap_or(60)
   let mut attempt = 0
   while attempt < max {
-    @async.sleep(interval)
+    // 先检查状态再 sleep，避免 mock 模式下的不必要等待
     let (status, result_url) = query_transcription_task(config, task_id)
     if status == "SUCCEEDED" {
       return result_url
     } else if status == "FAILED" {
       fail("Transcription task failed: \{task_id}")
     }
+    @async.sleep(@lib.mock_interval(config, interval))
     attempt = attempt + 1
   }
   fail("Transcription task timeout: \{task_id}")

@@ -62,15 +62,19 @@ async fn main {
   let question2 = "请生成一个斐波那契数列的前20项，并计算它们的总和"
   let messages2 : Array[@lib.Message] = [@lib.user_message_with_text(question2)]
   println("用户: \{question2}")
-  println("\n助手: ")
 
-  let answer2 = @lib.chat_code_interpreter_stream(
+  let result2 = @lib.chat_code_interpreter_stream_thinking(
     config,
     "qwen3.7-plus",
     messages2,
-    fn(text) { println(text) },
+    fn(reasoning) { println(reasoning) },
+    fn(answer) {
+      println("\n=== 最终回答 ===")
+      println(answer)
+    },
   )
 
-  println("\n\n=== 完整回复 ===")
-  println(answer2)
+  println("\n\n--- 统计信息 ---")
+  println("思考过程长度: \{result2.reasoning.length()} 字符")
+  println("回答长度: \{result2.answer.length()} 字符")
 }

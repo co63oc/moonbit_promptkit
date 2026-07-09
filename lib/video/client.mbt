@@ -128,13 +128,14 @@ pub async fn text_to_video(
   let max = max_attempts.unwrap_or(120)
   let mut attempt = 0
   while attempt < max {
-    @async.sleep(interval)
+    // 先检查状态再 sleep，避免 mock 模式下的不必要等待
     let (status, video_url) = query_video_task(config, task_id)
     if status == "SUCCEEDED" {
       return video_url
     } else if status == "FAILED" {
       fail("T2V task failed: \{task_id}")
     }
+    @async.sleep(@lib.mock_interval(config, interval))
     attempt = attempt + 1
   }
   fail("T2V task timeout: \{task_id}")
@@ -264,13 +265,14 @@ pub async fn image_to_video(
   let max = max_attempts.unwrap_or(120)
   let mut attempt = 0
   while attempt < max {
-    @async.sleep(interval)
+    // 先检查状态再 sleep，避免 mock 模式下的不必要等待
     let (status, video_url) = query_video_task(config, task_id)
     if status == "SUCCEEDED" {
       return video_url
     } else if status == "FAILED" {
       fail("I2V task failed: \{task_id}")
     }
+    @async.sleep(@lib.mock_interval(config, interval))
     attempt = attempt + 1
   }
   fail("I2V task timeout: \{task_id}")
@@ -422,13 +424,14 @@ pub async fn kf2v_video(
   let max = max_attempts.unwrap_or(120)
   let mut attempt = 0
   while attempt < max {
-    @async.sleep(interval)
+    // 先检查状态再 sleep，避免 mock 模式下的不必要等待
     let (status, video_url) = query_video_task(config, task_id)
     if status == "SUCCEEDED" {
       return video_url
     } else if status == "FAILED" {
       fail("KF2V task failed: \{task_id}")
     }
+    @async.sleep(@lib.mock_interval(config, interval))
     attempt = attempt + 1
   }
   fail("KF2V task timeout: \{task_id}")

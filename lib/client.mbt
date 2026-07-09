@@ -867,10 +867,7 @@ pub async fn generate_image(
   let mut final_status = ""
 
   while attempt <= max_attempts {
-    // Wait before checking
-    @async.sleep(interval_ms)
-
-    // Check status
+    // Check status first, before sleeping
     let response = get_image_gen_result(config, task_id)
     let status = response.output.task_status
     println("Attempt " + attempt.to_string() + ": Task status - " + status)
@@ -885,6 +882,9 @@ pub async fn generate_image(
       final_status = status
       break
     }
+
+    // Wait before next check
+    @async.sleep(interval_ms)
 
     // Increment attempt counter
     attempt = attempt + 1
@@ -1138,8 +1138,12 @@ pub async fn wait_for_batch(
   let mut attempt = 0
   let mut batch = get_batch(config, batch_id)
   while attempt < max_attempts && !is_terminal_status(batch.status) {
-    @async.sleep(poll_interval_ms)
+    // Check status first, before sleeping
     batch = get_batch(config, batch_id)
+    if is_terminal_status(batch.status) {
+      break
+    }
+    @async.sleep(poll_interval_ms)
     attempt = attempt + 1
   }
   batch
