@@ -17,16 +17,6 @@ let base_url : String = @lib.get_env_var(
 )
 
 ///|
-let mock_body = "{\"model\":\"qwen-plus\",\"id\":\"chatcmpl-e53f7f2d-61bd-9f59-9e6e-8a00e25e84b4\",\"choices\":[{\"message\":{\"content\":\"你好！我是通义千问（Qwen），阿里巴巴集团旗下的超大规模语言模型，能够回答问题、创作文字、编程、逻辑推理、多语言支持等，致力于为你提供高效、友好和专业的帮助。😊\",\"role\":\"assistant\"},\"index\":0,\"finish_reason\":\"stop\"}],\"created\":1783499893,\"object\":\"chat.completion\",\"usage\":{\"total_tokens\":63,\"completion_tokens\":47,\"prompt_tokens\":16,\"prompt_tokens_details\":{\"cached_tokens\":0}}}"
-
-///|
-let config : @lib.ClientConfig = @lib.make_client_config(
-  api_key,
-  base_url,
-  mock_body=Some(mock_body),
-)
-
-///|
 /// Sample dialogue text
 pub let sample_dialogue : String = "[1] 客服:您好,欢迎致电AB电商平台,请问有什么可以帮您?" +
   "\n" +
@@ -50,6 +40,15 @@ pub let sample_dialogue : String = "[1] 客服:您好,欢迎致电AB电商平台
 
 ///|
 async fn main {
+  let mock_body = @lib.read_file(
+    "cmd/bailian/dialogue_analysis/mocks/demo1.json",
+  )
+  let config : @lib.ClientConfig = @lib.make_client_config(
+    api_key,
+    base_url,
+    mock_body=Some(mock_body),
+  )
+
   println("=== 通义晓蜜对话分析模型示例 ===\n")
 
   try {

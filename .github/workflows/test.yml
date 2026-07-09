@@ -14,4 +14,4 @@ jobs:
       uses: ./.github/actions/install-moonbit
 
     - name: Run moon test
-      run: moon update && moon test
+      run: moon update && moon test --deny-warn

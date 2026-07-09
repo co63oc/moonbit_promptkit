@@ -19,16 +19,6 @@ let base_url : String = @lib.get_env_var(
 )
 
 ///|
-let mock_body = "{\"model\":\"qwen-plus\",\"id\":\"chatcmpl-e53f7f2d-61bd-9f59-9e6e-8a00e25e84b4\",\"choices\":[{\"message\":{\"content\":\"你好！我是通义千问（Qwen），阿里巴巴集团旗下的超大规模语言模型，能够回答问题、创作文字、编程、逻辑推理、多语言支持等，致力于为你提供高效、友好和专业的帮助。😊\",\"role\":\"assistant\"},\"index\":0,\"finish_reason\":\"stop\"}],\"created\":1783499893,\"object\":\"chat.completion\",\"usage\":{\"total_tokens\":63,\"completion_tokens\":47,\"prompt_tokens\":16,\"prompt_tokens_details\":{\"cached_tokens\":0}}}"
-
-///|
-let config : @lib.ClientConfig = @lib.make_client_config(
-  api_key,
-  base_url,
-  mock_body=Some(mock_body),
-)
-
-///|
 /// 示例图片：包含数学题的图片
 pub let math_image_url : String = "https://img.alicdn.com/imgextra/i1/O1CN01gDEY8M1W114Hi3XcN_!!6000000002727-0-tps-1024-406.jpg"
 
@@ -41,8 +31,15 @@ async fn main {
   println("问题: 这道题怎么解答？")
   println("")
 
+  let mock_body1 = @lib.read_file("cmd/bailian/vision/mocks/demo1.json")
+  let config1 : @lib.ClientConfig = @lib.make_client_config(
+    api_key,
+    base_url,
+    mock_body=Some(mock_body1),
+  )
+
   let result1 = @lib_vs.visual_reasoning_stream(
-    config,
+    config1,
     @lib_vs.default_reasoning_model,
     math_image_url,
     "这道题怎么解答？",
@@ -67,8 +64,15 @@ async fn main {
   println("enable_thinking: true")
   println("")
 
+  let mock_body2 = @lib.read_file("cmd/bailian/vision/mocks/demo2.json")
+  let config2 : @lib.ClientConfig = @lib.make_client_config(
+    api_key,
+    base_url,
+    mock_body=Some(mock_body2),
+  )
+
   let result2 = @lib_vs.qwen3vl_thinking(
-    config, @lib_vs.default_qwen3vl_model, math_image_url, "请分析图片中的内容",
+    config2, @lib_vs.default_qwen3vl_model, math_image_url, "请分析图片中的内容",
     true,
   )
   match result2.reasoning_content {
@@ -89,8 +93,15 @@ async fn main {
   println("enable_thinking: false")
   println("")
 
+  let mock_body3 = @lib.read_file("cmd/bailian/vision/mocks/demo3.json")
+  let config3 : @lib.ClientConfig = @lib.make_client_config(
+    api_key,
+    base_url,
+    mock_body=Some(mock_body3),
+  )
+
   let result3 = @lib_vs.qwen3vl_thinking(
-    config, @lib_vs.default_qwen3vl_model, math_image_url, "请分析图片中的内容",
+    config3, @lib_vs.default_qwen3vl_model, math_image_url, "请分析图片中的内容",
     false,
   )
   println("=== 直接回答 ===")
@@ -112,8 +123,9 @@ async fn main {
     @lib.user_message_with_text("请详细解答第一个图形的体积计算"),
   ]
 
+  // Demo 4 复用 Demo 1 的 mock（流式格式）
   let result4 = @lib_vs.visual_reasoning_multi_turn_stream(
-    config,
+    config1,
     @lib_vs.default_reasoning_model,
     messages,
     fn(s) {
@@ -137,8 +149,15 @@ async fn main {
   println("模型: \{@lib_vs.default_vision_model}")
   println("")
 
+  let mock_body5 = @lib.read_file("cmd/bailian/vision/mocks/demo5.json")
+  let config5 : @lib.ClientConfig = @lib.make_client_config(
+    api_key,
+    base_url,
+    mock_body=Some(mock_body5),
+  )
+
   let desc = @lib_vs.analyze_image(
-    config, @lib_vs.default_vision_model, math_image_url, "描述这张图片中的内容",
+    config5, @lib_vs.default_vision_model, math_image_url, "描述这张图片中的内容",
   )
   println("描述: \{desc}")
   println("")
@@ -148,12 +167,20 @@ async fn main {
   println("模型: \{@lib_vs.default_ocr_model}")
   println("")
 
-  let text = @lib_vs.ocr(config, @lib_vs.default_ocr_model, math_image_url)
+  let mock_body6 = @lib.read_file("cmd/bailian/vision/mocks/demo6.json")
+  let config6 : @lib.ClientConfig = @lib.make_client_config(
+    api_key,
+    base_url,
+    mock_body=Some(mock_body6),
+  )
+
+  let text = @lib_vs.ocr(config6, @lib_vs.default_ocr_model, math_image_url)
   println("识别结果: \{text}")
   println("")
 
   // === Demo 7: 图像定位 ===
   println("=== Demo 7: 图像定位 (Grounding) ===")
-  let bbox = @lib_vs.grounding_easy(config, math_image_url, "数字")
+  // Demo 7 复用 Demo 5 的 mock
+  let bbox = @lib_vs.grounding_easy(config5, math_image_url, "数字")
   println("定位结果: \{bbox}")
 }

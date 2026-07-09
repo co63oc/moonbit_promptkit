@@ -20,17 +20,14 @@ let base_url : String = @lib.get_env_var(
 )
 
 ///|
-let mock_body = "{\"output\":[{\"type\":\"message\",\"status\":\"completed\",\"output\":\"[{\\\"type\\\":\\\"file_search_call\\\",\\\"queries\\\":[\\\"知识库主要内容\\\"],\\\"results\\\":[{\\\"file_id\\\":\\\"file-mock-001\\\",\\\"text\\\":\\\"这是知识库中的示例内容。\\\"}]}]\"}],\"output_text\":\"你好！我是通义千问（Qwen），阿里巴巴集团旗下的超大规模语言模型，能够回答问题、创作文字、编程、逻辑推理、多语言支持等，致力于为你提供高效、友好和专业的帮助。😊\",\"usage\":{\"total_tokens\":63,\"input_tokens\":16,\"output_tokens\":47}}"
-
-///|
-let config : @lib.ClientConfig = @lib.make_client_config(
-  api_key,
-  base_url,
-  mock_body=Some(mock_body),
-)
-
-///|
 async fn main {
+  let mock_body = @lib.read_file("cmd/bailian/file_search/mocks/demo1.json")
+  let config : @lib.ClientConfig = @lib.make_client_config(
+    api_key,
+    base_url,
+    mock_body=Some(mock_body),
+  )
+
   println("=== 百炼文件搜索示例 (File Search) ===\n")
 
   // 获取知识库 ID（从环境变量或控制台）

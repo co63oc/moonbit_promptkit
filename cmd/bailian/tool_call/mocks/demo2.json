@@ -1,0 +1,1 @@
+{"model": "qwen3.7-plus", "id": "chatcmpl-tool-call-final", "choices": [{"message": {"role": "assistant", "content": "北京今天是晴天。"}, "index": 0, "finish_reason": "stop"}], "created": 1783499893, "object": "chat.completion", "usage": {"total_tokens": 50, "completion_tokens": 30, "prompt_tokens": 20}}

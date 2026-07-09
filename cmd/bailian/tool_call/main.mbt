@@ -19,16 +19,6 @@ let base_url : String = @lib.get_env_var(
 )
 
 ///|
-let mock_body = "{\"model\":\"qwen-plus\",\"id\":\"chatcmpl-e53f7f2d-61bd-9f59-9e6e-8a00e25e84b4\",\"choices\":[{\"message\":{\"content\":\"你好！我是通义千问（Qwen），阿里巴巴集团旗下的超大规模语言模型，能够回答问题、创作文字、编程、逻辑推理、多语言支持等，致力于为你提供高效、友好和专业的帮助。😊\",\"role\":\"assistant\"},\"index\":0,\"finish_reason\":\"stop\"}],\"created\":1783499893,\"object\":\"chat.completion\",\"usage\":{\"total_tokens\":63,\"completion_tokens\":47,\"prompt_tokens\":16,\"prompt_tokens_details\":{\"cached_tokens\":0}}}"
-
-///|
-let config : @lib.ClientConfig = @lib.make_client_config(
-  api_key,
-  base_url,
-  mock_body=Some(mock_body),
-)
-
-///|
 fn get_current_weather(location : String) -> String {
   let weather_conditions : Array[String] = ["晴天", "多云", "雨天"]
   let index = location.length() % weather_conditions.length()
@@ -38,6 +28,13 @@ fn get_current_weather(location : String) -> String {
 
 ///|
 async fn main {
+  let mock_body = @lib.read_file("cmd/bailian/tool_call/mocks/demo1.json")
+  let config : @lib.ClientConfig = @lib.make_client_config(
+    api_key,
+    base_url,
+    mock_body=Some(mock_body),
+  )
+
   let user_question = "北京天气咋样"
   let tools = @json.parse(
     "[{\"type\": \"function\", \"function\": {\"name\": \"get_current_weather\", \"description\": \"当你想查询指定城市的天气时非常有用。\", \"parameters\": {\"type\": \"object\", \"properties\": {\"location\": {\"type\": \"string\", \"description\": \"城市或县区，比如北京市、杭州市、余杭区等。\"}}, \"required\": [\"location\"]}}}]",
@@ -77,8 +74,17 @@ async fn main {
               println("工具返回：\{tool_result}")
               messages = messages +
                 [@lib.tool_message(tool_call_id, tool_result)]
+              // 第二次调用使用不同的 mock 文件（最终回复，无 tool_calls）
+              let mock_body2 = @lib.read_file(
+                "cmd/bailian/tool_call/mocks/demo2.json",
+              )
+              let config2 : @lib.ClientConfig = @lib.make_client_config(
+                api_key,
+                base_url,
+                mock_body=Some(mock_body2),
+              )
               response = @lib.chat_with_tools(
-                config, "qwen3.7-plus", messages, tools,
+                config2, "qwen3.7-plus", messages, tools,
               )
               messages = messages + [response]
             } else {

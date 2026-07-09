@@ -17,16 +17,6 @@ let base_url : String = @lib.get_env_var(
 )
 
 ///|
-let mock_body = "{\"model\":\"qwen-plus\",\"id\":\"chatcmpl-e53f7f2d-61bd-9f59-9e6e-8a00e25e84b4\",\"choices\":[{\"message\":{\"content\":\"你好！我是通义千问（Qwen），阿里巴巴集团旗下的超大规模语言模型，能够回答问题、创作文字、编程、逻辑推理、多语言支持等，致力于为你提供高效、友好和专业的帮助。😊\",\"role\":\"assistant\"},\"index\":0,\"finish_reason\":\"stop\"}],\"created\":1783499893,\"object\":\"chat.completion\",\"usage\":{\"total_tokens\":63,\"completion_tokens\":47,\"prompt_tokens\":16,\"prompt_tokens_details\":{\"cached_tokens\":0}}}"
-
-///|
-let config : @lib.ClientConfig = @lib.make_client_config(
-  api_key,
-  base_url,
-  mock_body=Some(mock_body),
-)
-
-///|
 pub let doc_model : String = "qwen-doc-turbo"
 
 ///|
@@ -34,6 +24,13 @@ pub let sample_doc : String = "智能办公产品手册 版本：V2.0 发布日�
 
 ///|
 async fn main {
+  let mock_body = @lib.read_file("cmd/bailian/qwen_doc_turbo/mocks/demo1.json")
+  let config : @lib.ClientConfig = @lib.make_client_config(
+    api_key,
+    base_url,
+    mock_body=Some(mock_body),
+  )
+
   println("=== Qwen-Doc-Turbo 数据挖掘模型示例 ===\n")
 
   // Demo 1: 信息抽取

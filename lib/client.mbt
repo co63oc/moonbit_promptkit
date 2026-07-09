@@ -632,8 +632,9 @@ pub async fn chat_web_extractor_stream(
   guard code is (200..=299) else {
     fail("HTTP request failed: \{code} \{reason}")
   }
-  on_delta(body_text)
-  body_text
+  let content = parse_sse(body_text)
+  on_delta(content)
+  content
 }
 
 ///|

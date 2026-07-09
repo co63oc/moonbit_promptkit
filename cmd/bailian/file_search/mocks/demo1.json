@@ -1,0 +1,1 @@
+{"output": [{"type": "message", "status": "completed", "output": "[{\"type\":\"file_search_call\",\"queries\":[\"知识库主要内容\"],\"results\":[{\"file_id\":\"file-mock-001\",\"text\":\"这是知识库中的示例内容，展示了文件搜索功能的基本用法。\"}]}]"}], "output_text": "根据知识库检索，主要内容涵盖以下几个方面：1) 系统架构设计；2) 核心功能模块；3) 使用指南和最佳实践。", "usage": {"total_tokens": 100, "input_tokens": 60, "output_tokens": 40}}

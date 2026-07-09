@@ -11,7 +11,7 @@ repos:
       - id: moon-check
         name: moon check
         description: Check MoonBit package compilation
-        entry: moon check --fmt
+        entry: moon check --deny-warn
         language: system
         pass_filenames: false
         always_run: true

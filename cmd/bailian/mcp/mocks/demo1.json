@@ -1,0 +1,1 @@
+{"model": "qwen3.7-plus", "id": "chatcmpl-mcp", "choices": [{"message": {"role": "assistant", "content": "根据查询结果，北京今天天气晴朗，气温约25°C，适合户外活动。"}, "index": 0, "finish_reason": "stop"}], "created": 1783499893, "object": "chat.completion", "usage": {"total_tokens": 80, "completion_tokens": 50, "prompt_tokens": 30}}
