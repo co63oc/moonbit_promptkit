@@ -21,16 +21,23 @@ pub async fn chat_topk(
     temperature: Some(temperature),
     top_k: Some(top_k),
   }
-  let (code, reason, text) = @lib.timed_post(
-    "\{config.base_url}/chat/completions",
-    request.to_json(),
-    headers={
-      "Authorization": "Bearer \{config.api_key}",
-      "Content-Type": "application/json",
-    },
-  )
-  guard code is (200..=299) else {
-    fail("Chat request failed: \{code} \{reason}")
+  // Check for mock mode
+  let text = match @lib.try_mock(config) {
+    Some(mock_body) => mock_body
+    None => {
+      let (code, reason, body) = @lib.timed_post(
+        "\{config.base_url}/chat/completions",
+        request.to_json(),
+        headers={
+          "Authorization": "Bearer \{config.api_key}",
+          "Content-Type": "application/json",
+        },
+      )
+      guard code is (200..=299) else {
+        fail("Chat request failed: \{code} \{reason}")
+      }
+      body
+    }
   }
   let resp : @lib.Response = @json.parse(text) |> @json.from_json()
   if resp.choices.length() == 0 {

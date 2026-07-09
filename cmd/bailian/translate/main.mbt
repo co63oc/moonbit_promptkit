@@ -19,40 +19,54 @@ let base_url : String = @lib.get_env_var(
 )
 
 ///|
-let mock_body = "{\"choices\":[{\"message\":{\"content\":\"Hello world\",\"role\":\"assistant\"},\"finish_reason\":\"stop\",\"index\":0,\"logprobs\":null}],\"object\":\"chat.completion\",\"usage\":{\"prompt_tokens\":32,\"completion_tokens\":2,\"total_tokens\":34},\"created\":1783499963,\"system_fingerprint\":null,\"model\":\"qwen-mt-flash\",\"id\":\"chatcmpl-8aff1694-7cd0-906f-a6bf-e9232826f164\"}"
-
-///|
-let config : @lib.ClientConfig = @lib.make_client_config(
-  api_key,
-  base_url,
-  mock_body=Some(mock_body),
-)
-
-///|
 async fn main {
+  // Load mock data for demos
+  let mock_demo1 = @lib.read_file("cmd/bailian/translate/mocks/demo1.json")
+  let mock_demo2 = @lib.read_file("cmd/bailian/translate/mocks/demo2.json")
+  let mock_demo3 = @lib.read_file("cmd/bailian/translate/mocks/demo3.json")
+  let mock_demo4a = @lib.read_file("cmd/bailian/translate/mocks/demo4a.json")
+  let mock_demo4b = @lib.read_file("cmd/bailian/translate/mocks/demo4b.json")
+  let mock_demo5 = @lib.read_file("cmd/bailian/translate/mocks/demo5.json")
+  let mock_demo6 = @lib.read_file("cmd/bailian/translate/mocks/demo6.json")
+
   println("=== 通义千问翻译模型 (Qwen-MT) 示例 ===\n")
 
   // Demo 1: 基础翻译 (中译英)
   println("--- Demo 1: 基础翻译 (中译英) ---")
+  let config1 = @lib.make_client_config(
+    api_key,
+    base_url,
+    mock_body=Some(mock_demo1),
+  )
   let text1 = "我看到这个视频后没有笑"
-  let result1 = @mt.translate(config, text1, "Chinese", "English")
+  let result1 = @mt.translate(config1, text1, "Chinese", "English")
   println("原文: " + text1)
   println("译文: " + result1)
   println("")
 
   // Demo 2: 自动检测源语种
   println("--- Demo 2: 自动检测源语种 (auto) ---")
+  let config2 = @lib.make_client_config(
+    api_key,
+    base_url,
+    mock_body=Some(mock_demo2),
+  )
   let text2 = "Hello, how are you today?"
-  let result2 = @mt.translate(config, text2, "auto", "Chinese")
+  let result2 = @mt.translate(config2, text2, "auto", "Chinese")
   println("原文: " + text2)
   println("译文: " + result2)
   println("")
 
   // Demo 3: 使用指定模型 (qwen-mt-plus 翻译质量最高)
   println("--- Demo 3: 使用 qwen-mt-plus 高质量翻译 ---")
+  let config3 = @lib.make_client_config(
+    api_key,
+    base_url,
+    mock_body=Some(mock_demo3),
+  )
   let text3 = "量子计算是一种利用量子力学现象进行信息处理的计算方式。"
   let result3 = @mt.translate_with_model(
-    config, text3, "Chinese", "English", "qwen-mt-plus",
+    config3, text3, "Chinese", "English", "qwen-mt-plus",
   )
   println("原文: " + text3)
   println("译文: " + result3)
@@ -64,7 +78,12 @@ async fn main {
   println("原文: " + text4)
 
   println("\n[不使用术语表]")
-  let result4a = @mt.translate(config, text4, "Chinese", "English")
+  let config4a = @lib.make_client_config(
+    api_key,
+    base_url,
+    mock_body=Some(mock_demo4a),
+  )
+  let result4a = @mt.translate(config4a, text4, "Chinese", "English")
   println("译文: " + result4a)
 
   println("\n[使用术语表]")
@@ -72,17 +91,27 @@ async fn main {
     @mt.translation_term("生物传感器", "biological sensor"),
     @mt.translation_term("身体健康状况", "health status of the body"),
   ]
+  let config4b = @lib.make_client_config(
+    api_key,
+    base_url,
+    mock_body=Some(mock_demo4b),
+  )
   let result4b = @mt.translate_with_terms(
-    config, text4, "Chinese", "English", terms,
+    config4b, text4, "Chinese", "English", terms,
   )
   println("译文: " + result4b)
   println("")
 
   // Demo 5: 领域提示 (domain hint)
   println("--- Demo 5: 领域提示 (Domain Hint) ---")
+  let config5 = @lib.make_client_config(
+    api_key,
+    base_url,
+    mock_body=Some(mock_demo5),
+  )
   let text5 = "The defendant was found guilty of breach of contract and ordered to pay damages."
   let result5 = @mt.translate_with_domain(
-    config, text5, "English", "Chinese", "legal",
+    config5, text5, "English", "Chinese", "legal",
   )
   println("原文: " + text5)
   println("译文: " + result5)
@@ -90,10 +119,15 @@ async fn main {
 
   // Demo 6: 流式输出 (Streaming)
   println("--- Demo 6: 流式输出 (Streaming) ---")
+  let config6 = @lib.make_client_config(
+    api_key,
+    base_url,
+    mock_body=Some(mock_demo6),
+  )
   let text6 = "人工智能正在改变我们的生活方式,从医疗诊断到自动驾驶,AI技术的应用越来越广泛。"
   println("原文: " + text6)
   println("译文 (流式): ")
-  let _ = @mt.translate_stream(config, text6, "Chinese", "English", fn(chunk) {
+  let _ = @mt.translate_stream(config6, text6, "Chinese", "English", fn(chunk) {
     println(chunk)
   })
 

@@ -96,7 +96,7 @@ async fn main {
     )
     println("")
   } catch {
-    _ => println("(对话分析需要有效的 API Key，Demo 跳过)\n")
+    e => println("(对话分析失败: \{e})\n")
   }
 
   println("=== 可用模型 ===")

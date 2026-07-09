@@ -263,7 +263,7 @@ pub async fn chat_with_tools(
 
 ///|
 /// Parse SSE stream data, extract content from choices
-fn parse_sse(body_text : String) -> String {
+pub fn parse_sse(body_text : String) -> String {
   let mut content = ""
   let lines = body_text.split("\n")
   for line in lines {

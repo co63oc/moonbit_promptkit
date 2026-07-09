@@ -10,6 +10,32 @@ pub let deep_research_default_model : String = "qwen-deep-research"
 /// DashScope API endpoint
 let dashscope_url : String = "https://dashscope.aliyuncs.com/api/v1/services/aigc/text-generation/generation"
 
+///|
+/// Extract content from deep research response JSON
+pub fn extract_content(response_text : String) -> String {
+  try {
+    let json = @json.parse(response_text)
+    match json {
+      Json::Object(obj) =>
+        match obj.get("output") {
+          Some(Json::Object(output)) =>
+            match output.get("message") {
+              Some(Json::Object(message)) =>
+                match message.get("content") {
+                  Some(Json::String(content)) => content
+                  _ => response_text
+                }
+              _ => response_text
+            }
+          _ => response_text
+        }
+      _ => response_text
+    }
+  } catch {
+    _ => response_text
+  }
+}
+
 ///| Start deep research with streaming output
 
 ///| Returns the complete research report
@@ -23,8 +49,9 @@ pub async fn research(
 ) -> String {
   match @lib.try_mock(config) {
     Some(body) => {
-      on_progress(body)
-      return body
+      let content = extract_content(body)
+      on_progress(content)
+      return content
     }
     None => ignore(())
   }
@@ -43,8 +70,9 @@ pub async fn research(
   guard code is (200..=299) else {
     fail("Research request failed: \{code} \{reason}")
   }
-  on_progress(text)
-  text
+  let content = extract_content(text)
+  on_progress(content)
+  content
 }
 
 ///|
@@ -57,8 +85,9 @@ pub async fn research_with_model(
 ) -> String {
   match @lib.try_mock(config) {
     Some(body) => {
-      on_progress(body)
-      return body
+      let content = extract_content(body)
+      on_progress(content)
+      return content
     }
     None => ignore(())
   }
@@ -73,8 +102,9 @@ pub async fn research_with_model(
   guard code is (200..=299) else {
     fail("Research request failed: \{code} \{reason}")
   }
-  on_progress(text)
-  text
+  let content = extract_content(text)
+  on_progress(content)
+  content
 }
 
 ///|
@@ -86,8 +116,9 @@ pub async fn research_with_messages(
 ) -> String {
   match @lib.try_mock(config) {
     Some(body) => {
-      on_progress(body)
-      return body
+      let content = extract_content(body)
+      on_progress(content)
+      return content
     }
     None => ignore(())
   }
@@ -105,6 +136,7 @@ pub async fn research_with_messages(
   guard code is (200..=299) else {
     fail("Research request failed: \{code} \{reason}")
   }
-  on_progress(text)
-  text
+  let content = extract_content(text)
+  on_progress(content)
+  content
 }

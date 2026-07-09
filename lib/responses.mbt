@@ -8,35 +8,79 @@
 pub struct ResponseTool {
   type_ : String
   vector_store_ids : Array[String]?
-} derive(ToJson(fields(type_(rename="type"))))
+}
+
+///|
+impl ToJson for ResponseTool with fn to_json(self : ResponseTool) -> Json {
+  match self.vector_store_ids {
+    Some(ids) =>
+      Json::object({
+        "type": Json::string(self.type_),
+        "vector_store_ids": Json::array(ids.map(fn(id) { Json::string(id) })),
+      })
+    None => Json::object({ "type": Json::string(self.type_) })
+  }
+}
 
 ///|
 /// Response API - Input text content
 pub struct InputText {
   type_ : String
   text : String
-} derive(ToJson(fields(type_(rename="type"))))
+}
+
+///|
+impl ToJson for InputText with fn to_json(self : InputText) -> Json {
+  Json::object({
+    "type": Json::string(self.type_),
+    "text": Json::string(self.text),
+  })
+}
 
 ///|
 /// Response API - Input image content
 pub struct InputImage {
   type_ : String
   image_url : String
-} derive(ToJson(fields(type_(rename="type"))))
+}
+
+///|
+impl ToJson for InputImage with fn to_json(self : InputImage) -> Json {
+  Json::object({
+    "type": Json::string(self.type_),
+    "image_url": Json::string(self.image_url),
+  })
+}
 
 ///|
 /// Response API - Input audio content
 pub struct InputAudio {
   type_ : String
   audio_url : String
-} derive(ToJson(fields(type_(rename="type"))))
+}
+
+///|
+impl ToJson for InputAudio with fn to_json(self : InputAudio) -> Json {
+  Json::object({
+    "type": Json::string(self.type_),
+    "audio_url": Json::string(self.audio_url),
+  })
+}
 
 ///|
 /// Response API - Input video content
 pub struct InputVideo {
   type_ : String
   video_url : String
-} derive(ToJson(fields(type_(rename="type"))))
+}
+
+///|
+impl ToJson for InputVideo with fn to_json(self : InputVideo) -> Json {
+  Json::object({
+    "type": Json::string(self.type_),
+    "video_url": Json::string(self.video_url),
+  })
+}
 
 ///|
 /// Response API - Input content item (union type simulation)

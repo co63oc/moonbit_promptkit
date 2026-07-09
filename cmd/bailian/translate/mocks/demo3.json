@@ -1,0 +1,23 @@
+{
+  "choices": [
+    {
+      "message": {
+        "content": "Quantum computing is a computational paradigm that leverages quantum-mechanical phenomena to process information.",
+        "role": "assistant"
+      },
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null
+    }
+  ],
+  "object": "chat.completion",
+  "usage": {
+    "prompt_tokens": 44,
+    "completion_tokens": 19,
+    "total_tokens": 63
+  },
+  "created": 1783563749,
+  "system_fingerprint": null,
+  "model": "qwen-mt-plus",
+  "id": "chatcmpl-a941a901-fdd8-9c3a-8eb1-73461b249b8a"
+}

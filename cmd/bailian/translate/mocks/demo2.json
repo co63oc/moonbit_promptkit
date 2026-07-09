@@ -1,0 +1,23 @@
+{
+  "choices": [
+    {
+      "message": {
+        "content": "你好，你今天怎么样？",
+        "role": "assistant"
+      },
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null
+    }
+  ],
+  "object": "chat.completion",
+  "usage": {
+    "prompt_tokens": 38,
+    "completion_tokens": 6,
+    "total_tokens": 44
+  },
+  "created": 1783563749,
+  "system_fingerprint": null,
+  "model": "qwen-mt-flash",
+  "id": "chatcmpl-6305b534-c124-9812-a76e-228a88d8c76a"
+}

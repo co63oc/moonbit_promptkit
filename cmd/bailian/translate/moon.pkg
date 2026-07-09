@@ -1,5 +1,6 @@
 import {
   "moonbitlang/async",
+  "moonbitlang/core/json",
   "co63oc/moonbit_promptkit/lib",
   "co63oc/moonbit_promptkit/lib/mt",
 }

@@ -1,0 +1,23 @@
+{
+  "choices": [
+    {
+      "message": {
+        "content": "被告被认定构成违约，并被判令支付赔偿金。",
+        "role": "assistant"
+      },
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null
+    }
+  ],
+  "object": "chat.completion",
+  "usage": {
+    "prompt_tokens": 47,
+    "completion_tokens": 12,
+    "total_tokens": 59
+  },
+  "created": 1783563751,
+  "system_fingerprint": null,
+  "model": "qwen-mt-flash",
+  "id": "chatcmpl-bc5ab15d-8aff-9a76-846d-bce0e2a688d8"
+}

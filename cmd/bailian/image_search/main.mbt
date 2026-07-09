@@ -19,17 +19,14 @@ let base_url : String = @lib.get_env_var(
 )
 
 ///|
-let mock_body = "{\"output\":[{\"type\":\"message\",\"status\":\"completed\",\"output\":\"[{\\\"title\\\":\\\"科技感背景图1\\\",\\\"url\\\":\\\"https://example.com/image1.jpg\\\"},{\\\"title\\\":\\\"科技感背景图2\\\",\\\"url\\\":\\\"https://example.com/image2.jpg\\\"}]\"}],\"output_text\":\"为您找到了以下相似风格的风景图。\",\"usage\":{\"total_tokens\":50,\"input_tokens\":20,\"output_tokens\":30}}"
-
-///|
-let config : @lib.ClientConfig = @lib.make_client_config(
-  api_key,
-  base_url,
-  mock_body=Some(mock_body),
-)
-
-///|
 async fn main {
+  let mock_body = @lib.read_file("cmd/bailian/image_search/mocks/demo1.json")
+  let config : @lib.ClientConfig = @lib.make_client_config(
+    api_key,
+    base_url,
+    mock_body=Some(mock_body),
+  )
+
   println("=== 图搜图示例 (Image Search) ===\n")
 
   // 示例图片 URL
@@ -105,6 +102,6 @@ async fn main {
       None => ignore(())
     }
   } catch {
-    _ => println("(图搜图需要有效的 API Key，Demo 跳过)")
+    e => println("(图搜图失败: \{e})")
   }
 }

@@ -1,0 +1,23 @@
+{
+  "choices": [
+    {
+      "message": {
+        "content": "Artificial intelligence is transforming our way of life; from medical diagnosis to autonomous driving, AI technologies are being applied across an ever-expanding range of fields.",
+        "role": "assistant"
+      },
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null
+    }
+  ],
+  "object": "chat.completion",
+  "usage": {
+    "prompt_tokens": 48,
+    "completion_tokens": 31,
+    "total_tokens": 79
+  },
+  "created": 1783563752,
+  "system_fingerprint": null,
+  "model": "qwen-mt-flash",
+  "id": "chatcmpl-7c12a8a4-4165-9d72-81cf-ac8811240a68"
+}

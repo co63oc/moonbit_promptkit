@@ -1,0 +1,23 @@
+{
+  "choices": [
+    {
+      "message": {
+        "content": "And this set of biological sensors employs graphene, a novel material; its target analytes are chemical elements, and its keen sense of smell enables it to reflect the health status of the body more deeply and accurately.",
+        "role": "assistant"
+      },
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null
+    }
+  ],
+  "object": "chat.completion",
+  "usage": {
+    "prompt_tokens": 121,
+    "completion_tokens": 42,
+    "total_tokens": 163
+  },
+  "created": 1783563751,
+  "system_fingerprint": null,
+  "model": "qwen-mt-flash",
+  "id": "chatcmpl-6b57b1db-ab49-929b-8498-187b003bd835"
+}

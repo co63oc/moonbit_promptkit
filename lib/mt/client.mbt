@@ -240,8 +240,16 @@ pub async fn translate_stream(
 ) -> String {
   match @lib.try_mock(config) {
     Some(body) => {
-      on_delta(body)
-      return body
+      let resp : @lib.Response = @json.from_json(@json.parse(body))
+      if resp.choices.length() == 0 {
+        fail("No translation result")
+      } else {
+        let content = @lib.extract_text_from_content(
+          resp.choices[0].message.content,
+        )
+        on_delta(content)
+        return content
+      }
     }
     None => ignore(())
   }
@@ -271,6 +279,7 @@ pub async fn translate_stream(
     fail("Translation request failed: \{response.code} \{response.reason}")
   }
   let body_text = body.text()
-  on_delta(body_text)
-  body_text
+  let content = @lib.parse_sse(body_text)
+  on_delta(content)
+  content
 }

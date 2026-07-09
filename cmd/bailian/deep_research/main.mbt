@@ -18,11 +18,12 @@ let base_url : String = @lib.get_env_var(
 
 ///|
 async fn main {
-  let mock_body = @lib.read_file("cmd/bailian/deep_research/mocks/demo1.json")
+  let mock_step1 = @lib.read_file("cmd/bailian/deep_research/mocks/demo1.json")
+  let mock_step2 = @lib.read_file("cmd/bailian/deep_research/mocks/demo2.json")
   let config : @lib.ClientConfig = @lib.make_client_config(
     api_key,
     base_url,
-    mock_body=Some(mock_body),
+    mock_body=Some(mock_step1),
   )
 
   println("=== Qwen-Deep-Research 深度研究模型示例 ===\n")
@@ -41,10 +42,16 @@ async fn main {
     })
     |> ignore
 
-    // 第二步：带上完整对话历史继续研究
+    // 第二步：带上完整对话历史继续研究（使用不同的 mock 数据）
     println("\n第二步：深入研究")
     let user_answer = "我主要关注个性化学习方面"
     println("用户回答: " + user_answer)
+
+    let config2 : @lib.ClientConfig = @lib.make_client_config(
+      api_key,
+      base_url,
+      mock_body=Some(mock_step2),
+    )
 
     let messages : Array[@lib.Message] = [
       @lib.user_message_with_text(initial_question),
@@ -53,13 +60,13 @@ async fn main {
       ),
       @lib.user_message_with_text(user_answer),
     ]
-    @lib_dr.research_with_messages(config, messages, fn(progress) {
+    @lib_dr.research_with_messages(config2, messages, fn(progress) {
       println(progress)
     })
     |> ignore
     println("\n研究完成!")
   } catch {
-    _ => println("(深度研究需要有效的 API Key，Demo 跳过)")
+    e => println("(深度研究失败: \{e})")
   }
   println("")
 

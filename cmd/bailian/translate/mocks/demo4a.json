@@ -1,0 +1,23 @@
+{
+  "choices": [
+    {
+      "message": {
+        "content": "This biosensor system leverages graphene, a cutting-edge material, with chemical elements as its target analytes. Its highly sensitive “sense of smell” enables it to provide a more comprehensive and precise assessment of health status.",
+        "role": "assistant"
+      },
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null
+    }
+  ],
+  "object": "chat.completion",
+  "usage": {
+    "prompt_tokens": 65,
+    "completion_tokens": 44,
+    "total_tokens": 109
+  },
+  "created": 1783563750,
+  "system_fingerprint": null,
+  "model": "qwen-mt-flash",
+  "id": "chatcmpl-4b8dc769-f38c-90a0-b74a-36872c6d530b"
+}

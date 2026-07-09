@@ -1,0 +1,23 @@
+{
+  "choices": [
+    {
+      "message": {
+        "content": "I didn’t laugh after watching this video.",
+        "role": "assistant"
+      },
+      "finish_reason": "stop",
+      "index": 0,
+      "logprobs": null
+    }
+  ],
+  "object": "chat.completion",
+  "usage": {
+    "prompt_tokens": 37,
+    "completion_tokens": 9,
+    "total_tokens": 46
+  },
+  "created": 1783563761,
+  "system_fingerprint": null,
+  "model": "qwen-mt-flash",
+  "id": "chatcmpl-a7ad93d2-75e0-91ce-aaf6-33802df4a68a"
+}
