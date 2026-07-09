@@ -1,0 +1,288 @@
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","created":1783567019,"object":"chat.completion.chunk","usage":null,"choices":[{"logprobs":null,"index":0,"delta":{"content":"","role":"assistant","reasoning_content":""},"finish_reason":null}]}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"用户"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"要求用3"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"句话介绍人工智能"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"的发展历史。\n"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"需要涵盖：起源"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"/早期、发展"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"/"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"低谷（AI寒冬"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"）、"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"现代/爆发（"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"深度学习与"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"当前）。\n\n第一"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"句：起源与"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"早期"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"探索（20"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"世纪5"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"0年代至7"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"0年代）。\n"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"第二"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"句：起伏与"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"算法"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"积累（20"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"世纪"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"80年代至"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"21世纪初，"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"经历AI寒冬与"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"专家系统的兴衰，"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"机器学习逐渐兴起）。"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"\n第三句"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"：现代突破与"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"爆发"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"（21世纪"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"10年代"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"至今，深度学习、"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"大模型引领的"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"繁荣）。\n\n草稿"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"1"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"：\n人工智能起源于"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"20世纪5"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"0年代，早期"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"研究者提出了符号主义"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"和逻辑推理等"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"基础概念，开启了"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"探索机器智能的"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"序幕。\n经历了"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"数次“AI寒冬"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"”"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"与技术路线的起伏"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"后，"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"随着算力的提升"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"和"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"大数据的积累，"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"机器学习在20"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"世纪末至2"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"1世纪初逐渐"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"取代传统规则系统"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"成为主流。\n"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"近年来，以深度"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"学习和大语言模型"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"为代表的"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"技术突破，推动"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"人工智能迎来了爆发式"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"发展，深刻"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"改变了人类社会的生产"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"与生活方式。\n\n"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"检查字数和句子"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"数：\n正好"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"3句话（以"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"句号结尾为准"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"）。\n内容涵盖了"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"起源"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"、发展/低谷"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"/转折、现代"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"爆发"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"。\n语言简"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"练、准确。"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"\n\n微调"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"：\n第一句"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"：人工智能起源于2"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"0世纪50"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"年代，早期学者"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"通过符号主义和"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"逻辑推理"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"等概念，开启了"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"让"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"机器模拟人类智能"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"的初步探索。"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"\n第二"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"句：在经历了"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"数次"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"因技术瓶颈导致的"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"“AI寒冬”"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"后，随着计算机"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"算力的飞跃和"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"海量"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"数据的积累，机器学习"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"逐渐崛起并成为研究"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"主流。\n第三"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"句：近年来，"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"得益于深度学习算法的"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"突破和大"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"模型的涌现，人工智能"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"迎来了"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"爆发式发展，"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"正"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"全面重塑人类社会的"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"生产与生活方式"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"。\n\n数一下"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"句号：3个"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"。\n逻辑"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"清晰，概括全面"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"。符合“3"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"句话”的要求"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"。\n直接输出"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":"。"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"人工智能起源于2","reasoning_content":""},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"0世纪50","reasoning_content":""},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"年代，早期学者","reasoning_content":""},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"通过符号主义和","reasoning_content":""},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"逻辑推理等概念","reasoning_content":""},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"，开启了让机器","reasoning_content":""},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"模拟人类智能的","reasoning_content":""},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"初步探索。\n\n","reasoning_content":""},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"在经历了数次因","reasoning_content":""},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"技术瓶颈导致的“","reasoning_content":""},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"AI寒冬”后","reasoning_content":""},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"，随着计算机算","reasoning_content":""},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"力的飞跃和海量","reasoning_content":""},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"数据的积累，机器学习","reasoning_content":""},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"逐渐崛起并取代","reasoning_content":""},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"传统规则系统","reasoning_content":""},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"成为研究主流。","reasoning_content":""},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"\n\n近年来，得益于","reasoning_content":""},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"深度学习算法的突破","reasoning_content":""},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"和大语言模型的涌现","reasoning_content":""},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"，","reasoning_content":""},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"人工智能迎来了爆发式","reasoning_content":""},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"发展，正全面","reasoning_content":""},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"重塑人类社会的生产","reasoning_content":""},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"与生活方式。","reasoning_content":""},"index":0,"finish_reason":null,"logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[{"delta":{"content":"","reasoning_content":""},"index":0,"finish_reason":"stop","logprobs":null}],"created":1783567019,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen3.7-plus","id":"chatcmpl-00814ba7-1603-9592-8a14-acc08718f78d","choices":[],"created":1783567019,"object":"chat.completion.chunk","usage":{"total_tokens":492,"completion_tokens":475,"prompt_tokens":17,"completion_tokens_details":{"reasoning_tokens":376,"text_tokens":475},"prompt_tokens_details":{"cached_tokens":0,"text_tokens":17}}}
+
+data: [DONE]
+

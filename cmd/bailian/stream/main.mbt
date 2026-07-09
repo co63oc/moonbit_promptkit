@@ -19,58 +19,58 @@ let base_url : String = @lib.get_env_var(
 )
 
 ///|
-let mock_body = "data: {\"model\":\"qwen-plus\",\"id\":\"chatcmpl-ef2163be-c382-9eea-bb28-776f62d453d5\",\"created\":1783500960,\"object\":\"chat.completion.chunk\",\"usage\":null,\"choices\":[{\"logprobs\":null,\"index\":0,\"delta\":{\"content\":\"\",\"role\":\"assistant\"},\"finish_reason\":null}]}\n\ndata: {\"model\":\"qwen-plus\",\"id\":\"chatcmpl-ef2163be-c382-9eea-bb28-776f62d453d5\",\"choices\":[{\"delta\":{\"content\":\"你好\"},\"index\":0,\"finish_reason\":null,\"logprobs\":null}],\"created\":1783500960,\"object\":\"chat.completion.chunk\",\"usage\":null}\n\ndata: {\"model\":\"qwen-plus\",\"id\":\"chatcmpl-ef2163be-c382-9eea-bb28-776f62d453d5\",\"choices\":[{\"delta\":{\"content\":\"！我是通\"},\"index\":0,\"finish_reason\":null,\"logprobs\":null}],\"created\":1783500960,\"object\":\"chat.completion.chunk\",\"usage\":null}\n\ndata: {\"model\":\"qwen-plus\",\"id\":\"chatcmpl-ef2163be-c382-9eea-bb28-776f62d453d5\",\"choices\":[{\"delta\":{\"content\":\"义千问\"},\"index\":0,\"finish_reason\":null,\"logprobs\":null}],\"created\":1783500960,\"object\":\"chat.completion.chunk\",\"usage\":null}\n\ndata: {\"model\":\"qwen-plus\",\"id\":\"chatcmpl-ef2163be-c382-9eea-bb28-776f62d453d5\",\"choices\":[{\"delta\":{\"content\":\"（Qwen\"},\"index\":0,\"finish_reason\":null,\"logprobs\":null}],\"created\":1783500960,\"object\":\"chat.completion.chunk\",\"usage\":null}\n\ndata: {\"model\":\"qwen-plus\",\"id\":\"chatcmpl-ef2163be-c382-9eea-bb28-776f62d453d5\",\"choices\":[{\"delta\":{\"content\":\"），阿里巴巴集团旗下的超\"},\"index\":0,\"finish_reason\":null,\"logprobs\":null}],\"created\":1783500960,\"object\":\"chat.completion.chunk\",\"usage\":null}\n\ndata: {\"model\":\"qwen-plus\",\"id\":\"chatcmpl-ef2163be-c382-9eea-bb28-776f62d453d5\",\"choices\":[{\"delta\":{\"content\":\"大规模语言模型，能够回答\"},\"index\":0,\"finish_reason\":null,\"logprobs\":null}],\"created\":1783500960,\"object\":\"chat.completion.chunk\",\"usage\":null}\n\ndata: {\"model\":\"qwen-plus\",\"id\":\"chatcmpl-ef2163be-c382-9eea-bb28-776f62d453d5\",\"choices\":[{\"delta\":{\"content\":\"问题、创作文字（\"},\"index\":0,\"finish_reason\":null,\"logprobs\":null}],\"created\":1783500960,\"object\":\"chat.completion.chunk\",\"usage\":null}\n\ndata: {\"model\":\"qwen-plus\",\"id\":\"chatcmpl-ef2163be-c382-9eea-bb28-776f62d453d5\",\"choices\":[{\"delta\":{\"content\":\"如写故事、公\"},\"index\":0,\"finish_reason\":null,\"logprobs\":null}],\"created\":1783500960,\"object\":\"chat.completion.chunk\",\"usage\":null}\n\ndata: {\"model\":\"qwen-plus\",\"id\":\"chatcmpl-ef2163be-c382-9eea-bb28-776f62d453d5\",\"choices\":[{\"delta\":{\"content\":\"文、邮件、剧本等\"},\"index\":0,\"finish_reason\":null,\"logprobs\":null}],\"created\":1783500960,\"object\":\"chat.completion.chunk\",\"usage\":null}\n\ndata: {\"model\":\"qwen-plus\",\"id\":\"chatcmpl-ef2163be-c382-9eea-bb28-776f62d453d5\",\"choices\":[{\"delta\":{\"content\":\"）、进行逻辑推理、\"},\"index\":0,\"finish_reason\":null,\"logprobs\":null}],\"created\":1783500960,\"object\":\"chat.completion.chunk\",\"usage\":null}\n\ndata: {\"model\":\"qwen-plus\",\"id\":\"chatcmpl-ef2163be-c382-9eea-bb28-776f62d453d5\",\"choices\":[{\"delta\":{\"content\":\"编程，还能表达观点，\"},\"index\":0,\"finish_reason\":null,\"logprobs\":null}],\"created\":1783500960,\"object\":\"chat.completion.chunk\",\"usage\":null}\n\ndata: {\"model\":\"qwen-plus\",\"id\":\"chatcmpl-ef2163be-c382-9eea-bb28-776f62d453d5\",\"choices\":[{\"delta\":{\"content\":\"甚至玩游戏，支持\"},\"index\":0,\"finish_reason\":null,\"logprobs\":null}],\"created\":1783500960,\"object\":\"chat.completion.chunk\",\"usage\":null}\n\ndata: {\"model\":\"qwen-plus\",\"id\":\"chatcmpl-ef2163be-c382-9eea-bb28-776f62d453d5\",\"choices\":[{\"delta\":{\"content\":\"多种语言，随时\"},\"index\":0,\"finish_reason\":null,\"logprobs\":null}],\"created\":1783500960,\"object\":\"chat.completion.chunk\",\"usage\":null}\n\ndata: {\"model\":\"qwen-plus\",\"id\":\"chatcmpl-ef2163be-c382-9eea-bb28-776f62d453d5\",\"choices\":[{\"delta\":{\"content\":\"为你提供帮助！\"},\"index\":0,\"finish_reason\":null,\"logprobs\":null}],\"created\":1783500960,\"object\":\"chat.completion.chunk\",\"usage\":null}\n\ndata: {\"model\":\"qwen-plus\",\"id\":\"chatcmpl-ef2163be-c382-9eea-bb28-776f62d453d5\",\"choices\":[{\"delta\":{\"content\":\"😊\"},\"index\":0,\"finish_reason\":null,\"logprobs\":null}],\"created\":1783500960,\"object\":\"chat.completion.chunk\",\"usage\":null}\n\ndata: {\"model\":\"qwen-plus\",\"id\":\"chatcmpl-ef2163be-c382-9eea-bb28-776f62d453d5\",\"choices\":[{\"delta\":{\"content\":\"\"},\"index\":0,\"finish_reason\":\"stop\",\"logprobs\":null}],\"created\":1783500960,\"object\":\"chat.completion.chunk\",\"usage\":null}\n\ndata: {\"model\":\"qwen-plus\",\"id\":\"chatcmpl-ef2163be-c382-9eea-bb28-776f62d453d5\",\"choices\":[],\"created\":1783500960,\"object\":\"chat.completion.chunk\",\"usage\":{\"total_tokens\":77,\"completion_tokens\":61,\"prompt_tokens\":16,\"prompt_tokens_details\":{\"cached_tokens\":0}}}\n\ndata: [DONE]\n\n"
-
-///|
-let config : @lib.ClientConfig = @lib.make_client_config(
-  api_key,
-  base_url,
-  mock_body=Some(mock_body),
-)
-
-///|
 async fn main {
-  println("=== 演示1：流式输出（图片理解）===")
+  println("=== 流式输出示例（阿里云百炼）===\n")
+
+  // Demo 1: 图片理解模型流式输出
+  println("--- Demo 1: 图片理解模型流式输出 ---")
+  let mock_body1 = @lib.read_file("cmd/bailian/stream/mocks/demo1_stream.txt")
+  let config1 : @lib.ClientConfig = @lib.make_client_config(
+    api_key,
+    base_url,
+    mock_body=Some(mock_body1),
+  )
+
   let image_url = "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20241022/emyrja/dog_and_girl.jpeg"
-  let messages1 : Array[@lib.Message] = [
+  let query = "图中描绘的是什么景象？"
+
+  println("图片 URL: \{image_url}")
+  println("问题: \{query}")
+  println("\n流式输出:")
+
+  let messages1 = [
     @lib.user_message_with_contents([
       @lib.image_content(image_url),
-      @lib.text_content("图中描绘的是什么景象？"),
+      @lib.text_content(query),
     ]),
   ]
-  println("用户: 图中描绘的是什么景象？")
-  println("助手: ")
-  let full_text1 = @lib.chat_stream(config, "qwen3-vl-plus", messages1, fn(
-    text,
-  ) {
-    println(text)
+  @lib.chat_stream(config1, "qwen3-vl-plus", messages1, fn(chunk) {
+    println(chunk)
   })
-  println("完整回复: \{full_text1}")
+  |> ignore
+  println("")
 
-  println("\n=== 演示2：流式输出（纯文本对话）===")
-  let messages2 : Array[@lib.Message] = [
-    @lib.user_message_with_text(
-      "请用3句话介绍一下人工智能的发展历史",
-    ),
-  ]
-  println("用户: 请用3句话介绍一下人工智能的发展历史")
-  println("助手: ")
-  let full_text2 = @lib.chat_stream(config, "qwen3.7-plus", messages2, fn(
-    text,
-  ) {
-    println(text)
+  // Demo 2: 纯文本模型流式输出
+  println("--- Demo 2: 纯文本模型流式输出 ---")
+  let mock_body2 = @lib.read_file("cmd/bailian/stream/mocks/demo2_stream.txt")
+  let config2 : @lib.ClientConfig = @lib.make_client_config(
+    api_key,
+    base_url,
+    mock_body=Some(mock_body2),
+  )
+
+  let question = "请用3句话介绍一下人工智能的发展历史"
+  println("问题: \{question}")
+  println("\n流式输出:")
+
+  let messages2 = [@lib.user_message_with_text(question)]
+  @lib.chat_stream(config2, "qwen3.7-plus", messages2, fn(chunk) {
+    println(chunk)
   })
-  println("完整回复: \{full_text2}")
+  |> ignore
+  println("")
 
-  println("\n=== 演示3：非流式输出 ===")
-  if api_key != "" {
-    let messages3 : Array[@lib.Message] = [
-      @lib.user_message_with_text("你好，请简单介绍一下你自己"),
-    ]
-    println("用户: 你好，请简单介绍一下你自己")
-    let response3 = @lib.chat(config, "qwen3.7-plus", messages3)
-    println("助手: \{@lib.extract_text_from_content(response3.content)}")
-  } else {
-    println("(非流式 Demo 需要有效的 API Key，跳过)")
-  }
+  println("=== 提示 ===")
+  println("使用前请设置 BAILIAN_API_KEY 环境变量")
+  println("可选：设置 BAILIAN_BASE_URL 指定 API 地址")
 }
