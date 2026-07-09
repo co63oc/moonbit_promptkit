@@ -19,7 +19,7 @@ let base_url : String = @lib.get_env_var(
 )
 
 ///|
-let mock_body = "{\"request_id\":\"ac5ff29c-ad17-97db-88da-9e952f92a5bb\",\"output\":{\"task_id\":\"a6c9b91a-4af9-457f-88ef-0189ce09ff58\",\"task_status\":\"PENDING\"}}"
+let mock_body = "{\"request_id\":\"ac5ff29c-ad17-97db-88da-9e952f92a5bb\",\"output\":{\"task_id\":\"a6c9b91a-4af9-457f-88ef-0189ce09ff58\",\"task_status\":\"SUCCEEDED\",\"video_url\":\"https://example.com/mock-vace.mp4\"}}"
 
 ///|
 let config : @lib.ClientConfig = @lib.make_client_config(

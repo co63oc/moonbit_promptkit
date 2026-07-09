@@ -201,7 +201,7 @@ pub async fn responses_create(
   tools : Array[ResponseTool]?,
 ) -> ResponsesResponse {
   let request = ResponsesRequest::{ model, input, tools, stream: Some(false) }
-  let (response, body) = @http.post(
+  let (code, reason, text) = timed_post(
     "\{config.base_url}/responses",
     request.to_json(),
     headers={
@@ -209,10 +209,10 @@ pub async fn responses_create(
       "Content-Type": "application/json",
     },
   )
-  guard response.code is (200..=299) else {
-    fail("HTTP request failed: \{response.code} \{response.reason}")
+  guard code is (200..=299) else {
+    fail("HTTP request failed: \{code} \{reason}")
   }
-  body.json() |> @json.from_json()
+  @json.parse(text) |> @json.from_json()
 }
 
 ///|

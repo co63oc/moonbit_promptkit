@@ -32,14 +32,18 @@ pub async fn upload_file(
   body = body + "Content-Type: text/plain\r\n\r\n"
   body = body + file_content + "\r\n"
   body = body + "--" + boundary + "--\r\n"
-  let (response, body_resp) = @http.post("\{config.base_url}/files", body, headers={
-    "Authorization": "Bearer \{config.api_key}",
-    "Content-Type": "multipart/form-data; boundary=" + boundary,
-  })
-  guard response.code is (200..=299) else {
-    fail("File upload failed: \{response.code} \{response.reason}")
+  let (code, reason, text) = @lib.timed_post_text(
+    "\{config.base_url}/files",
+    body,
+    headers={
+      "Authorization": "Bearer \{config.api_key}",
+      "Content-Type": "multipart/form-data; boundary=" + boundary,
+    },
+  )
+  guard code is (200..=299) else {
+    fail("File upload failed: \{code} \{reason}")
   }
-  @json.from_json(body_resp.json())
+  @json.parse(text) |> @json.from_json()
 }
 
 ///| 使用已上传的 file_id 进行文档问答（非流式）

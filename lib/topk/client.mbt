@@ -21,7 +21,7 @@ pub async fn chat_topk(
     temperature: Some(temperature),
     top_k: Some(top_k),
   }
-  let (response, body) = @http.post(
+  let (code, reason, text) = @lib.timed_post(
     "\{config.base_url}/chat/completions",
     request.to_json(),
     headers={
@@ -29,10 +29,10 @@ pub async fn chat_topk(
       "Content-Type": "application/json",
     },
   )
-  guard response.code is (200..=299) else {
-    fail("Chat request failed: \{response.code} \{response.reason}")
+  guard code is (200..=299) else {
+    fail("Chat request failed: \{code} \{reason}")
   }
-  let resp : @lib.Response = body.json() |> @json.from_json()
+  let resp : @lib.Response = @json.parse(text) |> @json.from_json()
   if resp.choices.length() == 0 {
     fail("No response from model")
   } else {
@@ -58,7 +58,7 @@ pub async fn chat_topk_stream(
     temperature: Some(temperature),
     top_k: Some(top_k),
   }
-  let (response, body) = @http.post(
+  let (code, reason, text) = @lib.timed_post(
     "\{config.base_url}/chat/completions",
     request.to_json(),
     headers={
@@ -66,10 +66,9 @@ pub async fn chat_topk_stream(
       "Content-Type": "application/json",
     },
   )
-  guard response.code is (200..=299) else {
-    fail("Chat request failed: \{response.code} \{response.reason}")
+  guard code is (200..=299) else {
+    fail("Chat request failed: \{code} \{reason}")
   }
-  let body_text = body.text()
-  on_delta(body_text)
+  on_delta(text)
   ""
 }

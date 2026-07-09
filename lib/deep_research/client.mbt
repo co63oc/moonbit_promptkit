@@ -21,6 +21,13 @@ pub async fn research(
   question : String,
   on_progress : (String) -> Unit,
 ) -> String {
+  match @lib.try_mock(config) {
+    Some(body) => {
+      on_progress(body)
+      return body
+    }
+    None => ignore(())
+  }
   let messages : Array[@lib.Message] = [@lib.user_message_with_text(question)]
   let input = DeepResearchInput::{ messages, }
   let request = DeepResearchRequest::{
@@ -28,17 +35,16 @@ pub async fn research(
     input,
     parameters: None,
   }
-  let (response, body) = @http.post(dashscope_url, request.to_json(), headers={
+  let (code, reason, text) = @lib.timed_post(dashscope_url, request.to_json(), headers={
     "Authorization": "Bearer \{config.api_key}",
     "Content-Type": "application/json",
     "X-DashScope-SSE": "enable",
   })
-  guard response.code is (200..=299) else {
-    fail("Research request failed: \{response.code} \{response.reason}")
+  guard code is (200..=299) else {
+    fail("Research request failed: \{code} \{reason}")
   }
-  let body_text = body.text()
-  on_progress(body_text)
-  body_text
+  on_progress(text)
+  text
 }
 
 ///|
@@ -49,20 +55,26 @@ pub async fn research_with_model(
   model : String,
   on_progress : (String) -> Unit,
 ) -> String {
+  match @lib.try_mock(config) {
+    Some(body) => {
+      on_progress(body)
+      return body
+    }
+    None => ignore(())
+  }
   let messages : Array[@lib.Message] = [@lib.user_message_with_text(question)]
   let input = DeepResearchInput::{ messages, }
   let request = DeepResearchRequest::{ model, input, parameters: None }
-  let (response, body) = @http.post(dashscope_url, request.to_json(), headers={
+  let (code, reason, text) = @lib.timed_post(dashscope_url, request.to_json(), headers={
     "Authorization": "Bearer \{config.api_key}",
     "Content-Type": "application/json",
     "X-DashScope-SSE": "enable",
   })
-  guard response.code is (200..=299) else {
-    fail("Research request failed: \{response.code} \{response.reason}")
+  guard code is (200..=299) else {
+    fail("Research request failed: \{code} \{reason}")
   }
-  let body_text = body.text()
-  on_progress(body_text)
-  body_text
+  on_progress(text)
+  text
 }
 
 ///|
@@ -72,21 +84,27 @@ pub async fn research_with_messages(
   messages : Array[@lib.Message],
   on_progress : (String) -> Unit,
 ) -> String {
+  match @lib.try_mock(config) {
+    Some(body) => {
+      on_progress(body)
+      return body
+    }
+    None => ignore(())
+  }
   let input = DeepResearchInput::{ messages, }
   let request = DeepResearchRequest::{
     model: deep_research_default_model,
     input,
     parameters: None,
   }
-  let (response, body) = @http.post(dashscope_url, request.to_json(), headers={
+  let (code, reason, text) = @lib.timed_post(dashscope_url, request.to_json(), headers={
     "Authorization": "Bearer \{config.api_key}",
     "Content-Type": "application/json",
     "X-DashScope-SSE": "enable",
   })
-  guard response.code is (200..=299) else {
-    fail("Research request failed: \{response.code} \{response.reason}")
+  guard code is (200..=299) else {
+    fail("Research request failed: \{code} \{reason}")
   }
-  let body_text = body.text()
-  on_progress(body_text)
-  body_text
+  on_progress(text)
+  text
 }

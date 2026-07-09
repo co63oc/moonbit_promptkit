@@ -1,0 +1,390 @@
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","created":1783503270,"object":"chat.completion.chunk","usage":null,"choices":[{"logprobs":null,"index":0,"delta":{"content":"","role":"assistant","reasoning_content":""},"finish_reason":null}]}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"我现在要解决"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"鸡兔同"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"笼的问题，"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"题目是头有35"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"，足有94"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"，问鸡兔各多少"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"。首先，我需要回忆"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"一下鸡兔同笼问题"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"的解法，"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"通常可以用假设法或者方"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"程组来解"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"。首先，头"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"的数量是35"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"，说明鸡和兔"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"的总数是35，"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"因为每个动物都有一个"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"头。然后，足"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"的数量是94，鸡"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"有2只脚，"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"兔有4只脚。\n\n"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"首先，设鸡的数量为"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"x，兔的数量为y"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"。那么根据头的数量"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"，可以得到第一个方程"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"：x + y = "},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"35。然后"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"，根据脚的数量，"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"鸡有2x只脚"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"，兔有4y只"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"脚，所以第二个"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"方程是2x +"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":" 4y = 9"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"4。\n\n接下来，我需要"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"解这个方程组"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"。可以用代入法，"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"比如从第一个方程解"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"出x = 35"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":" - y，然后代入"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"第二个方程。"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"代入后得到2("},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"35 - y) +"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":" 4y = 9"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"4。展开计算：7"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"0 - 2y +"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":" 4y = 9"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"4，也就是7"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"0 + 2y ="},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":" 94，然后"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"2y = 2"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"4，所以y = "},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"12。那么x"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":" = 35 - "},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"12 = 2"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"3。所以鸡"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"有23只"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"，兔有12"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"只。\n\n不过，为了确认"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"是否正确，我可以"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"再检查一下。鸡"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"23只，脚是"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"23×2=4"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"6，兔12只"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"，脚是12×"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"4=48，总"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"脚数是46+"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"48=94，"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"正好符合题目中的条件。"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"头数23+1"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"2=35，也"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"符合。所以答案"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"应该是正确的。\n\n另外"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"，也可以用假设法来"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"验证。假设3"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"5只都是鸡"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"，那么脚数"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"应该是35×2"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"=70，但"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"实际有94只脚"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"，多了94-7"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"0=24只脚"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"。这是因为每把"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"一只鸡换成兔"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"，脚数会"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"增加2（因为兔"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"比鸡多2只脚"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"），所以需要换2"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"4÷2=1"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"2只，也就是"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"兔有12"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"只，鸡就是3"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"5-12=2"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"3只，结果和之前"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"一致。\n\n或者假设"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"都是兔，那么脚"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"数是35×"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"4=140，"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"比实际多了1"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"40-94="},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"46只脚，每"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"把一只兔换成鸡"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"，脚数减少2，"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"所以需要换46÷"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"2=23只，"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"也就是鸡有23只"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"，兔有3"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"5-23=1"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"2只，同样"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"结果正确。\n\n所以无论是"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"用方程组"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"还是假设法，结果"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"都是鸡23只，"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"","reasoning_content":"兔12只。"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"**答案：鸡"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"有23只，兔"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"有12只。**\n\n"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"**解析过程：**\n\n1"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":". **设定变量：**"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"  \n   设鸡的数量为"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" $ x $，兔的数量"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"为 $ y $。\n\n2"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":". **根据题"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"意列方程：**"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"  \n   -"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" 头的总数：$ x"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" + y = 35"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" $  \n   -"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" 脚的总数：$"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" 2x + 4"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"y = 94 $\n\n"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"3. **解方程"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"组：**  \n   -"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" 由第一个方程得"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" $ x = 35"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" - y $。"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"  \n   - 代入"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"第二个方程：  \n    "},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" $$\n     2("},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"35 - y) +"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" 4y = 9"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"4 \\implies "},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"70 + 2y"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" = 94 \\impl"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"ies 2y ="},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" 24 \\implies"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" y = 12\n"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"     $$  \n   - "},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"代入 $ x = "},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"35 - y $"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" 得 $ x = "},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"23 $。\n\n4."},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" **验证结果：**  \n"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"   - 鸡脚"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"数：$ 23"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" \\times 2 = "},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"46 $  \n   -"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" 兔脚数"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"：$ 12 \\"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"times 4 = 4"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"8 $  \n   -"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" 总脚数：$ "},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"46 + 48"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" = 94 $（"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"符合题目条件）  \n"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"   - 总头数"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"：$ 23 +"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" 12 = 3"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"5 $（符合题目"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"条件）\n\n5. **假设"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"法验证：**  \n  "},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" - 假设"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"全为鸡，"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"脚数应为 $ "},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"35 \\times 2"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" = 70 $，"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"实际多出 $ 9"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"4 - 70 ="},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" 24 $ 只"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"脚。  \n   -"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" 每将1"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"只鸡换成兔"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"，脚数增加2"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"，需换 $ "},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"24 \\div 2"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" = 12 $"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" 只，故兔有1"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"2只，鸡有2"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"3只。\n\n**结论"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"：**  \n鸡有 **"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"23** 只，"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":"兔有 **12**"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":" 只。"},"index":0,"finish_reason":null,"logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[{"delta":{"content":""},"index":0,"finish_reason":"stop","logprobs":null}],"created":1783503270,"object":"chat.completion.chunk","usage":null}
+
+data: {"model":"qwen-plus","id":"chatcmpl-956a93e5-7ca6-93c7-8662-28041e81242b","choices":[],"created":1783503270,"object":"chat.completion.chunk","usage":{"total_tokens":1063,"completion_tokens":1034,"prompt_tokens":29,"completion_tokens_details":{"reasoning_tokens":584},"prompt_tokens_details":{"cached_tokens":0}}}
+
+data: [DONE]
+

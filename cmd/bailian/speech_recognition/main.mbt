@@ -19,7 +19,7 @@ let base_url : String = @lib.get_env_var(
 )
 
 ///|
-let mock_body = "{\"request_id\":\"135a7732-4a41-9aaf-a76f-b338e1a7bbe4\",\"output\":{\"task_id\":\"0f993915-2590-4143-ac62-2eacb01f6815\",\"task_status\":\"PENDING\"}}"
+let mock_body = "{\"request_id\":\"135a7732-4a41-9aaf-a76f-b338e1a7bbe4\",\"output\":{\"task_id\":\"0f993915-2590-4143-ac62-2eacb01f6815\",\"task_status\":\"SUCCEEDED\",\"results\":[{\"transcription_url\":\"https://example.com/mock-transcript.json\"}]}}"
 
 ///|
 let config : @lib.ClientConfig = @lib.make_client_config(

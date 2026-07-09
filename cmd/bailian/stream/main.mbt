@@ -63,10 +63,14 @@ async fn main {
   println("完整回复: \{full_text2}")
 
   println("\n=== 演示3：非流式输出 ===")
-  let messages3 : Array[@lib.Message] = [
-    @lib.user_message_with_text("你好，请简单介绍一下你自己"),
-  ]
-  println("用户: 你好，请简单介绍一下你自己")
-  let response3 = @lib.chat(config, "qwen3.7-plus", messages3)
-  println("助手: \{@lib.extract_text_from_content(response3.content)}")
+  if api_key != "" {
+    let messages3 : Array[@lib.Message] = [
+      @lib.user_message_with_text("你好，请简单介绍一下你自己"),
+    ]
+    println("用户: 你好，请简单介绍一下你自己")
+    let response3 = @lib.chat(config, "qwen3.7-plus", messages3)
+    println("助手: \{@lib.extract_text_from_content(response3.content)}")
+  } else {
+    println("(非流式 Demo 需要有效的 API Key，跳过)")
+  }
 }

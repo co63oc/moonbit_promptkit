@@ -38,26 +38,32 @@ async fn main {
 
   // 第一步：发送初始问题，获取模型的反问
   println("开始研究...")
-  @lib_dr.research(config, initial_question, fn(progress) { println(progress) })
-  |> ignore
+  try {
+    @lib_dr.research(config, initial_question, fn(progress) {
+      println(progress)
+    })
+    |> ignore
 
-  // 第二步：带上完整对话历史继续研究
-  println("\n第二步：深入研究")
-  let user_answer = "我主要关注个性化学习方面"
-  println("用户回答: " + user_answer)
+    // 第二步：带上完整对话历史继续研究
+    println("\n第二步：深入研究")
+    let user_answer = "我主要关注个性化学习方面"
+    println("用户回答: " + user_answer)
 
-  let messages : Array[@lib.Message] = [
-    @lib.user_message_with_text(initial_question),
-    @lib.assistant_message(
-      "请告诉我您希望重点研究人工智能在教育中的哪些具体应用场景？",
-    ),
-    @lib.user_message_with_text(user_answer),
-  ]
-  @lib_dr.research_with_messages(config, messages, fn(progress) {
-    println(progress)
-  })
-  |> ignore
-  println("\n研究完成!")
+    let messages : Array[@lib.Message] = [
+      @lib.user_message_with_text(initial_question),
+      @lib.assistant_message(
+        "请告诉我您希望重点研究人工智能在教育中的哪些具体应用场景？",
+      ),
+      @lib.user_message_with_text(user_answer),
+    ]
+    @lib_dr.research_with_messages(config, messages, fn(progress) {
+      println(progress)
+    })
+    |> ignore
+    println("\n研究完成!")
+  } catch {
+    _ => println("(深度研究需要有效的 API Key，Demo 跳过)")
+  }
   println("")
 
   println("=== 可用模型 ===")

@@ -116,6 +116,19 @@ pub async fn query_transcription_task(
   config : @lib.ClientConfig,
   task_id : String,
 ) -> (String, String) {
+  match @lib.try_mock(config) {
+    Some(body) => {
+      let resp : Json = @json.from_json(@json.parse(body))
+      let status = extract_status(resp)
+      if status == "SUCCEEDED" {
+        let result_url = extract_result_url(resp)
+        return (status, result_url)
+      } else {
+        return (status, "")
+      }
+    }
+    None => ignore(())
+  }
   let url = "https://dashscope.aliyuncs.com/api/v1/tasks/\{task_id}"
   let (response, body) = @http.get(url, headers={
     "Authorization": "Bearer \{config.api_key}",

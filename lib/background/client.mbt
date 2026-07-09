@@ -98,6 +98,18 @@ pub async fn query_task(
   config : @lib.ClientConfig,
   task_id : String,
 ) -> (String, Array[String]) {
+  match @lib.try_mock(config) {
+    Some(body) => {
+      let resp : Json = @json.from_json(@json.parse(body))
+      let status = extract_status(resp)
+      if status == "SUCCEEDED" {
+        return (status, extract_urls(resp))
+      } else {
+        return (status, [])
+      }
+    }
+    None => ignore(())
+  }
   let (response, resp_body) = @http.get("\{dashscope_base}/tasks/\{task_id}", headers={
     "Authorization": "Bearer \{config.api_key}",
   })

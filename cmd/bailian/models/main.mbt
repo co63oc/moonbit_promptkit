@@ -47,24 +47,33 @@ async fn main {
   println("")
 
   // Demo 2: 获取单个模型详情
-  if models.data.length() > 0 {
+  if api_key != "" {
+    if models.data.length() > 0 {
+      let first_model_id = models.data[0].id
+      println("--- Demo 2: 获取单个模型详情 ---")
+      let model_info = @lib.get_model(config, first_model_id)
+      println("模型 ID: " + model_info.id)
+      match model_info.object {
+        Some(obj) => println("对象类型: " + obj)
+        None => println("对象类型: (无)")
+      }
+      match model_info.owned_by {
+        Some(owner) => println("所属方: " + owner)
+        None => println("所属方: (无)")
+      }
+      match model_info.created {
+        Some(ts) => println("创建时间: " + ts.to_string())
+        None => println("创建时间: (无)")
+      }
+      println("")
+    }
+  } else {
+    println("--- Demo 2: 获取单个模型详情 (需要 API Key) ---")
     let first_model_id = models.data[0].id
-    println("--- Demo 2: 获取单个模型详情 ---")
-    let model_info = @lib.get_model(config, first_model_id)
-    println("模型 ID: " + model_info.id)
-    match model_info.object {
-      Some(obj) => println("对象类型: " + obj)
-      None => println("对象类型: (无)")
-    }
-    match model_info.owned_by {
-      Some(owner) => println("所属方: " + owner)
-      None => println("所属方: (无)")
-    }
-    match model_info.created {
-      Some(ts) => println("创建时间: " + ts.to_string())
-      None => println("创建时间: (无)")
-    }
-    println("")
+    println("模型 ID: " + first_model_id)
+    println("对象类型: system")
+    println("所属方: system")
+    println("(无 API Key 时使用 mock 数据)\n")
   }
 
   // Demo 3: 切换不同模型进行对话

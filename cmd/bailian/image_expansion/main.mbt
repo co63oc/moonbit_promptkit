@@ -14,7 +14,7 @@ let base_url : String = @lib.get_env_var(
 )
 
 ///|
-let mock_body = "{\"request_id\":\"0465c8ec-7024-96ff-8a39-1cbe1aa25c2c\",\"output\":{\"task_id\":\"2b0ef10f-ebf5-425a-9c4d-81e81d217312\",\"task_status\":\"PENDING\"}}"
+let mock_body = "{\"request_id\":\"0465c8ec-7024-96ff-8a39-1cbe1aa25c2c\",\"output\":{\"task_id\":\"2b0ef10f-ebf5-425a-9c4d-81e81d217312\",\"task_status\":\"SUCCEEDED\",\"results\":[{\"url\":\"https://example.com/mock-expanded.png\"}]}}"
 
 ///|
 let config : @lib.ClientConfig = @lib.make_client_config(

@@ -39,10 +39,14 @@ async fn main {
   println("\nFull reply: \{full_text1}")
 
   println("\n=== 演示2：非流式输出 ===")
-  let messages2 : Array[@lib.Message] = [
-    @lib.user_message_with_text("你好，请简单介绍一下你自己"),
-  ]
-  println("User: 你好，请简单介绍一下你自己")
-  let response2 = @lib.chat(config, "kimi-latest", messages2)
-  println("Assistant: \{@lib.extract_text_from_content(response2.content)}")
+  if api_key != "" {
+    let messages2 : Array[@lib.Message] = [
+      @lib.user_message_with_text("你好，请简单介绍一下你自己"),
+    ]
+    println("User: 你好，请简单介绍一下你自己")
+    let response2 = @lib.chat(config, "kimi-latest", messages2)
+    println("Assistant: \{@lib.extract_text_from_content(response2.content)}")
+  } else {
+    println("(非流式 Demo 需要有效的 API Key，跳过)")
+  }
 }

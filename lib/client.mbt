@@ -32,6 +32,41 @@ let mock_state : MockState = MockState::{
 }
 
 ///|
+
+///|
+/// Perform an HTTP POST. Returns (code, reason, body_text).
+pub async fn timed_post(
+  url : String,
+  body : Json,
+  headers~ : Map[String, String],
+) -> (Int, String, String) {
+  let (response, resp_body) = @http.post(url, body, headers~)
+  (response.code, response.reason, resp_body.text())
+}
+
+///|
+/// Perform an HTTP GET. Returns (code, reason, body_text).
+pub async fn timed_get(
+  url : String,
+  headers~ : Map[String, String],
+) -> (Int, String, String) {
+  let (response, resp_body) = @http.get(url, headers~)
+  (response.code, response.reason, resp_body.text())
+}
+
+///|
+/// Perform an HTTP POST (String body for multipart, etc.).
+/// Returns (code, reason, body_text).
+pub async fn timed_post_text(
+  url : String,
+  body : String,
+  headers~ : Map[String, String],
+) -> (Int, String, String) {
+  let (response, resp_body) = @http.post(url, body, headers~)
+  (response.code, response.reason, resp_body.text())
+}
+
+///|
 /// Perform an HTTP POST.
 /// In mock mode (either global install_mock or config.mock_body) returns
 /// the canned response and records the request; otherwise delegates to @http.post.
@@ -55,8 +90,7 @@ async fn do_post(
         mock_state.body = mock_state.body
         (mock_state.code, mock_state.reason, mock_state.body)
       } else {
-        let (response, resp_body) = @http.post(url, body, headers~)
-        (response.code, response.reason, resp_body.text())
+        timed_post(url, body, headers~)
       }
   }
 }
@@ -228,6 +262,48 @@ pub async fn chat_with_tools(
 }
 
 ///|
+/// Parse SSE stream data, extract content from choices
+fn parse_sse(body_text : String) -> String {
+  let mut content = ""
+  let lines = body_text.split("\n")
+  for line in lines {
+    let trimmed = line.trim()
+    if trimmed.has_prefix("data: ") && !trimmed.has_suffix("[DONE]") {
+      // "data: " is 6 chars, extract JSON from index 6
+      let json_str = trimmed.to_owned()[6:]
+      try {
+        let json = @json.parse(json_str)
+        match json {
+          Json::Object(obj) =>
+            match obj.get("choices") {
+              Some(Json::Array(choices)) =>
+                for choice in choices {
+                  match choice {
+                    Json::Object(choice_obj) =>
+                      match choice_obj.get("delta") {
+                        Some(Json::Object(delta_obj)) =>
+                          match delta_obj.get("content") {
+                            Some(Json::String(s)) => content = content + s
+                            _ => ignore(())
+                          }
+                        _ => ignore(())
+                      }
+                    _ => ignore(())
+                  }
+                }
+              _ => ignore(())
+            }
+          _ => ignore(())
+        }
+      } catch {
+        _ => ignore(())
+      }
+    }
+  }
+  content
+}
+
+///|
 pub async fn chat_stream(
   config : ClientConfig,
   model : String,
@@ -265,8 +341,10 @@ pub async fn chat_stream(
   guard code is (200..=299) else {
     fail("HTTP request failed: \{code} \{reason}")
   }
-  on_delta(body_text)
-  body_text
+  // Parse SSE and extract content
+  let content = parse_sse(body_text)
+  on_delta(content)
+  content
 }
 
 ///|
@@ -752,14 +830,14 @@ pub async fn get_image_gen_result(
     Some(body) => return @json.parse(body) |> @json.from_json()
     None => ignore(())
   }
-  let (response, body) = @http.get(
+  let (code, reason, text) = timed_get(
     "https://dashscope.aliyuncs.com/api/v1/tasks/\{task_id}",
     headers={ "Authorization": "Bearer \{config.api_key}" },
   )
-  guard response.code is (200..=299) else {
-    fail("HTTP request failed: \{response.code} \{response.reason}")
+  guard code is (200..=299) else {
+    fail("HTTP request failed: \{code} \{reason}")
   }
-  body.json() |> @json.from_json()
+  @json.parse(text) |> @json.from_json()
 }
 
 ///|
@@ -932,7 +1010,7 @@ pub async fn create_batch(
     completion_window,
     metadata: None,
   }
-  let (response, body) = @http.post(
+  let (code, reason, text) = timed_post(
     "\{config.base_url}/batches",
     request.to_json(),
     headers={
@@ -940,22 +1018,23 @@ pub async fn create_batch(
       "Content-Type": "application/json",
     },
   )
-  guard response.code is (200..=299) else {
-    fail("HTTP request failed: \{response.code} \{response.reason}")
+  guard code is (200..=299) else {
+    fail("HTTP request failed: \{code} \{reason}")
   }
-  body.json() |> @json.from_json()
+  @json.parse(text) |> @json.from_json()
 }
 
 ///|
 /// Get batch task status by ID
 pub async fn get_batch(config : ClientConfig, batch_id : String) -> Batch {
-  let (response, body) = @http.get("\{config.base_url}/batches/\{batch_id}", headers={
-    "Authorization": "Bearer \{config.api_key}",
-  })
-  guard response.code is (200..=299) else {
-    fail("HTTP request failed: \{response.code} \{response.reason}")
+  let (code, reason, text) = timed_get(
+    "\{config.base_url}/batches/\{batch_id}",
+    headers={ "Authorization": "Bearer \{config.api_key}" },
+  )
+  guard code is (200..=299) else {
+    fail("HTTP request failed: \{code} \{reason}")
   }
-  body.json() |> @json.from_json()
+  @json.parse(text) |> @json.from_json()
 }
 
 ///|
@@ -981,19 +1060,19 @@ pub async fn list_batches(
     }
     None => ignore(())
   }
-  let (response, body) = @http.get(url, headers={
+  let (code, reason, text) = timed_get(url, headers={
     "Authorization": "Bearer \{config.api_key}",
   })
-  guard response.code is (200..=299) else {
-    fail("HTTP request failed: \{response.code} \{response.reason}")
+  guard code is (200..=299) else {
+    fail("HTTP request failed: \{code} \{reason}")
   }
-  body.json() |> @json.from_json()
+  @json.parse(text) |> @json.from_json()
 }
 
 ///|
 /// Cancel a batch task
 pub async fn cancel_batch(config : ClientConfig, batch_id : String) -> Batch {
-  let (response, body) = @http.post(
+  let (code, reason, text) = timed_post(
     "\{config.base_url}/batches/\{batch_id}/cancel",
     ().to_json(),
     headers={
@@ -1001,10 +1080,10 @@ pub async fn cancel_batch(config : ClientConfig, batch_id : String) -> Batch {
       "Content-Type": "application/json",
     },
   )
-  guard response.code is (200..=299) else {
-    fail("HTTP request failed: \{response.code} \{response.reason}")
+  guard code is (200..=299) else {
+    fail("HTTP request failed: \{code} \{reason}")
   }
-  body.json() |> @json.from_json()
+  @json.parse(text) |> @json.from_json()
 }
 
 ///|
@@ -1013,14 +1092,14 @@ pub async fn get_file_content(
   config : ClientConfig,
   file_id : String,
 ) -> String {
-  let (response, body) = @http.get(
+  let (code, reason, text) = timed_get(
     "\{config.base_url}/files/\{file_id}/content",
     headers={ "Authorization": "Bearer \{config.api_key}" },
   )
-  guard response.code is (200..=299) else {
-    fail("HTTP request failed: \{response.code} \{response.reason}")
+  guard code is (200..=299) else {
+    fail("HTTP request failed: \{code} \{reason}")
   }
-  body.text()
+  text
 }
 
 ///|
@@ -1029,13 +1108,13 @@ pub async fn get_file_info(
   config : ClientConfig,
   file_id : String,
 ) -> BatchFile {
-  let (response, body) = @http.get("\{config.base_url}/files/\{file_id}", headers={
+  let (code, reason, text) = timed_get("\{config.base_url}/files/\{file_id}", headers={
     "Authorization": "Bearer \{config.api_key}",
   })
-  guard response.code is (200..=299) else {
-    fail("HTTP request failed: \{response.code} \{response.reason}")
+  guard code is (200..=299) else {
+    fail("HTTP request failed: \{code} \{reason}")
   }
-  body.json() |> @json.from_json()
+  @json.parse(text) |> @json.from_json()
 }
 
 ///|
@@ -1137,14 +1216,14 @@ pub async fn list_models(config : ClientConfig) -> ModelListResponse {
     Some(body) => return @json.parse(body) |> @json.from_json()
     None => ignore(())
   }
-  let (response, body) = @http.get("\{config.base_url}/models", headers={
+  let (code, reason, text) = timed_get("\{config.base_url}/models", headers={
     "Authorization": "Bearer \{config.api_key}",
     "Content-Type": "application/json",
   })
-  guard response.code is (200..=299) else {
-    fail("HTTP request failed: \{response.code} \{response.reason}")
+  guard code is (200..=299) else {
+    fail("HTTP request failed: \{code} \{reason}")
   }
-  body.json() |> @json.from_json()
+  @json.parse(text) |> @json.from_json()
 }
 
 ///|
@@ -1154,14 +1233,17 @@ pub async fn get_model(config : ClientConfig, model_id : String) -> Model {
     Some(body) => return @json.parse(body) |> @json.from_json()
     None => ignore(())
   }
-  let (response, body) = @http.get("\{config.base_url}/models/\{model_id}", headers={
-    "Authorization": "Bearer \{config.api_key}",
-    "Content-Type": "application/json",
-  })
-  guard response.code is (200..=299) else {
-    fail("HTTP request failed: \{response.code} \{response.reason}")
+  let (code, reason, text) = timed_get(
+    "\{config.base_url}/models/\{model_id}",
+    headers={
+      "Authorization": "Bearer \{config.api_key}",
+      "Content-Type": "application/json",
+    },
+  )
+  guard code is (200..=299) else {
+    fail("HTTP request failed: \{code} \{reason}")
   }
-  body.json() |> @json.from_json()
+  @json.parse(text) |> @json.from_json()
 }
 
 ///|
@@ -1487,14 +1569,14 @@ pub async fn get_video_gen_result(
     Some(body) => return @json.parse(body) |> @json.from_json()
     None => ignore(())
   }
-  let (response, body) = @http.get(
+  let (code, reason, text) = timed_get(
     "https://dashscope.aliyuncs.com/api/v1/tasks/\{task_id}",
     headers={ "Authorization": "Bearer \{config.api_key}" },
   )
-  guard response.code is (200..=299) else {
-    fail("HTTP request failed: \{response.code} \{response.reason}")
+  guard code is (200..=299) else {
+    fail("HTTP request failed: \{code} \{reason}")
   }
-  body.json() |> @json.from_json()
+  @json.parse(text) |> @json.from_json()
 }
 
 ///|
@@ -1675,14 +1757,14 @@ pub async fn get_3d_gen_result(
   config : ClientConfig,
   task_id : String,
 ) -> Gen3DResponse {
-  let (response, body) = @http.get(
+  let (code, reason, text) = timed_get(
     "https://dashscope.aliyuncs.com/api/v1/tasks/\{task_id}",
     headers={ "Authorization": "Bearer \{config.api_key}" },
   )
-  guard response.code is (200..=299) else {
-    fail("HTTP request failed: \{response.code} \{response.reason}")
+  guard code is (200..=299) else {
+    fail("HTTP request failed: \{code} \{reason}")
   }
-  body.json() |> @json.from_json()
+  @json.parse(text) |> @json.from_json()
 }
 
 ///|

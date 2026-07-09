@@ -81,3 +81,9 @@ pub fn create_batch_client_config(
     mock_body: None,
   }
 }
+
+///|
+/// Read file content as string
+pub fn read_file(path : String) -> String raise @fs.IOError {
+  @fs.read_file_to_string(path)
+}
