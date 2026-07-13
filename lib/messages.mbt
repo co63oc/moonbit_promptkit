@@ -234,10 +234,15 @@ pub fn get_completion_tokens(response : Response) -> Int {
 
 ///|
 pub fn get_cache_creation_tokens(response : Response) -> Int {
+  // OpenAI 兼容接口：缓存创建 token 数在 prompt_tokens_details.cache_creation_input_tokens
   match extract_usage(response) {
     Some(usage) =>
-      match usage.cache_creation_input_tokens {
-        Some(n) => n
+      match usage.prompt_tokens_details {
+        Some(details) =>
+          match details.cache_creation_input_tokens {
+            Some(n) => n
+            None => 0
+          }
         None => 0
       }
     None => 0
@@ -246,10 +251,15 @@ pub fn get_cache_creation_tokens(response : Response) -> Int {
 
 ///|
 pub fn get_cache_read_tokens(response : Response) -> Int {
+  // OpenAI 兼容接口：缓存命中 token 数在 prompt_tokens_details.cached_tokens
   match extract_usage(response) {
     Some(usage) =>
-      match usage.cache_read_input_tokens {
-        Some(n) => n
+      match usage.prompt_tokens_details {
+        Some(details) =>
+          match details.cached_tokens {
+            Some(n) => n
+            None => 0
+          }
         None => 0
       }
     None => 0

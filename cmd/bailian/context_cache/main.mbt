@@ -23,38 +23,42 @@ let base_url : String = @lib.get_env_var(
 pub let model : String = @lib.get_env_var("BAILIAN_MODEL", Some("qwen3.7-plus"))
 
 ///|
-fn build_long_system_prompt() -> String {
-  let mut prompt = "你是一个专业的编程助手。\n"
-  prompt = prompt + "请遵循以下规则：\n"
-  for i in 1..<=50 {
-    prompt = prompt +
-      "规则" +
-      i.to_string() +
-      ": 认真回答用户的问题。\n"
+/// 模拟的代码仓库内容，最小可缓存提示词长度为 1024 Token
+fn build_long_code_content() -> String {
+  let mut content = ""
+  for _ in 0..<400 {
+    content = content + "<Your Code Here>"
   }
-  prompt
+  content
 }
 
 ///|
 async fn main {
-  let mock_body = @lib.read_file("cmd/bailian/context_cache/mocks/demo1.json")
-  let config : @lib.ClientConfig = @lib.make_client_config(
+  let mock_body1 = @lib.read_file("cmd/bailian/context_cache/mocks/demo1.json")
+  let mock_body2 = @lib.read_file("cmd/bailian/context_cache/mocks/demo2.json")
+  let config1 : @lib.ClientConfig = @lib.make_client_config(
     api_key,
     base_url,
-    mock_body=Some(mock_body),
+    mock_body=Some(mock_body1),
+  )
+  let config2 : @lib.ClientConfig = @lib.make_client_config(
+    api_key,
+    base_url,
+    mock_body=Some(mock_body2),
   )
 
   println("=== 百炼上下文缓存（显式缓存）示例 ===\n")
 
-  let system_prompt = build_long_system_prompt()
+  let code_content = build_long_code_content()
 
+  // 第一次请求：创建缓存
   println("--- 第一次请求：创建缓存 ---")
   let messages1 : Array[@lib.Message] = [
-    @lib.system_message_with_cache(system_prompt),
-    @lib.user_message_with_text("请简单介绍一下MoonBit语言"),
+    @lib.system_message_with_cache(code_content),
+    @lib.user_message_with_text("这段代码的内容是什么"),
   ]
   let response1 = @lib.chat_full_with_params(
-    config,
+    config1,
     model,
     messages1,
     None,
@@ -65,17 +69,21 @@ async fn main {
   let msg1 = response1.choices[0].message
   println("回答: \{@lib.extract_text_from_content(msg1.content)}")
   println(
-    "缓存创建 Token 数: \{@lib.get_cache_creation_tokens(response1)}",
+    "第一次请求创建缓存 Token：\{@lib.get_cache_creation_tokens(response1)}",
   )
-  println("缓存读取 Token 数: \{@lib.get_cache_read_tokens(response1)}")
+  println(
+    "第一次请求命中缓存 Token：\{@lib.get_cache_read_tokens(response1)}",
+  )
+  println("====================")
 
+  // 第二次请求：命中缓存
   println("\n--- 第二次请求：命中缓存 ---")
   let messages2 : Array[@lib.Message] = [
-    @lib.system_message_with_cache(system_prompt),
-    @lib.user_message_with_text("MoonBit有哪些主要特性？"),
+    @lib.system_message_with_cache(code_content),
+    @lib.user_message_with_text("这段代码可以怎么优化"),
   ]
   let response2 = @lib.chat_full_with_params(
-    config,
+    config2,
     model,
     messages2,
     None,
@@ -86,9 +94,11 @@ async fn main {
   let msg2 = response2.choices[0].message
   println("回答: \{@lib.extract_text_from_content(msg2.content)}")
   println(
-    "缓存创建 Token 数: \{@lib.get_cache_creation_tokens(response2)}",
+    "第二次请求创建缓存 Token：\{@lib.get_cache_creation_tokens(response2)}",
   )
-  println("缓存读取 Token 数: \{@lib.get_cache_read_tokens(response2)}")
+  println(
+    "第二次请求命中缓存 Token：\{@lib.get_cache_read_tokens(response2)}",
+  )
 
   println("\n--- 使用说明 ---")
   println(

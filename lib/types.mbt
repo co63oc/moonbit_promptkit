@@ -113,6 +113,15 @@ pub struct Choice {
 ///|
 pub struct PromptTokensDetails {
   cached_tokens : Int?
+  text_tokens : Int?
+  cache_type : String?
+  cache_creation_input_tokens : Int?
+} derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub struct CompletionTokensDetails {
+  reasoning_tokens : Int?
+  text_tokens : Int?
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
@@ -121,9 +130,17 @@ pub struct Usage {
   completion_tokens : Int?
   total_tokens : Int?
   prompt_tokens_details : PromptTokensDetails?
-  cache_creation_input_tokens : Int?
-  cache_read_input_tokens : Int?
-} derive(Debug, ToJson, @json.FromJson)
+  completion_tokens_details : CompletionTokensDetails?
+} derive (
+  Debug,
+  ToJson(
+    fields(
+      prompt_tokens_details(rename="prompt_tokens_details"),
+      completion_tokens_details(rename="completion_tokens_details"),
+    ),
+  ),
+  @json.FromJson,
+)
 
 ///|
 pub struct Response {
