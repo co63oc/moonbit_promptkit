@@ -1,6 +1,6 @@
 name = "co63oc/moonbit_promptkit"
 
-version = "0.1.3"
+version = "0.1.4"
 
 import {
   "moonbitlang/async@0.19.1",
