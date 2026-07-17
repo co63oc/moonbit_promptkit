@@ -27,8 +27,8 @@ let mock_state : MockState = {
   reason: "OK",
   body: "",
   url: "",
-  req_body: Json::object({}),
-  req_headers: {},
+  req_body: Json::object(Map([])),
+  req_headers: Map([]),
 }
 
 ///|
@@ -116,8 +116,8 @@ pub fn install_mock(code : Int, reason : String, body_text : String) -> Unit {
   mock_state.reason = reason
   mock_state.body = body_text
   mock_state.url = ""
-  mock_state.req_body = Json::object({})
-  mock_state.req_headers = {}
+  mock_state.req_body = Json::object(Map([]))
+  mock_state.req_headers = Map([])
 }
 
 ///|

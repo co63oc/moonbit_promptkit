@@ -12,6 +12,8 @@ jobs:
 
     - name: Install MoonBit
       uses: ./.github/actions/install-moonbit
+      with:
+        version: "0.1.20260703"
 
     - name: Run moon test
       run: moon update && moon test --deny-warn

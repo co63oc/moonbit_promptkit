@@ -94,10 +94,10 @@ pub enum InputContent {
 ///|
 impl ToJson for InputContent with fn to_json(self : InputContent) -> Json {
   match self {
-    Text(t) => t.to_json()
-    Image(i) => i.to_json()
-    Audio(a) => a.to_json()
-    Video(v) => v.to_json()
+    Text(t) => ToJson::to_json(t)
+    Image(i) => ToJson::to_json(i)
+    Audio(a) => ToJson::to_json(a)
+    Video(v) => ToJson::to_json(v)
   }
 }
 
@@ -112,7 +112,7 @@ pub struct ResponseInputMessage {
 impl ToJson for ResponseInputMessage with fn to_json(
   self : ResponseInputMessage,
 ) -> Json {
-  let content_json = self.content.map(fn(c) { c.to_json() })
+  let content_json = self.content.map(fn(c) { ToJson::to_json(c) })
   Json::object({
     "role": Json::string(self.role),
     "content": Json::array(content_json),
@@ -222,14 +222,14 @@ pub fn input_video(video_url : String) -> InputContent {
 ///|
 /// Build input content array to JSON
 pub fn build_input_content(contents : Array[InputContent]) -> Json {
-  let json_array = contents.map(fn(c) { c.to_json() })
+  let json_array = contents.map(fn(c) { ToJson::to_json(c) })
   Json::array(json_array)
 }
 
 ///|
 /// Build input messages array
 pub fn build_input_messages(messages : Array[ResponseInputMessage]) -> Json {
-  let json_array = messages.map(fn(m) { m.to_json() })
+  let json_array = messages.map(fn(m) { ToJson::to_json(m) })
   Json::array(json_array)
 }
 

@@ -1,11 +1,21 @@
 name: 'Install MoonBit'
 description: 'Install MoonBit CLI'
 
+inputs:
+  version:
+    description: 'MoonBit version to install (e.g., "0.1.20260703"). Defaults to latest.'
+    required: false
+    default: ''
+
 runs:
   using: 'composite'
   steps:
     - name: Install MoonBit
       run: |
-        curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+        if [ -n "${{ inputs.version }}" ]; then
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash -s -- ${{ inputs.version }}
+        else
+          curl -fsSL https://cli.moonbitlang.com/install/unix.sh | bash
+        fi
         echo "$HOME/.moon/bin" >> $GITHUB_PATH
       shell: bash
