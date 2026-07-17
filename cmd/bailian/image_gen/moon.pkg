@@ -4,6 +4,4 @@ import {
   "co63oc/moonbit_promptkit/lib/image_gen" @lib_ig,
 }
 
-options(
-  "is-main": true,
-)
+pkgtype(kind: "executable")

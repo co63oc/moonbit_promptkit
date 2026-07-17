@@ -12,12 +12,18 @@ pub struct McpTool {
 } derive(ToJson(fields(type_(rename="type"))))
 
 ///|
+pub extend McpTool with ToJson::{to_json}
+
+///|
 /// MCP function definition
 pub struct McpFunction {
   name : String
   description : String
   parameters : Json
 } derive(ToJson)
+
+///|
+pub extend McpFunction with ToJson::{to_json}
 
 ///|
 /// Create an MCP tool
@@ -85,3 +91,6 @@ struct McpRequest {
   stream : Bool?
   stream_options : @lib.StreamOptions?
 } derive(ToJson)
+
+///|
+pub extend McpRequest with ToJson::{to_json}

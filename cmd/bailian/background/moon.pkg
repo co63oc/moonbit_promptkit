@@ -4,6 +4,4 @@ import {
   "co63oc/moonbit_promptkit/lib/background" @lib_bg,
 }
 
-options(
-  "is-main": true,
-)
+pkgtype(kind: "executable")

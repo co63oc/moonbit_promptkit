@@ -11,6 +11,15 @@ pub struct AudioInput {
   data : String
 } derive(Debug, ToJson, @json.FromJson)
 
+///|
+pub extend AudioInput with ToJson::{to_json}
+
+///|
+pub extend AudioInput with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend AudioInput with @moonbitlang/core/debug.Debug::{to_repr}
+
 ///| Audio content for messages
 
 ///| type must be "input_audio"
@@ -23,6 +32,15 @@ pub struct AudioContent {
 } derive(Debug, ToJson(fields(type_(rename="type"))), @json.FromJson)
 
 ///|
+pub extend AudioContent with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend AudioContent with ToJson::{to_json}
+
+///|
+pub extend AudioContent with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
 /// Audio request for Qwen3-Omni-Captioner
 pub struct AudioRequest {
   model : String
@@ -30,6 +48,9 @@ pub struct AudioRequest {
   stream : Bool?
   stream_options : @lib.StreamOptions?
 } derive(ToJson)
+
+///|
+pub extend AudioRequest with ToJson::{to_json}
 
 ///|
 /// Create audio input structure
@@ -61,6 +82,15 @@ pub struct VoiceSetting {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+pub extend VoiceSetting with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend VoiceSetting with ToJson::{to_json}
+
+///|
+pub extend VoiceSetting with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
 /// Audio setting for MiniMax-style TTS
 pub struct AudioSetting {
   sample_rate : Int?
@@ -68,6 +98,15 @@ pub struct AudioSetting {
   format : String?
   channel : Int?
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend AudioSetting with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend AudioSetting with ToJson::{to_json}
+
+///|
+pub extend AudioSetting with @moonbitlang/core/debug.Debug::{to_repr}
 
 ///|
 /// TTS input for CosyVoice/Qwen-TTS (SpeechSynthesizer API)
@@ -83,6 +122,15 @@ pub struct TtsInput {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+pub extend TtsInput with ToJson::{to_json}
+
+///|
+pub extend TtsInput with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend TtsInput with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
 /// TTS input for Qwen-TTS (multimodal-generation API)
 pub struct QwenTtsInput {
   text : String
@@ -95,11 +143,26 @@ pub struct QwenTtsInput {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+pub extend QwenTtsInput with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend QwenTtsInput with ToJson::{to_json}
+
+///|
+pub extend QwenTtsInput with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
 /// TTS request for CosyVoice (SpeechSynthesizer API)
 pub struct TtsRequest {
   model : String
   input : TtsInput
 } derive(Debug, ToJson)
+
+///|
+pub extend TtsRequest with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend TtsRequest with ToJson::{to_json}
 
 ///|
 /// TTS request for Qwen-TTS/MiniMax (multimodal-generation API)
@@ -109,12 +172,27 @@ pub struct MultimodalTtsRequest {
 } derive(Debug, ToJson)
 
 ///|
+pub extend MultimodalTtsRequest with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend MultimodalTtsRequest with ToJson::{to_json}
+
+///|
 /// TTS audio result
 pub struct TtsAudioResult {
   url : String?
   data : String?
   expires_at : String?
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend TtsAudioResult with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend TtsAudioResult with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend TtsAudioResult with ToJson::{to_json}
 
 ///|
 /// TTS output
@@ -126,6 +204,15 @@ pub struct TtsOutput {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+pub extend TtsOutput with ToJson::{to_json}
+
+///|
+pub extend TtsOutput with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend TtsOutput with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
 /// TTS response (non-streaming)
 pub struct TtsResponse {
   output : TtsOutput
@@ -133,6 +220,15 @@ pub struct TtsResponse {
   code : String?
   message : String?
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend TtsResponse with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend TtsResponse with ToJson::{to_json}
+
+///|
+pub extend TtsResponse with @moonbitlang/core/json.FromJson::{from_json}
 
 ///|
 /// Custom voice action types (internal use)
@@ -149,6 +245,15 @@ pub struct VoiceCloningInput {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+pub extend VoiceCloningInput with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend VoiceCloningInput with ToJson::{to_json}
+
+///|
+pub extend VoiceCloningInput with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
 /// Voice design input
 pub struct VoiceDesignInput {
   action : String
@@ -160,11 +265,31 @@ pub struct VoiceDesignInput {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+pub extend VoiceDesignInput with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend VoiceDesignInput with ToJson::{to_json}
+
+///|
+pub extend VoiceDesignInput with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
 /// Custom voice parameters
 pub struct CustomVoiceParameters {
   sample_rate : Int?
   response_format : String?
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend CustomVoiceParameters with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend CustomVoiceParameters with @moonbitlang/core/json.FromJson::{
+  from_json,
+}
+
+///|
+pub extend CustomVoiceParameters with ToJson::{to_json}
 
 ///|
 /// Custom voice request (voice cloning / voice design)
@@ -173,6 +298,12 @@ pub struct CustomVoiceRequest {
   input : Json
   parameters : CustomVoiceParameters?
 } derive(Debug, ToJson)
+
+///|
+pub extend CustomVoiceRequest with ToJson::{to_json}
+
+///|
+pub extend CustomVoiceRequest with @moonbitlang/core/debug.Debug::{to_repr}
 
 ///|
 /// Custom voice output
@@ -184,6 +315,15 @@ pub struct CustomVoiceOutput {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+pub extend CustomVoiceOutput with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend CustomVoiceOutput with ToJson::{to_json}
+
+///|
+pub extend CustomVoiceOutput with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
 /// Custom voice response
 pub struct CustomVoiceResponse {
   output : CustomVoiceOutput
@@ -191,6 +331,15 @@ pub struct CustomVoiceResponse {
   code : String?
   message : String?
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend CustomVoiceResponse with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend CustomVoiceResponse with ToJson::{to_json}
+
+///|
+pub extend CustomVoiceResponse with @moonbitlang/core/json.FromJson::{from_json}
 
 ///|
 /// Default TTS models

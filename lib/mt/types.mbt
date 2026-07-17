@@ -11,6 +11,15 @@ pub struct TranslationTerm {
   target : String
 } derive(Debug, ToJson, @json.FromJson)
 
+///|
+pub extend TranslationTerm with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend TranslationTerm with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend TranslationTerm with ToJson::{to_json}
+
 ///| Translation options for Qwen-MT models
 
 ///| source_lang/target_lang: use English language names (e.g. "Chinese", "English", "Japanese")
@@ -23,6 +32,15 @@ pub struct TranslationOptions {
   terms : Array[TranslationTerm]?
   domain : String?
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend TranslationOptions with ToJson::{to_json}
+
+///|
+pub extend TranslationOptions with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend TranslationOptions with @moonbitlang/core/debug.Debug::{to_repr}
 
 ///| Translate request for Qwen-MT models
 
@@ -37,6 +55,9 @@ pub struct TranslateRequest {
   stream_options : @lib.StreamOptions?
   translation_options : TranslationOptions
 } derive(ToJson)
+
+///|
+pub extend TranslateRequest with ToJson::{to_json}
 
 ///|
 /// Create a TranslationTerm for terminology intervention (术语干预)

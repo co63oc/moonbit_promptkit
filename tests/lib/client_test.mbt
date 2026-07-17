@@ -53,7 +53,7 @@ test "extract_text_from_content_empty_array" {
 
 ///|
 test "extract_text_from_content_non_text" {
-  let content = Json::object({})
+  let content = Json::object(Map([]))
   let result = @promptkit.extract_text_from_content(content)
   assert_eq(result, "(无文本回复)")
 }

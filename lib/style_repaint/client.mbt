@@ -32,10 +32,16 @@ struct StyleRepaintInput {
 } derive(ToJson)
 
 ///|
+pub extend StyleRepaintInput with ToJson::{to_json}
+
+///|
 struct StyleRepaintRequest {
   model : String
   input : StyleRepaintInput
 } derive(ToJson)
+
+///|
+pub extend StyleRepaintRequest with ToJson::{to_json}
 
 ///| 提交风格重绘异步任务
 

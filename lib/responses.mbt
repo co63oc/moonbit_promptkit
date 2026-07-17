@@ -129,6 +129,9 @@ pub struct ResponsesRequest {
 } derive(ToJson)
 
 ///|
+pub extend ResponsesRequest with ToJson::{to_json}
+
+///|
 /// Response API - Output item
 pub struct ResponseOutputItem {
   type_ : String?
@@ -138,10 +141,28 @@ pub struct ResponseOutputItem {
 } derive(Debug, ToJson(fields(type_(rename="type"))), @json.FromJson)
 
 ///|
+pub extend ResponseOutputItem with ToJson::{to_json}
+
+///|
+pub extend ResponseOutputItem with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend ResponseOutputItem with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
 /// Response API - Usage x_tools info
 pub struct XToolsInfo {
   count : Int?
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend XToolsInfo with ToJson::{to_json}
+
+///|
+pub extend XToolsInfo with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend XToolsInfo with @moonbitlang/core/json.FromJson::{from_json}
 
 ///|
 /// Response API - Usage
@@ -153,12 +174,30 @@ pub struct ResponsesUsage {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+pub extend ResponsesUsage with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend ResponsesUsage with ToJson::{to_json}
+
+///|
+pub extend ResponsesUsage with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
 /// Response API - Response
 pub struct ResponsesResponse {
   output : Array[ResponseOutputItem]
   output_text : String?
   usage : ResponsesUsage?
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend ResponsesResponse with ToJson::{to_json}
+
+///|
+pub extend ResponsesResponse with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend ResponsesResponse with @moonbitlang/core/debug.Debug::{to_repr}
 
 ///|
 /// Create a web_search_image tool

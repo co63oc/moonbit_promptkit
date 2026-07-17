@@ -1,6 +1,7 @@
 import {
-  "moonbitlang/core/json",
+  "co63oc/moonbit_promptkit/lib",
   "moonbitlang/async",
   "moonbitlang/async/http",
-  "co63oc/moonbit_promptkit/lib",
+  "moonbitlang/core/debug",
+  "moonbitlang/core/json",
 }

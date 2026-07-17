@@ -4,6 +4,4 @@ import {
   "co63oc/moonbit_promptkit/lib/style_repaint" @lib_sr,
 }
 
-options(
-  "is-main": true,
-)
+pkgtype(kind: "executable")

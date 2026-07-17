@@ -4,6 +4,4 @@ import {
   "co63oc/moonbit_promptkit/lib/image_edit" @lib_ie,
 }
 
-options(
-  "is-main": true,
-)
+pkgtype(kind: "executable")

@@ -16,6 +16,9 @@ struct TranscriptionInput {
 } derive(ToJson)
 
 ///|
+pub extend TranscriptionInput with ToJson::{to_json}
+
+///|
 /// Transcription request parameters
 struct TranscriptionParams {
   diarization_enabled : Bool?
@@ -24,12 +27,18 @@ struct TranscriptionParams {
 } derive(ToJson)
 
 ///|
+pub extend TranscriptionParams with ToJson::{to_json}
+
+///|
 /// Transcription request
 struct TranscriptionRequest {
   model : String
   input : TranscriptionInput
   parameters : TranscriptionParams?
 } derive(ToJson)
+
+///|
+pub extend TranscriptionRequest with ToJson::{to_json}
 
 ///|
 /// Submit transcription task (non-realtime, file-based)

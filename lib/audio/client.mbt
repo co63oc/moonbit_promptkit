@@ -30,6 +30,9 @@ struct AudioMessage {
 } derive(ToJson)
 
 ///|
+pub extend AudioMessage with ToJson::{to_json}
+
+///|
 /// Internal: build request and call API
 async fn caption_audio_impl(
   config : @lib.ClientConfig,

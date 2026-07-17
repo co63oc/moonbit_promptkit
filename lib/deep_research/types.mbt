@@ -11,7 +11,13 @@ pub struct DeepResearchRequest {
 } derive(ToJson)
 
 ///|
+pub extend DeepResearchRequest with ToJson::{to_json}
+
+///|
 /// Input structure
 pub struct DeepResearchInput {
   messages : Array[@lib.Message]
 } derive(ToJson)
+
+///|
+pub extend DeepResearchInput with ToJson::{to_json}

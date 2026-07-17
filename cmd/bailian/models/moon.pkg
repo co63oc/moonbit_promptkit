@@ -4,6 +4,4 @@ import {
   "co63oc/moonbit_promptkit/lib",
 }
 
-options(
-  "is-main": true,
-)
+pkgtype(kind: "executable")

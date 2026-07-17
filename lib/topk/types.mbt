@@ -14,3 +14,6 @@ pub struct TopKRequest {
   temperature : Float?
   top_k : Int?
 } derive(ToJson)
+
+///|
+pub extend TopKRequest with ToJson::{to_json}

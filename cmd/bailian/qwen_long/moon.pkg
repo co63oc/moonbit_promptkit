@@ -5,6 +5,4 @@ import {
   "co63oc/moonbit_promptkit/lib/qwen_long" @lib_ql,
 }
 
-options(
-  "is-main": true,
-)
+pkgtype(kind: "executable")

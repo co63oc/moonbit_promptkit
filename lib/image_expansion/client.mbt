@@ -17,10 +17,16 @@ struct ExpansionInput {
 } derive(ToJson)
 
 ///|
+pub extend ExpansionInput with ToJson::{to_json}
+
+///|
 struct ExpansionParams {
   x_scale : Double?
   y_scale : Double?
 } derive(ToJson)
+
+///|
+pub extend ExpansionParams with ToJson::{to_json}
 
 ///|
 struct ExpansionRequest {
@@ -28,6 +34,9 @@ struct ExpansionRequest {
   input : ExpansionInput
   parameters : ExpansionParams?
 } derive(ToJson)
+
+///|
+pub extend ExpansionRequest with ToJson::{to_json}
 
 ///| 提交图像扩展异步任务
 

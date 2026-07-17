@@ -51,6 +51,9 @@ struct VaceInput {
 } derive(ToJson)
 
 ///|
+pub extend VaceInput with ToJson::{to_json}
+
+///|
 /// VACE request parameters
 struct VaceParams {
   prompt_extend : Bool?
@@ -60,12 +63,18 @@ struct VaceParams {
 } derive(ToJson)
 
 ///|
+pub extend VaceParams with ToJson::{to_json}
+
+///|
 /// VACE request
 struct VaceRequest {
   model : String
   input : VaceInput
   parameters : VaceParams?
 } derive(ToJson)
+
+///|
+pub extend VaceRequest with ToJson::{to_json}
 
 ///|
 /// Submit image reference task (多图参考)

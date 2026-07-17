@@ -8,3 +8,12 @@ pub struct FileUploadResult {
   filename : String?
   purpose : String?
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend FileUploadResult with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend FileUploadResult with ToJson::{to_json}
+
+///|
+pub extend FileUploadResult with @moonbitlang/core/debug.Debug::{to_repr}

@@ -9,10 +9,28 @@ pub struct CacheControl {
 } derive(Debug, ToJson(fields(type_(rename="type"))), @json.FromJson)
 
 ///|
+pub extend CacheControl with ToJson::{to_json}
+
+///|
+pub extend CacheControl with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend CacheControl with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
 /// The ImageUrl type.
 pub struct ImageUrl {
   url : String
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend ImageUrl with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend ImageUrl with ToJson::{to_json}
+
+///|
+pub extend ImageUrl with @moonbitlang/core/debug.Debug::{to_repr}
 
 ///|
 /// The VideoUrl type.
@@ -21,10 +39,28 @@ pub struct VideoUrl {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+pub extend VideoUrl with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend VideoUrl with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend VideoUrl with ToJson::{to_json}
+
+///|
 /// The AudioUrl type.
 pub struct AudioUrl {
   url : String
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend AudioUrl with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend AudioUrl with ToJson::{to_json}
+
+///|
+pub extend AudioUrl with @moonbitlang/core/debug.Debug::{to_repr}
 
 ///|
 /// The Content type.
@@ -38,6 +74,15 @@ pub struct Content {
 } derive(Debug, ToJson(fields(type_(rename="type"))), @json.FromJson)
 
 ///|
+pub extend Content with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend Content with ToJson::{to_json}
+
+///|
+pub extend Content with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
 /// The Message type.
 pub struct Message {
   role : String
@@ -49,11 +94,29 @@ pub struct Message {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+pub extend Message with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend Message with ToJson::{to_json}
+
+///|
+pub extend Message with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
 /// The Function type.
 pub struct Function {
   name : String
   arguments : String
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend Function with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend Function with ToJson::{to_json}
+
+///|
+pub extend Function with @moonbitlang/core/json.FromJson::{from_json}
 
 ///|
 /// The ToolCall type.
@@ -63,10 +126,37 @@ pub struct ToolCall {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+pub extend ToolCall with ToJson::{to_json}
+
+///|
+pub extend ToolCall with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend Tool with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend Tool with ToJson::{to_json}
+
+///|
+pub extend Tool with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend ToolCall with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
 /// The StreamOptions type.
 pub struct StreamOptions {
   include_usage : Bool
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend StreamOptions with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend StreamOptions with ToJson::{to_json}
+
+///|
+pub extend StreamOptions with @moonbitlang/core/json.FromJson::{from_json}
 
 ///|
 /// The Parameters type.
@@ -77,12 +167,30 @@ pub struct Parameters {
 } derive(Debug, ToJson(fields(type_(rename="type"))), @json.FromJson)
 
 ///|
+pub extend Parameters with ToJson::{to_json}
+
+///|
+pub extend Parameters with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend Parameters with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
 /// The FunctionDef type.
 pub struct FunctionDef {
   name : String
   description : String
   parameters : Parameters
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend FunctionDef with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend FunctionDef with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend FunctionDef with ToJson::{to_json}
 
 ///|
 /// The Tool type.
@@ -96,6 +204,9 @@ pub struct Tool {
 pub struct SearchOptions {
   search_strategy : String?
 } derive(ToJson)
+
+///|
+pub extend SearchOptions with ToJson::{to_json}
 
 ///|
 /// The Request type.
@@ -120,10 +231,19 @@ pub struct Request {
 } derive(ToJson)
 
 ///|
+pub extend Request with ToJson::{to_json}
+
+///|
 /// The Choice type.
 pub struct Choice {
   message : Message
 } derive(ToJson, @json.FromJson)
+
+///|
+pub extend Choice with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend Choice with ToJson::{to_json}
 
 ///|
 /// The PromptTokensDetails type.
@@ -135,11 +255,31 @@ pub struct PromptTokensDetails {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+pub extend PromptTokensDetails with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend PromptTokensDetails with ToJson::{to_json}
+
+///|
+pub extend PromptTokensDetails with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
 /// The CompletionTokensDetails type.
 pub struct CompletionTokensDetails {
   reasoning_tokens : Int?
   text_tokens : Int?
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend CompletionTokensDetails with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend CompletionTokensDetails with @moonbitlang/core/json.FromJson::{
+  from_json,
+}
+
+///|
+pub extend CompletionTokensDetails with ToJson::{to_json}
 
 ///|
 /// The Usage type.
@@ -168,10 +308,34 @@ pub struct Response {
 } derive(ToJson, @json.FromJson)
 
 ///|
+pub extend Response with ToJson::{to_json}
+
+///|
+pub extend Usage with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend Response with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend Usage with ToJson::{to_json}
+
+///|
 /// The StreamChoice type.
 pub struct StreamChoice {
   delta : Message
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend StreamChoice with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend Usage with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend StreamChoice with ToJson::{to_json}
+
+///|
+pub extend StreamChoice with @moonbitlang/core/json.FromJson::{from_json}
 
 ///|
 /// The StreamResponse type.
@@ -181,12 +345,30 @@ pub struct StreamResponse {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+pub extend StreamResponse with ToJson::{to_json}
+
+///|
+pub extend StreamResponse with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend StreamResponse with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
 /// Image generation - input parameters
 pub struct ImageGenInput {
   prompt : String
   negative_prompt : String?
   ref_img : String?
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend ImageGenInput with ToJson::{to_json}
+
+///|
+pub extend ImageGenInput with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend ImageGenInput with @moonbitlang/core/debug.Debug::{to_repr}
 
 ///|
 /// Image generation - processing parameters
@@ -200,6 +382,15 @@ pub struct ImageGenParameters {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+pub extend ImageGenParameters with ToJson::{to_json}
+
+///|
+pub extend ImageGenParameters with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend ImageGenParameters with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
 /// Image generation - request body
 pub struct ImageGenRequest {
   model : String
@@ -208,10 +399,25 @@ pub struct ImageGenRequest {
 } derive(Debug, ToJson)
 
 ///|
+pub extend ImageGenRequest with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend ImageGenRequest with ToJson::{to_json}
+
+///|
 /// Image generation - single result
 pub struct ImageGenResult {
   url : String
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend ImageGenResult with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend ImageGenResult with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend ImageGenResult with ToJson::{to_json}
 
 ///|
 /// Image generation - task metrics
@@ -244,10 +450,37 @@ pub struct ImageGenOutput {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+pub extend ImageGenOutput with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend ImageGenTaskMetrics with ToJson::{to_json}
+
+///|
+pub extend ImageGenOutput with ToJson::{to_json}
+
+///|
+pub extend ImageGenTaskMetrics with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend ImageGenTaskMetrics with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend ImageGenOutput with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
 /// Image generation - usage info
 pub struct ImageGenUsage {
   image_count : Int
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend ImageGenUsage with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend ImageGenUsage with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend ImageGenUsage with ToJson::{to_json}
 
 ///|
 /// Image generation - response
@@ -260,12 +493,30 @@ pub struct ImageGenResponse {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+pub extend ImageGenResponse with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend ImageGenResponse with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend ImageGenResponse with ToJson::{to_json}
+
+///|
 /// Video generation - media item for reference
 pub struct VideoMediaItem {
   type_ : String
   url : String
   reference_voice : String?
 } derive(Debug, ToJson(fields(type_(rename="type"))), @json.FromJson)
+
+///|
+pub extend VideoMediaItem with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend VideoMediaItem with ToJson::{to_json}
+
+///|
+pub extend VideoMediaItem with @moonbitlang/core/debug.Debug::{to_repr}
 
 ///|
 /// Video generation - input parameters
@@ -280,6 +531,15 @@ pub struct VideoGenInput {
   image : String?
   images : Array[Json]?
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend VideoGenInput with ToJson::{to_json}
+
+///|
+pub extend VideoGenInput with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend VideoGenInput with @moonbitlang/core/debug.Debug::{to_repr}
 
 ///|
 /// Video generation - processing parameters
@@ -301,12 +561,27 @@ pub struct VideoGenParameters {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+pub extend VideoGenParameters with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend VideoGenParameters with ToJson::{to_json}
+
+///|
+pub extend VideoGenParameters with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
 /// Video generation - request body
 pub struct VideoGenRequest {
   model : String
   input : VideoGenInput
   parameters : VideoGenParameters?
 } derive(Debug, ToJson)
+
+///|
+pub extend VideoGenRequest with ToJson::{to_json}
+
+///|
+pub extend VideoGenRequest with @moonbitlang/core/debug.Debug::{to_repr}
 
 ///|
 /// Video generation - output info
@@ -321,6 +596,15 @@ pub struct VideoGenOutput {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+pub extend VideoGenOutput with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend VideoGenOutput with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend VideoGenOutput with ToJson::{to_json}
+
+///|
 /// Video generation - response
 pub struct VideoGenResponse {
   output : VideoGenOutput
@@ -328,6 +612,15 @@ pub struct VideoGenResponse {
   code : String?
   message : String?
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend VideoGenResponse with ToJson::{to_json}
+
+///|
+pub extend VideoGenResponse with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend VideoGenResponse with @moonbitlang/core/json.FromJson::{from_json}
 
 ///|
 /// 3D generation - single result
@@ -338,12 +631,30 @@ pub struct Gen3DResult {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+pub extend Gen3DResult with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend Gen3DResult with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend Gen3DResult with ToJson::{to_json}
+
+///|
 /// 3D generation - output info
 pub struct Gen3DOutput {
   task_id : String
   task_status : String
   results : Array[Gen3DResult]?
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend Gen3DOutput with ToJson::{to_json}
+
+///|
+pub extend Gen3DOutput with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend Gen3DOutput with @moonbitlang/core/debug.Debug::{to_repr}
 
 ///|
 /// 3D generation - response
@@ -353,6 +664,15 @@ pub struct Gen3DResponse {
   code : String?
   message : String?
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend Gen3DResponse with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend Gen3DResponse with ToJson::{to_json}
+
+///|
+pub extend Gen3DResponse with @moonbitlang/core/json.FromJson::{from_json}
 
 ///|
 /// Batch File - uploaded file info
@@ -368,6 +688,24 @@ pub struct BatchFile {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+pub extend BatchFile with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend Batch with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend Batch with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend BatchFile with ToJson::{to_json}
+
+///|
+pub extend Batch with ToJson::{to_json}
+
+///|
+pub extend BatchFile with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
 /// Batch Error info
 pub struct BatchError {
   code : String?
@@ -377,6 +715,15 @@ pub struct BatchError {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+pub extend BatchError with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend BatchError with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend BatchError with ToJson::{to_json}
+
+///|
 /// Batch Request - create batch task
 pub struct BatchCreateRequest {
   input_file_id : String
@@ -384,6 +731,15 @@ pub struct BatchCreateRequest {
   completion_window : String
   metadata : Map[String, String]?
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend BatchCreateRequest with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend BatchCreateRequest with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend BatchCreateRequest with ToJson::{to_json}
 
 ///|
 /// Batch - batch task info
@@ -417,6 +773,15 @@ pub struct BatchRequestCounts {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+pub extend BatchRequestCounts with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend BatchRequestCounts with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend BatchRequestCounts with ToJson::{to_json}
+
+///|
 /// Batch List Response
 pub struct BatchListResponse {
   object : String?
@@ -425,6 +790,15 @@ pub struct BatchListResponse {
   first_id : String?
   last_id : String?
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend BatchListResponse with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend BatchListResponse with ToJson::{to_json}
+
+///|
+pub extend BatchListResponse with @moonbitlang/core/json.FromJson::{from_json}
 
 ///|
 /// Batch input item - for JSONL input file
@@ -436,6 +810,15 @@ pub struct BatchInputItem {
 } derive(Debug, ToJson(fields(method_(rename="method"))), @json.FromJson)
 
 ///|
+pub extend BatchInputItem with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend BatchInputItem with ToJson::{to_json}
+
+///|
+pub extend BatchInputItem with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
 /// Batch output item - for JSONL output file
 pub struct BatchOutputItem {
   id : String?
@@ -445,12 +828,30 @@ pub struct BatchOutputItem {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+pub extend BatchOutputItem with ToJson::{to_json}
+
+///|
+pub extend BatchOutputItem with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend BatchOutputItem with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
 /// Batch Output Response
 pub struct BatchOutputResponse {
   status_code : Int?
   request_id : String?
   body : Json?
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend BatchOutputResponse with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend BatchOutputResponse with ToJson::{to_json}
+
+///|
+pub extend BatchOutputResponse with @moonbitlang/core/json.FromJson::{from_json}
 
 ///|
 /// Embedding request body
@@ -462,6 +863,9 @@ pub struct EmbeddingRequest {
 } derive(ToJson)
 
 ///|
+pub extend EmbeddingRequest with ToJson::{to_json}
+
+///|
 /// Embedding data item
 pub struct EmbeddingData {
   object : String?
@@ -470,11 +874,29 @@ pub struct EmbeddingData {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+pub extend EmbeddingData with ToJson::{to_json}
+
+///|
+pub extend EmbeddingData with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend EmbeddingData with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
 /// Embedding usage
 pub struct EmbeddingUsage {
   prompt_tokens : Int?
   total_tokens : Int?
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend EmbeddingUsage with ToJson::{to_json}
+
+///|
+pub extend EmbeddingUsage with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend EmbeddingUsage with @moonbitlang/core/debug.Debug::{to_repr}
 
 ///|
 /// Embedding response
@@ -486,6 +908,15 @@ pub struct EmbeddingResponse {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+pub extend EmbeddingResponse with ToJson::{to_json}
+
+///|
+pub extend EmbeddingResponse with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend EmbeddingResponse with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
 /// Model info - for List Models API
 pub struct Model {
   id : String
@@ -495,8 +926,26 @@ pub struct Model {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+pub extend Model with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend Model with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend Model with ToJson::{to_json}
+
+///|
 /// Model list response - for List Models API
 pub struct ModelListResponse {
   object : String?
   data : Array[Model]
 } derive(Debug, ToJson, @json.FromJson)
+
+///|
+pub extend ModelListResponse with @moonbitlang/core/json.FromJson::{from_json}
+
+///|
+pub extend ModelListResponse with @moonbitlang/core/debug.Debug::{to_repr}
+
+///|
+pub extend ModelListResponse with ToJson::{to_json}

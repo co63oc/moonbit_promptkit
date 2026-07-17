@@ -5,6 +5,4 @@ import {
   "co63oc/moonbit_promptkit/lib/qwen_coder" @lib_qc,
 }
 
-options(
-  "is-main": true,
-)
+pkgtype(kind: "executable")

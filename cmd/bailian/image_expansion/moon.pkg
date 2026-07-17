@@ -4,6 +4,4 @@ import {
   "co63oc/moonbit_promptkit/lib/image_expansion" @lib_ix,
 }
 
-options(
-  "is-main": true,
-)
+pkgtype(kind: "executable")
