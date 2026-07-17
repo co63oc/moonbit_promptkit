@@ -86,7 +86,7 @@ async fn create_embeddings_impl(
   let input = if texts.length() == 1 {
     TextEmbeddingInput::Single(texts[0])
   } else {
-    TextEmbeddingInput::Multiple(texts)
+    Multiple(texts)
   }
   let request = TextEmbeddingRequest::{ model, input, dimensions }
 
@@ -149,7 +149,7 @@ pub async fn rerank_with_options(
   let scores = resp.results.map(fn(r) { (r.index, r.relevance_score) })
   let docs = resp.results.map(fn(r) {
     match r.document {
-      Some(Json::String(s)) => Some(s)
+      Some(String(s)) => Some(s)
       _ => None
     }
   })

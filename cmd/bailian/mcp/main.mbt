@@ -41,18 +41,18 @@ async fn main {
     "get_weather",
     "获取指定城市的天气信息",
     Json::object(
-      Map::Map(
+      Map(
         [
           ("type", Json::string("object")),
           (
             "properties",
             Json::object(
-              Map::Map(
+              Map(
                 [
                   (
                     "city",
                     Json::object(
-                      Map::Map(
+                      Map(
                         [
                           ("type", Json::string("string")),
                           ("description", Json::string("城市名称")),

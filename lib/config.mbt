@@ -6,6 +6,7 @@
 let env : Map[String, String] = @sys.get_env_vars()
 
 ///|
+/// The get_env_var function.
 pub fn get_env_var(name : String, default : String?) -> String {
   match env.get(name) {
     Some(value) => value
@@ -21,6 +22,7 @@ pub fn get_env_var(name : String, default : String?) -> String {
 }
 
 ///|
+/// The ClientConfig type.
 pub struct ClientConfig {
   api_key : String
   base_url : String
@@ -38,16 +40,17 @@ pub fn make_client_config(
   base_url : String,
   mock_body? : String? = None,
 ) -> ClientConfig {
-  ClientConfig::{ api_key, base_url, mock_body }
+  { api_key, base_url, mock_body }
 }
 
 ///|
+/// The create_client_config function.
 pub fn create_client_config(
   api_key_env : String,
   base_url_env : String,
   default_base_url : String,
 ) -> ClientConfig {
-  ClientConfig::{
+  {
     api_key: get_env_var(api_key_env, None),
     base_url: get_env_var(base_url_env, Some(default_base_url)),
     mock_body: None,
@@ -62,7 +65,7 @@ pub let batch_chat_base_url : String = "https://batch.dashscope.aliyuncs.com/com
 /// Create a batch chat client config from an existing config
 /// Uses batch.dashscope.aliyuncs.com endpoint for 50% cost reduction
 pub fn to_batch_config(config : ClientConfig) -> ClientConfig {
-  ClientConfig::{
+  {
     api_key: config.api_key,
     base_url: batch_chat_base_url,
     mock_body: config.mock_body,
@@ -75,7 +78,7 @@ pub fn create_batch_client_config(
   api_key_env : String,
   base_url_env : String,
 ) -> ClientConfig {
-  ClientConfig::{
+  {
     api_key: get_env_var(api_key_env, None),
     base_url: get_env_var(base_url_env, Some(batch_chat_base_url)),
     mock_body: None,

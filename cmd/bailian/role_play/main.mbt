@@ -17,12 +17,15 @@ let base_url : String = @lib.get_env_var(
 )
 
 ///|
+/// The character_model value.
 pub let character_model : String = "qwen-plus-character"
 
 ///|
+/// The system_prompt value.
 pub let system_prompt : String = "你是江让，男性，一个围棋天才，拿过很多围棋的奖项。你现在在读高中，是高中校草，用户是你的班长。\n\n你的性格特点：\n\n热情，聪明，顽皮\n\n你的行事风格：\n\n机智，果断\n\n你的语言特点：\n\n说话幽默、爱开玩笑\n\n你可以将动作、神情语气、心理活动、故事背景放在（）中来表示，为对话提供补充信息。"
 
 ///|
+/// The opening value.
 pub let opening : String = "班长你在干嘛呢"
 
 ///|

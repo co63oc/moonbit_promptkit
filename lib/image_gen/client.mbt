@@ -47,7 +47,7 @@ pub async fn generate_sync(
   }
   let request = SyncImageGenRequest::{
     model,
-    input: SyncImageGenInput::{ messages: [message] },
+    input: { messages: [message] },
     parameters: Some(params),
   }
   let (response, resp_body) = @http.post(
@@ -92,8 +92,8 @@ pub async fn submit_async_task(
   }
   let request = AsyncImageGenRequest::{
     model,
-    input: AsyncImageGenInput::{ prompt, negative_prompt, style },
-    parameters: Some(AsyncImageGenParams::{ n, size }),
+    input: { prompt, negative_prompt, style },
+    parameters: Some({ n, size }),
   }
   let (response, resp_body) = @http.post(
     "\{dashscope_base}/services/aigc/text2image/image-synthesis",
@@ -232,9 +232,9 @@ fn extract_image_urls(resp : ImageGenResponse) -> Array[String] {
 ///|
 fn extract_task_id(output : Json) -> String {
   match output {
-    Json::Object(obj) =>
+    Object(obj) =>
       match obj.get("task_id") {
-        Some(Json::String(id)) => id
+        Some(String(id)) => id
         _ => "UNKNOWN"
       }
     _ => "UNKNOWN"
@@ -244,9 +244,9 @@ fn extract_task_id(output : Json) -> String {
 ///|
 fn extract_task_status(output : Json) -> String {
   match output {
-    Json::Object(obj) =>
+    Object(obj) =>
       match obj.get("task_status") {
-        Some(Json::String(s)) => s
+        Some(String(s)) => s
         _ => "UNKNOWN"
       }
     _ => "UNKNOWN"
@@ -257,15 +257,15 @@ fn extract_task_status(output : Json) -> String {
 fn extract_result_urls(output : Json) -> Array[String] {
   let urls : Array[String] = []
   match output {
-    Json::Object(obj) =>
+    Object(obj) =>
       // Pattern 1: results array (text2image)
       match obj.get("results") {
-        Some(Json::Array(results)) =>
+        Some(Array(results)) =>
           for r in results {
             match r {
-              Json::Object(robj) =>
+              Object(robj) =>
                 match robj.get("url") {
-                  Some(Json::String(u)) => urls.push(u)
+                  Some(String(u)) => urls.push(u)
                   _ => ()
                 }
               _ => ()
@@ -274,7 +274,7 @@ fn extract_result_urls(output : Json) -> Array[String] {
         _ =>
           // Pattern 2: output_image_url (image2image)
           match obj.get("output_image_url") {
-            Some(Json::String(u)) => urls.push(u)
+            Some(String(u)) => urls.push(u)
             _ => ()
           }
       }

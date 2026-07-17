@@ -13,12 +13,15 @@ pub let default_model : String = "wanx2.1-vace-plus"
 pub let image_reference_fn : String = "image_reference"
 
 ///|
+/// The video_repainting_fn value.
 pub let video_repainting_fn : String = "video_repainting"
 
 ///|
+/// The local_editing_fn value.
 pub let local_editing_fn : String = "local_editing"
 
 ///|
+/// The video_extension_fn value.
 pub let video_extension_fn : String = "video_extension"
 
 ///|
@@ -26,12 +29,15 @@ pub let video_extension_fn : String = "video_extension"
 pub let pose_body_face : String = "posebodyface"
 
 ///|
+/// The pose_body value.
 pub let pose_body : String = "posebody"
 
 ///|
+/// The depth_condition value.
 pub let depth_condition : String = "depth"
 
 ///|
+/// The scribble_condition value.
 pub let scribble_condition : String = "scribble"
 
 ///|
@@ -283,11 +289,11 @@ pub async fn query_vace_task(
 ///|
 fn extract_task_id(resp : Json) -> String {
   match resp {
-    Json::Object(obj) =>
+    Object(obj) =>
       match obj.get("output") {
-        Some(Json::Object(output)) =>
+        Some(Object(output)) =>
           match output.get("task_id") {
-            Some(Json::String(id)) => id
+            Some(String(id)) => id
             _ => "UNKNOWN"
           }
         _ => "UNKNOWN"
@@ -299,11 +305,11 @@ fn extract_task_id(resp : Json) -> String {
 ///|
 fn extract_status(resp : Json) -> String {
   match resp {
-    Json::Object(obj) =>
+    Object(obj) =>
       match obj.get("output") {
-        Some(Json::Object(output)) =>
+        Some(Object(output)) =>
           match output.get("task_status") {
-            Some(Json::String(s)) => s
+            Some(String(s)) => s
             _ => "UNKNOWN"
           }
         _ => "UNKNOWN"
@@ -315,11 +321,11 @@ fn extract_status(resp : Json) -> String {
 ///|
 fn extract_video_url(resp : Json) -> String {
   match resp {
-    Json::Object(obj) =>
+    Object(obj) =>
       match obj.get("output") {
-        Some(Json::Object(output)) =>
+        Some(Object(output)) =>
           match output.get("video_url") {
-            Some(Json::String(u)) => u
+            Some(String(u)) => u
             _ => ""
           }
         _ => ""

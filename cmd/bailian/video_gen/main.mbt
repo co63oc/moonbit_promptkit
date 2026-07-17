@@ -24,6 +24,7 @@ let config : @lib.ClientConfig = @lib.make_client_config(
 )
 
 ///|
+/// The sample_image_url value.
 pub let sample_image_url : String = "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20250925/wpimhv/rap.png"
 
 ///|

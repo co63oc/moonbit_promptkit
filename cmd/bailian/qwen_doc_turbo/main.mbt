@@ -17,9 +17,11 @@ let base_url : String = @lib.get_env_var(
 )
 
 ///|
+/// The doc_model value.
 pub let doc_model : String = "qwen-doc-turbo"
 
 ///|
+/// The sample_doc value.
 pub let sample_doc : String = "智能办公产品手册 版本：V2.0 发布日期：2024年1月\n\n1.1 产品概述\nPRO-100 智能打印机，价格 8999 元\nPRO-200 智能扫描仪，价格 12999 元\nSEC-400 智能访客系统，价格 9999 元\nSEC-500 智能停车管理，价格 22999 元"
 
 ///|

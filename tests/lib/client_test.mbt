@@ -147,7 +147,7 @@ test "response_message" {
 test "input_text" {
   let content = @promptkit.input_text("hello")
   match content {
-    @promptkit.InputContent::Text(t) => assert_true(t.text == "hello")
+    Text(t) => assert_true(t.text == "hello")
     _ => fail("expected Text")
   }
 }
@@ -156,8 +156,7 @@ test "input_text" {
 test "input_image" {
   let content = @promptkit.input_image("https://img.png")
   match content {
-    @promptkit.InputContent::Image(i) =>
-      assert_true(i.image_url == "https://img.png")
+    Image(i) => assert_true(i.image_url == "https://img.png")
     _ => fail("expected Image")
   }
 }

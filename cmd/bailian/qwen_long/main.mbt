@@ -17,6 +17,7 @@ let base_url : String = @lib.get_env_var(
 )
 
 ///|
+/// The model value.
 pub let model : String = @lib_ql.default_model
 
 ///|

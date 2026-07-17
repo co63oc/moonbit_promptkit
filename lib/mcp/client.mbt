@@ -27,7 +27,7 @@ pub fn mcp_tool(
   parameters : Json,
 ) -> McpTool {
   let function = McpFunction::{ name, description, parameters }
-  McpTool::{ type_: "function", function }
+  { type_: "function", function }
 }
 
 ///|

@@ -29,6 +29,7 @@ let config : @lib.ClientConfig = @lib.make_client_config(
 )
 
 ///|
+/// The sample_audio_url value.
 pub let sample_audio_url : String = "https://dashscope.oss-cn-beijing.aliyuncs.com/audios/welcome.mp3"
 
 ///|

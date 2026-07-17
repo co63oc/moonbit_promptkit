@@ -87,7 +87,7 @@ async fn main {
 
   // 示例2: 多轮追问搜索
   println("\n\n【示例2: 多轮追问搜索】")
-  let queries = [
+  let queries : ReadOnlyArray[String] = [
     "知识库中提到了哪些关键技术？", "这些技术的优势是什么？",
   ]
   let mut idx = 0

@@ -44,7 +44,7 @@ pub fn extract_file_search_results(
         try {
           let parsed = @json.parse(output_str)
           match parsed {
-            Json::Array(arr) =>
+            Array(arr) =>
               for x in arr {
                 results.push(x)
               }

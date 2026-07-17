@@ -6,7 +6,7 @@
 
 ///|
 fn test_config() -> ClientConfig {
-  ClientConfig::{
+  {
     api_key: "test-key",
     base_url: "https://api.example.com/v1",
     mock_body: None,
@@ -17,7 +17,7 @@ fn test_config() -> ClientConfig {
 /// Read a field from a JSON object as an Option[Json].
 fn body_field(body : Json, key : String) -> Json? {
   match body {
-    Json::Object(obj) => obj.get(key)
+    Object(obj) => obj.get(key)
     _ => None
   }
 }
@@ -49,7 +49,7 @@ async test "chat success extracts assistant content" {
   try {
     let msg = chat(cfg, "gpt-4", [user_message_with_text("hi")])
     match msg.content {
-      Json::String(s) => assert_eq(s, "Hi")
+      String(s) => assert_eq(s, "Hi")
       _ => fail("expected string content")
     }
     restore_mock()

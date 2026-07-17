@@ -20,6 +20,7 @@ let base_url : String = @lib.get_env_var(
 )
 
 ///|
+/// The model value.
 pub let model : String = @lib.get_env_var("BAILIAN_MODEL", Some("qwen3.7-plus"))
 
 ///|

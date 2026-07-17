@@ -1,4 +1,5 @@
 ///|
+/// The code_generate function.
 pub async fn code_generate(
   config : @lib.ClientConfig,
   prompt : String,
@@ -19,6 +20,7 @@ pub async fn code_generate(
 }
 
 ///|
+/// The code_generate_stream function.
 pub async fn code_generate_stream(
   config : @lib.ClientConfig,
   prompt : String,
@@ -40,6 +42,7 @@ pub async fn code_generate_stream(
 }
 
 ///|
+/// The code_with_tools function.
 pub async fn code_with_tools(
   config : @lib.ClientConfig,
   prompt : String,
@@ -61,6 +64,7 @@ pub async fn code_with_tools(
 }
 
 ///|
+/// The code_explain function.
 pub async fn code_explain(
   config : @lib.ClientConfig,
   code : String,
@@ -76,6 +80,7 @@ pub async fn code_explain(
 }
 
 ///|
+/// The code_refactor function.
 pub async fn code_refactor(
   config : @lib.ClientConfig,
   code : String,

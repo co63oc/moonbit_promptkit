@@ -19,6 +19,7 @@ let base_url : String = @lib.get_env_var(
 )
 
 ///|
+/// The sample_image_url value.
 pub let sample_image_url : String = "https://help-static-aliyun-doc.aliyuncs.com/file-manage-files/zh-CN/20251031/ownrof/f26d201b1e3f4e62ab4a1fc82dd5c9bb.png"
 
 ///|

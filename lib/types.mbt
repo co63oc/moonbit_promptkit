@@ -3,26 +3,31 @@
 ///
 
 ///|
+/// The CacheControl type.
 pub struct CacheControl {
   type_ : String
 } derive(Debug, ToJson(fields(type_(rename="type"))), @json.FromJson)
 
 ///|
+/// The ImageUrl type.
 pub struct ImageUrl {
   url : String
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+/// The VideoUrl type.
 pub struct VideoUrl {
   url : String
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+/// The AudioUrl type.
 pub struct AudioUrl {
   url : String
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+/// The Content type.
 pub struct Content {
   text : String?
   image_url : ImageUrl?
@@ -33,6 +38,7 @@ pub struct Content {
 } derive(Debug, ToJson(fields(type_(rename="type"))), @json.FromJson)
 
 ///|
+/// The Message type.
 pub struct Message {
   role : String
   content : Json
@@ -43,23 +49,27 @@ pub struct Message {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+/// The Function type.
 pub struct Function {
   name : String
   arguments : String
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+/// The ToolCall type.
 pub struct ToolCall {
   id : String
   function : Function
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+/// The StreamOptions type.
 pub struct StreamOptions {
   include_usage : Bool
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+/// The Parameters type.
 pub struct Parameters {
   type_ : String
   properties : Map[String, Json]
@@ -67,6 +77,7 @@ pub struct Parameters {
 } derive(Debug, ToJson(fields(type_(rename="type"))), @json.FromJson)
 
 ///|
+/// The FunctionDef type.
 pub struct FunctionDef {
   name : String
   description : String
@@ -74,17 +85,20 @@ pub struct FunctionDef {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+/// The Tool type.
 pub struct Tool {
   type_ : String
   function : FunctionDef
 } derive(Debug, ToJson(fields(type_(rename="type"))), @json.FromJson)
 
 ///|
+/// The SearchOptions type.
 pub struct SearchOptions {
   search_strategy : String?
 } derive(ToJson)
 
 ///|
+/// The Request type.
 pub struct Request {
   model : String
   messages : Array[Message]
@@ -106,11 +120,13 @@ pub struct Request {
 } derive(ToJson)
 
 ///|
+/// The Choice type.
 pub struct Choice {
   message : Message
 } derive(ToJson, @json.FromJson)
 
 ///|
+/// The PromptTokensDetails type.
 pub struct PromptTokensDetails {
   cached_tokens : Int?
   text_tokens : Int?
@@ -119,12 +135,14 @@ pub struct PromptTokensDetails {
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+/// The CompletionTokensDetails type.
 pub struct CompletionTokensDetails {
   reasoning_tokens : Int?
   text_tokens : Int?
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+/// The Usage type.
 pub struct Usage {
   prompt_tokens : Int?
   completion_tokens : Int?
@@ -143,17 +161,20 @@ pub struct Usage {
 )
 
 ///|
+/// The Response type.
 pub struct Response {
   choices : Array[Choice]
   usage : Json?
 } derive(ToJson, @json.FromJson)
 
 ///|
+/// The StreamChoice type.
 pub struct StreamChoice {
   delta : Message
 } derive(Debug, ToJson, @json.FromJson)
 
 ///|
+/// The StreamResponse type.
 pub struct StreamResponse {
   choices : Array[StreamChoice]
   usage : Json?

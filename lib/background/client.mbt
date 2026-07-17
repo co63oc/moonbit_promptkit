@@ -42,7 +42,7 @@ pub async fn submit_background(
     Some(v) => input_fields.push(("ref_image_url", v.to_json()))
     None => ()
   }
-  let input_json = Json::object(Map::Map(input_fields.view()))
+  let input_json = Json::object(Map(input_fields.view()))
 
   // 手动构建 parameters JSON
   let param_fields : Array[(String, Json)] = [("model_version", "v3".to_json())]
@@ -55,7 +55,7 @@ pub async fn submit_background(
     None => ()
   }
   let parameters_json = if param_fields.length() > 0 {
-    Some(Json::object(Map::Map(param_fields.view())))
+    Some(Json::object(Map(param_fields.view())))
   } else {
     None
   }
@@ -69,7 +69,7 @@ pub async fn submit_background(
     Some(v) => request_fields.push(("parameters", v))
     None => ()
   }
-  let request = Json::object(Map::Map(request_fields.view()))
+  let request = Json::object(Map(request_fields.view()))
 
   let (response, resp_body) = @http.post(
     "\{dashscope_base}/services/aigc/background-generation/generation",
@@ -181,11 +181,11 @@ pub async fn background_easy(
 ///|
 fn extract_task_id(resp : Json) -> String {
   match resp {
-    Json::Object(obj) =>
+    Object(obj) =>
       match obj.get("output") {
-        Some(Json::Object(output)) =>
+        Some(Object(output)) =>
           match output.get("task_id") {
-            Some(Json::String(id)) => id
+            Some(String(id)) => id
             _ => "UNKNOWN"
           }
         _ => "UNKNOWN"
@@ -197,11 +197,11 @@ fn extract_task_id(resp : Json) -> String {
 ///|
 fn extract_status(resp : Json) -> String {
   match resp {
-    Json::Object(obj) =>
+    Object(obj) =>
       match obj.get("output") {
-        Some(Json::Object(output)) =>
+        Some(Object(output)) =>
           match output.get("task_status") {
-            Some(Json::String(s)) => s
+            Some(String(s)) => s
             _ => "UNKNOWN"
           }
         _ => "UNKNOWN"
@@ -214,16 +214,16 @@ fn extract_status(resp : Json) -> String {
 fn extract_urls(resp : Json) -> Array[String] {
   let urls : Array[String] = []
   match resp {
-    Json::Object(obj) =>
+    Object(obj) =>
       match obj.get("output") {
-        Some(Json::Object(output)) =>
+        Some(Object(output)) =>
           match output.get("results") {
-            Some(Json::Array(results)) =>
+            Some(Array(results)) =>
               for r in results {
                 match r {
-                  Json::Object(robj) =>
+                  Object(robj) =>
                     match robj.get("url") {
-                      Some(Json::String(u)) => urls.push(u)
+                      Some(String(u)) => urls.push(u)
                       _ => ()
                     }
                   _ => ()

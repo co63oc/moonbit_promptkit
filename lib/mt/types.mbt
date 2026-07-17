@@ -41,5 +41,5 @@ pub struct TranslateRequest {
 ///|
 /// Create a TranslationTerm for terminology intervention (术语干预)
 pub fn translation_term(source : String, target : String) -> TranslationTerm {
-  TranslationTerm::{ source, target }
+  { source, target }
 }

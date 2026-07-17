@@ -17,12 +17,15 @@ let base_url : String = @lib.get_env_var(
 )
 
 ///|
+/// The model value.
 pub let model : String = "qwen-coder-plus"
 
 ///|
+/// The fibonacci_code value.
 pub let fibonacci_code : String = "def fibonacci(n, memo={}):\n    if n in memo:\n        return memo[n]\n    if n <= 1:\n        return n\n    memo[n] = fibonacci(n-1, memo) + fibonacci(n-2, memo)\n    return memo[n]"
 
 ///|
+/// The process_code value.
 pub let process_code : String = "def process(data):\n    result = []\n    for i in range(len(data)):\n        if data[i] > 0:\n            result.append(data[i] * 2)\n        elif data[i] == 0:\n            result.append(0)\n        else:\n            result.append(data[i] * -1)\n    return result"
 
 ///|

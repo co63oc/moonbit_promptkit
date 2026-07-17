@@ -47,7 +47,7 @@ pub async fn edit_image(
   let params = EditParams::{ n, size, prompt_extend }
   let request = EditRequest::{
     model,
-    input: EditInput::{ messages: [message] },
+    input: { messages: [message] },
     parameters: Some(params),
   }
   let (response, resp_body) = @http.post(

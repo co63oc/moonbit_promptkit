@@ -34,13 +34,13 @@ pub struct AudioRequest {
 ///|
 /// Create audio input structure
 pub fn audio_input(url : String) -> AudioInput {
-  AudioInput::{ data: url }
+  { data: url }
 }
 
 ///|
 /// Create audio content for messages
 pub fn audio_content(url : String) -> AudioContent {
-  AudioContent::{ type_: "input_audio", input_audio: audio_input(url) }
+  { type_: "input_audio", input_audio: audio_input(url) }
 }
 
 ///|
@@ -197,9 +197,11 @@ pub struct CustomVoiceResponse {
 pub let default_cosyvoice_model : String = "cosyvoice-v3-flash"
 
 ///|
+/// The default_qwen_tts_model value.
 pub let default_qwen_tts_model : String = "qwen3-tts-flash"
 
 ///|
+/// The default_minimax_model value.
 pub let default_minimax_model : String = "MiniMax/speech-2.8-hd"
 
 ///|

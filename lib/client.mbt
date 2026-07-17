@@ -21,7 +21,7 @@ priv struct MockState {
 }
 
 ///|
-let mock_state : MockState = MockState::{
+let mock_state : MockState = {
   use_mock: false,
   code: 200,
   reason: "OK",
@@ -134,6 +134,7 @@ pub fn last_request() -> (String, Json, Map[String, String]) {
 }
 
 ///|
+/// The generate function.
 pub async fn generate(config : ClientConfig, request : Request) -> Response {
   if config.api_key == "" {
     match config.mock_body {
@@ -162,6 +163,7 @@ pub async fn generate(config : ClientConfig, request : Request) -> Response {
 }
 
 ///|
+/// The chat function.
 pub async fn chat(
   config : ClientConfig,
   model : String,
@@ -195,6 +197,7 @@ pub async fn chat(
 }
 
 ///|
+/// The chat_with_search function.
 pub async fn chat_with_search(
   config : ClientConfig,
   model : String,
@@ -228,6 +231,7 @@ pub async fn chat_with_search(
 }
 
 ///|
+/// The chat_with_tools function.
 pub async fn chat_with_tools(
   config : ClientConfig,
   model : String,
@@ -274,16 +278,16 @@ pub fn parse_sse(body_text : String) -> String {
       try {
         let json = @json.parse(json_str)
         match json {
-          Json::Object(obj) =>
+          Object(obj) =>
             match obj.get("choices") {
-              Some(Json::Array(choices)) =>
+              Some(Array(choices)) =>
                 for choice in choices {
                   match choice {
-                    Json::Object(choice_obj) =>
+                    Object(choice_obj) =>
                       match choice_obj.get("delta") {
-                        Some(Json::Object(delta_obj)) =>
+                        Some(Object(delta_obj)) =>
                           match delta_obj.get("content") {
-                            Some(Json::String(s)) => content = content + s
+                            Some(String(s)) => content = content + s
                             _ => ignore(())
                           }
                         _ => ignore(())
@@ -304,6 +308,7 @@ pub fn parse_sse(body_text : String) -> String {
 }
 
 ///|
+/// The chat_stream function.
 pub async fn chat_stream(
   config : ClientConfig,
   model : String,
@@ -314,7 +319,7 @@ pub async fn chat_stream(
     model,
     messages,
     stream: Some(true),
-    stream_options: Some(StreamOptions::{ include_usage: true }),
+    stream_options: Some({ include_usage: true }),
     tools: None,
     extra_body: None,
     enable_search: None,
@@ -368,22 +373,22 @@ fn parse_thinking_sse(body_text : String) -> ThinkingResult {
       try {
         let json = @json.parse(json_str)
         match json {
-          Json::Object(obj) =>
+          Object(obj) =>
             match obj.get("choices") {
-              Some(Json::Array(choices)) =>
+              Some(Array(choices)) =>
                 if choices.length() > 0 {
                   match choices[0] {
-                    Json::Object(choice_obj) =>
+                    Object(choice_obj) =>
                       match choice_obj.get("delta") {
-                        Some(Json::Object(delta_obj)) => {
+                        Some(Object(delta_obj)) => {
                           // Extract reasoning_content
                           match delta_obj.get("reasoning_content") {
-                            Some(Json::String(s)) => reasoning = reasoning + s
+                            Some(String(s)) => reasoning = reasoning + s
                             _ => ignore(())
                           }
                           // Extract content
                           match delta_obj.get("content") {
-                            Some(Json::String(s)) => answer = answer + s
+                            Some(String(s)) => answer = answer + s
                             _ => ignore(())
                           }
                         }
@@ -401,7 +406,7 @@ fn parse_thinking_sse(body_text : String) -> ThinkingResult {
       }
     }
   }
-  ThinkingResult::{ reasoning, answer }
+  { reasoning, answer }
 }
 
 ///|
@@ -418,7 +423,7 @@ pub async fn chat_stream_thinking(
     model,
     messages,
     stream: Some(true),
-    stream_options: Some(StreamOptions::{ include_usage: true }),
+    stream_options: Some({ include_usage: true }),
     tools: None,
     extra_body: None,
     enable_search: None,
@@ -605,12 +610,12 @@ pub async fn chat_web_extractor_stream(
     model,
     messages,
     stream: Some(true),
-    stream_options: Some(StreamOptions::{ include_usage: true }),
+    stream_options: Some({ include_usage: true }),
     tools: None,
     extra_body: None,
     enable_search: Some(true),
     enable_thinking: Some(true),
-    search_options: Some(SearchOptions::{ search_strategy: Some("agent_max") }),
+    search_options: Some({ search_strategy: Some("agent_max") }),
     enable_code_interpreter: None,
     top_p: None,
     temperature: None,
@@ -651,12 +656,12 @@ pub async fn chat_web_extractor_stream_thinking(
     model,
     messages,
     stream: Some(true),
-    stream_options: Some(StreamOptions::{ include_usage: true }),
+    stream_options: Some({ include_usage: true }),
     tools: None,
     extra_body: None,
     enable_search: Some(true),
     enable_thinking: Some(true),
-    search_options: Some(SearchOptions::{ search_strategy: Some("agent_max") }),
+    search_options: Some({ search_strategy: Some("agent_max") }),
     enable_code_interpreter: None,
     top_p: None,
     temperature: None,
@@ -702,7 +707,7 @@ pub async fn chat_code_interpreter_stream(
     model,
     messages,
     stream: Some(true),
-    stream_options: Some(StreamOptions::{ include_usage: true }),
+    stream_options: Some({ include_usage: true }),
     tools: None,
     extra_body: None,
     enable_search: None,
@@ -747,7 +752,7 @@ pub async fn chat_code_interpreter_stream_thinking(
     model,
     messages,
     stream: Some(true),
-    stream_options: Some(StreamOptions::{ include_usage: true }),
+    stream_options: Some({ include_usage: true }),
     tools: None,
     extra_body: None,
     enable_search: None,
@@ -1196,7 +1201,7 @@ pub fn build_chat_batch_input(
     seed: None,
     stop: None,
   }
-  BatchInputItem::{
+  {
     custom_id,
     method_: "POST",
     url: "/v1/chat/completions",
@@ -1270,18 +1275,18 @@ pub async fn describe_image(
   prompt : String,
 ) -> String {
   let messages : Array[Message] = [
-    Message::{
+    {
       role: "user",
       content: [
         Content::{
           type_: "image_url",
           text: None,
-          image_url: Some(ImageUrl::{ url: image_url }),
+          image_url: Some({ url: image_url }),
           video_url: None,
           audio_url: None,
           cache_control: None,
         },
-        Content::{
+        {
           type_: "text",
           text: Some(prompt),
           image_url: None,
@@ -1298,7 +1303,7 @@ pub async fn describe_image(
   ]
   let response = chat(config, "qwen-vl-plus", messages)
   match response.content {
-    Json::String(s) => s
+    String(s) => s
     _ => "(无法解析响应)"
   }
 }
@@ -1312,18 +1317,18 @@ pub async fn describe_image_with_model(
   prompt : String,
 ) -> String {
   let messages : Array[Message] = [
-    Message::{
+    {
       role: "user",
       content: [
         Content::{
           type_: "image_url",
           text: None,
-          image_url: Some(ImageUrl::{ url: image_url }),
+          image_url: Some({ url: image_url }),
           video_url: None,
           audio_url: None,
           cache_control: None,
         },
-        Content::{
+        {
           type_: "text",
           text: Some(prompt),
           image_url: None,
@@ -1340,7 +1345,7 @@ pub async fn describe_image_with_model(
   ]
   let response = chat(config, model, messages)
   match response.content {
-    Json::String(s) => s
+    String(s) => s
     _ => "(无法解析响应)"
   }
 }
@@ -1374,18 +1379,18 @@ pub async fn analyze_video(
   prompt : String,
 ) -> String {
   let messages : Array[Message] = [
-    Message::{
+    {
       role: "user",
       content: [
         Content::{
           type_: "video_url",
           text: None,
           image_url: None,
-          video_url: Some(VideoUrl::{ url: video_url }),
+          video_url: Some({ url: video_url }),
           audio_url: None,
           cache_control: None,
         },
-        Content::{
+        {
           type_: "text",
           text: Some(prompt),
           image_url: None,
@@ -1402,7 +1407,7 @@ pub async fn analyze_video(
   ]
   let response = chat(config, "qwen-vl-max", messages)
   match response.content {
-    Json::String(s) => s
+    String(s) => s
     _ => "(无法解析响应)"
   }
 }
@@ -1416,18 +1421,18 @@ pub async fn analyze_video_with_model(
   prompt : String,
 ) -> String {
   let messages : Array[Message] = [
-    Message::{
+    {
       role: "user",
       content: [
         Content::{
           type_: "video_url",
           text: None,
           image_url: None,
-          video_url: Some(VideoUrl::{ url: video_url }),
+          video_url: Some({ url: video_url }),
           audio_url: None,
           cache_control: None,
         },
-        Content::{
+        {
           type_: "text",
           text: Some(prompt),
           image_url: None,
@@ -1444,7 +1449,7 @@ pub async fn analyze_video_with_model(
   ]
   let response = chat(config, model, messages)
   match response.content {
-    Json::String(s) => s
+    String(s) => s
     _ => "(无法解析响应)"
   }
 }
@@ -1458,26 +1463,26 @@ pub async fn compare_images(
   prompt : String,
 ) -> String {
   let messages : Array[Message] = [
-    Message::{
+    {
       role: "user",
       content: [
         Content::{
           type_: "image_url",
           text: None,
-          image_url: Some(ImageUrl::{ url: image_url1 }),
+          image_url: Some({ url: image_url1 }),
           video_url: None,
           audio_url: None,
           cache_control: None,
         },
-        Content::{
+        {
           type_: "image_url",
           text: None,
-          image_url: Some(ImageUrl::{ url: image_url2 }),
+          image_url: Some({ url: image_url2 }),
           video_url: None,
           audio_url: None,
           cache_control: None,
         },
-        Content::{
+        {
           type_: "text",
           text: Some(prompt),
           image_url: None,
@@ -1494,7 +1499,7 @@ pub async fn compare_images(
   ]
   let response = chat(config, "qwen-vl-plus", messages)
   match response.content {
-    Json::String(s) => s
+    String(s) => s
     _ => "(无法解析响应)"
   }
 }
@@ -1509,16 +1514,16 @@ pub async fn multi_image_chat_full(
 ) -> Response {
   let contents : Array[Content] = []
   for url in image_urls {
-    contents.push(Content::{
+    contents.push({
       type_: "image_url",
       text: None,
-      image_url: Some(ImageUrl::{ url, }),
+      image_url: Some({ url, }),
       video_url: None,
       audio_url: None,
       cache_control: None,
     })
   }
-  contents.push(Content::{
+  contents.push({
     type_: "text",
     text: Some(prompt),
     image_url: None,
@@ -1527,7 +1532,7 @@ pub async fn multi_image_chat_full(
     cache_control: None,
   })
   let messages : Array[Message] = [
-    Message::{
+    {
       role: "user",
       content: contents.to_json(),
       partial: None,
@@ -1712,14 +1717,10 @@ pub async fn edit_video(
   reference_image_url : String?,
 ) -> VideoGenResponse {
   let media : Array[VideoMediaItem] = []
-  media.push(VideoMediaItem::{
-    type_: "video",
-    url: video_url,
-    reference_voice: None,
-  })
+  media.push({ type_: "video", url: video_url, reference_voice: None })
   match reference_image_url {
     Some(img_url) =>
-      media.push(VideoMediaItem::{
+      media.push({
         type_: "reference_image",
         url: img_url,
         reference_voice: None,

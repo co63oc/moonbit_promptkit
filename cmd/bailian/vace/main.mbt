@@ -29,12 +29,15 @@ let config : @lib.ClientConfig = @lib.make_client_config(
 )
 
 ///|
+/// The sample_image_1 value.
 pub let sample_image_1 : String = "http://wanx.alicdn.com/material/20250318/image_reference_2_5_16.png"
 
 ///|
+/// The sample_image_2 value.
 pub let sample_image_2 : String = "http://wanx.alicdn.com/material/20250318/image_reference_1_5_16.png"
 
 ///|
+/// The sample_video value.
 pub let sample_video : String = "http://wanx.alicdn.com/material/20250318/video_repainting_1.mp4"
 
 ///|

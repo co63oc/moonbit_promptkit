@@ -364,7 +364,7 @@ async fn minimax_tts_impl(
     channel: Some(1),
   }
   let input_obj = Json::object(
-    Map::Map(
+    Map(
       [
         ("text", text.to_json()),
         ("voice_setting", voice_setting.to_json()),
@@ -447,7 +447,7 @@ pub async fn qwen_clone_voice(
   target_model : String,
   preferred_name : String,
 ) -> String {
-  let audio_obj = Json::object(Map::Map([("data", audio_url.to_json())].view()))
+  let audio_obj = Json::object(Map([("data", audio_url.to_json())].view()))
   let input = VoiceCloningInput::{
     action: "create",
     target_model,

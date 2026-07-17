@@ -48,17 +48,17 @@ async fn main {
     while i < limit {
       let img = images[i]
       match img {
-        Json::Object(obj) =>
+        Object(obj) =>
           match obj.get("title") {
-            Some(Json::String(title)) => println("[\{i + 1}] \{title}")
+            Some(String(title)) => println("[\{i + 1}] \{title}")
             _ => println("[\{i + 1}] (无标题)")
           }
         _ => println("[\{i + 1}] (无标题)")
       }
       match img {
-        Json::Object(obj) =>
+        Object(obj) =>
           match obj.get("url") {
-            Some(Json::String(url)) => println("    \{url}")
+            Some(String(url)) => println("    \{url}")
             _ => ignore(())
           }
         _ => ignore(())

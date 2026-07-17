@@ -49,8 +49,8 @@ pub async fn submit_expansion(
   }
   let request = ExpansionRequest::{
     model,
-    input: ExpansionInput::{ image_url, },
-    parameters: Some(ExpansionParams::{ x_scale, y_scale }),
+    input: { image_url, },
+    parameters: Some({ x_scale, y_scale }),
   }
   let (response, resp_body) = @http.post(
     "\{dashscope_base}/services/aigc/image2image/out-painting",
@@ -150,11 +150,11 @@ pub async fn expand_easy(
 ///|
 fn extract_task_id(resp : Json) -> String {
   match resp {
-    Json::Object(obj) =>
+    Object(obj) =>
       match obj.get("output") {
-        Some(Json::Object(output)) =>
+        Some(Object(output)) =>
           match output.get("task_id") {
-            Some(Json::String(id)) => id
+            Some(String(id)) => id
             _ => "UNKNOWN"
           }
         _ => "UNKNOWN"
@@ -166,11 +166,11 @@ fn extract_task_id(resp : Json) -> String {
 ///|
 fn extract_status(resp : Json) -> String {
   match resp {
-    Json::Object(obj) =>
+    Object(obj) =>
       match obj.get("output") {
-        Some(Json::Object(output)) =>
+        Some(Object(output)) =>
           match output.get("task_status") {
-            Some(Json::String(s)) => s
+            Some(String(s)) => s
             _ => "UNKNOWN"
           }
         _ => "UNKNOWN"
@@ -183,16 +183,16 @@ fn extract_status(resp : Json) -> String {
 fn extract_urls(resp : Json) -> Array[String] {
   let urls : Array[String] = []
   match resp {
-    Json::Object(obj) =>
+    Object(obj) =>
       match obj.get("output") {
-        Some(Json::Object(output)) =>
+        Some(Object(output)) =>
           match output.get("results") {
-            Some(Json::Array(results)) =>
+            Some(Array(results)) =>
               for r in results {
                 match r {
-                  Json::Object(robj) =>
+                  Object(robj) =>
                     match robj.get("url") {
-                      Some(Json::String(u)) => urls.push(u)
+                      Some(String(u)) => urls.push(u)
                       _ => ()
                     }
                   _ => ()
@@ -201,7 +201,7 @@ fn extract_urls(resp : Json) -> Array[String] {
             _ =>
               // image2image may use output_image_url
               match output.get("output_image_url") {
-                Some(Json::String(u)) => urls.push(u)
+                Some(String(u)) => urls.push(u)
                 _ => ()
               }
           }

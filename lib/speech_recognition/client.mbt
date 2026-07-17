@@ -152,11 +152,11 @@ pub async fn query_transcription_task(
 ///|
 fn extract_task_id(resp : Json) -> String {
   match resp {
-    Json::Object(obj) =>
+    Object(obj) =>
       match obj.get("output") {
-        Some(Json::Object(output)) =>
+        Some(Object(output)) =>
           match output.get("task_id") {
-            Some(Json::String(id)) => id
+            Some(String(id)) => id
             _ => "UNKNOWN"
           }
         _ => "UNKNOWN"
@@ -168,11 +168,11 @@ fn extract_task_id(resp : Json) -> String {
 ///|
 fn extract_status(resp : Json) -> String {
   match resp {
-    Json::Object(obj) =>
+    Object(obj) =>
       match obj.get("output") {
-        Some(Json::Object(output)) =>
+        Some(Object(output)) =>
           match output.get("task_status") {
-            Some(Json::String(s)) => s
+            Some(String(s)) => s
             _ => "UNKNOWN"
           }
         _ => "UNKNOWN"
@@ -184,16 +184,16 @@ fn extract_status(resp : Json) -> String {
 ///|
 fn extract_result_url(resp : Json) -> String {
   match resp {
-    Json::Object(obj) =>
+    Object(obj) =>
       match obj.get("output") {
-        Some(Json::Object(output)) =>
+        Some(Object(output)) =>
           match output.get("results") {
-            Some(Json::Array(results)) =>
+            Some(Array(results)) =>
               if results.length() > 0 {
                 match results[0] {
-                  Json::Object(r) =>
+                  Object(r) =>
                     match r.get("transcription_url") {
-                      Some(Json::String(u)) => u
+                      Some(String(u)) => u
                       _ => ""
                     }
                   _ => ""

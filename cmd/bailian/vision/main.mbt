@@ -76,7 +76,7 @@ async fn main {
     true,
   )
   match result2.reasoning_content {
-    Some(Json::String(s)) => {
+    Some(String(s)) => {
       println("=== 思考内容 ===")
       println(s)
     }

@@ -47,7 +47,7 @@ pub async fn submit_text_to_video(
     }
     None => ignore(())
   }
-  let input_json = Json::object(Map::Map([("prompt", prompt.to_json())].view()))
+  let input_json = Json::object(Map([("prompt", prompt.to_json())].view()))
   let params_fields : Array[(String, Json)] = []
   match resolution {
     Some(v) => params_fields.push(("resolution", v.to_json()))
@@ -74,11 +74,11 @@ pub async fn submit_text_to_video(
     None => ()
   }
   let request = Json::object(
-    Map::Map(
+    Map(
       [
         ("model", model.to_json()),
         ("input", input_json),
-        ("parameters", Json::object(Map::Map(params_fields.view()))),
+        ("parameters", Json::object(Map(params_fields.view()))),
       ].view(),
     ),
   )
@@ -186,7 +186,7 @@ pub async fn submit_image_to_video(
   for type_, url in media.iter() {
     media_arr.push(
       Json::object(
-        Map::Map([("type", type_.to_json()), ("url", url.to_json())].view()),
+        Map([("type", type_.to_json()), ("url", url.to_json())].view()),
       ),
     )
   }
@@ -213,11 +213,11 @@ pub async fn submit_image_to_video(
     None => ()
   }
   let request = Json::object(
-    Map::Map(
+    Map(
       [
         ("model", model.to_json()),
-        ("input", Json::object(Map::Map(input_fields.view()))),
-        ("parameters", Json::object(Map::Map(params_fields.view()))),
+        ("input", Json::object(Map(input_fields.view()))),
+        ("parameters", Json::object(Map(params_fields.view()))),
       ].view(),
     ),
   )
@@ -372,11 +372,11 @@ pub async fn submit_kf2v(
     None => ()
   }
   let request = Json::object(
-    Map::Map(
+    Map(
       [
         ("model", model.to_json()),
-        ("input", Json::object(Map::Map(input_fields.view()))),
-        ("parameters", Json::object(Map::Map(params_fields.view()))),
+        ("input", Json::object(Map(input_fields.view()))),
+        ("parameters", Json::object(Map(params_fields.view()))),
       ].view(),
     ),
   )
@@ -500,11 +500,11 @@ pub async fn query_task(
 ///|
 fn extract_task_id(resp : Json) -> String {
   match resp {
-    Json::Object(obj) =>
+    Object(obj) =>
       match obj.get("output") {
-        Some(Json::Object(output)) =>
+        Some(Object(output)) =>
           match output.get("task_id") {
-            Some(Json::String(id)) => id
+            Some(String(id)) => id
             _ => "UNKNOWN"
           }
         _ => "UNKNOWN"
@@ -516,11 +516,11 @@ fn extract_task_id(resp : Json) -> String {
 ///|
 fn extract_status(resp : Json) -> String {
   match resp {
-    Json::Object(obj) =>
+    Object(obj) =>
       match obj.get("output") {
-        Some(Json::Object(output)) =>
+        Some(Object(output)) =>
           match output.get("task_status") {
-            Some(Json::String(s)) => s
+            Some(String(s)) => s
             _ => "UNKNOWN"
           }
         _ => "UNKNOWN"
@@ -532,11 +532,11 @@ fn extract_status(resp : Json) -> String {
 ///|
 fn extract_video_url(resp : Json) -> String {
   match resp {
-    Json::Object(obj) =>
+    Object(obj) =>
       match obj.get("output") {
-        Some(Json::Object(output)) =>
+        Some(Object(output)) =>
           match output.get("video_url") {
-            Some(Json::String(u)) => u
+            Some(String(u)) => u
             _ => ""
           }
         _ => ""

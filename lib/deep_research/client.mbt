@@ -16,13 +16,13 @@ pub fn extract_content(response_text : String) -> String {
   try {
     let json = @json.parse(response_text)
     match json {
-      Json::Object(obj) =>
+      Object(obj) =>
         match obj.get("output") {
-          Some(Json::Object(output)) =>
+          Some(Object(output)) =>
             match output.get("message") {
-              Some(Json::Object(message)) =>
+              Some(Object(message)) =>
                 match message.get("content") {
-                  Some(Json::String(content)) => content
+                  Some(String(content)) => content
                   _ => response_text
                 }
               _ => response_text

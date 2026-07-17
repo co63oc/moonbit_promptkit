@@ -163,19 +163,19 @@ pub struct ResponsesResponse {
 ///|
 /// Create a web_search_image tool
 pub fn web_search_image_tool() -> ResponseTool {
-  ResponseTool::{ type_: "web_search_image", vector_store_ids: None }
+  { type_: "web_search_image", vector_store_ids: None }
 }
 
 ///|
 /// Create an image_search tool
 pub fn image_search_tool() -> ResponseTool {
-  ResponseTool::{ type_: "image_search", vector_store_ids: None }
+  { type_: "image_search", vector_store_ids: None }
 }
 
 ///|
 /// Create a file_search tool
 pub fn file_search_tool() -> ResponseTool {
-  ResponseTool::{ type_: "file_search", vector_store_ids: None }
+  { type_: "file_search", vector_store_ids: None }
 }
 
 ///|
@@ -183,10 +183,7 @@ pub fn file_search_tool() -> ResponseTool {
 pub fn file_search_tool_with_ids(
   vector_store_ids : Array[String],
 ) -> ResponseTool {
-  ResponseTool::{
-    type_: "file_search",
-    vector_store_ids: Some(vector_store_ids),
-  }
+  { type_: "file_search", vector_store_ids: Some(vector_store_ids) }
 }
 
 ///|
@@ -195,31 +192,31 @@ pub fn response_message(
   role : String,
   content : Array[InputContent],
 ) -> ResponseInputMessage {
-  ResponseInputMessage::{ role, content }
+  { role, content }
 }
 
 ///|
 /// Create input text content
 pub fn input_text(text : String) -> InputContent {
-  InputContent::Text(InputText::{ type_: "input_text", text })
+  Text({ type_: "input_text", text })
 }
 
 ///|
 /// Create input image content
 pub fn input_image(image_url : String) -> InputContent {
-  InputContent::Image(InputImage::{ type_: "input_image", image_url })
+  Image({ type_: "input_image", image_url })
 }
 
 ///|
 /// Create input audio content
 pub fn input_audio(audio_url : String) -> InputContent {
-  InputContent::Audio(InputAudio::{ type_: "input_audio", audio_url })
+  Audio({ type_: "input_audio", audio_url })
 }
 
 ///|
 /// Create input video content
 pub fn input_video(video_url : String) -> InputContent {
-  InputContent::Video(InputVideo::{ type_: "input_video", video_url })
+  Video({ type_: "input_video", video_url })
 }
 
 ///|
@@ -302,7 +299,7 @@ pub fn extract_web_search_images(response : ResponsesResponse) -> Array[Json] {
         try {
           let parsed = @json.parse(output_str)
           match parsed {
-            Json::Array(arr) =>
+            Array(arr) =>
               for x in arr {
                 results.push(x)
               }
@@ -329,7 +326,7 @@ pub fn extract_image_search_results(
         try {
           let parsed = @json.parse(output_str)
           match parsed {
-            Json::Array(arr) =>
+            Array(arr) =>
               for x in arr {
                 results.push(x)
               }
