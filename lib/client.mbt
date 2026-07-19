@@ -96,12 +96,38 @@ async fn do_post(
 }
 
 ///|
+/// Perform an HTTP POST with streaming response body.
+/// Uses `@http.post_stream` to open a streaming connection, write the JSON
+/// body, then return the response code, reason, and a readable Client.
+/// The caller MUST close the Client after reading is complete.
+async fn do_post_stream(
+  url : String,
+  body : Json,
+  headers~ : Map[String, String],
+) -> (Int, String, @http.Client) {
+  let client = @http.post_stream(url, headers~)
+  client.write(body.stringify())
+  let response = client.end_request()
+  (response.code, response.reason, client)
+}
+
+///|
 /// If api_key is empty and mock_body is configured, return it; otherwise None.
 pub fn try_mock(config : ClientConfig) -> String? {
   if config.api_key == "" {
     config.mock_body
   } else {
     None
+  }
+}
+
+///|
+/// Resolve mock body from config or global mock state.
+/// Used by streaming functions that need to simulate incremental output.
+fn try_mock_stream_body(config : ClientConfig) -> String? {
+  match try_mock(config) {
+    Some(body) => Some(body)
+    None => if mock_state.use_mock { Some(mock_state.body) } else { None }
   }
 }
 
@@ -268,12 +294,22 @@ pub async fn chat_with_tools(
 ///|
 /// Parse SSE stream data, extract content from choices
 pub fn parse_sse(body_text : String) -> String {
+  parse_sse_incremental(body_text, fn(_s) {  })
+}
+
+///|
+/// Parse SSE stream data incrementally, calling `on_delta` for each content chunk
+/// as it is parsed. Returns the full accumulated content.
+/// This provides "typewriter" streaming: each token is delivered as soon as parsed.
+pub fn parse_sse_incremental(
+  body_text : String,
+  on_delta : (String) -> Unit,
+) -> String {
   let mut content = ""
   let lines = body_text.split("\n")
   for line in lines {
     let trimmed = line.trim()
     if trimmed.has_prefix("data: ") && !trimmed.has_suffix("[DONE]") {
-      // "data: " is 6 chars, extract JSON from index 6
       let json_str = trimmed.to_owned()[6:]
       try {
         let json = @json.parse(json_str)
@@ -287,7 +323,10 @@ pub fn parse_sse(body_text : String) -> String {
                       match choice_obj.get("delta") {
                         Some(Object(delta_obj)) =>
                           match delta_obj.get("content") {
-                            Some(String(s)) => content = content + s
+                            Some(String(s)) => {
+                              content = content + s
+                              on_delta(s)
+                            }
                             _ => ignore(())
                           }
                         _ => ignore(())
@@ -308,7 +347,76 @@ pub fn parse_sse(body_text : String) -> String {
 }
 
 ///|
+/// Parse SSE stream from a Reader, calling `on_delta` for each content chunk
+/// as it arrives from the network. Returns the full accumulated content.
+/// This implements true incremental "typewriter" streaming over HTTP.
+async fn parse_sse_stream(
+  reader : @http.Client,
+  on_delta : (String) -> Unit,
+) -> String {
+  let mut content = ""
+  let mut running = true
+  while running {
+    let line = reader.read_until("\n")
+    match line {
+      None => running = false
+      Some(l) => {
+        let trimmed = l.trim()
+        if trimmed.has_prefix("data: ") && !trimmed.has_suffix("[DONE]") {
+          let json_str = trimmed.to_owned()[6:]
+          try {
+            let json = @json.parse(json_str)
+            match json {
+              Object(obj) =>
+                match obj.get("choices") {
+                  Some(Array(choices)) =>
+                    for choice in choices {
+                      match choice {
+                        Object(choice_obj) =>
+                          match choice_obj.get("delta") {
+                            Some(Object(delta_obj)) =>
+                              match delta_obj.get("content") {
+                                Some(String(s)) => {
+                                  content = content + s
+                                  on_delta(s)
+                                }
+                                _ => ignore(())
+                              }
+                            _ => ignore(())
+                          }
+                        _ => ignore(())
+                      }
+                    }
+                  _ => ignore(())
+                }
+              _ => ignore(())
+            }
+          } catch {
+            _ => ignore(())
+          }
+        }
+      }
+    }
+  }
+  content
+}
+
+///|
+/// Parse SSE stream from a raw @http.Client reader, calling `on_delta`
+/// for each content chunk as it arrives from the network.
+/// Returns the full accumulated content.
+/// Public wrapper for sub-modules that manage their own HTTP connections.
+pub async fn parse_sse_stream_raw(
+  reader : @http.Client,
+  on_delta : (String) -> Unit,
+) -> String {
+  parse_sse_stream(reader, on_delta)
+}
+
+///|
 /// The chat_stream function.
+/// Streams tokens incrementally via `on_delta` callback as they arrive,
+/// providing true "typewriter" streaming output.
 pub async fn chat_stream(
   config : ClientConfig,
   model : String,
@@ -334,21 +442,32 @@ pub async fn chat_stream(
     seed: None,
     stop: None,
   }
-  let (code, reason, body_text) = do_post(
+  // Mock mode: simulate streaming from pre-loaded body text
+  match try_mock_stream_body(config) {
+    Some(mock_body) => {
+      if mock_body == "" {
+        on_delta("")
+        return ""
+      }
+      return parse_sse_incremental(mock_body, on_delta)
+    }
+    None => ignore(())
+  }
+  // Real streaming mode: use post_stream for true incremental reading
+  let (code, reason, reader) = do_post_stream(
     "\{config.base_url}/chat/completions",
     request.to_json(),
     headers={
       "Authorization": "Bearer \{config.api_key}",
       "Content-Type": "application/json",
     },
-    mock_body=try_mock(config),
   )
   guard code is (200..=299) else {
+    reader.close()
     fail("HTTP request failed: \{code} \{reason}")
   }
-  // Parse SSE and extract content
-  let content = parse_sse(body_text)
-  on_delta(content)
+  let content = parse_sse_stream(reader, on_delta)
+  reader.close()
   content
 }
 
@@ -360,15 +479,20 @@ pub struct ThinkingResult {
 }
 
 ///|
-/// Parse SSE stream data, extract reasoning_content and content
-fn parse_thinking_sse(body_text : String) -> ThinkingResult {
+/// Parse SSE stream data incrementally, calling `on_reasoning_delta` and
+/// `on_answer_delta` for each reasoning/content chunk as it is parsed.
+/// Returns the full accumulated result.
+fn parse_thinking_sse_incremental(
+  body_text : String,
+  on_reasoning_delta : (String) -> Unit,
+  on_answer_delta : (String) -> Unit,
+) -> ThinkingResult {
   let mut reasoning = ""
   let mut answer = ""
   let lines = body_text.split("\n")
   for line in lines {
     let trimmed = line.trim()
     if trimmed.has_prefix("data: ") && !trimmed.has_suffix("[DONE]") {
-      // "data: " is 6 chars, extract JSON from index 6
       let json_str = trimmed.to_owned()[6:]
       try {
         let json = @json.parse(json_str)
@@ -381,14 +505,18 @@ fn parse_thinking_sse(body_text : String) -> ThinkingResult {
                     Object(choice_obj) =>
                       match choice_obj.get("delta") {
                         Some(Object(delta_obj)) => {
-                          // Extract reasoning_content
                           match delta_obj.get("reasoning_content") {
-                            Some(String(s)) => reasoning = reasoning + s
+                            Some(String(s)) => {
+                              reasoning = reasoning + s
+                              on_reasoning_delta(s)
+                            }
                             _ => ignore(())
                           }
-                          // Extract content
                           match delta_obj.get("content") {
-                            Some(String(s)) => answer = answer + s
+                            Some(String(s)) => {
+                              answer = answer + s
+                              on_answer_delta(s)
+                            }
                             _ => ignore(())
                           }
                         }
@@ -410,7 +538,75 @@ fn parse_thinking_sse(body_text : String) -> ThinkingResult {
 }
 
 ///|
+/// Parse SSE stream from a Reader for deep thinking mode.
+/// Calls `on_reasoning_delta` and `on_answer_delta` for each incremental chunk
+/// as it arrives from the network. Returns the full accumulated reasoning and answer.
+/// This implements true incremental "typewriter" streaming for thinking models.
+async fn parse_thinking_sse_stream(
+  reader : @http.Client,
+  on_reasoning_delta : (String) -> Unit,
+  on_answer_delta : (String) -> Unit,
+) -> ThinkingResult {
+  let mut reasoning = ""
+  let mut answer = ""
+  let mut running = true
+  while running {
+    let line = reader.read_until("\n")
+    match line {
+      None => running = false
+      Some(l) => {
+        let trimmed = l.trim()
+        if trimmed.has_prefix("data: ") && !trimmed.has_suffix("[DONE]") {
+          let json_str = trimmed.to_owned()[6:]
+          try {
+            let json = @json.parse(json_str)
+            match json {
+              Object(obj) =>
+                match obj.get("choices") {
+                  Some(Array(choices)) =>
+                    if choices.length() > 0 {
+                      match choices[0] {
+                        Object(choice_obj) =>
+                          match choice_obj.get("delta") {
+                            Some(Object(delta_obj)) => {
+                              match delta_obj.get("reasoning_content") {
+                                Some(String(s)) => {
+                                  reasoning = reasoning + s
+                                  on_reasoning_delta(s)
+                                }
+                                _ => ignore(())
+                              }
+                              match delta_obj.get("content") {
+                                Some(String(s)) => {
+                                  answer = answer + s
+                                  on_answer_delta(s)
+                                }
+                                _ => ignore(())
+                              }
+                            }
+                            _ => ignore(())
+                          }
+                        _ => ignore(())
+                      }
+                    }
+                  _ => ignore(())
+                }
+              _ => ignore(())
+            }
+          } catch {
+            _ => ignore(())
+          }
+        }
+      }
+    }
+  }
+  { reasoning, answer }
+}
+
+///|
 /// Chat with deep thinking enabled (streaming)
+/// Streams reasoning and answer tokens incrementally as they arrive,
+/// providing true "typewriter" streaming output.
 /// Returns ThinkingResult with both reasoning process and final answer
 pub async fn chat_stream_thinking(
   config : ClientConfig,
@@ -438,27 +634,31 @@ pub async fn chat_stream_thinking(
     seed: None,
     stop: None,
   }
-  let (code, reason, body_text) = do_post(
+  // Mock mode: simulate streaming from pre-loaded body text
+  match try_mock_stream_body(config) {
+    Some(mock_body) =>
+      return parse_thinking_sse_incremental(
+        mock_body, on_reasoning_delta, on_answer_delta,
+      )
+    None => ignore(())
+  }
+  // Real streaming mode: use post_stream for true incremental reading
+  let (code, reason, reader) = do_post_stream(
     "\{config.base_url}/chat/completions",
     request.to_json(),
     headers={
       "Authorization": "Bearer \{config.api_key}",
       "Content-Type": "application/json",
     },
-    mock_body=try_mock(config),
   )
   guard code is (200..=299) else {
+    reader.close()
     fail("HTTP request failed: \{code} \{reason}")
   }
-  // Parse SSE stream and separate reasoning from answer
-  let result = parse_thinking_sse(body_text)
-  // Call callbacks with final content
-  if result.reasoning.length() > 0 {
-    on_reasoning_delta(result.reasoning)
-  }
-  if result.answer.length() > 0 {
-    on_answer_delta(result.answer)
-  }
+  let result = parse_thinking_sse_stream(
+    reader, on_reasoning_delta, on_answer_delta,
+  )
+  reader.close()
   result
 }
 
@@ -625,20 +825,26 @@ pub async fn chat_web_extractor_stream(
     seed: None,
     stop: None,
   }
-  let (code, reason, body_text) = do_post(
+  // Mock mode: simulate streaming from pre-loaded body text
+  match try_mock_stream_body(config) {
+    Some(mock_body) => return parse_sse_incremental(mock_body, on_delta)
+    None => ignore(())
+  }
+  // Real streaming mode
+  let (code, reason, reader) = do_post_stream(
     "\{config.base_url}/chat/completions",
     request.to_json(),
     headers={
       "Authorization": "Bearer \{config.api_key}",
       "Content-Type": "application/json",
     },
-    mock_body=try_mock(config),
   )
   guard code is (200..=299) else {
+    reader.close()
     fail("HTTP request failed: \{code} \{reason}")
   }
-  let content = parse_sse(body_text)
-  on_delta(content)
+  let content = parse_sse_stream(reader, on_delta)
+  reader.close()
   content
 }
 
@@ -671,25 +877,31 @@ pub async fn chat_web_extractor_stream_thinking(
     seed: None,
     stop: None,
   }
-  let (code, reason, body_text) = do_post(
+  // Mock mode: simulate streaming from pre-loaded body text
+  match try_mock_stream_body(config) {
+    Some(mock_body) =>
+      return parse_thinking_sse_incremental(
+        mock_body, on_reasoning_delta, on_answer_delta,
+      )
+    None => ignore(())
+  }
+  // Real streaming mode
+  let (code, reason, reader) = do_post_stream(
     "\{config.base_url}/chat/completions",
     request.to_json(),
     headers={
       "Authorization": "Bearer \{config.api_key}",
       "Content-Type": "application/json",
     },
-    mock_body=try_mock(config),
   )
   guard code is (200..=299) else {
+    reader.close()
     fail("HTTP request failed: \{code} \{reason}")
   }
-  let result = parse_thinking_sse(body_text)
-  if result.reasoning.length() > 0 {
-    on_reasoning_delta(result.reasoning)
-  }
-  if result.answer.length() > 0 {
-    on_answer_delta(result.answer)
-  }
+  let result = parse_thinking_sse_stream(
+    reader, on_reasoning_delta, on_answer_delta,
+  )
+  reader.close()
   result
 }
 
@@ -722,18 +934,30 @@ pub async fn chat_code_interpreter_stream(
     seed: None,
     stop: None,
   }
-  let (code, reason, body_text) = do_post(
+  // Mock mode: pass the full mock body
+  match try_mock_stream_body(config) {
+    Some(mock_body) => {
+      on_delta(mock_body)
+      return mock_body
+    }
+    None => ignore(())
+  }
+  // Real streaming mode
+  let (code, reason, reader) = do_post_stream(
     "\{config.base_url}/chat/completions",
     request.to_json(),
     headers={
       "Authorization": "Bearer \{config.api_key}",
       "Content-Type": "application/json",
     },
-    mock_body=try_mock(config),
   )
   guard code is (200..=299) else {
+    reader.close()
     fail("HTTP request failed: \{code} \{reason}")
   }
+  let body_data = reader.read_all()
+  reader.close()
+  let body_text = body_data.text()
   on_delta(body_text)
   body_text
 }
@@ -767,25 +991,31 @@ pub async fn chat_code_interpreter_stream_thinking(
     seed: None,
     stop: None,
   }
-  let (code, reason, body_text) = do_post(
+  // Mock mode: simulate streaming from pre-loaded body text
+  match try_mock_stream_body(config) {
+    Some(mock_body) =>
+      return parse_thinking_sse_incremental(
+        mock_body, on_reasoning_delta, on_answer_delta,
+      )
+    None => ignore(())
+  }
+  // Real streaming mode
+  let (code, reason, reader) = do_post_stream(
     "\{config.base_url}/chat/completions",
     request.to_json(),
     headers={
       "Authorization": "Bearer \{config.api_key}",
       "Content-Type": "application/json",
     },
-    mock_body=try_mock(config),
   )
   guard code is (200..=299) else {
+    reader.close()
     fail("HTTP request failed: \{code} \{reason}")
   }
-  let result = parse_thinking_sse(body_text)
-  if result.reasoning.length() > 0 {
-    on_reasoning_delta(result.reasoning)
-  }
-  if result.answer.length() > 0 {
-    on_answer_delta(result.answer)
-  }
+  let result = parse_thinking_sse_stream(
+    reader, on_reasoning_delta, on_answer_delta,
+  )
+  reader.close()
   result
 }
 

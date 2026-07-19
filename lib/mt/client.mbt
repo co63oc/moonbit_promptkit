@@ -267,19 +267,17 @@ pub async fn translate_stream(
     stream_options: Some(@lib.stream_options(true)),
     translation_options,
   }
-  let (response, body) = @http.post(
-    "\{config.base_url}/chat/completions",
-    request.to_json(),
-    headers={
-      "Authorization": "Bearer \{config.api_key}",
-      "Content-Type": "application/json",
-    },
-  )
+  let client = @http.post_stream("\{config.base_url}/chat/completions", headers={
+    "Authorization": "Bearer \{config.api_key}",
+    "Content-Type": "application/json",
+  })
+  client.write(request.to_json().stringify())
+  let response = client.end_request()
   guard response.code is (200..=299) else {
+    client.close()
     fail("Translation request failed: \{response.code} \{response.reason}")
   }
-  let body_text = body.text()
-  let content = @lib.parse_sse(body_text)
-  on_delta(content)
+  let content = @lib.parse_sse_stream_raw(client, on_delta)
+  client.close()
   content
 }

@@ -19,8 +19,15 @@ let base_url : String = @lib.get_env_var(
 )
 
 ///|
+/// FFI: write bytes to stdout and flush immediately, without adding a newline.
+/// When `is_mock` is true, also applies a small delay for the typewriter effect.
+#borrow(data)
+extern "C" fn print_flush(data : Bytes, len : Int, is_mock : Bool) -> Unit = "moonbit_print_flush"
+
+///|
 async fn main {
   println("=== 流式输出示例（阿里云百炼）===\n")
+  let is_mock = api_key == ""
 
   // Demo 1: 图片理解模型流式输出
   println("--- Demo 1: 图片理解模型流式输出 ---")
@@ -45,7 +52,8 @@ async fn main {
     ]),
   ]
   @lib.chat_stream(config1, "qwen3-vl-plus", messages1, fn(chunk) {
-    println(chunk)
+    let bytes = @encoding.encode(UTF8, chunk)
+    print_flush(bytes, bytes.length(), is_mock)
   })
   |> ignore
   println("")
@@ -65,7 +73,8 @@ async fn main {
 
   let messages2 = [@lib.user_message_with_text(question)]
   @lib.chat_stream(config2, "qwen3.7-plus", messages2, fn(chunk) {
-    println(chunk)
+    let bytes = @encoding.encode(UTF8, chunk)
+    print_flush(bytes, bytes.length(), is_mock)
   })
   |> ignore
   println("")

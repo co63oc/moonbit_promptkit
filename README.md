@@ -2,6 +2,83 @@
 
 MoonBit 实现的 AI 大模型 SDK，附带多平台调用示例。
 
+## 安装
+
+### 前置条件：安装 MoonBit 工具链
+
+```bash
+curl -fsSL https://cli.moonbitlang.com/install.sh | bash
+```
+
+安装完成后重启终端或执行 `source ~/.bashrc`（/`~/.zshrc`），验证：
+
+```bash
+moon version
+```
+
+### 获取项目
+
+```bash
+git clone https://gitlink.org.cn/co63oc/moonbit_promptkit.git
+cd moonbit_promptkit
+```
+
+### 安装依赖
+
+```bash
+moon install
+```
+
+### 运行示例
+
+无需 API Key 即可运行（使用内置 mock 数据）：
+
+```bash
+moon run cmd/bailian/stream      # 流式输出示例
+moon run cmd/bailian/tool_call   # 工具调用示例
+```
+
+指定 API Key 调用真实接口：
+
+```bash
+BAILIAN_API_KEY="sk-xxx" moon run cmd/bailian/chat
+```
+
+### 运行测试
+
+```bash
+moon test
+```
+
+## 快速开始
+
+### 最小对话示例
+
+```mbt
+// main.mbt — 文件放在一个独立的 MoonBit 包中
+
+async fn main {
+  // 空 api_key 自动触发 mock 模式，无需联网
+  let config = @lib.make_client_config(
+    "",
+    "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    mock_body="{\"model\":\"qwen-plus\",\"choices\":[{\"message\":{\"content\":\"你好！我是通义千问（Qwen），阿里巴巴集团旗下的超大规模语言模型。\",\"role\":\"assistant\"},\"finish_reason\":\"stop\"}]}",
+  )
+  let messages = [@lib.user_message_with_text("你好!")]
+  let reply = @lib.chat(config, "qwen-plus", messages)
+  println(reply.content)
+}
+```
+
+预期输出：
+
+```
+你好！我是通义千问（Qwen），阿里巴巴集团旗下的超大规模语言模型。
+```
+
+> **补充说明**：`lib/client` 包中的 `chat` / `chat_stream` / `chat_stream_thinking` 为核心入口。
+> 更多功能（工具调用、图像/视频/音频生成、embedding、MCP 等）见 [cmd/bailian/](cmd/bailian/) 目录下的完整示例。
+
 ## 支持的 API 平台
 
 | 平台 | 说明 | 文档 |
@@ -22,6 +99,12 @@ cmd/
 ├── qianfan/     # 百度千帆示例
 └── bailian/     # 阿里云百炼示例
 ```
+
+## Mock 数据说明
+
+mock 数据来源于 API 接口调用返回，使用授权与项目代码一致，见 [LICENSE](LICENSE)。
+
+参考范围：覆盖对话补全、SSE 流式、工具调用、思考模型等 OpenAI 兼容格式的响应解析；不包含异常响应、网络异常、生产环境真实延迟及模型输出质量评估。
 
 ## 环境变量
 

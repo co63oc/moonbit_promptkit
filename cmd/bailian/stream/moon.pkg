@@ -1,6 +1,11 @@
 import {
   "moonbitlang/async",
   "co63oc/moonbit_promptkit/lib",
+  "moonbitlang/x/encoding",
 }
 
 pkgtype(kind: "executable")
+
+options(
+  "native-stub": [ "print_flush.c" ],
+)
