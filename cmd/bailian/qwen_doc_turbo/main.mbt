@@ -59,8 +59,9 @@ async fn main {
       "请提取会议纪要中的关键信息，以JSON格式返回",
     ),
   ]
-  @lib.chat_stream(config, doc_model, messages2, fn(delta) { println(delta) })
-  |> ignore
+  let _ = @lib.chat_stream(config, doc_model, messages2, fn(delta) {
+    println(delta)
+  })
   println("\n")
 
   println("=== 可用模型 ===")

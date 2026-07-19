@@ -306,44 +306,83 @@ pub fn parse_sse_incremental(
   on_delta : (String) -> Unit,
 ) -> String {
   let mut content = ""
-  let lines = body_text.split("\n")
-  for line in lines {
-    let trimmed = line.trim()
-    if trimmed.has_prefix("data: ") && !trimmed.has_suffix("[DONE]") {
-      let json_str = trimmed.to_owned()[6:]
-      try {
-        let json = @json.parse(json_str)
-        match json {
-          Object(obj) =>
-            match obj.get("choices") {
-              Some(Array(choices)) =>
-                for choice in choices {
-                  match choice {
-                    Object(choice_obj) =>
-                      match choice_obj.get("delta") {
-                        Some(Object(delta_obj)) =>
-                          match delta_obj.get("content") {
-                            Some(String(s)) => {
-                              content = content + s
-                              on_delta(s)
-                            }
-                            _ => ignore(())
-                          }
+  let len = body_text.length()
+  let mut start = 0
+  for i = 0; i < len; i = i + 1 {
+    if body_text[i] == '\n' {
+      content = process_sse_line(
+        body_text.sub(start~, end=i).to_owned(),
+        content,
+        on_delta,
+      )
+      start = i + 1
+    }
+  } where {
+    proof_invariant: i >= 0,
+    proof_invariant: i <= len,
+    proof_reasoning: (
+      #| loop terminates because
+      #| i increases toward len
+    ),
+  }
+  if start < len {
+    content = process_sse_line(
+      body_text.sub(start~, end=len).to_owned(),
+      content,
+      on_delta,
+    )
+  }
+  content
+}
+
+///|
+/// Process a single SSE line, calling `on_delta` if it contains a content delta.
+/// Returns the updated accumulated content.
+fn process_sse_line(
+  line : String,
+  content : String,
+  on_delta : (String) -> Unit,
+) -> String {
+  let trimmed = line.trim()
+  if !trimmed.has_prefix("data: ") {
+    return content
+  }
+  if trimmed.has_suffix("[DONE]") {
+    return content
+  }
+  let json_str = trimmed.to_owned()[6:]
+  let mut result = content
+  try {
+    let json = @json.parse(json_str)
+    match json {
+      Object(obj) =>
+        match obj.get("choices") {
+          Some(Array(choices)) =>
+            for choice in choices {
+              match choice {
+                Object(choice_obj) =>
+                  match choice_obj.get("delta") {
+                    Some(Object(delta_obj)) =>
+                      match delta_obj.get("content") {
+                        Some(String(s)) => {
+                          result = result + s
+                          on_delta(s)
+                        }
                         _ => ignore(())
                       }
                     _ => ignore(())
                   }
-                }
-              _ => ignore(())
+                _ => ignore(())
+              }
             }
           _ => ignore(())
         }
-      } catch {
-        _ => ignore(())
-      }
+      _ => ignore(())
     }
+  } catch {
+    _ => ignore(())
   }
-  content
+  result
 }
 
 ///|
@@ -489,52 +528,102 @@ fn parse_thinking_sse_incremental(
 ) -> ThinkingResult {
   let mut reasoning = ""
   let mut answer = ""
-  let lines = body_text.split("\n")
-  for line in lines {
-    let trimmed = line.trim()
-    if trimmed.has_prefix("data: ") && !trimmed.has_suffix("[DONE]") {
-      let json_str = trimmed.to_owned()[6:]
-      try {
-        let json = @json.parse(json_str)
-        match json {
-          Object(obj) =>
-            match obj.get("choices") {
-              Some(Array(choices)) =>
-                if choices.length() > 0 {
-                  match choices[0] {
-                    Object(choice_obj) =>
-                      match choice_obj.get("delta") {
-                        Some(Object(delta_obj)) => {
-                          match delta_obj.get("reasoning_content") {
-                            Some(String(s)) => {
-                              reasoning = reasoning + s
-                              on_reasoning_delta(s)
-                            }
-                            _ => ignore(())
-                          }
-                          match delta_obj.get("content") {
-                            Some(String(s)) => {
-                              answer = answer + s
-                              on_answer_delta(s)
-                            }
-                            _ => ignore(())
-                          }
+  let len = body_text.length()
+  let mut start = 0
+  for i = 0; i < len; i = i + 1 {
+    if body_text[i] == '\n' {
+      let (r, a) = process_thinking_sse_line(
+        body_text.sub(start~, end=i).to_owned(),
+        reasoning,
+        answer,
+        on_reasoning_delta,
+        on_answer_delta,
+      )
+      reasoning = r
+      answer = a
+      start = i + 1
+    }
+  } where {
+    proof_invariant: i >= 0,
+    proof_invariant: i <= len,
+    proof_reasoning: (
+      #| loop terminates because
+      #| i increases toward len
+    ),
+  }
+  if start < len {
+    let (r, a) = process_thinking_sse_line(
+      body_text.sub(start~, end=len).to_owned(),
+      reasoning,
+      answer,
+      on_reasoning_delta,
+      on_answer_delta,
+    )
+    reasoning = r
+    answer = a
+  }
+  { reasoning, answer }
+}
+
+///|
+/// Process a single SSE line for thinking mode, calling `on_reasoning_delta`
+/// or `on_answer_delta` as appropriate. Returns updated (reasoning, answer).
+fn process_thinking_sse_line(
+  line : String,
+  reasoning : String,
+  answer : String,
+  on_reasoning_delta : (String) -> Unit,
+  on_answer_delta : (String) -> Unit,
+) -> (String, String) {
+  let trimmed = line.trim()
+  if !trimmed.has_prefix("data: ") {
+    return (reasoning, answer)
+  }
+  if trimmed.has_suffix("[DONE]") {
+    return (reasoning, answer)
+  }
+  let json_str = trimmed.to_owned()[6:]
+  let mut r = reasoning
+  let mut a = answer
+  try {
+    let json = @json.parse(json_str)
+    match json {
+      Object(obj) =>
+        match obj.get("choices") {
+          Some(Array(choices)) =>
+            if choices.length() > 0 {
+              match choices[0] {
+                Object(choice_obj) =>
+                  match choice_obj.get("delta") {
+                    Some(Object(delta_obj)) => {
+                      match delta_obj.get("reasoning_content") {
+                        Some(String(s)) => {
+                          r = r + s
+                          on_reasoning_delta(s)
                         }
                         _ => ignore(())
                       }
+                      match delta_obj.get("content") {
+                        Some(String(s)) => {
+                          a = a + s
+                          on_answer_delta(s)
+                        }
+                        _ => ignore(())
+                      }
+                    }
                     _ => ignore(())
                   }
-                }
-              _ => ignore(())
+                _ => ignore(())
+              }
             }
           _ => ignore(())
         }
-      } catch {
-        _ => ignore(())
-      }
+      _ => ignore(())
     }
+  } catch {
+    _ => ignore(())
   }
-  { reasoning, answer }
+  (r, a)
 }
 
 ///|

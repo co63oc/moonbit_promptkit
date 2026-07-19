@@ -29,6 +29,12 @@ pub let system_prompt : String = "你是江让，男性，一个围棋天才，�
 pub let opening : String = "班长你在干嘛呢"
 
 ///|
+/// FFI: write bytes to stdout and flush immediately, without adding a newline.
+/// When `is_mock` is true, also applies a small delay for the typewriter effect.
+#borrow(data)
+extern "C" fn print_flush(data : Bytes, len : Int, is_mock : Bool) -> Unit = "moonbit_print_flush"
+
+///|
 async fn main {
   let mock_body = @lib.read_file("cmd/bailian/role_play/mocks/demo1.json")
   let config : @lib.ClientConfig = @lib.make_client_config(
@@ -65,15 +71,16 @@ async fn main {
 
   // Demo 3: 流式输出
   println("--- Demo 3: 流式输出 ---")
+  let is_mock = api_key == ""
   let messages3 : Array[@lib.Message] = [
     @lib.system_message(system_prompt),
     @lib.assistant_message(opening),
     @lib.user_message_with_text("最近心情不好，安慰我一下"),
   ]
-  @lib.chat_stream(config, character_model, messages3, fn(delta) {
-    println(delta)
+  let _ = @lib.chat_stream(config, character_model, messages3, fn(delta) {
+    let bytes = @encoding.encode(UTF8, delta)
+    print_flush(bytes, bytes.length(), is_mock)
   })
-  |> ignore
   println("")
   println("")
 

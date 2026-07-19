@@ -60,10 +60,9 @@ async fn main {
     @lib.system_message(gui_system_prompt),
     @lib.user_message_with_contents(contents2),
   ]
-  @lib.chat_stream(config, "gui-plus-2026-02-26", messages2, fn(delta) {
+  let _ = @lib.chat_stream(config, "gui-plus-2026-02-26", messages2, fn(delta) {
     println(delta)
   })
-  |> ignore
   println("")
   println("")
 
