@@ -10,7 +10,7 @@ MoonBit 实现的 AI 大模型 SDK，附带多平台调用示例。
 curl -fsSL https://cli.moonbitlang.com/install.sh | bash
 ```
 
-安装完成后重启终端或执行 `source ~/.bashrc`（/`~/.zshrc`），验证：
+安装完成后重启终端或执行 `source ~/.bashrc`，验证：
 
 ```bash
 moon version
