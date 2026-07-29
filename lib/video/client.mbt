@@ -186,7 +186,7 @@ pub async fn submit_image_to_video(
   for type_, url in media.iter() {
     media_arr.push(
       Json::object(
-        Map([("type", type_.to_json()), ("url", url.to_json())].view()),
+        Map([("type", type_.to_json()), ("url", ToJson::to_json(url))].view()),
       ),
     )
   }
