@@ -1,0 +1,4 @@
+/// MiniMax 示例代码
+///
+/// 基于 MiniMax 的 AI 大模型调用，使用 OpenAI 兼容接口。
+/// 支持 MiniMax-M1 等模型，擅长长文本和角色扮演。

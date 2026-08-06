@@ -88,21 +88,33 @@ async fn main {
 
 | 平台 | 说明 | 文档 |
 |------|------|------|
+| **阿里云百炼 (Bailian)** | 通义千问系列，功能最全 | [cmd/bailian/README.md](cmd/bailian/README.md) |
 | **OpenRouter** | 统一接口访问数百种模型 | [cmd/openrouter/README.md](cmd/openrouter/README.md) |
-| **Moonshot AI (Kimi)** | OpenAI 兼容接口 | [cmd/moonshot/README.md](cmd/moonshot/README.md) |
-| **阿里云百炼 (Bailian)** | OpenAI 兼容接口 | [cmd/bailian/README.md](cmd/bailian/README.md) |
+| **Moonshot AI (Kimi)** | 超长上下文（128K） | [cmd/moonshot/README.md](cmd/moonshot/README.md) |
 | **腾讯混元 (Tokenhub)** | OpenAI 兼容接口 | [cmd/hunyuan/README.md](cmd/hunyuan/README.md) |
 | **百度千帆 (Qianfan)** | OpenAI 兼容接口 | [cmd/qianfan/README.md](cmd/qianfan/README.md) |
+| **DeepSeek** | 性价比之王，R1 深度思考 | [cmd/deepseek/README.md](cmd/deepseek/README.md) |
+| **智谱AI (GLM)** | 清华系，GLM-4 系列 | [cmd/zhipu/README.md](cmd/zhipu/README.md) |
+| **讯飞星火 (Spark)** | 中文语音生态，Lite 免费 | [cmd/spark/README.md](cmd/spark/README.md) |
+| **零一万物 (Yi)** | Yi-Lightning 旗舰模型 | [cmd/yi/README.md](cmd/yi/README.md) |
+| **MiniMax** | 长文本与角色扮演 | [cmd/minimax/README.md](cmd/minimax/README.md) |
+| **阶跃星辰 (Step)** | 中文理解能力强 | [cmd/step/README.md](cmd/step/README.md) |
 
 ## 项目结构
 
 ```
 cmd/
-├── openrouter/  # OpenRouter 示例 
-├── moonshot/    # Moonshot AI (Kimi) 示例
-├── hunyuan/     # 腾讯混元示例
-├── qianfan/     # 百度千帆示例
-└── bailian/     # 阿里云百炼示例
+├── bailian/        # 阿里云百炼示例（功能最全）
+├── openrouter/     # OpenRouter 示例
+├── moonshot/       # Moonshot AI (Kimi) 示例
+├── hunyuan/        # 腾讯混元示例
+├── qianfan/        # 百度千帆示例
+├── deepseek/       # DeepSeek 示例（含深度思考）
+├── zhipu/          # 智谱AI GLM 示例
+├── spark/          # 讯飞星火示例
+├── yi/             # 零一万物 Yi 示例
+├── minimax/        # MiniMax 示例
+└── step/           # 阶跃星辰示例
 ```
 
 ## Mock 数据说明
@@ -120,19 +132,31 @@ SDK 在运行时会从环境变量读取 API Key。不同模块使用各自独�
 
 | 模块 / 平台 | 所需 API Key 环境变量 | 说明 |
 |-------------|----------------------|------|
+| **阿里云百炼 (Bailian)** | `BAILIAN_API_KEY` | `cmd/bailian/*` 全部示例（chat、stream、image、video、audio、embedding、batch 等）|
 | **OpenRouter** | `OPENROUTER_API_KEY` | `cmd/openrouter/*` 示例 |
 | **Moonshot AI (Kimi)** | `MOONSHOT_API_KEY` | `cmd/moonshot/*` 示例 |
 | **腾讯混元 (Tokenhub)** | `HUNYUAN_API_KEY` | `cmd/hunyuan/*` 示例 |
 | **百度千帆 (Qianfan)** | `QIANFAN_API_KEY` | `cmd/qianfan/*` 示例 |
-| **阿里云百炼 (Bailian)** | `BAILIAN_API_KEY` | `cmd/bailian/*` 全部示例（chat、stream、image、video、audio、embedding、batch 等）|
+| **DeepSeek** | `DEEPSEEK_API_KEY` | `cmd/deepseek/*` 示例（含深度思考） |
+| **智谱AI (GLM)** | `ZHIPU_API_KEY` | `cmd/zhipu/*` 示例 |
+| **讯飞星火 (Spark)** | `SPARK_API_KEY` | `cmd/spark/*` 示例 |
+| **零一万物 (Yi)** | `YI_API_KEY` | `cmd/yi/*` 示例 |
+| **MiniMax** | `MINIMAX_API_KEY` | `cmd/minimax/*` 示例 |
+| **阶跃星辰 (Step)** | `STEP_API_KEY` | `cmd/step/*` 示例 |
 
 各模块除 API Key 外，Base URL 也通过环境变量读取（缺失时使用内置默认值）：
 
-- OpenRouter：`OPENROUTER_BASE_URL`（默认 `https://openrouter.ai/api/v1`）
-- Moonshot：`MOONSHOT_BASE_URL`（默认 `https://api.moonshot.cn/v1`）
-- 腾讯混元：`HUNYUAN_BASE_URL`（默认 `https://tokenhub.tencentmaas.com/v1`）
-- 百度千帆：`QIANFAN_BASE_URL`（默认 `https://qianfan.baidubce.com/v2`）
-- 阿里云百炼：`BAILIAN_BASE_URL`（默认 `https://dashscope.aliyuncs.com/compatible-mode/v1`）
+- **阿里云百炼**：`BAILIAN_BASE_URL`（默认 `https://dashscope.aliyuncs.com/compatible-mode/v1`）
+- **OpenRouter**：`OPENROUTER_BASE_URL`（默认 `https://openrouter.ai/api/v1`）
+- **Moonshot**：`MOONSHOT_BASE_URL`（默认 `https://api.moonshot.cn/v1`）
+- **腾讯混元**：`HUNYUAN_BASE_URL`（默认 `https://tokenhub.tencentmaas.com/v1`）
+- **百度千帆**：`QIANFAN_BASE_URL`（默认 `https://qianfan.baidubce.com/v2`）
+- **DeepSeek**：`DEEPSEEK_BASE_URL`（默认 `https://api.deepseek.com`）
+- **智谱AI**：`ZHIPU_BASE_URL`（默认 `https://open.bigmodel.cn/api/paas/v4`）
+- **讯飞星火**：`SPARK_BASE_URL`（默认 `https://spark-api-open.xf-yun.com/v1`）
+- **零一万物**：`YI_BASE_URL`（默认 `https://api.lingyiwanwu.com/v1`）
+- **MiniMax**：`MINIMAX_BASE_URL`（默认 `https://api.minimax.chat/v1`）
+- **阶跃星辰**：`STEP_BASE_URL`（默认 `https://api.stepfun.com/v1`）
 
 ### 额外环境变量
 

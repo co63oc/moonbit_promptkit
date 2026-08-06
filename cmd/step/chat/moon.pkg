@@ -1,0 +1,6 @@
+import {
+  "moonbitlang/async",
+  "co63oc/moonbit_promptkit/lib",
+}
+
+pkgtype(kind: "executable")
